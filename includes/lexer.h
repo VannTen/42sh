@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 15:46:10 by bjanik            #+#    #+#             */
-/*   Updated: 2017/12/09 13:01:22 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/05 19:16:51 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void				get_operator(t_lexer *lexer);
 void				realloc_current_token(t_lexer *lexer);
 int					is_operator(char *token);
 
-extern t_transition	g_lexer[MAX_STATE][MAX_EVENT];
-extern char			g_op_char[6];
-extern char			*g_op_list[15];
+extern const t_transition	g_lexer[MAX_STATE][MAX_EVENT];
+extern const char			g_op_char[6];
+extern const char			*g_op_list[15];
 #endif

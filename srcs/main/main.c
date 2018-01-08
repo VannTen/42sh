@@ -6,12 +6,28 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 20:15:06 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/02 17:27:49 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/05 19:16:17 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsh.h"
 #include "stdio.h"
+
+/*void	display_tokens(t_token *tk)
+{
+	t_token	*t;
+
+	t = tk;
+	while (t)
+	{
+		if (t->next)
+			ft_printf("[%s] ->", t->token);
+		else
+			ft_printf("[%s]", t->token);
+		t = t->next;
+	}
+	ft_printf("\n");
+}*/
 
 static void	connect_tokens(t_bsh *bsh)
 {
@@ -43,6 +59,7 @@ static void	start_process(t_bsh *bsh)
 		else
 			ft_printf("Missing quotes or end of input is an operator\n");
 	}
+	/*display_tokens(bsh->tokens[0]);*/
 	add_cmd_to_history(bsh);
 	(ret == ACCEPTED && bsh->exec) ? execution(bsh) : 0;
 }

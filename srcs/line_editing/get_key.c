@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 15:11:38 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/03 17:39:22 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/06 17:06:59 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_keys	g_handle_keys[] = {
 	{ALT_LESS, {handle_alt_less, skip_key}},
 	{RETURN_C, {handle_return, skip_key}},
 	{CLEAR_SCREEN, {handle_clear_screen, skip_key}},
+	{TABULATION, {test, skip_key}},
 	{NULL, {NULL, NULL}},
 };
 

@@ -6,14 +6,14 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 15:22:54 by bjanik            #+#    #+#             */
-/*   Updated: 2017/12/09 13:02:06 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/05 19:17:11 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsh.h"
 
-char				g_op_char[MAX_OP_CHAR + 1] = "><&|;";
-char				*g_op_list[MAX_TOKENS + 1] = {
+const char				g_op_char[MAX_OP_CHAR + 1] = "><&|;";
+const char				*g_op_list[MAX_TOKENS + 1] = {
 	NULL,
 	NULL,
 	NULL,
@@ -31,12 +31,12 @@ char				*g_op_list[MAX_TOKENS + 1] = {
 	NULL,
 };
 
-static inline void	skip_char(t_lexer *lexer)
+static inline void		skip_char(t_lexer *lexer)
 {
 	(void)lexer;
 }
 
-t_transition		g_lexer[MAX_STATE][MAX_EVENT] = {
+const t_transition		g_lexer[MAX_STATE][MAX_EVENT] = {
 	{{STD, skip_char},
 		{DQUOTE, append_char},
 		{QUOTE, append_char},

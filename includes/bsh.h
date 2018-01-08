@@ -6,13 +6,14 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 17:57:19 by bjanik            #+#    #+#             */
-/*   Updated: 2017/12/26 17:30:23 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/06 16:34:07 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BSH_H
 # define BSH_H
 
+# include <dirent.h>
 # include <signal.h>
 # include <limits.h>
 # include <pwd.h>
@@ -88,4 +89,5 @@ void			add_cmd_to_history(t_bsh *bsh);
 
 void			simple_command(t_bsh *bsh, t_exec *exec);
 void			launch_builtin(t_bsh *bsh, t_exec *exec, int index);
+char			**get_cmd_path(t_env *env);
 #endif

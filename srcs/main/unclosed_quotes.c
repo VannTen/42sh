@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 14:39:25 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/03 17:07:20 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/05 16:12:11 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ static void	update_input_buffer(t_input *input)
 static void	do_stuff(int *ret, t_lexer *lexer, t_token *tokens[],
 		t_input *input)
 {
-	if ((*ret == UNCLOSED_QUOTES || *ret == ACCEPTED) &&
-			tokens[1]->type == WORD)
+	if ((*ret == UNCLOSED_QUOTES || *ret == ACCEPTED || *ret == END_IS_OP) &&
+			tokens[1]->type == WORD && lexer->token_list[0]->type == WORD)
 		concat_tokens(lexer, tokens, input);
 	else if (*ret != SYNTAX_ERROR)
 	{

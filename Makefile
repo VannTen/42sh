@@ -2,7 +2,7 @@ NAME = 21sh
 
 CC = gcc
 
-FLAGS = -g -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra
 
 LIBFT  = libft/
 
@@ -23,6 +23,7 @@ SRC_NAME = builtins/check_arg_opt.c \
 	   builtins/ft_setenv.c \
 	   builtins/ft_unsetenv.c \
 	   builtins/mod_env.c \
+	   completion/get_matches.c \
 	   env/env_funcs.c \
 	   env/env_funcs2.c \
 	   exec/check_access.c \

@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 17:57:42 by bjanik            #+#    #+#             */
-/*   Updated: 2017/12/04 16:46:43 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/06 17:07:32 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@
 # define END "\x1B[F"
 
 # define RETURN_C "\n"
+# define TABULATION "\t"
 
 typedef struct	s_input
 {
@@ -117,4 +118,7 @@ void			reset_buffer(t_input *input);
 int				copy_selection(t_input *input);
 int				cut_selection(t_input *input);
 int				paste_selection(t_input *input);
+
+t_list			*open_and_readdir(char *word, char *dir);
+int				test(t_input *input);
 #endif

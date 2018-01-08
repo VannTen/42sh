@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 17:57:29 by bjanik            #+#    #+#             */
-/*   Updated: 2017/12/09 12:07:46 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/06 14:48:37 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int					redir_heredoc(t_redir *redir);
 int					handle_heredocs(t_exec *exec);
 int					handle_redirection(t_exec *exec);
 int					ambigous_redirect(char *filename);
-char				**get_cmd_path(t_env *env);
 char				**lst_to_tab(t_list *word_list, int word_count);
 void				run_binary(t_exec *exec, t_env *env, int offset);
 int					run_builtin(t_exec *exec, int offset);
