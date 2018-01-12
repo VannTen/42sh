@@ -74,7 +74,8 @@ char              *ft_getopt(const char **argv,
 		}
         ft_bzero((void *)opt, nb_max_opt);
         i = 1;
-        while (argv[i] && ft_strcmp(argv[i], "--") && argv[i][0] == '-')
+        while (argv[i] && ft_strcmp(argv[i], "--") &&
+				ft_strcmp(argv[i], "-") && argv[i][0] == '-')
 		{
             if (add_opt(&opt, argv[i], sample, error))
 				break ;
