@@ -14,7 +14,7 @@
 
 static void			print_current_table(t_hash_table *htable, int i)
 {
-	ft_dprintf(STDOUT_FILENO, "%-4d\t%s\n",
+	ft_dprintf(STDOUT_FILENO, "%4d\t%s\n",
 				htable->hash_table[i]->hits,
 				htable->hash_table[i]->path);
 }

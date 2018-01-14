@@ -17,7 +17,7 @@ t_hash_table		*init_hash_table(void)
 	t_hash_table	*new_table;
 	size_t			i;
 
-	if ((new_table = malloc(size_of(t_hash_table))) == NULL)
+	if ((new_table = malloc(sizeof(t_hash_table))) == NULL)
 		return (NULL);
 	i = 0;
 	while (i < MAX_BIN)
@@ -39,7 +39,7 @@ int					add_hash_table(t_hash_table *htable,
 			htable->hash_table[hash]->hits += 1;
 		else
 		{
-			if ((data = malloc(size_of(t_hash_data))) == NULL)
+			if ((data = malloc(sizeof(t_hash_data))) == NULL)
 				return (1);
 			data->name = ft_strdup(bin_name);
 			data->path = ft_strdup(bin_path);
@@ -83,4 +83,16 @@ char				*get_path_table(t_hash_table *htable,
 			return (htable->hash_table[hash]->path);
 	}
 	return (NULL);
+}
+
+int					hash_42sh(const char *bin_name)
+{
+	int				hash;
+	int				i;
+
+	hash = 0;
+	i = 0;
+	while (bin_name[i])
+		hash += (int)bin_name[i++];
+	return (hash % MAX_BIN);
 }

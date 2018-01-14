@@ -13,7 +13,7 @@
 #ifndef HASHTABLE_H
 # define HASHTABLE_H
 
-# define MAX_BIN	4096;
+# define MAX_BIN	4096
 
 typedef struct		s_hash_table
 {
@@ -31,7 +31,7 @@ typedef struct		s_hash_data
 ** simple hash algorithm.
 */
 
-int					hash_42sh(char *bin_name);
+int					hash_42sh(const char *bin_name);
 
 /*
 ** function to call to execute a simple builtin "hash", print on stdout
