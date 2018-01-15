@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/15 12:51:52 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/15 14:19:03 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main(int argc, char **argv, char **environ)
 	env.env_array = convert_env_to_array(env.env_list, env.env_len);
 	ft_printf("--------------------------------\n");
 	ft_printf("--------------------------------\n");
-	display_env(env.env_list, GLOBAL);
+	display_global_env(env.env_list);
 	append_variable_to_env(&env, "TOTO", "456", 1);
 	append_variable_to_env(&env, "TATA", "666", 1);
 	append_variable_to_env(&env, "TATA", "444", 1);
@@ -32,7 +32,7 @@ int main(int argc, char **argv, char **environ)
 	append_variable_to_env(&env, "TOTO", "111", 1);
 	ft_printf("--------------------------------\n");
 	ft_printf("--------------------------------\n");
-	display_env(env.env_list, GLOBAL);
+	display_global_env(env.env_list);
 	ft_printf("--------------------------------\n");
 	ft_printf("--------------------------------\n");
 	remove_variable_from_env(&env, "TERM_SESSION_ID");
@@ -43,17 +43,17 @@ int main(int argc, char **argv, char **environ)
 	remove_variable_from_env(&env, "OLDPWD");
 	remove_variable_from_env(&env, "TATA");
 	remove_variable_from_env(&env, "TOTO");*/
-	display_env(env.env_list, GLOBAL);
+	display_global_env(env.env_list);
 	ft_printf("--------------------------------\n");
 	ft_printf("--------------------------------\n");
 	append_variable_to_env(&env, "TATA", "666", 1);
 	append_variable_to_env(&env, "TUTU", "222", 1);
 	append_variable_to_env(&env, "TITI", "444", 1);
-	display_env(env.env_list, GLOBAL);
+	display_global_env(env.env_list);
 	remove_variable_from_env(&env, "TATA");
 	ft_printf("--------------------------------\n");
 	ft_printf("--------------------------------\n");
-	display_env(env.env_list, GLOBAL);
+	display_global_env(env.env_list);
 	while (42);
 
 	return (0);
