@@ -6,17 +6,20 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:50:58 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/16 14:14:56 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/16 14:23:04 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-# define LOCAL 0
-# define GLOBAL 1
-# define GLOBAL_AND_LOCAL 2
 # define TRUE 1
 # define FALSE 0
+
+enum {
+	LOCAL,
+	GLOBAL,
+	GLOBAL_AND_LOCAL,
+};
 
 typedef struct s_env_list
 {
