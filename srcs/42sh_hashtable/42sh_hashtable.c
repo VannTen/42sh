@@ -35,7 +35,11 @@ int					add_hash_table(t_hash_table *htable,
 	if (htable && bin_name && bin_path)
 	{
 		hash = hash_42sh(bin_name);
-		if (htable->hash_table[hash] != NULL)
+		while (htable->hash_table[hash] != NULL &&
+			ft_strcmp(htable->hash_table[hash]->name, bin_name))
+			hash++;
+		if (htable->hash_table[hash] != NULL &&
+			!ft_strcmp(htable->hash_table[hash]->name, bin_name))
 			htable->hash_table[hash]->hits += 1;
 		else
 		{
@@ -79,7 +83,11 @@ char				*get_path_table(t_hash_table *htable,
 	if (htable && bin_name)
 	{
 		hash = hash_42sh(bin_name);
-		if (htable->hash_table[hash] != NULL)
+		while (htable->hash_table[hash] != NULL &&
+			ft_strcmp(htable->hash_table[hash]->name, bin_name))
+			hash++;
+		if (htable->hash_table[hash] != NULL &&
+			!ft_strcmp(htable->hash_table[hash]->name, bin_name))
 			return (htable->hash_table[hash]->path);
 	}
 	return (NULL);
