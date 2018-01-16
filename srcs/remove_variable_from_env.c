@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 14:25:10 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/15 12:35:22 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/16 14:08:28 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	free_env_var(t_env_list *var)
 ** function returns.
 */
 
-int		remove_variable_from_env(t_env *env, char *const name)
+int		remove_variable_from_env(t_env *env, const char *const name)
 {
 	t_env_list	*remove_var;
 	t_env_list	*tmp;

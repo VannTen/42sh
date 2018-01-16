@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 13:28:26 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/15 11:25:15 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/16 14:16:30 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 ** If any allocation fails, return NULL.
 */
 
-static t_env_list	*add_to_env_list(t_env_list *env_list, char *const name,
-							char *const value, unsigned short exportable)
+static t_env_list	*add_to_env_list(t_env_list *env_list, const char *name,
+							const char *value, unsigned short exportable)
 {
 	t_env_list	*new_variable;
 
@@ -36,11 +36,9 @@ static t_env_list	*add_to_env_list(t_env_list *env_list, char *const name,
 
 /*
 ** Function changes the variable value if it is different from VALUE parameter
-**
 */
 
-static int	update_env_variable(t_env *env, t_env_list *const var,
-								char *const value)
+static int	update_env_variable(t_env_list *const var, const char *const value)
 {
 	if (ft_strcmp(var->value, value))
 	{
@@ -58,7 +56,7 @@ static int	update_env_variable(t_env *env, t_env_list *const var,
 ** If the variable name already exists, function updates its value.
 */
 
-int	append_variable_to_env(t_env *env, char *const name, char *const value,
+int	append_variable_to_env(t_env *env, const char *name, const char *value,
 						const unsigned short exportable)
 {
 	t_env_list	*var;
@@ -66,7 +64,7 @@ int	append_variable_to_env(t_env *env, char *const name, char *const value,
 
 	if ((var = ft_getenv(env->env_list, name)))
 	{
-		if (update_env_variable(env, var, value))
+		if (update_env_variable(var, value))
 			return (1);
 	}
 	else

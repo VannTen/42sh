@@ -6,13 +6,13 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:48:17 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/15 11:31:12 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/16 14:14:46 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
-t_env_list		*create_env_node(char *const var, const int flag)
+t_env_list		*create_env_node(const char *const var, const int flag)
 {
 	char		**splitted;
 	t_env_list	*env;
@@ -46,7 +46,7 @@ t_env_list		*create_env_node(char *const var, const int flag)
 ** global or not, and a pointer to the next element of the list.
 */
 
-t_env_list	*convert_environ_to_list(char **const environ)
+t_env_list	*convert_environ_to_list(char ** environ)
 {
 	t_env_list	*env_list[2];
 	size_t		i;

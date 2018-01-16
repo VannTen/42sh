@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:23:39 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/12 13:43:41 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/16 13:53:24 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 ** Function takes the environnment list as argument returns a string array
 ** The returned array being passed later to execve system call, only global
-**  environment variables are stroed in the array.
+**  environment variables are stored in the array.
 */
 
 char		**convert_env_to_array(t_env_list *env_list, const size_t env_len)
