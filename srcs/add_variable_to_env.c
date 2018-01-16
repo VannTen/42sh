@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 13:28:26 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/16 14:16:30 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/16 14:26:51 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 ** If any allocation fails, return NULL.
 */
 
-static t_env_list	*add_to_env_list(t_env_list *env_list, const char *name,
-							const char *value, unsigned short exportable)
+static t_env_list	*add_to_env_list(const char *name, const char *value,
+					unsigned short exportable)
 {
 	t_env_list	*new_variable;
 
@@ -69,8 +69,7 @@ int	append_variable_to_env(t_env *env, const char *name, const char *value,
 	}
 	else
 	{
-		if (!(new_var = add_to_env_list(env->env_list, name, value,
-						exportable)))
+		if (!(new_var = add_to_env_list(name, value, exportable)))
 			return (1);
 		if (env->env_list == NULL)
 			env->env_list = new_var;
