@@ -12,6 +12,7 @@
 
 #ifndef TOKENS_H
 # define TOKENS_H
+# include "libft.h"
 
 enum
 {
@@ -35,7 +36,7 @@ enum
 typedef struct		s_token
 {
 	char			*value;
-	int				type;
+	size_t			type;
 	struct s_token	*next;
 	struct s_token	*prev;
 }					t_token;
