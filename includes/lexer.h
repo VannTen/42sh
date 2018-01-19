@@ -72,7 +72,7 @@ int					realloc_current_token(t_lexer *lexer);
 int					is_operator(const char *token);
 void				get_event(t_lexer *lexer);
 
-extern t_transition	g_lexer[MAX_STATE][MAX_EVENT];
-extern char			g_op_char[MAX_OP_CHAR + 1];
-extern char			*g_op_list[MAX_TOKENS + 1];
+extern const t_transition	g_lexer[MAX_STATE][MAX_EVENT];
+extern const char			g_op_char[MAX_OP_CHAR + 1];
+extern const char			*g_op_list[MAX_TOKENS + 1];
 #endif

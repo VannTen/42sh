@@ -12,8 +12,8 @@
 
 #include "lexer.h"
 
-char				g_op_char[MAX_OP_CHAR + 1] = "><&|;";
-char				*g_op_list[MAX_TOKENS + 1] = {
+const char				g_op_char[MAX_OP_CHAR + 1] = "><&|;";
+const char				*g_op_list[MAX_TOKENS + 1] = {
 	NULL,
 	NULL,
 	NULL,
@@ -38,7 +38,7 @@ static inline int	skip_char(t_lexer *lexer)
 	return (0);
 }
 
-t_transition		g_lexer[MAX_STATE][MAX_EVENT] = {
+const t_transition		g_lexer[MAX_STATE][MAX_EVENT] = {
 	{{STD, skip_char},
 		{DQUOTE, append_char},
 		{QUOTE, append_char},
