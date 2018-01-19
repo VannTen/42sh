@@ -15,14 +15,16 @@
 int		append_char(t_lexer *lexer)
 {
 	if (lexer->token_len == lexer->token_size)
-		realloc_current_token(lexer);
+		if (realloc_current_token(lexer) == MALLOC_FAIL)
+			return (MALLOC_FAIL);
 	if (is_operator(lexer->current_token) != -1 && lexer->state == STD)
 	{
 		lexer->current_token[lexer->token_len++] = *(lexer->input);
 		if (is_operator(lexer->current_token) == -1)
 		{
 			lexer->current_token[--lexer->token_len] = '\0';
-			delimitate_token(lexer);
+			if (delimitate_token(lexer) == MALLOC_FAIL)
+				return (MALLOC_FAIL);
 			lexer->current_token[lexer->token_len++] = *(lexer->input);
 		}
 	}
