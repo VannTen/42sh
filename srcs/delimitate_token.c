@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   remove_cmd_from_history.c                          :+:      :+:    :+:   */
+/*   delimitate_token.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/15 15:55:16 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/15 17:48:34 by bjanik           ###   ########.fr       */
+/*   Created: 2017/10/11 15:13:50 by bjanik            #+#    #+#             */
+/*   Updated: 2017/11/08 15:33:31 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "history.h"
+#include "lexer.h"
 
-int	remove_cmd_from_history(t_history *history, const int offset)
+int	delimitate_token(t_lexer *lexer)
 {
-	if (offset < 1 || offset > history->len)
-		return (1);
-	ft_strdel(&history->history[offset - 1]);
-	ft_memmove((char**)history->history + offset - 1,
-				(char**)history->history + offset, (history->len - offset)*
-				sizeof(char*));
-	history->len--;
-	history->history[history->len] = NULL;
+	t_token	*token;
+
+	if (lexer->token_len > 0)
+	{
+		if (!(token = init_token_node(lexer)))
+			return (MALLOC_FAIL);
+		if (!lexer->tokens[0])
+		{
+			token->prev = NULL;
+			lexer->tokens[0] = token;
+			lexer->tokens[1] = token;
+		}
+		else
+		{
+			lexer->tokens[1]->next = token;
+			token->prev = lexer->tokens[1];
+		}
+		lexer->tokens[1] = token;
+	}
 	return (0);
 }

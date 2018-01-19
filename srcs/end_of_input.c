@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_all_history.c                                :+:      :+:    :+:   */
+/*   end_of_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/15 18:54:08 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/15 19:12:07 by bjanik           ###   ########.fr       */
+/*   Created: 2017/10/11 20:20:19 by bjanik            #+#    #+#             */
+/*   Updated: 2017/10/19 15:59:17 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "history.h"
+#include "lexer.h"
 
-int	clear_all_history(t_history *history)
+int	end_of_input(t_lexer *lexer)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < history->len)
-		ft_strdel(&history->history[i++]);
-	history->len = 0;
-	history->current = 0;
+	if (delimitate_token(lexer) == MALLOC_FAIL
+			|| append_char(lexer) == MALLOC_FAIL
+			|| delimitate_token(lexer) == MALLOC_FAIL)
+		return (MALLOC_FAIL);
 	return (0);
 }

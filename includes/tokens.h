@@ -1,31 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   save_history_to_histfile.c                         :+:      :+:    :+:   */
+/*   tokens.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/16 11:39:40 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/16 11:48:34 by bjanik           ###   ########.fr       */
+/*   Created: 2017/10/19 17:58:23 by bjanik            #+#    #+#             */
+/*   Updated: 2017/12/09 14:36:17 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "history.h"
+#ifndef TOKENS_H
+# define TOKENS_H
 
-int	save_history_to_histfile(t_history *const history)
+enum
 {
-	size_t	i;
-	int		fd;
+	WORD,
+	NEWLINE,
+	IO_NUMBER,
+	DLESS,
+	DGREAT,
+	LESSAND,
+	GREATAND,
+	LESS,
+	GREAT,
+	AND_IF,
+	OR_IF,
+	SEMI,
+	AND,
+	PIPE,
+	CLOBBER,
+};
 
-	i = 0;
-	if ((fd = open(history->histfile, O_CREAT | O_TRUNC | O_WRONLY, 0644)) < 0)
-		return (1);
-	while (i < history->len)
-	{
-		write(fd, history->history[i], ft_strlen(history->history[i]));
-		write(fd, "\n", 1);
-		i++;
-	}
-	close(fd);
-	return (0);
-}
+typedef struct		s_token
+{
+	char			*value;
+	int				type;
+	struct s_token	*next;
+	struct s_token	*prev;
+}					t_token;
+#endif
