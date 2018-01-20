@@ -17,7 +17,7 @@ char	*search_in_history_by_num(t_history *history, const int number)
 	if (ft_abs(number) > history->len)
 		return (NULL);
 	if (number < 0)
-		return (history->history[len - number]);
+		return (history->history[len + number]);
 	return (history->history[number]);
 }
 
