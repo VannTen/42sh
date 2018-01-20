@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:59:31 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/16 16:39:45 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/20 15:45:17 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ char	*search_in_history_by_num(t_history *history, const int number)
 	if (ft_abs(number) > history->len)
 		return (NULL);
 	if (number < 0)
-		return (history->history[len - number]);
+		return (history->history[history->len + number]);
 	return (history->history[number]);
 }
 
-char	*search_in_history_by_str(t_history *history, const char *const str)
+char	*search_in_history_by_str(t_history *history, const char *str)
 {
 	size_t	i;
 	size_t	len_str;

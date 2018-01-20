@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 16:36:42 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/16 11:48:37 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/20 15:46:09 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int			import_history_from_file(t_history *history)
 	if (!(history->histfile = ft_strnjoin(get_pw_dir(), 2, "/",
 											".42sh_history")))
 		return (1);
-	if ((fd = open(history->hist_file, O_CREAT | O_RDWR |O_APPEND, 0644)) < 0)
+	if ((fd = open(history->histfile, O_CREAT | O_RDWR |O_APPEND, 0644)) < 0)
 		return (2);
 	while (get_next_line(fd, &line) > 0 && history->len <= history->size)
 	{
