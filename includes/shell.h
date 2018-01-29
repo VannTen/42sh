@@ -38,4 +38,5 @@ typedef struct	s_bsh
 
 int					init_termcaps(t_bsh *bsh);
 int					ft_putchar_termcaps(int c);
+int					ft_realloc_str(t_string *string);
 #endif

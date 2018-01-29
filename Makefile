@@ -60,6 +60,7 @@ SRC_NAME = env/add_variable_to_env.c \
 		   line_editing/waiting_for_input.c \
 		   main/init_shell.c \
 		   main/main.c \
+		   main/ft_realloc_str.c\
 		   term/prompt.c \
 		   term/term.c \
 
