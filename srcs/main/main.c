@@ -16,7 +16,7 @@ void	display_tokens(t_token *tokens)
 {
 	while (tokens)
 	{
-		ft_printf("[%s] ==> %d\n", tokens->value, tokens->type);
+		ft_printf("[%s] ==> %zu\n", tokens->value, tokens->type);
 		tokens = tokens->next;
 	}
 }

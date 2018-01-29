@@ -20,7 +20,7 @@ int		wait_for_input(t_input *input, int input_type)
 	while (42)
 	{
 		ft_bzero(input->read_buffer, MAX_KEY_LENGTH);
-		if (read(STDIN, input->read_buffer, MAX_KEY_LENGTH) < 1)
+		if (read(STDIN_FILENO, input->read_buffer, MAX_KEY_LENGTH) < 1)
 			return (READ_FAIL);
 		if ((ret = get_key(input)) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
@@ -28,6 +28,6 @@ int		wait_for_input(t_input *input, int input_type)
 			break ;
 	}
 	if (input->type != HISTORY_SEARCH)
-		write(STDOUT, RETURN_C, 1);
+		write(STDOUT_FILENO, RETURN_C, 1);
 	return (ret);
 }

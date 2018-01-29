@@ -36,7 +36,7 @@ t_keys	g_handle_keys[] = {
 	{ALT_LESS, {handle_alt_less, skip_key}},
 	{RETURN_C, {handle_return, skip_key}},
 	{CLEAR_SCREEN, {handle_clear_screen, skip_key}},
-	{TAB, {completion, skip_key}},
+	//{TAB, {completion, skip_key}},
 	{NULL, {NULL, NULL}},
 };
 

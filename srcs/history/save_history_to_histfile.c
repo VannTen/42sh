@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "history.h"
+#include <fcntl.h>
 
 int	save_history_to_histfile(t_history history)
 {

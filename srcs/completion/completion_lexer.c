@@ -93,6 +93,7 @@ void	del_matches(void *matches, size_t size)
 	ft_memdel((void**)&matches);
 }
 
+/*
 int				completion(t_input *input)
 {
 	t_lexer	lexer;
@@ -110,16 +111,17 @@ int				completion(t_input *input)
 						completion.basename, completion.basename_len);
 	for (t_list *l = completion.matches; l != NULL; l = l->next)
 		ft_printf("{%s} ==> ", l->content);
-	
+
 
 
 	if (completion.search_location == DIRECTORY)
 		ft_printf("DIRECTORY!\n");
 	else if (completion.search_location == PATH)
 		ft_printf("PATH\n");
-//	display_tokens(lexer.tokens[0]);*/
+//	display_tokens(lexer.tokens[0]);
 	clear_tokens(&lexer.tokens[0]);
 	ft_strdel(&lexer.current_token);
 	ft_lstdel(&completion.matches, del_matches);
 	return (0);
 }
+*/

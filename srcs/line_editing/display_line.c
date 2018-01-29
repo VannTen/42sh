@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "shell.h"
+#include <unistd.h>
 
 static void	enable_video_display(t_input *input, int cursor)
 {
@@ -41,7 +42,7 @@ void		display_buffer(t_input *input, int cursor)
 	{
 		if (input->pivot > -1)
 			enable_video_display(input, cursor);
-		write(STDIN, &input->buffer[i], 1);
+		write(STDIN_FILENO, &input->buffer[i], 1);
 		if (input->term->cursor_col == input->term->width)
 		{
 			tputs(tgetstr("do", NULL), 1, ft_putchar_termcaps);

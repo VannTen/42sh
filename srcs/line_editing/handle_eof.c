@@ -12,6 +12,7 @@
 
 #include "shell.h"
 #include "history.h"
+#include <unistd.h>
 
 int		handle_clear_line(t_input *input)
 {
@@ -36,7 +37,7 @@ int		handle_clear_line(t_input *input)
 
 void	exit_ctrl_d(t_input *input)
 {
-	ft_putendl_fd("exit", STDERR);
+	ft_putendl_fd("exit", STDERR_FILENO);
 	save_history_to_histfile(*(input->history));
 	restore_initial_attr(*(input->term));
 	exit(0);

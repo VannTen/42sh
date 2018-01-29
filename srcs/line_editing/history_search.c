@@ -12,6 +12,7 @@
 
 #include "shell.h"
 #include "history.h"
+#include <unistd.h>
 
 static void	go_to_beg_line(t_input *input)
 {
@@ -24,7 +25,7 @@ static void	go_to_beg_line(t_input *input)
 static void	init_search(t_input *input)
 {
 	go_to_beg_line(input);
-	ft_putstr_fd("History Search> ", STDERR);
+	ft_putstr_fd("History Search> ", STDERR_FILENO);
 	input->term->prompt_len = 16;
 	input->term->cursor_col = 17;
 	input->term->first_line_len = input->term->width - 16;

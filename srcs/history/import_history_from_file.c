@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "history.h"
+#include <fcntl.h>
 
 /*
 ** Opens history_file and saves its content to the session's history structure.
