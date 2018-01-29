@@ -63,6 +63,7 @@ SRC_NAME = env/add_variable_to_env.c \
 		   main/ft_realloc_str.c\
 		   term/prompt.c \
 		   term/term.c \
+		   term/ft_putchar_termcaps.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
