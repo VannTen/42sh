@@ -106,7 +106,7 @@ static int	readline_process(t_input *input, t_lexer *lexer, t_history *history)
 {
 	int		ret;
 	t_string	exp_input = {ft_strnew(input->buffer_size), 0,
-							input->buffer_size};
+		input->buffer_size};
 
 	print_prompt(input, BOLD_CYAN);
 	if (get_line(lexer, input) == MALLOC_FAIL)
@@ -131,7 +131,7 @@ static int	readline_process(t_input *input, t_lexer *lexer, t_history *history)
 	return (0);
 }
 
-/*static char const	g_grammar[] =
+static char const	g_grammar[] =
 " PROGRAM : COMPLETE_COMMAND NEWLINE"
 "| NEWLINE;"
 "COMPLETE_COMMAND : LIST SEPARATOR_OP"
@@ -165,12 +165,13 @@ static int	readline_process(t_input *input, t_lexer *lexer, t_history *history)
 "| GREAT FILENAME"
 "| GREATAND FILENAME"
 "| DGREAT FILENAME"
+"| LESSGREAT FILENAME"
 "| CLOBBER FILENAME;"
 "FILENAME : WORD;"
-"IO_HERE : DLESS HERE_END;"
+"IO_HERE : DLESSDASH HERE_END | DLESS HERE_END;"
 "HERE_END: WORD;"
 "SEPARATOR_OP: AND"
-"| SEMI;";
+"|SEMI;";
 
 char const			*tokens_name[] = {
 	"WORD",
@@ -188,13 +189,17 @@ char const			*tokens_name[] = {
 	"AND",
 	"PIPE",
 	"CLOBBER",
+	"DLESSDASH",
+	"LESSGREAT",
 	NULL
 };
 
-size_t	get_token_id(void const *token)
+size_t	get_tok_id(void const *token)
 {
 	t_token const *tok;
 
+	if (token == tokens_name)
+		return (DLESSDASH + 1);
 	tok = token;
 	return (tok->type);
 }
@@ -205,24 +210,49 @@ void	*take_token(void *token_list_address)
 	void	*token;
 
 	list_address = token_list_address;
-	token = *list_address;
-	*list_address = (*list_address)->next;
-	return (token);
+	if (*list_address != NULL)
+	{
+		token = *list_address;
+		*list_address = (*list_address)->next;
+		return (token);
+	}
+	else
+		return ((void*)tokens_name);
 }
 
-#include "parser_interface.h"*/
+#include "parser_interface.h"
+#include "parser_defs.h"
+
+static void	*create_program(__attribute__((unused))void const *no_val)
+{
+	return ((void*)g_grammar);
+}
+
+static t_bool	test_parser(t_token *list_tokens, t_parser const *parser)
+{
+	void				*result;
+	t_bool				syntax_valid;
+
+	if (parser == NULL)
+		exit(1);
+	result = execute_construct(parser, "PROGRAM", &list_tokens, take_token);
+	syntax_valid = result != NULL;
+	free(result);
+	return (syntax_valid);
+}
 
 int main(int argc, char **argv, char **environ)
 {
-	t_bsh	*bsh;
-	int		ret;
-	/*t_parser	*parser;
+	t_bsh				*bsh;
+	int					ret;
 	t_exec	const		exec_rules[] = {
-		{.name = NULL, .create = NULL, .give = NULL}};*/
+		{.name = "PROGRAM", .create = create_program, .give = NULL},
+		{.name = NULL, .create = NULL, .give = NULL}
+	};
+	t_parser			*parser;
 
 	(void)argc;
 	(void)argv;
-	//parser = generate_parser(g_grammar, tokens_name, exec_rules, get_token_id);
 	if (!(bsh = (t_bsh*)malloc(sizeof(t_bsh))))
 		return (MALLOC_FAIL);
 	init_lexer(&bsh->lexer);
@@ -231,12 +261,14 @@ int main(int argc, char **argv, char **environ)
 	init_input(&bsh->input, &bsh->term, &bsh->history);
 	init_env(&bsh->env, environ);
 	init_termcaps(bsh);
+	parser = generate_parser(g_grammar, tokens_name, exec_rules, get_tok_id);
+	print_grammar_back(STDERR_FILENO, parser->grammar);
 	while (42)
 	{
 		reset_lexer(&bsh->lexer);
 		if ((ret = readline_process(&bsh->input, &bsh->lexer,
 						&bsh->history)) == EVENT_NOT_FOUND
-						|| ret == MALLOC_FAIL)
+				|| ret == MALLOC_FAIL)
 		{
 			(ret == EVENT_NOT_FOUND) ?
 				ft_dprintf(STDERR_FILENO, "bsh: event not found\n") : 0;
@@ -248,12 +280,14 @@ int main(int argc, char **argv, char **environ)
 			continue ;
 		if (update_history(&bsh->history, &bsh->input) == MALLOC_FAIL)
 			continue ;
-		#ifdef DEBUG
+#ifdef DEBUG
 		display_history(bsh->history);
-		#endif
+#endif
 		display_tokens(bsh->lexer.tokens[0]);
-		reset_lexer(&bsh->lexer);
-		//execute_construct(parser, "PROGRAM", &bsh->lexer.tokens[0], take_token);
+		ft_dprintf(STDERR_FILENO,
+				"\"%s\" : syntax is %svalid\n",
+				bsh->input.buffer,
+				test_parser(bsh->lexer.tokens[0], parser) ? " " : "not ");
 	}
 	return (0);
 }

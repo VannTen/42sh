@@ -8,7 +8,7 @@ LIBFT  = libft/
 
 LIB = libft/libft.a
 
-HEADERS = includes/
+HEADERS = includes/ grammar_generator/includes
 
 SRC_PATH = srcs/
 OBJ_PATH = obj/
@@ -74,7 +74,9 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 	@make -C $(LIBFT)
-	@$(CC) $(FLAGS) $(OBJ) $(LIB) -ltermcap -o $(NAME)
+	+make -C grammar_generator libgrammar_generator.a
+	@$(CC) $(FLAGS) $(OBJ) $(LIB) -ltermcap \
+	-L grammar_generator -lgrammar_generator -o $(NAME)
 
 $(OBJ) : $(OBJ_PATH)
 
@@ -83,7 +85,7 @@ $(OBJ_PATH) :
 	@mkdir -p $(dir $(OBJ))
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	$(CC) $(FLAGS) -I$(HEADERS) -I$(LIBFT) -c $< -o $@
+	$(CC) $(FLAGS) $(foreach inc,$(HEADERS),-iquote$(inc)) -I$(LIBFT) -c $< -o $@
 
 clean :
 	/bin/rm -rf $(OBJ_PATH)
