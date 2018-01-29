@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 14:58:40 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/16 16:37:55 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/21 17:02:35 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,20 @@
 # include <sys/types.h>
 # include <uuid/uuid.h>
 
+# define DEFAULT_HISTSIZE 10000
+
 typedef struct	s_history
 {
 	char		**history;
-	char		*histfile;
-	size_t		current;
-	size_t		len;
-	size_t		size;
+	char		*file;
+	int			current;
+	int			len;
+	int			size;
 }				t_history;
 
+int				init_history(t_history *history, int size);
 int				import_history_from_file(t_history *history);
+int				save_history_to_histfile(t_history history);
 int				display_history(t_history history);
 int				add_cmd_to_history(t_history *history, char *const command);
 int				remove_cmd_from_history(t_history *history, const int offset);

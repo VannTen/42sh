@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   end_of_input.c                                     :+:      :+:    :+:   */
+/*   keys_alt.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/11 20:20:19 by bjanik            #+#    #+#             */
-/*   Updated: 2017/10/19 15:59:17 by bjanik           ###   ########.fr       */
+/*   Created: 2017/11/03 16:10:25 by bjanik            #+#    #+#             */
+/*   Updated: 2018/01/21 15:54:39 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "shell.h"
 
-int	end_of_input(t_lexer *lexer)
+int	handle_alt_great(t_input *input)
 {
-	if (delimitate_token(lexer) == MALLOC_FAIL
-			|| append_char(lexer) == MALLOC_FAIL
-			|| delimitate_token(lexer) == MALLOC_FAIL)
-		return (MALLOC_FAIL);
+	input->history->current = 0;
+	cp_history_to_buffer(input);
+	return (0);
+}
+
+int	handle_alt_less(t_input *input)
+{
+	input->history->current = input->history->len - 1;
+	cp_history_to_buffer(input);
 	return (0);
 }

@@ -1,45 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokens.h                                           :+:      :+:    :+:   */
+/*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/19 17:58:23 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/26 13:16:40 by bjanik           ###   ########.fr       */
+/*   Created: 2018/01/21 12:31:57 by bjanik            #+#    #+#             */
+/*   Updated: 2018/01/29 12:36:17 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKENS_H
-# define TOKENS_H
+#ifndef SHELL_H
+# define SHELL_H
+
 # include "libft.h"
+# include "lexer.h"
+# include "input.h"
+# include "history.h"
+# include "term.h"
+# include "env.h"
+# include "expansion.h"
+# include "completion.h"
+# include <termios.h>
+# include <dirent.h>
 
-enum
-{
-	WORD,
-	NEWLINE,
-	IO_NUMBER,
-	DLESS,
-	DGREAT,
-	LESSAND,
-	GREATAND,
-	LESS,
-	GREAT,
-	AND_IF,
-	OR_IF,
-	SEMI,
-	AND,
-	PIPE,
-	CLOBBER,
-	LESS_GREAT,
-	DLESSDASH,
-};
+# define EVENT_NOT_FOUND 1
+# define MALLOC_FAIL -1
 
-typedef struct		s_token
+typedef struct	s_bsh
 {
-	char			*value;
-	size_t			type;
-	struct s_token	*next;
-	struct s_token	*prev;
-}					t_token;
+	t_input		input;
+	t_lexer		lexer;
+	t_env		env;
+	t_history	history;
+	t_term		term;
+}				t_bsh;
+
+int					init_termcaps(t_bsh *bsh);
 #endif

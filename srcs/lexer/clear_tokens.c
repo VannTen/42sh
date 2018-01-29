@@ -1,45 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokens.h                                           :+:      :+:    :+:   */
+/*   clear_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/19 17:58:23 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/26 13:16:40 by bjanik           ###   ########.fr       */
+/*   Created: 2018/01/22 17:07:22 by bjanik            #+#    #+#             */
+/*   Updated: 2018/01/25 17:42:11 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKENS_H
-# define TOKENS_H
-# include "libft.h"
+#include "shell.h"
 
-enum
+void	clear_tokens(t_token *tokens[])
 {
-	WORD,
-	NEWLINE,
-	IO_NUMBER,
-	DLESS,
-	DGREAT,
-	LESSAND,
-	GREATAND,
-	LESS,
-	GREAT,
-	AND_IF,
-	OR_IF,
-	SEMI,
-	AND,
-	PIPE,
-	CLOBBER,
-	LESS_GREAT,
-	DLESSDASH,
-};
+	t_token	*tmp;
 
-typedef struct		s_token
-{
-	char			*value;
-	size_t			type;
-	struct s_token	*next;
-	struct s_token	*prev;
-}					t_token;
-#endif
+	if (!tokens)
+		return ;
+	tmp = tokens[0];
+	while (tokens[0])
+	{
+		tmp = tokens[0]->next;
+		ft_strdel(&tokens[0]->value);
+		tokens[0]->next = NULL;
+		tokens[0]->prev = NULL;
+		ft_memdel((void**)&tokens[0]);
+		tokens[0] = tmp;
+	}
+	tokens[1] = NULL;
+}

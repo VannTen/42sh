@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_realloc_str.c                                   :+:      :+:    :+:   */
+/*   delimitate_token.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/22 18:13:23 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/24 15:39:17 by bjanik           ###   ########.fr       */
+/*   Created: 2017/10/11 15:13:50 by bjanik            #+#    #+#             */
+/*   Updated: 2018/01/22 15:14:47 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "shell.h"
 
-int	ft_realloc_str(t_string *str)
+int	delimitate_token(t_lexer *lexer)
 {
-	char	*tmp;
+	t_token	*token;
 
-	tmp = str->str;
-	if (str->size * 2 > 1000000000)
-		return (-1);
-	if (!(str->str = ft_strnew(str->size * 2)))
-		return (-1);
-	str->size *= 2;
-	ft_printf("[%d]\n", str->size);
-	ft_strcpy(str->str, tmp);
-	free(tmp);
+	if (lexer->token_len > 0)
+	{
+		if (!(token = init_token_node(lexer)))
+			return (MALLOC_FAIL);
+		if (!lexer->tokens[0])
+		{
+			token->prev = NULL;
+			lexer->tokens[0] = token;
+			lexer->tokens[1] = token;
+		}
+		else
+		{
+			lexer->tokens[1]->next = token;
+			token->prev = lexer->tokens[1];
+		}
+		lexer->tokens[1] = token;
+	}
 	return (0);
 }

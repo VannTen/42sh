@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 16:51:57 by bjanik            #+#    #+#             */
-/*   Updated: 2017/12/04 14:16:51 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/24 15:38:11 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@
 # define STDOUT 1
 # define STDERR 2
 
-# define MALLOC_FAIL -1
-
 typedef struct		s_dlst
 {
 	void			*data;
@@ -61,8 +59,8 @@ typedef struct		s_list
 typedef struct		s_string
 {
 	char			*str;
-	size_t			len;
-	size_t			size;
+	int				len;
+	int				size;
 }					t_string;
 
 int					ft_putchar(char c);
@@ -164,5 +162,6 @@ void				ft_error_msg(char *error);
 void				*ft_malloc(size_t size);
 int					ft_realloc_str(t_string *str);
 t_string			ft_init_str(const size_t size);
+size_t				ft_tab_len(char **tab);
 
 #endif

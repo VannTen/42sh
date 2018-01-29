@@ -6,7 +6,7 @@
 #    By: bjanik <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 16:52:33 by bjanik            #+#    #+#              #
-#    Updated: 2017/11/06 10:05:39 by bjanik           ###   ########.fr        #
+#    Updated: 2018/01/21 15:39:34 by bjanik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -129,6 +129,7 @@ SRCS = ft_putstr.c \
 	   ft_putchar_termcaps.c \
 	   ft_realloc_str.c \
 	   ft_init_str.c \
+	   ft_tab_len.c \
 
 OBJ = $(SRCS:.c=.o)
 RM = rm -f

@@ -1,45 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokens.h                                           :+:      :+:    :+:   */
+/*   is_operator.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/19 17:58:23 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/26 13:16:40 by bjanik           ###   ########.fr       */
+/*   Created: 2017/10/11 20:18:42 by bjanik            #+#    #+#             */
+/*   Updated: 2018/01/22 15:15:27 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKENS_H
-# define TOKENS_H
-# include "libft.h"
+#include "shell.h"
 
-enum
+int			is_operator(const char *token)
 {
-	WORD,
-	NEWLINE,
-	IO_NUMBER,
-	DLESS,
-	DGREAT,
-	LESSAND,
-	GREATAND,
-	LESS,
-	GREAT,
-	AND_IF,
-	OR_IF,
-	SEMI,
-	AND,
-	PIPE,
-	CLOBBER,
-	LESS_GREAT,
-	DLESSDASH,
-};
+	int	i;
 
-typedef struct		s_token
-{
-	char			*value;
-	size_t			type;
-	struct s_token	*next;
-	struct s_token	*prev;
-}					t_token;
-#endif
+	i = 2;
+	while (g_op_list[++i])
+	{
+		if (!ft_strcmp(g_op_list[i], token))
+			return (i);
+	}
+	return (-1);
+}

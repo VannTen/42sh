@@ -6,13 +6,13 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 15:22:54 by bjanik            #+#    #+#             */
-/*   Updated: 2017/12/09 13:02:06 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/26 15:23:28 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "shell.h"
 
-const char				g_op_char[MAX_OP_CHAR + 1] = "><&|;";
+const char				g_op_char[MAX_OP_CHAR + 1] = "><&|;-";
 const char				*g_op_list[MAX_TOKENS + 1] = {
 	NULL,
 	NULL,
@@ -29,6 +29,8 @@ const char				*g_op_list[MAX_TOKENS + 1] = {
 	"&",
 	"|",
 	">|",
+	"<>",
+	"<<-",
 	NULL,
 };
 
@@ -46,7 +48,8 @@ const t_transition		g_lexer[MAX_STATE][MAX_EVENT] = {
 		{STD, NULL},
 		{NWLINE, NULL},
 		{COMMENT, NULL},
-		{STD, append_char}},
+		{STD, append_char},
+		{STD, handle_backslash}},
 
 	{{DQUOTE, append_char},
 		{STD, append_char},
@@ -113,6 +116,17 @@ int				handle_backslash(t_lexer *lexer)
 	return (0);
 }
 
+int	reset_lexer(t_lexer *lexer)
+{
+	clear_tokens(&lexer->tokens[0]);
+	lexer->tokens[1] = NULL;
+	lexer->state = INIT;
+	lexer->event = 0;
+	ft_bzero(lexer->current_token, lexer->token_size);
+	lexer->token_len = 0;
+	return (0);
+}
+
 int				lexer(t_lexer *lexer, char *input)
 {
 	lexer->input = input;
@@ -122,14 +136,20 @@ int				lexer(t_lexer *lexer, char *input)
 	while (lexer->state != NWLINE && *(lexer->input) != '\0')
 	{
 		if (g_lexer[lexer->state][lexer->event].p_transit(lexer) == MALLOC_FAIL)
+		{
+			reset_lexer(lexer);
 			return (MALLOC_FAIL);
+		}
 		if (lexer->state != INIT)
 			lexer->input++;
 		lexer->state = g_lexer[lexer->state][lexer->event].new_state;
 		get_event(lexer);
 	}
 	if (delimitate_token(lexer) == MALLOC_FAIL)
+	{
+		reset_lexer(lexer);
 		return (MALLOC_FAIL);
+	}
 	lexer->input = NULL;
 	(lexer->state == NWLINE) ? lexer->state = INIT : 0;
 	return (0);

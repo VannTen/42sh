@@ -1,45 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokens.h                                           :+:      :+:    :+:   */
+/*   save_history_to_histfile.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/19 17:58:23 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/26 13:16:40 by bjanik           ###   ########.fr       */
+/*   Created: 2018/01/16 11:39:40 by bjanik            #+#    #+#             */
+/*   Updated: 2018/01/21 17:01:54 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKENS_H
-# define TOKENS_H
-# include "libft.h"
+#include "history.h"
 
-enum
+int	save_history_to_histfile(t_history history)
 {
-	WORD,
-	NEWLINE,
-	IO_NUMBER,
-	DLESS,
-	DGREAT,
-	LESSAND,
-	GREATAND,
-	LESS,
-	GREAT,
-	AND_IF,
-	OR_IF,
-	SEMI,
-	AND,
-	PIPE,
-	CLOBBER,
-	LESS_GREAT,
-	DLESSDASH,
-};
+	int	i;
+	int	fd;
 
-typedef struct		s_token
-{
-	char			*value;
-	size_t			type;
-	struct s_token	*next;
-	struct s_token	*prev;
-}					t_token;
-#endif
+	i = -1;
+	if ((fd = open(history.file, O_CREAT | O_TRUNC | O_WRONLY, 0644)) < 0)
+		return (1);
+	while (++i < history.len)
+	{
+		write(fd, history.history[i], ft_strlen(history.history[i]));
+		write(fd, "\n", 1);
+	}
+	close(fd);
+	return (0);
+}

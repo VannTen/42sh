@@ -1,45 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokens.h                                           :+:      :+:    :+:   */
+/*   end_of_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/19 17:58:23 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/26 13:16:40 by bjanik           ###   ########.fr       */
+/*   Created: 2017/10/11 20:20:19 by bjanik            #+#    #+#             */
+/*   Updated: 2018/01/22 15:14:54 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKENS_H
-# define TOKENS_H
-# include "libft.h"
+#include "shell.h"
 
-enum
+int	end_of_input(t_lexer *lexer)
 {
-	WORD,
-	NEWLINE,
-	IO_NUMBER,
-	DLESS,
-	DGREAT,
-	LESSAND,
-	GREATAND,
-	LESS,
-	GREAT,
-	AND_IF,
-	OR_IF,
-	SEMI,
-	AND,
-	PIPE,
-	CLOBBER,
-	LESS_GREAT,
-	DLESSDASH,
-};
-
-typedef struct		s_token
-{
-	char			*value;
-	size_t			type;
-	struct s_token	*next;
-	struct s_token	*prev;
-}					t_token;
-#endif
+	if (delimitate_token(lexer) == MALLOC_FAIL
+			|| append_char(lexer) == MALLOC_FAIL
+			|| delimitate_token(lexer) == MALLOC_FAIL)
+		return (MALLOC_FAIL);
+	return (0);
+}

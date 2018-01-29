@@ -1,45 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokens.h                                           :+:      :+:    :+:   */
+/*   realloc_buffer.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/19 17:58:23 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/26 13:16:40 by bjanik           ###   ########.fr       */
+/*   Created: 2017/11/22 15:43:48 by bjanik            #+#    #+#             */
+/*   Updated: 2018/01/21 15:55:15 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKENS_H
-# define TOKENS_H
-# include "libft.h"
+#include "shell.h"
 
-enum
+int		realloc_buffer(t_input *input)
 {
-	WORD,
-	NEWLINE,
-	IO_NUMBER,
-	DLESS,
-	DGREAT,
-	LESSAND,
-	GREATAND,
-	LESS,
-	GREAT,
-	AND_IF,
-	OR_IF,
-	SEMI,
-	AND,
-	PIPE,
-	CLOBBER,
-	LESS_GREAT,
-	DLESSDASH,
-};
+	char	*tmp;
 
-typedef struct		s_token
-{
-	char			*value;
-	size_t			type;
-	struct s_token	*next;
-	struct s_token	*prev;
-}					t_token;
-#endif
+	tmp = input->buffer;
+	if (!(input->buffer = (char*)malloc((input->buffer_size * 2 + 1)
+			* sizeof(char))))
+		return (MALLOC_FAIL);
+	input->buffer_size *= 2;
+	ft_bzero(input->buffer, input->buffer_size + 1);
+	ft_strcpy(input->buffer, tmp);
+	free(tmp);
+	return (0);
+}

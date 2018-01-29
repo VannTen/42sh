@@ -6,11 +6,11 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 20:22:35 by bjanik            #+#    #+#             */
-/*   Updated: 2017/11/23 11:54:56 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/22 15:15:38 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "shell.h"
 
 int		realloc_current_token(t_lexer *lexer)
 {

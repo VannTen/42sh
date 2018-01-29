@@ -1,45 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokens.h                                           :+:      :+:    :+:   */
+/*   import_history_from_file.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/19 17:58:23 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/26 13:16:40 by bjanik           ###   ########.fr       */
+/*   Created: 2018/01/15 16:36:42 by bjanik            #+#    #+#             */
+/*   Updated: 2018/01/25 17:49:03 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKENS_H
-# define TOKENS_H
-# include "libft.h"
+#include "history.h"
 
-enum
-{
-	WORD,
-	NEWLINE,
-	IO_NUMBER,
-	DLESS,
-	DGREAT,
-	LESSAND,
-	GREATAND,
-	LESS,
-	GREAT,
-	AND_IF,
-	OR_IF,
-	SEMI,
-	AND,
-	PIPE,
-	CLOBBER,
-	LESS_GREAT,
-	DLESSDASH,
-};
+/*
+** Opens history_file and saves its content to the session's history structure.
+*/
 
-typedef struct		s_token
+int			import_history_from_file(t_history *history)
 {
-	char			*value;
-	size_t			type;
-	struct s_token	*next;
-	struct s_token	*prev;
-}					t_token;
-#endif
+	char	*line;
+	int		fd;
+
+	if ((fd = open(history->file, O_CREAT | O_RDWR | O_APPEND, 0644)) < 0)
+		return (2);
+	while (get_next_line(fd, &line) > 0)
+	{
+		add_cmd_to_history(history, line);
+		ft_strdel(&line);
+	}
+	close(fd);
+	return (0);
+}

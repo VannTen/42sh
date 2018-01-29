@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_operator.c                                      :+:      :+:    :+:   */
+/*   remove_cmd_from_history.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/11 20:18:42 by bjanik            #+#    #+#             */
-/*   Updated: 2017/10/19 15:58:47 by bjanik           ###   ########.fr       */
+/*   Created: 2018/01/15 15:55:16 by bjanik            #+#    #+#             */
+/*   Updated: 2018/01/22 15:18:11 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "history.h"
 
-int			is_operator(const char *token)
+int	remove_cmd_from_history(t_history *history, const int offset)
 {
-	int	i;
-
-	i = 2;
-	while (g_op_list[++i])
-	{
-		if (!ft_strcmp(g_op_list[i], token))
-			return (i);
-	}
-	return (-1);
+	if (offset < 1 || offset > history->len)
+		return (1);
+	ft_strdel(&history->history[offset - 1]);
+	ft_memmove((char**)history->history + offset - 1,
+				(char**)history->history + offset, (history->len - offset) *
+				sizeof(char*));
+	history->len--;
+	history->history[history->len] = NULL;
+	return (0);
 }

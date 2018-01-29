@@ -1,34 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   append_char.c                                      :+:      :+:    :+:   */
+/*   get_operator.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/11 15:15:35 by bjanik            #+#    #+#             */
-/*   Updated: 2017/11/18 14:16:49 by bjanik           ###   ########.fr       */
+/*   Created: 2017/10/11 15:40:44 by bjanik            #+#    #+#             */
+/*   Updated: 2018/01/26 13:42:23 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "shell.h"
 
-int		append_char(t_lexer *lexer)
+int		get_operator(t_lexer *lexer)
 {
-	if (lexer->token_len == lexer->token_size)
-		if (realloc_current_token(lexer) == MALLOC_FAIL)
+	if (lexer->token_len == 0)
+	{
+		if (append_char(lexer) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
-	if (is_operator(lexer->current_token) != -1 && lexer->state == STD)
+	}
+	else if (ft_strchr(g_op_char, lexer->current_token[0]))
 	{
 		lexer->current_token[lexer->token_len++] = *(lexer->input);
 		if (is_operator(lexer->current_token) == -1)
 		{
 			lexer->current_token[--lexer->token_len] = '\0';
+			lexer->input--;
 			if (delimitate_token(lexer) == MALLOC_FAIL)
 				return (MALLOC_FAIL);
-			lexer->current_token[lexer->token_len++] = *(lexer->input);
 		}
 	}
-	else
-		lexer->current_token[lexer->token_len++] = *(lexer->input);
+	else if (is_operator(lexer->current_token) == -1)
+	{
+		if (delimitate_token(lexer) == MALLOC_FAIL ||
+				append_char(lexer) == MALLOC_FAIL)
+			return (MALLOC_FAIL);
+	}
 	return (0);
 }

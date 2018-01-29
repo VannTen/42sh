@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delimitate_token.c                                 :+:      :+:    :+:   */
+/*   waiting_for_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/11 15:13:50 by bjanik            #+#    #+#             */
-/*   Updated: 2017/11/08 15:33:31 by bjanik           ###   ########.fr       */
+/*   Created: 2017/11/03 11:41:51 by bjanik            #+#    #+#             */
+/*   Updated: 2018/01/22 17:59:41 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "shell.h"
 
-int	delimitate_token(t_lexer *lexer)
+int		wait_for_input(t_input *input, int input_type)
 {
-	t_token	*token;
+	int	ret;
 
-	if (lexer->token_len > 0)
+	input->type = input_type;
+	while (42)
 	{
-		if (!(token = init_token_node(lexer)))
+		ft_bzero(input->read_buffer, MAX_KEY_LENGTH);
+		if (read(STDIN, input->read_buffer, MAX_KEY_LENGTH) < 1)
+			return (READ_FAIL);
+		if ((ret = get_key(input)) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
-		if (!lexer->tokens[0])
-		{
-			token->prev = NULL;
-			lexer->tokens[0] = token;
-			lexer->tokens[1] = token;
-		}
-		else
-		{
-			lexer->tokens[1]->next = token;
-			token->prev = lexer->tokens[1];
-		}
-		lexer->tokens[1] = token;
+		else if (ret)
+			break ;
 	}
-	return (0);
+	if (input->type != HISTORY_SEARCH)
+		write(STDOUT, RETURN_C, 1);
+	return (ret);
 }

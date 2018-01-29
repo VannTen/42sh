@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 15:46:10 by bjanik            #+#    #+#             */
-/*   Updated: 2017/12/09 13:01:22 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/26 16:06:27 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define LEXER_H
 # include "tokens.h"
 # include "libft.h"
-# define INITIAL_TOKEN_SIZE 256
-# define MAX_TOKENS 15
-# define MAX_OP_CHAR 5
+# define INITIAL_TOKEN_SIZE 32
+# define MAX_TOKENS 17
+# define MAX_OP_CHAR 6
 
 enum		e_state
 {
@@ -61,7 +61,7 @@ typedef struct		s_transition
 }					t_transition;
 
 int					lexer(t_lexer *lexer, char *input);
-t_lexer				*init_lexer();
+int					init_lexer(t_lexer *lexer);
 t_token				*init_token_node(t_lexer *lexer);
 int					append_char(t_lexer *lexer);
 int					delimitate_token(t_lexer *lexer);
@@ -71,6 +71,9 @@ int					end_of_input(t_lexer *lexer);
 int					realloc_current_token(t_lexer *lexer);
 int					is_operator(const char *token);
 void				get_event(t_lexer *lexer);
+void				clear_tokens(t_token **tokens);
+int					reset_lexer(t_lexer *lexer);
+void				display_tokens(t_token *tokens);
 
 extern const t_transition	g_lexer[MAX_STATE][MAX_EVENT];
 extern const char			g_op_char[MAX_OP_CHAR + 1];
