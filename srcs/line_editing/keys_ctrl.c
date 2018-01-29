@@ -12,6 +12,7 @@
 
 #include "input.h"
 #include "shell.h"
+#include "color.h"
 #include <unistd.h>
 
 int		handle_ctrl_down(t_input *input)

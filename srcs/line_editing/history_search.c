@@ -12,6 +12,7 @@
 
 #include "shell.h"
 #include "history.h"
+#include "color.h"
 #include <unistd.h>
 
 static void	go_to_beg_line(t_input *input)
