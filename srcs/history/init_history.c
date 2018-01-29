@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 
 #include "shell.h"
+#include "libft.h"
+#include <unistd.h>
+#include <stddef.h>
 
 /*
 ** Returns HOME directory.
@@ -32,7 +35,8 @@ int			init_history(t_history *history, int size)
 	if (!(history->history = (char**)malloc(sizeof(char*) * (size + 1))))
 		return (MALLOC_FAIL);
 	ft_memset(history->history, 0, (size + 1) * sizeof(char*));
-	if (!(history->file = ft_strnjoin(get_home_dir(), 2, "/", ".42sh_history")))
+	history->file = ft_strvajoin(3, get_home_dir(), "/", ".42sh_history");
+	if (history->file == NULL)
 		return (MALLOC_FAIL);
 	history->current = 0;
 	history->len = 0;

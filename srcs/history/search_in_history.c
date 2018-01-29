@@ -12,7 +12,12 @@
 
 #include "history.h"
 
-char	*search_in_history_by_num(t_history *history, const int number)
+static int	ft_abs(int const number)
+{
+	return (number < 0 ? -number : number);
+}
+
+char		*search_in_history_by_num(t_history *history, const int number)
 {
 	if (ft_abs(number) > history->len)
 		return (NULL);
@@ -21,7 +26,7 @@ char	*search_in_history_by_num(t_history *history, const int number)
 	return (history->history[number]);
 }
 
-char	*search_in_history_by_str(t_history *history, const char *str)
+char		*search_in_history_by_str(t_history *history, const char *str)
 {
 	int		i;
 	size_t	len_str;

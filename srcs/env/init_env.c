@@ -19,7 +19,7 @@ int	init_env(t_env *env, char **environ)
 		if (!(env->env_list = convert_environ_to_list(environ)))
 			return (MALLOC_FAIL);
 	}
-	env->env_len = ft_string_array_count(environ);
+	env->env_len = ft_string_array_count((char const *const *)environ);
 	env->env_array = NULL;
 	env->has_changed = 1;
 	return (0);
