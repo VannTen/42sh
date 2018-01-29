@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 09:50:04 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/01/25 10:12:18 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/01/29 09:37:57 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include "libft.h"
 
-struct	s_list
+struct	s_sh_list
 {
-	t_list	*and_or_list;
+	t_list	*and_or_sequence;
 }
 
 #endif

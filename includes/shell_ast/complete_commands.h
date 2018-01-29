@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 09:46:27 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/01/25 10:09:14 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/01/29 09:23:05 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "libft.h"
 
-struct s_complete_commands
+struct s_sh_complete_commands
 {
 	t_list	*complete_commands;
 };
