@@ -88,7 +88,7 @@ int			handle_bang(t_history *history, char **input, t_string *exp_input)
 		num = ft_atoi(s);
 		if (get_cmd_num(history, exp_input, num) == 1)
 			return (EVENT_NOT_FOUND);
-		(*input) += ft_nb_digit_base(num, 10);
+		(*input) += itoa_len_signed(num, 10);
 	}
 	/*else if (*s == '#')
 	{

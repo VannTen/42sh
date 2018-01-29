@@ -34,7 +34,7 @@ t_env_list		*create_env_node(const char *const var, const int flag)
 		return (NULL);
 	env->next = NULL;
 	env->exportable = flag;
-	ft_free_string_tab(&splitted);
+	ft_free_string_array(&splitted);
 	return (env);
 }
 
