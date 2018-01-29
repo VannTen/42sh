@@ -12,6 +12,13 @@
 
 #include "shell.h"
 #include <unistd.h>
+#include <sys/ioctl.h>
+
+static void			ft_error_msg(char const *str)
+{
+	ft_dprintf(STDERR_FILENO, "%s\n", str);
+	exit(EXIT_FAILURE);
+}
 
 int					restore_custom_attr(t_term term)
 {

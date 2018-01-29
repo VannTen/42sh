@@ -54,6 +54,7 @@ static int	remove_backslash_nl(t_input *input, t_lexer *lexer)
 static int	get_line(t_lexer *lex, t_input *input)
 {
 	char *limit;
+	char *tmp;
 
 	limit = input->buffer + input->buffer_len;
 	reset_buffer(input);
@@ -72,7 +73,10 @@ static int	get_line(t_lexer *lex, t_input *input)
 			return (MALLOC_FAIL);
 		if (lexer(lex, input->buffer) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
-		input->buffer = ft_strjoin_free(input->buf_tmp, input->buffer, 3);
+		tmp = ft_strjoin(input->buf_tmp, input->buffer);
+		ft_strdel(&input->buf_tmp);
+		ft_strdel(&input->buffer);
+		input->buffer = tmp;
 		input->buffer_len = ft_strlen(input->buffer);
 		input->buffer_size = input->buffer_len;
 	}

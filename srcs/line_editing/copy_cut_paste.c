@@ -11,6 +11,15 @@
 /* ************************************************************************** */
 
 #include "shell.h"
+#include "libft.h"
+#include <stdlib.h>
+#include <unistd.h>
+
+static void	ft_error_msg(char const *str)
+{
+	ft_dprintf(STDERR_FILENO, "%s\n", str);
+	exit(EXIT_FAILURE);
+}
 
 int			copy_selection(t_input *input)
 {

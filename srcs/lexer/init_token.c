@@ -29,7 +29,7 @@ t_token		*init_token_node(t_lexer *lexer)
 		token->type = NEWLINE;
 	else
 		token->type = WORD;
-	if (ft_str_isdigit(token->value) && (*(lexer->input) == '<' ||
+	if (string_is_digit(token->value) && (*(lexer->input) == '<' ||
 			*(lexer->input) == '>'))
 		token->type = IO_NUMBER;
 	token->next = NULL;
