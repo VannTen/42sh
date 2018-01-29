@@ -13,9 +13,9 @@ HEADERS = includes/
 SRC_PATH = srcs/
 OBJ_PATH = obj/
 
-SRC_NAME = completion/completion_lexer.c \
-		   completion/search_directories.c \
-		   env/add_variable_to_env.c \
+#completion/completion_lexer.c 
+#		   completion/search_directories.c 
+SRC_NAME = env/add_variable_to_env.c \
 		   env/convert_env_to_array.c \
 		   env/convert_environ_to_list.c \
 		   env/display_env.c \
@@ -81,7 +81,7 @@ $(OBJ_PATH) :
 	@mkdir -p $(dir $(OBJ))
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	$(CC) $(FLAGS) -I$(HEADERS) -I$(LIBFT)includes -c $< -o $@
+	$(CC) $(FLAGS) -I$(HEADERS) -I$(LIBFT) -c $< -o $@
 
 clean :
 	/bin/rm -rf $(OBJ_PATH)
