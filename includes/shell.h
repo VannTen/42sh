@@ -36,5 +36,12 @@ typedef struct	s_bsh
 	t_term		term;
 }				t_bsh;
 
+typedef struct		s_string
+{
+	char			*str;
+	int				len;
+	int				size;
+}					t_string;
+
 int					init_termcaps(t_bsh *bsh);
 #endif
