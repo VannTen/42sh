@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "shell.h"
+#include <unistd.h>
 
 void		get_prompt(t_term *term)
 {

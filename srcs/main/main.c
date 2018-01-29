@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "shell.h"
+#include <unistd.h>
 
 void	display_tokens(t_token *tokens)
 {

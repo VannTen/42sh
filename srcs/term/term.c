@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "shell.h"
+#include <unistd.h>
 
 int					restore_custom_attr(t_term term)
 {

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "shell.h"
+#include <unistd.h>
 
 int		wait_for_input(t_input *input, int input_type)
 {
