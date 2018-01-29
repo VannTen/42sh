@@ -12,7 +12,7 @@
 
 #ifndef SHELL_H
 # define SHELL_H
-
+# include "custom_string.h"
 # include "libft.h"
 # include "lexer.h"
 # include "input.h"
@@ -20,7 +20,7 @@
 # include "term.h"
 # include "env.h"
 # include "expansion.h"
-# include "completion.h"
+//# include "completion.h"
 # include <termios.h>
 # include <dirent.h>
 
@@ -36,12 +36,6 @@ typedef struct	s_bsh
 	t_term		term;
 }				t_bsh;
 
-typedef struct		s_string
-{
-	char			*str;
-	int				len;
-	int				size;
-}					t_string;
-
 int					init_termcaps(t_bsh *bsh);
+int					ft_putchar_termcaps(int c);
 #endif
