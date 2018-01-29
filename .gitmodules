@@ -2,3 +2,6 @@
 	path = grammar_generator
 	url = https://github.com/VannTen/grammar_generator.git
 	branch = WIP
+[submodule "libft"]
+	path = libft
+	url = https://github.com/VannTen/libft.git
