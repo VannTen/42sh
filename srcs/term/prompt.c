@@ -40,7 +40,7 @@ void		display_basic_prompt(t_input *input)
 	input->term->prompt_len = 2;
 	ft_bzero(input->buffer, input->buffer_len);
 	ft_strcpy(input->term->prompt, "> ");
-	write(STDERR, input->term->prompt, input->term->prompt_len);
+	write(STDERR_FILENO, input->term->prompt, input->term->prompt_len);
 	input->cursor_pos = 0;
 	input->buffer_len = 0;
 	input->term->cursor_col = 3;
@@ -50,12 +50,12 @@ void		print_prompt(t_input *input, char *color)
 {
 	get_prompt(input->term);
 	if (input->type != HISTORY_SEARCH)
-		ft_putchar_fd('\n', STDERR);
-	ft_putstr_fd(BOLD_GRN, STDERR);
+		ft_putchar_fd('\n', STDERR_FILENO);
+	ft_putstr_fd(BOLD_GRN, STDERR_FILENO);
 	ft_printf("%C ", 0x21E8);
-	ft_putstr_fd(RESET, STDERR);
-	ft_putstr_fd(color, STDERR);
-	ft_putstr_fd(input->term->prompt, STDERR);
-	ft_putstr_fd(RESET, STDERR);
-	ft_putchar_fd(' ', STDERR);
+	ft_putstr_fd(RESET, STDERR_FILENO);
+	ft_putstr_fd(color, STDERR_FILENO);
+	ft_putstr_fd(input->term->prompt, STDERR_FILENO);
+	ft_putstr_fd(RESET, STDERR_FILENO);
+	ft_putchar_fd(' ', STDERR_FILENO);
 }

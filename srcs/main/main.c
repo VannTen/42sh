@@ -233,7 +233,7 @@ int main(int argc, char **argv, char **environ)
 						|| ret == MALLOC_FAIL)
 		{
 			(ret == EVENT_NOT_FOUND) ?
-				dprintf(STDERR, "bsh: event not found\n") : 0;
+				ft_dprintf(STDERR_FILENO, "bsh: event not found\n") : 0;
 			if (ret == MALLOC_FAIL)
 				init_buffers(&bsh->input);
 			continue ;
