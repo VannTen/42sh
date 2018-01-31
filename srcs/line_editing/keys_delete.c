@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 20:38:51 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/21 15:55:11 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/31 16:41:32 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static void	delete_char(t_input *input)
 				input->buffer + input->cursor_pos + 1);
 	cursor_pos = input->cursor_pos;
 	handle_home(input);
-	tputs(tgetstr("sc", NULL), 1, ft_putchar_termcaps);
-	tputs(tgetstr("ce", NULL), 1, ft_putchar_termcaps);
+	tputs(tgetstr("sc", NULL), 1, putchar_termcaps);
+	tputs(tgetstr("ce", NULL), 1, putchar_termcaps);
 	if (input->buffer_len > input->term->first_line_len)
 	{
-		tputs(tgetstr("do", NULL), 1, ft_putchar_termcaps);
-		tputs(tgetstr("cd", NULL), 1, ft_putchar_termcaps);
+		tputs(tgetstr("do", NULL), 1, putchar_termcaps);
+		tputs(tgetstr("cd", NULL), 1, putchar_termcaps);
 	}
-	tputs(tgetstr("rc", NULL), 1, ft_putchar_termcaps);
+	tputs(tgetstr("rc", NULL), 1, putchar_termcaps);
 	display_buffer(input, 0);
 	i = --input->buffer_len;
 	while (i-- > cursor_pos)

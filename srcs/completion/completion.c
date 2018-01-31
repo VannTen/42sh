@@ -1,49 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   completion_lexer.c                                 :+:      :+:    :+:   */
+/*   completion.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:24:25 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/29 13:43:49 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/31 17:23:03 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static char		*ft_basename(char *path)
+static size_t	get_search_location(t_lexer lexer, t_comp comp)
 {
-	char	*slash;
-
-	if (!path)
-		return (NULL);
-	if ((slash = ft_strrchr(path , '/')))
-		return (ft_strdup(slash + 1));
-	return (ft_strdup(path));
-}
-
-static char		*ft_dirname(char *path)
-{
-	if (!path)
-		return (NULL);
-	if (!ft_strchr(path, '/'))
-		return (".");
-	else if (!ft_strcmp(path, "/"))
-		return (ft_strdup("/"));
-	return (ft_strndup(path, ft_strrchr(path, '/') - path));
-}
-
-static size_t	get_search_location(t_lexer lexer, t_comp completion)
-{
-	if (completion.prefix[0])
+	if (comp.prefix[0])
 	{
-		if (((lexer.tokens[1]->prev && (lexer.tokens[1]->prev->type == SEMI
-				|| lexer.tokens[1]->prev->type == AND_IF
-				|| lexer.tokens[1]->prev->type == OR_IF
-				|| lexer.tokens[1]->prev->type == PIPE))
-				|| (lexer.tokens[1] == lexer.tokens[0]
-				&& !ft_strcmp(completion.dirname, "."))))
+		if ((!lexer.tokens[1]->prev || (lexer.tokens[1]->prev->type == SEMI
+					|| lexer.tokens[1]->prev->type == AND_IF
+					|| lexer.tokens[1]->prev->type == OR_IF
+					|| lexer.tokens[1]->prev->type == PIPE))
+					&& !ft_strcmp(comp.dirname, "."))
 			return (PATH);
 		else
 			return (DIRECTORY);
@@ -77,7 +54,7 @@ static t_lexer	get_tokens_up_to_cursor(char *buffer, const int cursor_pos)
 	return (lexer);
 }
 
-static char	*completion_get_prefix(t_lexer lexer, const int cursor_pos,
+static char	*comp_get_prefix(t_lexer lexer, const int cursor_pos,
 									const char *buffer)
 {
 	if (!lexer.tokens[0] || (lexer.state != DQUOTE && lexer.state != QUOTE
@@ -88,38 +65,47 @@ static char	*completion_get_prefix(t_lexer lexer, const int cursor_pos,
 		return (ft_strdup(lexer.tokens[1]->value));
 }
 
-void	del_matches(void *matches, size_t size)
+void		del_matches(void *matches, size_t size)
 {
+	(void)size;
 	ft_memdel((void**)&matches);
+}
+
+static void		clear_completion_data(t_comp *comp, t_input *input)
+{
+	ft_strdel(&comp->dirname);
+	ft_strdel(&comp->basename);
+	ft_strdel(&comp->prefix);
+	ft_lstdel(&comp->matches, del_matches);
+	ft_strdel(&input->buf_copy);
 }
 
 int				completion(t_input *input)
 {
 	t_lexer	lexer;
-	t_comp	completion = {NULL, NULL, NULL, 0, NULL, 0, 0};
+	t_comp	comp = {NULL, NULL, NULL, 0, NULL, NULL, 0, 0};
 
 	lexer = get_tokens_up_to_cursor(input->buffer, input->cursor_pos);
-	if (!(completion.prefix = completion_get_prefix(lexer, input->cursor_pos,
+	if (!(comp.prefix = comp_get_prefix(lexer, input->cursor_pos,
 						input->buffer)))
 		return (MALLOC_FAIL);
-	completion.dirname = ft_dirname(completion.prefix);
-	completion.basename = ft_basename(completion.prefix);
-	completion.basename_len = ft_strlen(completion.basename);
-	completion.search_location = get_search_location(lexer, completion);
-	completion.matches = open_and_read_directory(completion.dirname,
-						completion.basename, completion.basename_len);
-	for (t_list *l = completion.matches; l != NULL; l = l->next)
-		ft_printf("{%s} ==> ", l->content);
-	
-
-
-	if (completion.search_location == DIRECTORY)
-		ft_printf("DIRECTORY!\n");
-	else if (completion.search_location == PATH)
-		ft_printf("PATH\n");
-//	display_tokens(lexer.tokens[0]);*/
+	comp.dirname = ft_dirname(comp.prefix);
+	comp.basename = ft_basename(comp.prefix);
+	comp.basename_len = ft_strlen(comp.basename);
+	comp.search_location = get_search_location(lexer, comp);
+	if (comp.prefix[0] == '$')
+		comp.matches = completion_search_in_env(&comp);
+	else if (comp.search_location == PATH)
+		completion_search_path(&comp);
+	else if (comp.search_location == DIRECTORY)
+		comp.matches = open_and_read_directory(&comp, comp.dirname);
+	/*for (t_list *l = comp.matches; l != NULL; l = l->next)
+		ft_printf("[%s] ==> ", l->content);*/
+	if (comp.matches)
+		completion_display(comp, input);
 	clear_tokens(&lexer.tokens[0]);
 	ft_strdel(&lexer.current_token);
-	ft_lstdel(&completion.matches, del_matches);
+	clear_completion_data(&comp, input);
+
 	return (0);
 }

@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   waiting_for_input.c                                :+:      :+:    :+:   */
+/*   ft_basename.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/03 11:41:51 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/31 16:36:06 by bjanik           ###   ########.fr       */
+/*   Created: 2018/01/30 11:20:17 by bjanik            #+#    #+#             */
+/*   Updated: 2018/01/31 17:17:38 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int		wait_for_input(t_input *input, int input_type)
+char		*ft_basename(const char *path)
 {
-	int	ret;
+	char	*slash;
 
-	input->type = input_type;
-	while (42)
-	{
-		ft_bzero(input->read_buffer, MAX_KEY_LENGTH);
-		if (read(STDIN_FILENO, input->read_buffer, MAX_KEY_LENGTH) < 1)
-			return (READ_FAIL);
-		if ((ret = get_key(input)) == MALLOC_FAIL)
-			return (MALLOC_FAIL);
-		else if (ret)
-			break ;
-	}
-	if (input->type != HISTORY_SEARCH)
-		write(STDOUT, RETURN_C, 1);
-	return (ret);
+	if (!path)
+		return (NULL);
+	if ((slash = ft_strrchr(path , '/')))
+		return (ft_strdup(slash + 1));
+	return (ft_strdup(path));
 }

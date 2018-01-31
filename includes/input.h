@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 17:57:42 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/28 14:34:59 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/31 17:15:25 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct	s_keys
 	int			(*handle_keystroke[2])(t_input *input);
 }				t_keys;
 
+int				putchar_termcaps(int c);
 int				wait_for_input(t_input *input, int type);
 int				init_input(t_input *input, t_term *term, t_history *history);
 int				init_buffers(t_input *input);
@@ -128,7 +129,8 @@ int				realloc_buffer(t_input *input);
 void			reset_buffer(t_input *input);
 int				copy_selection(t_input *input);
 int				cut_selection(t_input *input);
-int				paste_selection(t_input *input);
+int				paste_selection_buffer(t_input *input);
+int				paste_str_in_buffer(const char * copy, t_input *input);
 
 void			get_prompt(t_term *term);
 void			print_prompt(t_input *input, char *color);

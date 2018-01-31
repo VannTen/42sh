@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:46:47 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/21 15:58:56 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/31 16:40:59 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		handle_clear_line(t_input *input)
 			return (MALLOC_FAIL);
 		cursor_pos = input->cursor_pos;
 		handle_home(input);
-		tputs(tgetstr("cd", NULL), 1, ft_putchar_termcaps);
+		tputs(tgetstr("cd", NULL), 1, putchar_termcaps);
 		ft_bzero(input->buffer, input->buffer_size);
 		ft_strcpy(input->buffer, buf);
 		free(buf);
@@ -36,9 +36,9 @@ int		handle_clear_line(t_input *input)
 
 void	exit_ctrl_d(t_input *input)
 {
-	ft_putendl_fd("exit", STDERR);
+	ft_putendl_fd("exit", STDERR_FILENO);
 	save_history_to_histfile(*(input->history));
-	restore_initial_attr(*(input->term));
+	restore_initial_attr(input->term);
 	exit(0);
 }
 

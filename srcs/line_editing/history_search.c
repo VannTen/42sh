@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 14:19:38 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/21 15:57:00 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/31 16:41:07 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	go_to_beg_line(t_input *input)
 {
 	handle_home(input);
 	reset_buffer(input);
-	tputs(tgetstr("cr", NULL), 1, ft_putchar_termcaps);
-	tputs(tgetstr("cd", NULL), 1, ft_putchar_termcaps);
+	tputs(tgetstr("cr", NULL), 1, putchar_termcaps);
+	tputs(tgetstr("cd", NULL), 1, putchar_termcaps);
 }
 
 static void	init_search(t_input *input)

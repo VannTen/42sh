@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 11:59:28 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/21 15:54:09 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/31 16:40:56 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ static void	enable_video_display(t_input *input, int cursor)
 	if (cursor > input->pivot)
 	{
 		if (input->cursor_pos == input->pivot)
-			tputs(tgetstr("mr", NULL), 1, ft_putchar_termcaps);
+			tputs(tgetstr("mr", NULL), 1, putchar_termcaps);
 		if (input->cursor_pos == cursor)
-			tputs(tgetstr("me", NULL), 1, ft_putchar_termcaps);
+			tputs(tgetstr("me", NULL), 1, putchar_termcaps);
 	}
 	else if (cursor < input->pivot)
 	{
 		if (input->cursor_pos == cursor)
-			tputs(tgetstr("mr", NULL), 1, ft_putchar_termcaps);
+			tputs(tgetstr("mr", NULL), 1, putchar_termcaps);
 		if (input->cursor_pos == input->pivot)
-			tputs(tgetstr("me", NULL), 1, ft_putchar_termcaps);
+			tputs(tgetstr("me", NULL), 1, putchar_termcaps);
 	}
 	else
-		tputs(tgetstr("me", NULL), 1, ft_putchar_termcaps);
+		tputs(tgetstr("me", NULL), 1, putchar_termcaps);
 }
 
 void		display_buffer(t_input *input, int cursor)
@@ -41,10 +41,10 @@ void		display_buffer(t_input *input, int cursor)
 	{
 		if (input->pivot > -1)
 			enable_video_display(input, cursor);
-		write(STDIN, &input->buffer[i], 1);
+		write(STDIN_FILENO, &input->buffer[i], 1);
 		if (input->term->cursor_col == input->term->width)
 		{
-			tputs(tgetstr("do", NULL), 1, ft_putchar_termcaps);
+			tputs(tgetstr("do", NULL), 1, putchar_termcaps);
 			input->term->cursor_col = 0;
 		}
 		input->cursor_pos++;

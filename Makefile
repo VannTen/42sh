@@ -2,7 +2,7 @@ NAME = 42sh
 
 CC = gcc
 
-FLAGS = -g -Wall -Wextra 
+FLAGS = -g -Wall -Wextra
 
 LIBFT  = libft/
 
@@ -13,7 +13,12 @@ HEADERS = includes/
 SRC_PATH = srcs/
 OBJ_PATH = obj/
 
-SRC_NAME = completion/completion_lexer.c \
+SRC_NAME = completion/completion.c \
+		   completion/completion_display.c \
+		   completion/completion_search_in_env.c \
+		   completion/completion_search_path.c \
+		   completion/ft_basename.c \
+		   completion/ft_dirname.c \
 		   completion/search_directories.c \
 		   env/add_variable_to_env.c \
 		   env/convert_env_to_array.c \
@@ -55,6 +60,7 @@ SRC_NAME = completion/completion_lexer.c \
 		   line_editing/keys_ctrl.c \
 		   line_editing/keys_delete.c \
 		   line_editing/keys_home_end_return.c \
+		   line_editing/putchar_termcaps.c \
 		   line_editing/realloc_buffer.c \
 		   line_editing/selection.c \
 		   line_editing/waiting_for_input.c \
