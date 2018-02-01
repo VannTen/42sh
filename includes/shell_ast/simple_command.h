@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 09:37:24 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/01/29 09:38:34 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/01 16:38:15 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 
 struct s_sh_simple_command
 {
-	char	**args;
+	t_list	*arglist;
+	size_t	argc;
 	t_list	*redirs;
 	int		child;
 };
