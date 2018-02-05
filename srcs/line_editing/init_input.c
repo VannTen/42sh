@@ -6,13 +6,13 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 16:48:42 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/25 12:53:32 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/03 14:13:45 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int		init_buffers(t_input *input)
+int			init_buffers(t_input *input)
 {
 	if (input->buffer)
 		ft_strdel(&input->buffer);
@@ -30,7 +30,19 @@ int		init_buffers(t_input *input)
 	return (0);
 }
 
-int		init_input(t_input *input, t_term *term, t_history *history)
+static void	init_completion(t_comp *comp)
+{
+	comp->prefix = NULL;
+	comp->basename = NULL;
+	comp->dirname = NULL;
+	comp->basename_len = 0;
+	comp->matches = NULL;
+	comp->current = NULL;
+	comp->nb_matches = 0;
+	comp->search_location = 0;
+}
+
+int			init_input(t_input *input, t_term *term, t_history *history)
 {
 	input->buffer = NULL;
 	input->buf_tmp = NULL;
@@ -41,5 +53,6 @@ int		init_input(t_input *input, t_term *term, t_history *history)
 	input->history = history;
 	input->state = STANDARD;
 	input->pivot = -1;
+	init_completion(&input->comp);
 	return (0);
 }

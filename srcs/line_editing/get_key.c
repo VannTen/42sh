@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 15:11:38 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/31 17:19:44 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/03 16:26:53 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_keys	g_handle_keys[] = {
 	{ALT_LESS, {handle_alt_less, skip_key}},
 	{RETURN_C, {handle_return, skip_key}},
 	{CLEAR_SCREEN, {handle_clear_screen, skip_key}},
-	{TAB, {completion, skip_key}},
 	{NULL, {NULL, NULL}},
 };
 
@@ -45,6 +44,15 @@ int		get_key(t_input *input)
 	int	i;
 
 	i = -1;
+	if (!ft_strcmp(TAB, input->read_buffer) && input->state != SELECTION)
+		input->state = COMPLETION;
+	else if (input->state != SELECTION)
+		input->state = STANDARD;
+	if (input->state == COMPLETION && input->comp.prefix == NULL)
+		init_completion_data(&input->comp, input->buffer, input->cursor_pos);
+	if (input->state == COMPLETION)
+		return (completion(input));
+	reset_completion_data(&input->comp);
 	while (g_handle_keys[++i].key)
 	{
 		if (!ft_strcmp(g_handle_keys[i].key, input->read_buffer))

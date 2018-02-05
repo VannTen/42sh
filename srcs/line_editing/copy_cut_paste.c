@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:32:04 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/31 16:40:53 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/05 19:42:28 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,19 @@ int			copy_selection(t_input *input)
 	return (0);
 }
 
-static void	cut_from_buffer(t_input *input)
+void	cut_from_buffer(t_input *input, const int cursor,
+							const int pivot, const size_t len)
 {
-	if (input->cursor_pos > input->pivot)
-		ft_strcpy(input->buffer + input->pivot,
-				input->buffer + input->cursor_pos + 1);
+	if (cursor > pivot)
+		ft_strcpy(input->buffer + pivot,
+				input->buffer + cursor + 1);
+	else if (cursor < pivot)
+		ft_strcpy(input->buffer + cursor,
+				input->buffer + pivot);
 	else
-		ft_strcpy(input->buffer + input->cursor_pos,
-				input->buffer + input->pivot);
-	input->buffer_len -= ft_strlen(input->buf_copy);
+		ft_strcpy(input->buffer + cursor,
+				input->buffer + cursor + 1);
+	input->buffer_len -= len;
 	ft_memset(input->buffer + input->buffer_len, 0,
 			input->buffer_size - input->buffer_len);
 }
@@ -56,7 +60,8 @@ int			cut_selection(t_input *input)
 
 	cursor = input->cursor_pos;
 	copy_selection(input);
-	cut_from_buffer(input);
+	cut_from_buffer(input, input->cursor_pos, input->pivot,
+							ft_strlen(input->buf_copy));
 	switch_input_state(input);
 	tputs(tgetstr("me", NULL), 1, putchar_termcaps);
 	handle_home(input);
@@ -91,12 +96,17 @@ int	paste_str_in_buffer(const char *str, t_input *input)
 				input->buffer_len - input->cursor_pos);
 		ft_memcpy(input->buffer + input->cursor_pos, str, len);
 		input->buffer_len += len;
-		display_line(input, input->cursor_pos + len);
 	}
 	return (0);
 }
 
 int			paste_selection_buffer(t_input *input)
 {
-	return (paste_str_in_buffer(input->buf_copy, input));
+	if (input->buf_copy)
+	{
+		if (paste_str_in_buffer(input->buf_copy, input) == MALLOC_FAIL)
+			return (MALLOC_FAIL);
+		display_line(input, input->cursor_pos + ft_strlen(input->buf_copy));
+	}
+	return (0);
 }
