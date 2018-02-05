@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 17:57:42 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/31 17:15:25 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/05 18:28:29 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@
 # define INITIAL_BUFFER_SIZE 4000
 # define STANDARD 0
 # define SELECTION 1
+# define COMPLETION 2
 
 # define ARROW_RIGHT "\x1B[C"
 # define ARROW_LEFT "\x1B[D"
 # define ARROW_UP "\x1B[A"
 # define ARROW_DOWN "\x1B[B"
-
 # define CTRL_RIGHT "\x1B[1;2C"
 # define CTRL_LEFT "\x1B[1;2D"
 # define CTRL_UP "\x1B[1;2A"
@@ -43,16 +43,13 @@
 # define CTRL_U "\x15"
 # define CTRL_X "\x18"
 # define CLEAR_SCREEN "\xC"
-
 # define ALT_GREAT "\x1B>"
 # define ALT_LESS "\x1B<"
-
 # define DELETE "\x1B[3~"
 # define BACKSPACE "\x7F"
 # define HOME "\x1B[H"
 # define END "\x1B[F"
 # define TAB "\t"
-
 # define RETURN_C "\n"
 
 # define REGULAR_INPUT 0
@@ -67,6 +64,24 @@
 
 # define READ_FAIL -1
 
+# define DIRECTORY 1
+# define PATH 2
+
+typedef struct		s_comp
+{
+	char			*prefix;
+	char			*dirname;
+	char			*basename;
+	char			*comp_str;
+	size_t			count;
+	size_t			basename_len;
+	t_list			*matches;
+	t_list			*current;
+	size_t			nb_matches;
+	size_t			search_location;
+	int				init_c_pos;
+}					t_comp;
+
 typedef struct	s_input
 {
 	char		*buffer;
@@ -76,6 +91,7 @@ typedef struct	s_input
 	int			buffer_size;
 	int			cursor_pos;
 	char		read_buffer[MAX_KEY_LENGTH + 1];
+	t_comp		comp;
 	t_term		*term;
 	t_history	*history;
 	int			fd;
@@ -128,11 +144,30 @@ void			display_line(t_input *input, int cursor);
 int				realloc_buffer(t_input *input);
 void			reset_buffer(t_input *input);
 int				copy_selection(t_input *input);
+void			cut_from_buffer(t_input *input, const int cursor,
+								const int pivot, const size_t len);
 int				cut_selection(t_input *input);
 int				paste_selection_buffer(t_input *input);
 int				paste_str_in_buffer(const char * copy, t_input *input);
-
 void			get_prompt(t_term *term);
 void			print_prompt(t_input *input, char *color);
 void			display_basic_prompt(t_input *input);
+
+
+/*
+** Completion part
+*/
+
+int					completion(t_input *input);
+int					init_completion_data(t_comp *comp, char *buffer,
+					const int cursor_pos);
+t_list				*open_and_read_directory(t_comp *comp,
+					const char *directory);
+int					completion_search_path(t_comp *comp);
+t_list				*completion_search_in_env(t_comp *comp);
+int					completion_display(t_comp *comp, t_input *input);
+int					reset_completion_data(t_comp *comp);
+char				*ft_basename(const char *path);
+char				*ft_dirname(const char *path);
+
 #endif
