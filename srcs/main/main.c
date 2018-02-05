@@ -134,10 +134,10 @@ static int	readline_process(t_input *input, t_lexer *lexer, t_history *history)
 static char const	g_grammar[] =
 " PROGRAM : COMPLETE_COMMAND NEWLINE"
 "| NEWLINE;"
-"COMPLETE_COMMAND : LIST SEPARATOR_OP"
-"| LIST;"
-"LIST : LIST SEPARATOR_OP AND_OR"
+"COMPLETE_COMMAND : LIST;"
+"LIST : LIST SEPARATOR_OP AND_OR_2"
 "| AND_OR;"
+"AND_OR_2: AND_OR | ;"
 "AND_OR : PIPELINE"
 "| AND_OR AND_IF PIPELINE"
 "| AND_OR OR_IF PIPELINE;"
@@ -230,14 +230,17 @@ static void	*create_program(__attribute__((unused))void const *no_val)
 
 static t_bool	test_parser(t_token *list_tokens, t_parser const *parser)
 {
-	void				*result;
-	t_bool				syntax_valid;
+	void						*result;
+	t_bool						syntax_valid;
+	struct s_parse_input		input;
 
+	input.input = &list_tokens;
+	input.get_token = take_token;
+	input.del_token = no_destroy;
 	if (parser == NULL)
 		exit(1);
-	result = execute_construct(parser, "PROGRAM", &list_tokens, take_token);
+	result = execute_construct(parser, "PROGRAM", &input);
 	syntax_valid = result != NULL;
-	free(result);
 	return (syntax_valid);
 }
 
@@ -246,7 +249,7 @@ int main(int argc, char **argv, char **environ)
 	t_bsh				*bsh;
 	int					ret;
 	t_exec	const		exec_rules[] = {
-		{.name = "PROGRAM", .create = create_program, .give = NULL},
+		{.name = "PROGRAM", .create = create_program, .destroy = no_destroy, .give = NULL},
 		{.name = NULL, .create = NULL, .give = NULL}
 	};
 	t_parser			*parser;
