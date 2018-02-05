@@ -6,12 +6,14 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 16:51:57 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/24 15:38:11 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/01/31 16:36:49 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
+# include "colors.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -22,20 +24,6 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 
-# define BLK "\x1B[30m"
-# define RED "\x1B[31m"
-# define GRN "\x1B[32m"
-# define YEL "\x1B[33m"
-# define BLU "\x1B[34m"
-# define MAG "\x1B[35m"
-# define CYN "\x1B[36m"
-# define WHT "\x1B[37m"
-# define BACK_GRN "\x1B[42m"
-# define BACK_YEL "\x1B[43m"
-# define BACK_CYN "\x1B[46m"
-# define BOLD_CYAN "\x1B[1m\033[36m"
-# define BOLD_GRN "\x1B[1m\033[32m"
-# define RESET "\x1B[0m"
 
 # define STDIN 0
 # define STDOUT 1
@@ -64,7 +52,6 @@ typedef struct		s_string
 }					t_string;
 
 int					ft_putchar(char c);
-int					ft_putchar_termcaps(int c);
 int					ft_putnchar(char c, int n);
 int					ft_putwchar_t(wchar_t wc);
 int					ft_wchar_len(wchar_t wc);
