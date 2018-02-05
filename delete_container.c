@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_container.h                                      :+:      :+:    :+:   */
+/*   delete_container.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/31 12:25:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/02 13:52:04 by ble-berr         ###   ########.fr       */
+/*   Created: 2018/02/02 10:11:33 by ble-berr          #+#    #+#             */
+/*   Updated: 2018/02/02 11:08:16 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef S_CONTAINER_H
-# define S_CONTAINER_H
+#include "container.h"
+#include <stdlib.h>
 
-struct	s_container
+void	delete_container(struct s_container **const container_loc,
+		void (*del)(void *))
 {
-	void	*content;
-	int		label;
-};
-
-struct s_container	*new_container(void const *content, size_t content_size,
-		int label);
-void				delete_container(struct s_container **container_loc,
-		void (*del)(void *));
-
-#endif
+	if (container_loc != NULL && *container_loc != NULL)
+	{
+		if (del != NULL && (*container_loc)->content != NULL)
+		{
+			del((*container_loc)->content);
+			(*container_loc)->content = NULL;
+		}
+		free(*container_loc);
+		*container_loc = NULL;
+	}
+}
