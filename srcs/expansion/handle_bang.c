@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 12:43:04 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/25 17:49:50 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/05 11:22:14 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static int	get_cmd_str(t_history *history, t_string *exp_input, char **input,
 
 	if (!(tmp = ft_strchr(s, ' ')))
 	{
+		(ft_strchr(s, '\n')) ? s[ft_strlen(s) - 1] = '\0' : 0;
 		if (!(tmp = search_in_history_by_str(history, s)))
 			return (1);
 		tmp2 = s;

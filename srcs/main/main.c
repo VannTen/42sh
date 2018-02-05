@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/30 14:42:29 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/05 19:28:05 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,13 +216,6 @@ int main(int argc, char **argv, char **environ)
 	(void)argc;
 	(void)argv;
 	//parser = generate_parser(g_grammar, tokens_name, exec_rules, get_token_id);
-	/*if (!(bsh = (t_bsh*)malloc(sizeof(t_bsh))))
-		return (MALLOC_FAIL);
-	init_lexer(&bsh->lexer);
-	init_history(&bsh->history, 10);
-	init_term(&bsh->term);
-	init_input(&bsh->input, &bsh->term, &bsh->history);
-	init_env(&bsh->env, environ);*/
 	bsh = shell_init(environ);
 	init_termcaps(bsh);
 	while (42)
