@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 14:03:11 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/03 18:19:59 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/05 18:28:08 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,11 @@ int				init_completion_data(t_comp *comp, char *buffer,
 	comp->basename = ft_basename(comp->prefix);
 	comp->basename_len = ft_strlen(comp->basename);
 	comp->search_location = get_search_location(lexer, *comp);
+	comp->count = 0;
+	comp->comp_str = NULL;
 	comp->matches = NULL;
 	comp->current = NULL;
-	comp->init_pos = cursor_pos;
+	comp->init_c_pos = cursor_pos;
 	ft_strdel(&lexer.current_token);
 	clear_tokens(&lexer.tokens[0]);
 	return (0);
