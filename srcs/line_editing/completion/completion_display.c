@@ -39,6 +39,7 @@ static int	display_next_match(t_comp *comp, t_input *input, char *copy)
 int	completion_display(t_comp *comp, t_input *input)
 {
 	char		*str;
+	int			i;
 
 	str = (char*)comp->matches->content;
 	if (comp->nb_matches == 1)
@@ -60,6 +61,9 @@ int	completion_display(t_comp *comp, t_input *input)
 		if (comp->count)
 			cut_from_buffer(input, input->cursor_pos,
 							comp->init_c_pos, ft_strlen(comp->comp_str));
+		i = input->cursor_pos;
+		while (i-- > comp->init_c_pos)
+			handle_arrow_left(input);
 		ft_strdel(&comp->comp_str);
 		str = (char*)comp->current->content;
 		comp->comp_str = ft_strdup(str + comp->basename_len);

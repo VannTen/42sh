@@ -52,7 +52,7 @@ static t_lexer	get_tokens_up_to_cursor(char *buffer, const int cursor_pos)
 
 	init_lexer(&lexer);
 	lexer.input = buffer;
-	while (lexer.input != buffer + cursor_pos)
+	while (lexer.input < buffer + cursor_pos)
 	{
 		g_lexer[lexer.state][lexer.event].p_transit(&lexer);
 		if (lexer.state != INIT)

@@ -12,6 +12,26 @@
 
 #include "shell.h"
 
+static void	sort_matches(t_list *matches)
+{
+	t_list	*tmp;
+
+	tmp = matches;
+	if (matches)
+	{
+		while (tmp->next)
+		{
+			if (ft_strcmp((char*)tmp->content, (char*)tmp->next->content) > 0)
+			{
+				ft_swap(&tmp->content, &tmp->next->content);
+				tmp = matches;
+			}
+			else
+				tmp = tmp->next;
+		}
+	}
+}
+
 static int	update_match(t_comp *comp, t_list *match, int *ret)
 {
 	struct stat	info;
@@ -23,11 +43,16 @@ static int	update_match(t_comp *comp, t_list *match, int *ret)
 		return (MALLOC_FAIL);
 	stat(completed_str, &info);
 	tmp = (char*)match->content;
-	if (S_ISDIR(info.st_mode))
+	if (S_ISDIR(info.st_mode) && ft_strcmp(match->content, comp->basename))
+	{
 		match->content = ft_strjoin((char*)match->content, "/");
-	else
+		free(tmp);
+	}
+	else if (ft_strcmp(match->content, comp->basename))
+	{
 		match->content = ft_strjoin((char*)match->content, " ");
-	free(tmp);
+		free(tmp);
+	}
 	if (*ret == 0)
 		comp->nb_matches++;
 	ft_strdel(&completed_str);
@@ -67,6 +92,7 @@ t_list		*open_and_read_directory(t_comp *comp, const char *directory)
 		}
 		(match[0] && !ret) ? update_match(comp, match[1], &ret) : 0;
 	}
+	sort_matches(match[0]);
 	closedir(dirp);
 	return (match[0]);
 }
