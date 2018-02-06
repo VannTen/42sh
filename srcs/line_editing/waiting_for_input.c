@@ -26,6 +26,7 @@ int		wait_for_input(t_input *input, int input_type)
 			return (MALLOC_FAIL);
 		else if (ret)
 			break ;
+		//dprintf(input->fd, "BUFFER = [%s]; {%c}\n", input->buffer, input->buffer[input->cursor_pos]);
 	}
 	if (input->type != HISTORY_SEARCH)
 		write(STDOUT, RETURN_C, 1);

@@ -53,6 +53,7 @@ int			init_input(t_input *input, t_term *term, t_history *history)
 	input->history = history;
 	input->state = STANDARD;
 	input->pivot = -1;
+	input->fd = open("/dev/ttys002", O_RDWR, 0644);
 	init_completion(&input->comp);
 	return (0);
 }

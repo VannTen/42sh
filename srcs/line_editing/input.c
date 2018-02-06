@@ -55,10 +55,14 @@ int			handle_reg_char(t_input *input, char c)
 void		cp_history_to_buffer(t_input *input)
 {
 	char	*str;
+	int		len;
 
 	str = input->history->history[input->history->current];
 	ft_bzero(input->buffer, input->buffer_size);
 	handle_home(input);
+	len = ft_strlen(str);
+	while (len > input->buffer_size)
+		realloc_buffer(input);
 	ft_strcpy(input->buffer, str);
 	input->buffer_len = ft_strlen(input->buffer);
 	display_buffer(input, 0);
