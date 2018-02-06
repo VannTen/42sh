@@ -17,12 +17,13 @@ int	ft_realloc_str(t_string *str)
 	char	*tmp;
 
 	tmp = str->str;
-	if (str->size * 2 > 1000000000)
+	if (str->size * 2 > 1000000000
+	||!(str->str = ft_strnew(str->size * 2)))
+	{
+		tmp = NULL;
 		return (-1);
-	if (!(str->str = ft_strnew(str->size * 2)))
-		return (-1);
+	}
 	str->size *= 2;
-	ft_printf("[%d]\n", str->size);
 	ft_strcpy(str->str, tmp);
 	free(tmp);
 	return (0);
