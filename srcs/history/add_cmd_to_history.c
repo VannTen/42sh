@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "history.h"
+#include "shell.h"
 
 /*
 ** Function adds parameter COMMAND to the existing history.

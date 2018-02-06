@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "history.h"
+#include "shell.h"
 
 int	remove_cmd_from_history(t_history *history, const int offset)
 {

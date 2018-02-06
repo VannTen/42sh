@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "history.h"
+#include "shell.h"
 
 int	clear_all_history(t_history *history)
 {

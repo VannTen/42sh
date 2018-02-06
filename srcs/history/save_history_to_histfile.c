@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "history.h"
+#include "shell.h"
 
 int	save_history_to_histfile(t_history history)
 {

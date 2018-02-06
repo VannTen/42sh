@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "history.h"
+#include "shell.h"
 
 int	display_history(t_history history)
 {
