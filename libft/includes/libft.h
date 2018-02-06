@@ -137,7 +137,7 @@ t_dlst				*ft_dlstnew(void const *data, size_t data_size);
 void				ft_dlstdelone(t_dlst **alst, void(*del)(void *, size_t));
 void				ft_dlstdel(t_dlst **alst, void(*del)(void *, size_t));
 void				ft_dlstadd(t_dlst **alst, t_dlst *new);
-void				ft_swap(void *a, void *b);
+void				ft_swap(void **a, void **b);
 int					ft_nb_digit_base(long long n, int base);
 int					ft_abs(int i);
 void				ft_free_string_tab(char ***tab);
