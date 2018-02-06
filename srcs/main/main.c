@@ -51,13 +51,9 @@ static int	remove_backslash_nl(t_input *input, t_lexer *lexer)
 
 static int	get_line(t_lexer *lex, t_input *input)
 {
-	char *limit;
-
-	limit = input->buffer + input->buffer_len;
 	reset_buffer(input);
-	if (wait_for_input(input, REGULAR_INPUT) == MALLOC_FAIL)
-		return (MALLOC_FAIL);
-	if (lexer(lex, input->buffer) == MALLOC_FAIL)
+	if (wait_for_input(input, REGULAR_INPUT) == MALLOC_FAIL
+	|| lexer(lex, input->buffer) == MALLOC_FAIL)
 		return (MALLOC_FAIL);
 	while (lex->state != INIT)
 	{
@@ -66,13 +62,16 @@ static int	get_line(t_lexer *lex, t_input *input)
 		if (!(input->buffer = ft_strnew(input->buffer_size)))
 			return (MALLOC_FAIL);
 		display_basic_prompt(input);
-		if (wait_for_input(input, REGULAR_INPUT) == MALLOC_FAIL)
+		if (wait_for_input(input, REGULAR_INPUT) == MALLOC_FAIL
+		|| lexer(lex, input->buffer) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
-		if (lexer(lex, input->buffer) == MALLOC_FAIL)
-			return (MALLOC_FAIL);
-		input->buffer = ft_strjoin_free(input->buf_tmp, input->buffer, 3);
+		if ((int)ft_strlen(input->buf_tmp)
+							+ input->buffer_len > input->buffer_size)
+			realloc_buffer(input);
+		ft_swap((void**)&input->buffer, (void**)&input->buf_tmp);
+		strcat(input->buffer, input->buf_tmp);
+		ft_strdel(&input->buf_tmp);
 		input->buffer_len = ft_strlen(input->buffer);
-		input->buffer_size = input->buffer_len;
 	}
 	remove_backslash_nl(input, lex);
 	return (0);
