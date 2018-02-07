@@ -26,7 +26,7 @@ static int	add_escape_backslash(void **content)
 	j = 0;
 	while (tmp[i])
 	{
-		if (ft_strchr(" \'\"\\", tmp[i]) && tmp[i + 1])
+		if (ft_strchr(" \'\"\\|&<>;", tmp[i]) && tmp[i + 1])
 		{
 			str[j++] = '\\';
 			str[j++] = tmp[i++];
@@ -39,7 +39,7 @@ static int	add_escape_backslash(void **content)
 	return (0);
 }
 
-static void	sort_matches(t_list *matches)
+/*void	sort_matches(t_list *matches)
 {
 	t_list	*tmp;
 
@@ -57,7 +57,7 @@ static void	sort_matches(t_list *matches)
 				tmp = tmp->next;
 		}
 	}
-}
+}*/
 
 static int	update_match(t_comp *comp, t_list *match, int *ret)
 {
@@ -75,7 +75,7 @@ static int	update_match(t_comp *comp, t_list *match, int *ret)
 		match->content = ft_strjoin((char*)match->content, "/");
 		free(tmp);
 	}
-	else if (ft_strcmp(match->content, comp->basename))
+	else
 	{
 		match->content = ft_strjoin((char*)match->content, " ");
 		free(tmp);
@@ -120,7 +120,7 @@ t_list		*open_and_read_directory(t_comp *comp, const char *directory)
 		}
 		(match[0] && !ret) ? update_match(comp, match[1], &ret) : 0;
 	}
-	sort_matches(match[0]);
+	match[0] =  merge_sort_matches(match[0]);
 	closedir(dirp);
 	return (match[0]);
 }

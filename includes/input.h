@@ -49,7 +49,6 @@
 # define BACKSPACE "\x7F"
 # define HOME "\x1B[H"
 # define END "\x1B[F"
-# define TAB "\t"
 # define RETURN_C "\n"
 
 # define REGULAR_INPUT 0
@@ -169,5 +168,5 @@ int					completion_display(t_comp *comp, t_input *input);
 int					reset_completion_data(t_comp *comp);
 char				*ft_basename(const char *path);
 char				*ft_dirname(const char *path);
-
+t_list				*merge_sort_matches(t_list *matches);
 #endif
