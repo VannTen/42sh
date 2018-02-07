@@ -12,6 +12,33 @@
 
 #include "shell.h"
 
+static int	add_escape_backslash(void **content)
+{
+	char	*str;
+	char	*tmp;
+	int		i;
+	int		j;
+
+	tmp = (char*)(*content);
+	if (!(str = ft_strnew(ft_strlen((char*)(*content)) * 2 + 1)))
+		return (MALLOC_FAIL);
+	i = 0;
+	j = 0;
+	while (tmp[i])
+	{
+		if (ft_strchr(" \'\"\\", tmp[i]) && tmp[i + 1])
+		{
+			str[j++] = '\\';
+			str[j++] = tmp[i++];
+		}
+		else
+			str[j++] = tmp[i++];
+	}
+	*content = str;
+	ft_strdel(&tmp);
+	return (0);
+}
+
 static void	sort_matches(t_list *matches)
 {
 	t_list	*tmp;
@@ -53,6 +80,7 @@ static int	update_match(t_comp *comp, t_list *match, int *ret)
 		match->content = ft_strjoin((char*)match->content, " ");
 		free(tmp);
 	}
+	add_escape_backslash(&match->content);
 	if (*ret == 0)
 		comp->nb_matches++;
 	ft_strdel(&completed_str);
