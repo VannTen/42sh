@@ -20,7 +20,7 @@ int			copy_selection(t_input *input)
 	if (input->cursor_pos > input->pivot)
 	{
 		if (!(input->buf_copy = ft_strndup(input->buffer + input->pivot,
-				input->cursor_pos - input->pivot + 1)))
+				input->cursor_pos - input->pivot)))
 			return (MALLOC_FAIL);
 	}
 	else if (input->cursor_pos < input->pivot)
@@ -41,7 +41,7 @@ void	cut_from_buffer(t_input *input, const int cursor,
 {
 	if (cursor > pivot)
 		ft_strcpy(input->buffer + pivot,
-				input->buffer + cursor + 1);
+				input->buffer + cursor);
 	else if (cursor < pivot)
 		ft_strcpy(input->buffer + cursor,
 				input->buffer + pivot);

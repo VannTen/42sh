@@ -44,7 +44,7 @@ int		get_key(t_input *input)
 	int	i;
 
 	i = -1;
-	if (!ft_strcmp(TAB, input->read_buffer) && input->state != SELECTION)
+	if (input->read_buffer[0] == '\t' && input->state != SELECTION)
 		input->state = COMPLETION;
 	else if (input->state != SELECTION)
 		input->state = STANDARD;
