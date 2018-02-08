@@ -13,6 +13,7 @@
 #ifndef HISTORY_H
 # define HISTORY_H
 # include "libft.h"
+# include "lexer.h"
 # include <pwd.h>
 # include <sys/types.h>
 # include <uuid/uuid.h>

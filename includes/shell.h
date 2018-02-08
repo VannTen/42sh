@@ -19,7 +19,6 @@
 # include "history.h"
 # include "term.h"
 # include "env.h"
-# include "expansion.h"
 # include <termios.h>
 # include <dirent.h>
 
