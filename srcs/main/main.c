@@ -211,7 +211,6 @@ int main(int argc, char **argv, char **environ)
 	/*t_parser	*parser;
 	t_exec	const		exec_rules[] = {
 		{.name = NULL, .create = NULL, .give = NULL}};*/
-
 	(void)argc;
 	(void)argv;
 	//parser = generate_parser(g_grammar, tokens_name, exec_rules, get_token_id);
@@ -238,7 +237,6 @@ int main(int argc, char **argv, char **environ)
 		display_history(bsh->history);
 		#endif
 		display_tokens(bsh->lexer.tokens[0]);
-		reset_lexer(&bsh->lexer);
 		//execute_construct(parser, "PROGRAM", &bsh->lexer.tokens[0], take_token);
 	}
 	return (0);

@@ -61,7 +61,7 @@ t_bsh		*shell_init(char **environ)
 	if (init_env(&bsh->env, environ) == MALLOC_FAIL)
 		return (NULL);
 	update_shlvl(&bsh->env);
-	if (ft_getenv(bsh->env.env_list, "TERM"))
+	if (!ft_getenv(bsh->env.env_list, "TERM"))
 		if (append_variable_to_env(&bsh->env, "TERM", "xterm", GLOBAL))
 			return (NULL);
 	return (bsh);
