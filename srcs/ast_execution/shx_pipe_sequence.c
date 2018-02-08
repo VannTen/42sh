@@ -6,11 +6,17 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 10:08:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/06 11:21:58 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/08 11:48:52 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell_ast/pipe_sequence.h"
+
+static void	mark_as_child(struct s_sh_simple_command *const simple_command)
+{
+	if (simple_command != NULL)
+		simple_command->child = TRUE;
+}
 
 static int	setup_next_pipe(void)
 {
@@ -24,23 +30,6 @@ static int	setup_next_pipe(void)
 		close(pipe[1]);
 	}
 	return (pipe[0]);
-}
-
-static void	wait_for_instance(pid_t father, t_bool const last_pipe,
-		struct s_shx_global *const global)
-{
-	int	instance_status;
-
-	while (waitpid(father, &instance_status, WNOHANG) < 0)
-		;
-	if (!last_pipe)
-		return ;
-	if (WIFEXITED(instance_status))
-		global->ret = WEXITSTATUS(instance_status);
-	else if (WIFSIGNALED(instance_status))
-		global->ret = WTERMSIG(instance_status);
-	else
-		;
 }
 
 static int	spawn_pipe(t_list	*sequence, int pipe_in,

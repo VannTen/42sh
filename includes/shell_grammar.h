@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 12:12:51 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/01 09:17:28 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/08 09:36:43 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,12 @@ static char const	g_shell_grammar[] =
 "|and_or"
 ";"
 "and_or"
-":and_or AND_IF pipe_sequence"
-"|and_or OR_IF pipe_sequence"
+":and_or AND_IF pipeline"
+"|and_or OR_IF pipeline"
+"|pipeline"
+";"
+"pipeline"
+":bang pipe_sequence"
 "|pipe_sequence"
 ";"
 "pipe_sequence"
@@ -104,6 +108,9 @@ static t_exec const	g_exec_rules[] = {
 	},{ .name="and_or",
 		.create=&create_and_or,
 		.give=&give_and_or
+	},{ .name="pipeline",
+		.create=&create_pipeline,
+		.give=&give_pipeline
 	},{ .name="pipe_sequence",
 		.create=&create_pipe_sequence,
 		.give=&give_pipe_sequence

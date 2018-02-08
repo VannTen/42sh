@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shx_list.c                                         :+:      :+:    :+:   */
+/*   child_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/05 09:15:01 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/08 09:40:54 by ble-berr         ###   ########.fr       */
+/*   Created: 2018/02/08 10:29:19 by ble-berr          #+#    #+#             */
+/*   Updated: 2018/02/08 10:45:56 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	shx_list(struct s_sh_list *const list, struct s_sh_global *const global)
+void	child_handler(int sigid)
 {
-	if (list != NULL)
-		(void)shx_and_or(list->and_or, global);
-	return (0);
+	pid_t	child_pid;
+	int		status;
+
+	child_pid = waitpid(-1, &status, WNOHANG);
 }

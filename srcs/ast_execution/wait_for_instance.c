@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shx_list.c                                         :+:      :+:    :+:   */
+/*   wait_for_instance.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/05 09:15:01 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/08 09:40:54 by ble-berr         ###   ########.fr       */
+/*   Created: 2018/02/08 10:56:41 by ble-berr          #+#    #+#             */
+/*   Updated: 2018/02/08 10:56:50 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	shx_list(struct s_sh_list *const list, struct s_sh_global *const global)
+#include <sys/wait.h>
+
+void	wait_for_instance(pid_t father, t_bool const save_return,
+		struct s_shx_global *const global)
 {
-	if (list != NULL)
-		(void)shx_and_or(list->and_or, global);
-	return (0);
+	int	instance_status;
+
+	while (waitpid(father, &instance_status, WNOHANG) < 0)
+		;
+	if (save_return)
+	{
+		if (WIFEXITED(instance_status))
+			global->ret = WEXITSTATUS(instance_status);
+		else if (WIFSIGNALED(instance_status))
+			global->ret = WTERMSIG(instance_status);
+	}
 }
