@@ -20,11 +20,11 @@ SRC_NAME = env/add_variable_to_env.c \
 	   env/ft_getenv.c \
 	   env/init_env.c \
 	   env/remove_variable_from_env.c \
-	   expansion/get_expanded_input.c \
-	   expansion/handle_bang.c \
 	   history/add_cmd_to_history.c \
 	   history/clear_all_history.c \
 	   history/display_history.c \
+	   history/get_expanded_input.c \
+	   history/handle_bang.c \
 	   history/import_history_from_file.c \
 	   history/init_history.c \
 	   history/remove_cmd_from_history.c \
@@ -39,6 +39,7 @@ SRC_NAME = env/add_variable_to_env.c \
 	   line_editing/completion/init_completion_data.c \
 	   line_editing/completion/reset_completion_data.c \
 	   line_editing/completion/search_directories.c \
+	   line_editing/completion/sort_matches.c \
 	   line_editing/copy_cut_paste.c \
 	   line_editing/display_line.c \
 	   line_editing/get_key.c \

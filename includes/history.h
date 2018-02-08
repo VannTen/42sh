@@ -38,5 +38,8 @@ int				clear_all_history(t_history *history);
 char			*search_in_history_by_num(t_history *history, const int number);
 char			*search_in_history_by_str(t_history *history,
 										const char *const str);
-
+int				handle_bang(t_history *history, char **input,
+							t_string *exp_input);
+int				get_expanded_input(t_lexer *lexer, t_history *history,
+									char *input, t_string *exp_input);
 #endif
