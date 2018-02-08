@@ -12,11 +12,37 @@
 
 #include "shell.h"
 
-int				completion(t_input *input)
+static int	eligible_to_env_completion(t_comp *comp)
 {
+	int	len;
+	int	len_bis;
+
+	len = ft_strlen(comp->prefix);
+	len_bis = len;
+	if (len)
+		while ((ft_isalnum(comp->prefix[--len])
+				|| comp->prefix[len] == '_') && len > -1)
+			;
+	if (comp->prefix[len] == '$')
+	{
+		ft_strdel(&comp->basename);
+		if (!(comp->basename = ft_strdup(comp->prefix + len + 1)))
+			return (MALLOC_FAIL);
+		comp->basename_len = len_bis - len - 1;
+		return (1);
+	}
+	return (0);
+}
+
+int			completion(t_input *input)
+{
+	int	ret;
+
 	if (!input->comp.matches)
 	{
-		if (input->comp.prefix[0] == '$')
+		if ((ret = eligible_to_env_completion(&input->comp) )== MALLOC_FAIL)
+			return (MALLOC_FAIL);
+		else if (ret)
 			input->comp.matches = completion_search_in_env(&input->comp);
 		else if (input->comp.search_location == PATH)
 			completion_search_path(&input->comp);

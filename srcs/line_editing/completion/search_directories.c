@@ -26,7 +26,7 @@ static int	add_escape_backslash(void **content)
 	j = 0;
 	while (tmp[i])
 	{
-		if (ft_strchr(" \'\"\\|&<>;", tmp[i]) && tmp[i + 1])
+		if (ft_strchr(" \'\"\\|&<>;$!*[]{}^", tmp[i]) && tmp[i + 1])
 		{
 			str[j++] = '\\';
 			str[j++] = tmp[i++];
@@ -39,26 +39,6 @@ static int	add_escape_backslash(void **content)
 	return (0);
 }
 
-/*void	sort_matches(t_list *matches)
-{
-	t_list	*tmp;
-
-	tmp = matches;
-	if (matches)
-	{
-		while (tmp->next)
-		{
-			if (ft_strcmp((char*)tmp->content, (char*)tmp->next->content) > 0)
-			{
-				ft_swap(&tmp->content, &tmp->next->content);
-				tmp = matches;
-			}
-			else
-				tmp = tmp->next;
-		}
-	}
-}*/
-
 static int	update_match(t_comp *comp, t_list *match, int *ret)
 {
 	struct stat	info;
@@ -70,19 +50,19 @@ static int	update_match(t_comp *comp, t_list *match, int *ret)
 		return (MALLOC_FAIL);
 	stat(completed_str, &info);
 	tmp = (char*)match->content;
-	if (S_ISDIR(info.st_mode) && ft_strcmp(match->content, comp->basename))
+	if (S_ISDIR(info.st_mode) && (ft_strcmp(match->content, comp->basename)
+			|| get_shell_data()->input.buffer[comp->init_c_pos] != '/'))
 	{
 		match->content = ft_strjoin((char*)match->content, "/");
 		free(tmp);
 	}
-	else
+	else if (!S_ISDIR(info.st_mode))
 	{
 		match->content = ft_strjoin((char*)match->content, " ");
 		free(tmp);
 	}
 	add_escape_backslash(&match->content);
-	if (*ret == 0)
-		comp->nb_matches++;
+	(*ret == 0) ? comp->nb_matches++ : 0;
 	ft_strdel(&completed_str);
 	*ret = 1;
 	return (0);

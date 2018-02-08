@@ -41,8 +41,7 @@ int		completion_search_path(t_comp *comp)
 		while (tmp && matches[1]->next)
 				matches[1] = matches[1]->next;
 	}
-	comp->matches = matches[0];
-	matches[0] = merge_sort_matches(matches[0]);
+	comp->matches = merge_sort_matches(matches[0]);
 	ft_free_string_tab(&paths);
 	return (0);
 }

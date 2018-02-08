@@ -18,7 +18,7 @@ static t_list	*split_list(t_list *list)
 	return (second);
 }
 
-t_list			*merge_lists(t_list *first, t_list *second)
+static t_list	*merge_lists(t_list *first, t_list *second)
 {
 	if (!first)
 		return (second);
@@ -36,7 +36,7 @@ t_list			*merge_lists(t_list *first, t_list *second)
 	}
 }
 
-t_list			*merge_sort_matches(t_list *first)
+t_list	*merge_sort_matches(t_list *first)
 {
 	t_list	*second;
 

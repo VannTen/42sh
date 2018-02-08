@@ -19,9 +19,8 @@ t_list	*completion_search_in_env(t_comp *comp)
 	char		*str;
 	int			ret;
 
-	if (!(env = get_shell_data()->env.env_list))
-		return (NULL);
-	str = comp->prefix + 1;
+	env = get_shell_data()->env.env_list;
+	str = comp->basename;
 	match[0] = NULL;
 	ret = -1;
 	while (env)
@@ -38,7 +37,6 @@ t_list	*completion_search_in_env(t_comp *comp)
 		}
 		env = env->next;
 		(ret == 0) ? comp->nb_matches++ : 0;
-
 	}
 	return (match[0]);
 }
