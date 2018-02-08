@@ -19,14 +19,13 @@ int		wait_for_input(t_input *input, int input_type)
 	input->type = input_type;
 	while (42)
 	{
-		ft_bzero(input->read_buffer, MAX_KEY_LENGTH);
+		ft_bzero(input->read_buffer, MAX_KEY_LENGTH + 1);
 		if (read(STDIN_FILENO, input->read_buffer, MAX_KEY_LENGTH) < 1)
 			return (READ_FAIL);
 		if ((ret = get_key(input)) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
 		else if (ret)
 			break ;
-		//dprintf(input->fd, "BUFFER = [%s]; {%c}\n", input->buffer, input->buffer[input->cursor_pos]);
 	}
 	if (input->type != HISTORY_SEARCH)
 		write(STDOUT, RETURN_C, 1);
