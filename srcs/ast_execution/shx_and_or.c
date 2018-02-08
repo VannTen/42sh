@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shx_and_or_list.c                                  :+:      :+:    :+:   */
+/*   shx_and_or.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/25 09:26:33 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/01/25 09:28:40 by ble-berr         ###   ########.fr       */
+/*   Created: 2018/02/05 09:43:16 by ble-berr          #+#    #+#             */
+/*   Updated: 2018/02/05 09:43:17 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell_ast/and_or.h"
 
-int	shx_and_or_list(struct s_and_or_list *const and_or_list)
+int	shx_and_or(struct s_sh_and_or *const and_or,
+		struct s_shx_global *const global)
 {
-	t_list	*tmp;
-	int		ret;
+	struct s_and_or_logic	*logic;
 
-	if (and_or != NULL)
+	if (and_or != NULL && global != NULL)
 	{
-		tmp = and_or->pipe_sequences;
-		while (tmp != NULL)
+		logic = and_or->logic;
+		while (logic != NULL)
 		{
-			ret = shx_pipe_sequence(tmp->content);
-			if (tmp->next != NULL && continue_logic(tmp->next->content, ret))
+			(void)shx_pipeline(logic->pipeline, global);
+			if (logic->next != NULL
+					&& continue_logic(logic->type, global->latest_ret))
 				tmp = tmp->next->next;
 			else
 				break;
 		}
-		return (ret);
 	}
-	else
-		return (-1);
+	return (0);
 }

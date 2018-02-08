@@ -6,62 +6,82 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 10:08:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/01/25 10:08:47 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/06 11:21:58 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell_ast/pipe_sequence.h"
 
-static int	extend_sequence(void *const simple_command, int prevpipe_read)
+static int	setup_next_pipe(void)
 {
-	int		pipe[2];
-	pid_t	father;
+	int	pipe_buf[2];
 
-	if (!pipe[2])
+	if (pipe(pipe_buf) == -1)
+		return (-1);
+	if (pipe[1] != 1)
 	{
-		father = fork();
-		if (father)
-		{
-			close(prevpipe_read);
-			close(pipe[1]);
-			if (father == -1 || update_sequence_info(sequence_info, father))
-			{
-				close(pipe[0]);
-				return (-1);
-			}
-			return (pipe[0]);
-		}
-		else if (!father)
-		{
-			close(pipe[0]);
-			exit(setup_piped_instance(simple_command, prevpipe_read, pipe[1]));
-		}
+		dup2(pipe[1], 1);
+		close(pipe[1]);
 	}
-	return (-1);
+	return (pipe[0]);
 }
 
-int			shx_pipe_sequence(struct s_pipe_sequence *const pipe_sequence)
+static void	wait_for_instance(pid_t father, t_bool const last_pipe,
+		struct s_shx_global *const global)
 {
-	int		job_id;
+	int	instance_status;
 
-	children = NULL;
+	while (waitpid(father, &instance_status, WNOHANG) < 0)
+		;
+	if (!last_pipe)
+		return ;
+	if (WIFEXITED(instance_status))
+		global->ret = WEXITSTATUS(instance_status);
+	else if (WIFSIGNALED(instance_status))
+		global->ret = WTERMSIG(instance_status);
+	else
+		;
+}
+
+static int	spawn_pipe(t_list	*sequence, int pipe_in,
+		struct s_shx_global *const global)
+{
+	t_bool const	last_pipe = (sequence->next == NULL);
+	pid_t			father;
+
+	dup2(pipe_in, 0);
+	if (pipe_in != 0)
+		close(pipe_in);
+	if (!last_pipe)
+		pipe_in = setup_next_pipe();
+	father = fork();
+	if (father == -1)
+		return (1);
+	else if (!father)
+	{
+		close(pipe_in);
+		mark_as_child(sequence->content);
+		exit(shx_simple_command(sequence->content, global));
+	}
+	(void)spawn_pipe(sequence->next, pipe_in, global);
+	wait_for_instance(father, last_pipe, global);
+	return (0);
+}
+
+int			shx_pipe_sequence(struct s_sh_pipe_sequence *const pipe_sequence,
+		struct s_shx_global *const global)
+{
+	t_list	*sequence;
+
 	if (pipe_sequence != NULL)
 	{
-		job_id = create_job();
-		if (0 <= job_id)
-			return (pipe_sequence(pipe_sequence));
-		else if (job_id == -1)
-		carry_over = (simple_commands->next != NULL) ? 0 : -1;
-		while (simple_commands->next != NULL)
-		{
-			carry_over = extend_sequence(simple_commands->content,
-					carry_over, &children);
-			if (carry_over == -1)
-				return (-1);
-			simple_commands = simple_commands->next;
-		}
-		return(end_sequence(simple_commands->content, carry_over,
-					&children));
+		sequence = pipe_sequence->simple_commands;
+		if (sequence == NULL)
+			return (0);
+		else if (sequence->next == NULL)
+			global.latest_ret = shx_simple_command(sequence->content, global);
+		else
+			return(spawn_pipe(sequence, 0, global));
 	}
-	return (-1);
+	return (0);
 }

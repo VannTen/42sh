@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection.c                                      :+:      :+:    :+:   */
+/*   io_redir_aggregate.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/25 13:07:26 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/01/25 13:21:26 by ble-berr         ###   ########.fr       */
+/*   Created: 2018/01/29 13:03:03 by ble-berr          #+#    #+#             */
+/*   Updated: 2018/01/29 13:37:51 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell_ast/redirection.h"
-
-void	*ast_alloc_redirection(void)
+int	io_redir_aggregate(struct s_io_redirection const io_redir,
+		t_list **const fd_backups)
 {
-	struct s_redirection	*redirection;
-
-	redirection = (struct s_redirection*)malloc(sizeof(*redirection));
-	if (redirection != NULL)
+	if (backup_conflict(io_redir.ionum, &fd_backups)
+			|| backup_conflict(io_redir.target.fd, &fd_backups))
+		ADD_ERRMSG;
+	else
 	{
-		redirection->ionum = -1;
-		redirection->tpye = e_redirection_type_none;
-		ft_memset(&(redirection->target), 0, sizeof(redirection->target));
+		if (dup2(target_fd, io_redir.ionum) == -1)
+			dup2_errmsg(target_fd, io_redir.ionum);
+		else
+		{
+			close(io_redir.target.fd);
+			return (0);
+		}
 	}
-	return (redirection);
+	return (1);
 }

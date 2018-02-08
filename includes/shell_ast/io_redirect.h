@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 09:24:49 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/01/29 10:39:30 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/02 14:55:38 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,13 @@ enum	e_sh_io_type
 	e_sh_io_type_max,
 };
 
-union	u_sh_io_target
-{
-	int		fd;
-	char	*name;
-};
-
 struct s_sh_io_redirect
 {
-	int						ionum;
-	enum e_sh_io_type		type;
-	union u_sh_io_target	target;
-	int						flags;
-	int						mode;
+	char				*ionum;
+	enum e_sh_io_type	type;
+	char				*target;
+	int					flags;
+	int					mode;
 };
 
 #endif

@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   and_or.c                                           :+:      :+:    :+:   */
+/*   shx_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/25 12:00:36 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/01/25 12:02:44 by ble-berr         ###   ########.fr       */
+/*   Created: 2018/02/05 09:15:01 by ble-berr          #+#    #+#             */
+/*   Updated: 2018/02/05 09:17:00 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell_ast/and_or.h"
-
-void	*ast_alloc_and_or(void)
+int	shx_list(struct s_sh_list *const list, struct s_sh_global *const global)
 {
-	struct s_and_or	*and_or;
-
-	and_or = (struct s_and_or*)malloc(sizeof(*and_or));
-	if (and_or != NULL)
-	{
-		and_or->pipe_sequences = NULL;
-	}
-	return (and_or);
+	if (list != NULL)
+		(void)shx_and_or(list->and_or);
+	return (0);
 }

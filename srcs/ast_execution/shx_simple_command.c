@@ -6,50 +6,33 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 12:09:31 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/01/24 16:04:30 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/06 11:39:03 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	call_external(char *const extbin, char **const args,
-		int const already_forked)
+void	mark_as_child(struct s_sh_simple_command *const simple_command)
 {
-	WIP;
-	if (!already_forked)
-	{
-	}
-	EXECVE_HERE;
-	return (-1);
+	if (simple_command != NULL)
+		simple_command->child = TRUE;
 }
 
-static int	launch_utility(char **const args, int const already_forked)
+int			shx_simple_command(struct s_simple_command *const simple_command,
+		struct s_shx_global *const global)
 {
-	union u_utility	utility;
-	int				ret;
-	pid_t			child;
-
-	if (args != NULL && *args != NULL)
-	{
-		if (!ft_strchr(*args, "/")
-				&& (utility.builtin = get_builtin_utility(*args)) != NULL)
-			return (utility.builtin(args));
-		if ((utility.external = get_external_utility(*args)) != NULL)
-			return (call_external(utility.external, args, already_forked));
-	}
-	return (0);
-}
-
-int			shx_simple_command(struct s_simple_command *const simple_command)
-{
+	char	**argv;
 	t_list	*fd_backups;
 	int		ret;
 
 	if (simple_command != NULL)
 	{
+		argv = create_argv(simple_command->arglist, simple_command->argc);
+		if (argv == NULL)
+			return (0);
 		redirection_reset = NULL;
 		if (apply_redirections(simple_command->redirs, &fd_backups) == 0)
-			ret = launch_utility(simple_command->args, simple_command->child);
+			ret = launch_utility(argv, simple_command->child, global);
 		undo_redirections(&fd_backups);
 		return (ret);
 	}

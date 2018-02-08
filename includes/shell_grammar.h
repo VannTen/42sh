@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 12:12:51 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/01/31 09:45:20 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/01 09:17:28 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,52 +124,52 @@ static t_exec const	g_exec_rules[] = {
 		.give=NULL
 	},{ .name="WORD",
 		.create=&create_word,
-		.give=&give_word
+		.give=NULL
 	},{ .name="AND_IF",
 		.create=&create_and_if,
-		.give=&give_and_if
+		.give=NULL
 	},{ .name="OR_IF",
 		.create=&create_or_if,
-		.give=&give_or_if
+		.give=NULL
 	},{ .name="PIPE",
 		.create=NULL,
 		.give=NULL
 	},{ .name="IO_NUMBER",
 		.create=&create_io_number,
-		.give=&give_io_number
+		.give=NULL
 	},{ .name="LESS",
 		.create=&create_less,
-		.give=&give_less
+		.give=NULL
 	},{ .name="DLESS",
 		.create=&create_dless,
-		.give=&give_dless
+		.give=NULL
 	},{ .name="DLESSDASH",
 		.create=&create_dlessdash,
-		.give=&give_dlessdash
+		.give=NULL
 	},{ .name="LESSAND",
 		.create=&create_lessand,
-		.give=&give_lessand
+		.give=NULL
 	},{ .name="LESSGREAT",
 		.create=&create_lessgreat,
-		.give=&give_lessgreat,
+		.give=NULL
 	},{ .name="GREAT",
 		.create=&create_great,
-		.give=&give_great
+		.give=NULL
 	},{ .name="DGREAT",
 		.create=&create_dgreat,
-		.give=&give_dgreat
+		.give=NULL
 	},{ .name="GREATAND",
 		.create=&create_greatand,
-		.give=&give_greatand
+		.give=NULL
 	},{ .name="CLOBBER",
 		.create=&create_clobber,
-		.give=&give_clobber
+		.give=NULL
 	},{ .name="NEWLINE",
 		.create=&create_newline,
-		.give=&give_newline
+		.give=NULL
 	},{ .name="SEMICOLON",
 		.create=&create_semicolon,
-		.give=&give_semicolon
+		.give=NULL
 	},{ .name=NULL, .create=NULL, .give=NULL }
 };
 

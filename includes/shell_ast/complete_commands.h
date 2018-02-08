@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 09:46:27 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/01/29 09:23:05 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/02 13:14:15 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 struct s_sh_complete_commands
 {
-	t_list	*complete_commands;
+	t_list	*sequence;
 };
 
 #endif

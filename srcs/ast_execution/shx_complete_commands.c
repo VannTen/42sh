@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   complete_commands.c                                :+:      :+:    :+:   */
+/*   shx_complete_commands.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/25 11:31:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/01/25 11:35:36 by ble-berr         ###   ########.fr       */
+/*   Created: 2018/02/05 09:03:46 by ble-berr          #+#    #+#             */
+/*   Updated: 2018/02/05 09:13:26 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell_ast/complete_commands.h"
-
-void	*ast_alloc_complete_commands(void)
+int	shx_complete_commands(
+		struct s_sh_complete_commands *const complete_commands,
+		struct s_shx_global *const global)
 {
-	struct s_complete_commands	*complete_commands;
+	t_list	*sequence;
 
-	complete_commands = (struct s_complete_commands*)malloc(sizeof(complete_commands));
 	if (complete_commands != NULL)
 	{
-		complete_commands->complete_commands = NULL;
+		sequence = complete_commands->sequence;
+		while (sequence != NULL)
+		{
+			(void)shx_complete_command(sequence->content, global);
+			sequence = sequence->next;
+		}
 	}
-	return (complete_commands);
+	return (0);
 }

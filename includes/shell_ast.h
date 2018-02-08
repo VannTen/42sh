@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 10:00:26 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/01/29 09:13:07 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/01 12:39:02 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@
 # include "shell_ast/pipe_sequence.h"
 # include "shell_ast/simple_command.h"
 # include "shell_ast/io_redirect.h"
+# include "shell_ast/io_operator.h"
 
 #endif
