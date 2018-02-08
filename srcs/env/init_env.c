@@ -14,11 +14,13 @@
 
 int	init_env(t_env *env, char **environ)
 {
-	if (environ)
+	if (environ[0])
 	{
 		if (!(env->env_list = convert_environ_to_list(environ)))
 			return (MALLOC_FAIL);
 	}
+	else
+		env->env_list = NULL;
 	env->env_len = ft_tab_len(environ);
 	env->env_array = NULL;
 	env->has_changed = 1;

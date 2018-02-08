@@ -51,8 +51,6 @@ t_env_list		*convert_environ_to_list(char **environ)
 	t_env_list	*env_list[2];
 	size_t		i;
 
-	if (!environ || !*environ)
-		return (NULL);
 	i = 0;
 	env_list[0] = NULL;
 	while (environ[i])
