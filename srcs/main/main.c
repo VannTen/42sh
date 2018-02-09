@@ -62,7 +62,7 @@ static int	get_line(t_lexer *lex, t_input *input)
 		if (!(input->buffer = ft_strnew(input->buffer_size)))
 			return (MALLOC_FAIL);
 		display_basic_prompt(input);
-		if (wait_for_input(input, REGULAR_INPUT) == MALLOC_FAIL
+		if (wait_for_input(input, UNCLOSED_QUOTES) == MALLOC_FAIL
 		|| lexer(lex, input->buffer) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
 		if ((int)ft_strlen(input->buf_tmp)
