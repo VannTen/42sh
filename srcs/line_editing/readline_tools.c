@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_basename.c                                      :+:      :+:    :+:   */
+/*   readline_tools.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/30 11:20:17 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/09 12:55:55 by bjanik           ###   ########.fr       */
+/*   Created: 2018/02/09 15:39:03 by bjanik            #+#    #+#             */
+/*   Updated: 2018/02/09 15:47:37 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-char		*ft_basename(const char *path)
+int	clear_lines(t_input *input, const char *str)
 {
-	char	*slash;
-
-	if (!path)
-		return (NULL);
-	if ((slash = ft_strrchr(path, '/')))
-		return (ft_strdup(slash + 1));
-	return (ft_strdup(path));
+	if (input->buffer_len + (int)ft_strlen(str) > input->term->first_line_len)
+	{
+		tputs(tgetstr("sc", NULL), 1, putchar_termcaps);
+		tputs(tgetstr("nw", NULL), 1, putchar_termcaps);
+		tputs(tgetstr("cd", NULL), 1, putchar_termcaps);
+		tputs(tgetstr("rc", NULL), 1, putchar_termcaps);
+	}
+	return (0);
 }

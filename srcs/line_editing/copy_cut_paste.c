@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:32:04 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/05 19:42:28 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/09 15:41:38 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,7 @@ int			cut_selection(t_input *input)
 	switch_input_state(input);
 	tputs(tgetstr("me", NULL), 1, putchar_termcaps);
 	handle_home(input);
-	if (input->buffer_len + (int)ft_strlen(input->buf_copy) >
-			input->term->first_line_len)
-	{
-		tputs(tgetstr("sc", NULL), 1, putchar_termcaps);
-		tputs(tgetstr("nw", NULL), 1, putchar_termcaps);
-		tputs(tgetstr("cd", NULL), 1, putchar_termcaps);
-		tputs(tgetstr("rc", NULL), 1, putchar_termcaps);
-	}
+	clear_lines(input, input->buf_copy);
 	tputs(tgetstr("ce", NULL), 1, putchar_termcaps);
 	display_buffer(input, 0);
 	i = input->buffer_len;

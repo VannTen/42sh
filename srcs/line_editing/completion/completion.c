@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:24:25 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/03 17:05:44 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/09 12:55:45 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int			completion(t_input *input)
 
 	if (!input->comp.matches)
 	{
-		if ((ret = eligible_to_env_completion(&input->comp) )== MALLOC_FAIL)
+		if ((ret = eligible_to_env_completion(&input->comp)) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
 		else if (ret)
 			input->comp.matches = completion_search_in_env(&input->comp);

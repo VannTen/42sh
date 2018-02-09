@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 14:03:11 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/05 18:28:08 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/09 14:15:45 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int				init_completion_data(t_comp *comp, char *buffer,
 	comp->matches = NULL;
 	comp->current = NULL;
 	comp->init_c_pos = cursor_pos;
-	ft_strdel(&lexer.current_token);
 	clear_tokens(&lexer.tokens[0]);
 	return (0);
 }

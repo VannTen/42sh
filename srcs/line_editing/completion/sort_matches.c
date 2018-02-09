@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_matches.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/09 12:56:25 by bjanik            #+#    #+#             */
+/*   Updated: 2018/02/09 12:56:47 by bjanik           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "shell.h"
 
 static t_list	*split_list(t_list *list)
@@ -36,7 +48,7 @@ static t_list	*merge_lists(t_list *first, t_list *second)
 	}
 }
 
-t_list	*merge_sort_matches(t_list *first)
+t_list			*merge_sort_matches(t_list *first)
 {
 	t_list	*second;
 
