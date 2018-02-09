@@ -1,0 +1,91 @@
+#!/bin/zsh
+
+# Write the following ast generation file templates for non_terminal constructs:
+# create_ give_ delete_
+
+while [ $1 ] && [ $1 != "--" ];
+do;
+	cat >create_${1}.c << EOF
+#include "shell_ast/${1}.h"
+#include "shell_ast/container_labels.h"
+#include "container.h"
+#include <stdlib.h>
+
+void	*create_${1}(void const *lex_value)
+{
+	struct s_container	*container;
+	struct s_sh_${1}	${1};
+
+	(void)lex_value;
+	${1}-> = ;
+	container = new_container(${1}, sizeof(${1}), e_ast_container_label_${1});
+	return (container);
+}
+EOF
+	cat >give_${1}.c << EOF
+#include "bool_interface.h"
+#include "shell_ast/${1}.h"
+#include "shell_ast/container_labels.h"
+#include "container.h"
+#include <stddef.h>
+
+t_bool	give_${1}(void *construct, void *sub_construct)
+{
+	struct s_container	*sub;
+	struct s_sh_${1}	*${1};
+	t_bool				ret;
+
+	ret = FALSE;
+	if (construct != NULL && sub_construct != NULL)
+	{
+		${1} = ((struct s_container*)construct)->content;
+		sub = sub_construct;
+		if (sub->label == e_ast_container_label_)
+			ret = ;
+		if (ret == TRUE)
+			delete_container(&sub, );
+	}
+	return (ret);
+}
+EOF
+	cat >delete_${1}.c << EOF
+#include "shell_ast/${1}.h"
+#include <stdlib.h>
+
+void	delete_${1}(struct s_sh_${1} **const ${1}_loc)
+{
+	struct s_sh_${1}	*todel;
+
+	todel = (${1}_loc != NULL) ? (*${1}_loc) : (NULL);
+	if (todel != NULL)
+	{
+		delete_(&(todel->));
+		free(todel)
+		${1}_loc = NULL;
+	}
+}
+EOF
+	shift;
+done;
+
+if [ $1 ] && [ $1 = "--" ]
+then;
+	shift;
+fi;
+
+# Write the following ast generation file templates for terminal constructs:
+# create_
+
+while [ $1 ];
+do;
+	cat  >create_${1}.c << EOF
+#include "shell_ast/container_labels.h"
+#include <stddef.h>
+
+void	*create_${1}(void const *lex_value)
+{
+	return (new_container(, , e_ast_container_label_${1}));
+}
+EOF
+	shift;
+done;
