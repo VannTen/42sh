@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 09:51:58 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/02 15:26:53 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/08 14:12:02 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 enum	e_logic
 {
-	e_logic_none;
-	e_logic_and;
-	e_logic_or;
+	e_logic_none,
+	e_logic_and,
+	e_logic_or
 };
 
 struct	s_and_or_logic

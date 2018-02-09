@@ -6,11 +6,13 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 09:43:16 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/08 09:52:43 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/08 14:25:43 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell_ast/and_or.h"
+#include "s_shx_global.h"
+#include "shell_ast.h"
+#include <stddef.h>
 
 static t_bool	continue_logic(enum e_logic logic_type,
 		unsigned char latest_ret)
