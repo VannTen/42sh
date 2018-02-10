@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 12:43:04 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/10 15:06:06 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/10 15:51:48 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static int	get_cmd_num(t_history *history, t_string *exp_input, const int num)
 		return (1);
 	len = ft_strlen(s);
 	while (exp_input->len + len > exp_input->size)
-		realloc_str(exp_input);
+		if (realloc_str(exp_input) == MALLOC_FAIL)
+			return (MALLOC_FAIL);
 	ft_strcat(exp_input->str, s);
 	exp_input->len += len;
 	return (0);
@@ -54,7 +55,7 @@ static int	get_cmd_str(t_history *history, t_string *exp_input, char **input,
 			return (1);
 	}
 	len = ft_strlen(tmp);
-	if (exp_input->len + len > exp_input->size)
+	while (exp_input->len + len > exp_input->size)
 		if (realloc_str(exp_input) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
 	ft_strcat(exp_input->str, tmp);
