@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 20:22:35 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/22 15:15:38 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/10 14:59:58 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@ int		realloc_current_token(t_lexer *lexer)
 	char	*tmp;
 
 	tmp = lexer->current_token;
-	lexer->token_size *= 2;
-	if (!(lexer->current_token = (char *)ft_memalloc((lexer->token_size * 2 + 1)
+	if (!(lexer->current_token = ft_strnew((lexer->token_size * 2)
 			* sizeof(char))))
 		return (MALLOC_FAIL);
-	ft_bzero(lexer->current_token, lexer->token_size + 1);
+	lexer->token_size *= 2;
 	ft_strcpy(lexer->current_token, tmp);
-	free(tmp);
+	ft_strdel(&tmp);
 	return (0);
 }
