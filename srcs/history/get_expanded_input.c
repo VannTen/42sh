@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 18:11:05 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/25 11:52:49 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/09 17:40:40 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int			get_expanded_input(t_lexer *lexer, t_history *history, char *input,
 		get_event(lexer);
 		lexer->state = g_lexer[lexer->state][lexer->event].new_state;
 		if (exp_input->len == exp_input->size)
-			if (ft_realloc_str(exp_input) == MALLOC_FAIL)
+			if (realloc_str(exp_input) == MALLOC_FAIL)
 				return (MALLOC_FAIL);
 		if (check_bang_is_expandable(lexer->state, lexer->input, input))
 		{

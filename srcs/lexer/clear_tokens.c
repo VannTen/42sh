@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 17:07:22 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/25 17:42:11 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/09 14:17:36 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	clear_tokens(t_token *tokens[])
 		ft_memdel((void**)&tokens[0]);
 		tokens[0] = tmp;
 	}
+	tokens[0] = NULL;
 	tokens[1] = NULL;
 }
