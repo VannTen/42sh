@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 16:51:57 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/31 16:36:49 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/09 17:05:20 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,6 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
-
-typedef struct		s_string
-{
-	char			*str;
-	int				len;
-	int				size;
-}					t_string;
 
 int					ft_putchar(char c);
 int					ft_putnchar(char c, int n);
@@ -147,8 +140,6 @@ int					get_next_line(int fd, char **line);
 void				ft_display_tab(char **tab);
 void				ft_error_msg(char *error);
 void				*ft_malloc(size_t size);
-int					ft_realloc_str(t_string *str);
-t_string			ft_init_str(const size_t size);
 size_t				ft_tab_len(char **tab);
 
 #endif
