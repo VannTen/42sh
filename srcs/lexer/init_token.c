@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 15:23:36 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/10 15:41:50 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/10 18:52:45 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_token		*init_token_node(t_lexer *lexer)
 	op = 0;
 	if (!(token = (t_token*)malloc(sizeof(t_token))))
 		return (NULL);
-	//dprintf(get_shell_data()->input.fd, "{%s}\n", lexer->current_token);
 	if (!(token->value = ft_strdup(lexer->current_token)))
 		return (NULL);
 	if ((op = is_operator(token->value)) != -1)
