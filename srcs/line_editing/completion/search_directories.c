@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 11:54:17 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/09 14:21:47 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/10 17:48:11 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,15 @@ static int	add_escape_backslash(void **content)
 	int		j;
 
 	tmp = (char*)(*content);
-	if (!(str = ft_strnew(ft_strlen(tmp) * 2 + 1)))
+	if (!(str = ft_strnew(ft_strlen((char*)tmp) * 2)))
 		return (MALLOC_FAIL);
 	i = 0;
 	j = 0;
 	while (tmp[i])
 	{
 		if (ft_strchr(" \'\"\\|&<>;$!*[]{}^", tmp[i]) && tmp[i + 1])
-		{
 			str[j++] = '\\';
-			str[j++] = tmp[i++];
-		}
-		else
-			str[j++] = tmp[i++];
+		str[j++] = tmp[i++];
 	}
 	str[j] = '\0';
 	*content = str;

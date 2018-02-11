@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 14:03:11 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/09 14:15:45 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/10 13:49:47 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,24 @@ static char		*comp_get_prefix(t_lexer lexer, const int cursor_pos,
 		return (ft_strdup(lexer.tokens[1]->value));
 }
 
-static t_lexer	get_tokens_up_to_cursor(char *buffer, const int cursor_pos)
+static int	get_tokens_up_to_cursor(t_lexer *lexer, char *buffer,
+									const int cursor_pos)
 {
-	t_lexer	lexer;
-
-	init_lexer(&lexer);
-	lexer.input = buffer;
-	while (lexer.input < buffer + cursor_pos)
+	init_lexer(lexer);
+	lexer->input = buffer;
+	while (lexer->input < buffer + cursor_pos)
 	{
-		g_lexer[lexer.state][lexer.event].p_transit(&lexer);
-		if (lexer.state != INIT)
-			lexer.input++;
-		lexer.state = g_lexer[lexer.state][lexer.event].new_state;
-		get_event(&lexer);
+		if (g_lexer[lexer->state][lexer->event].p_transit(lexer) == MALLOC_FAIL)
+			return (MALLOC_FAIL);
+		if (lexer->state != INIT)
+			lexer->input++;
+		lexer->state = g_lexer[lexer->state][lexer->event].new_state;
+		get_event(lexer);
 	}
-	delimitate_token(&lexer);
-	ft_strdel(&lexer.current_token);
-	return (lexer);
+	if (delimitate_token(lexer) == MALLOC_FAIL)
+		return (MALLOC_FAIL);
+	ft_strdel(&lexer->current_token);
+	return (0);
 }
 
 int				init_completion_data(t_comp *comp, char *buffer,
@@ -70,7 +71,8 @@ int				init_completion_data(t_comp *comp, char *buffer,
 {
 	t_lexer	lexer;
 
-	lexer = get_tokens_up_to_cursor(buffer, cursor_pos);
+	if (get_tokens_up_to_cursor(&lexer, buffer, cursor_pos) == MALLOC_FAIL)
+		return (MALLOC_FAIL);
 	if (!(comp->prefix = comp_get_prefix(lexer, cursor_pos, buffer)))
 		return (MALLOC_FAIL);
 	comp->dirname = ft_dirname(comp->prefix);
