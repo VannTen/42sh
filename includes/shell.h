@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 12:31:57 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/03 13:00:00 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/11 19:27:34 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@
 # include "history.h"
 # include "term.h"
 # include "env.h"
+# include "tokens.h"
 # include <termios.h>
 # include <dirent.h>
 
 # define EVENT_NOT_FOUND 1
 # define MALLOC_FAIL -1
+
 
 typedef struct	s_bsh
 {

@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 14:58:40 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/21 17:02:35 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/09 17:14:00 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,15 @@
 # include "libft.h"
 # include "lexer.h"
 # include <pwd.h>
-# include <sys/types.h>
-# include <uuid/uuid.h>
 
 # define DEFAULT_HISTSIZE 10000
+
+typedef struct	s_string
+{
+	char		*str;
+	int			len;
+	int			size;
+}				t_string;
 
 typedef struct	s_history
 {
@@ -43,4 +48,5 @@ int				handle_bang(t_history *history, char **input,
 							t_string *exp_input);
 int				get_expanded_input(t_lexer *lexer, t_history *history,
 									char *input, t_string *exp_input);
+int				realloc_str(t_string *str);
 #endif

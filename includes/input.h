@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 17:57:42 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/05 18:28:29 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/09 15:47:33 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ int				putchar_termcaps(int c);
 int				wait_for_input(t_input *input, int type);
 int				init_input(t_input *input, t_term *term, t_history *history);
 int				init_buffers(t_input *input);
+int				get_key(t_input *input);
 int				handle_arrow_left(t_input *input);
 int				handle_arrow_right(t_input *input);
 int				handle_arrow_up(t_input *input);
@@ -134,9 +135,9 @@ int				switch_input_state(t_input *input);
 int				select_right(t_input *input);
 int				select_left(t_input *input);
 int				skip_key(t_input *input);
+int				clear_lines(t_input *input, const char *str);
 void			cp_history_to_buffer(t_input *input);
 int				cursor_on_last_line(t_input *input);
-int				get_key(t_input *input);
 int				get_displayed_lines(t_input *input);
 void			display_buffer(t_input *input, int cursor);
 void			display_line(t_input *input, int cursor);
@@ -148,6 +149,8 @@ void			cut_from_buffer(t_input *input, const int cursor,
 int				cut_selection(t_input *input);
 int				paste_selection_buffer(t_input *input);
 int				paste_str_in_buffer(const char * copy, t_input *input);
+
+
 void			get_prompt(t_term *term);
 void			print_prompt(t_input *input, char *color);
 void			display_basic_prompt(t_input *input);
