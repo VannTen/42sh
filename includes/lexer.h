@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 15:46:10 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/11 19:28:24 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/11 20:03:19 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LEXER_H
 # include "tokens.h"
 # include "libft.h"
-# define INITIAL_TOKEN_SIZE 32
+# define INITIAL_TOKEN_SIZE 1
 # define MAX_TOKENS 17
 # define MAX_OP_CHAR 6
 

@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 17:57:42 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/09 15:47:33 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/11 20:03:59 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # define MAX_KEY_LENGTH 6
 # define MAX_PROMPT_SIZE 256
-# define INITIAL_BUFFER_SIZE 8192
+# define INITIAL_BUFFER_SIZE 1
 # define STANDARD 0
 # define SELECTION 1
 # define COMPLETION 2

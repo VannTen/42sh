@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 15:22:54 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/26 15:23:28 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/11 19:41:46 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static inline int	skip_char(t_lexer *lexer)
 	return (0);
 }
 
-const t_transition		g_lexer[MAX_STATE][MAX_EVENT] = {
+const t_transition	g_lexer[MAX_STATE][MAX_EVENT] = {
 	{{STD, skip_char},
 		{DQUOTE, append_char},
 		{QUOTE, append_char},
@@ -102,13 +102,16 @@ const t_transition		g_lexer[MAX_STATE][MAX_EVENT] = {
 		{COMMENT, skip_char}}
 };
 
-int				handle_backslash(t_lexer *lexer)
+int					handle_backslash(t_lexer *lexer)
 {
 	if (is_operator(lexer->current_token) > 0)
 		if (delimitate_token(lexer) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
 	if (is_operator(lexer->current_token) == -1)
 	{
+		if (lexer->token_len + 2 >= lexer->token_size)
+			if (realloc_current_token(lexer) == MALLOC_FAIL)
+				return (MALLOC_FAIL);
 		lexer->current_token[lexer->token_len++] = *(lexer->input);
 		lexer->input++;
 		lexer->current_token[lexer->token_len++] = *(lexer->input);
@@ -116,7 +119,7 @@ int				handle_backslash(t_lexer *lexer)
 	return (0);
 }
 
-int	reset_lexer(t_lexer *lexer)
+int					reset_lexer(t_lexer *lexer)
 {
 	clear_tokens(&lexer->tokens[0]);
 	lexer->tokens[1] = NULL;
@@ -127,7 +130,7 @@ int	reset_lexer(t_lexer *lexer)
 	return (0);
 }
 
-int				lexer(t_lexer *lexer, char *input)
+int					lexer(t_lexer *lexer, char *input)
 {
 	lexer->input = input;
 	lexer->event = 0;
@@ -140,8 +143,7 @@ int				lexer(t_lexer *lexer, char *input)
 			reset_lexer(lexer);
 			return (MALLOC_FAIL);
 		}
-		if (lexer->state != INIT)
-			lexer->input++;
+		(lexer->state != INIT) ? lexer->input++ : 0;
 		lexer->state = g_lexer[lexer->state][lexer->event].new_state;
 		get_event(lexer);
 	}
