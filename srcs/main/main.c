@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/05 19:28:05 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/11 19:47:30 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	display_tokens(t_token *tokens)
 {
 	while (tokens)
 	{
-		ft_printf("[%s] ==> %d\n", tokens->value, tokens->type);
+		ft_printf("[%s] ==> type = %d\n", tokens->value, tokens->type);
 		tokens = tokens->next;
 	}
 }
@@ -52,8 +52,9 @@ static int	remove_backslash_nl(t_input *input, t_lexer *lexer)
 static int	get_line(t_lexer *lex, t_input *input)
 {
 	reset_buffer(input);
-	if (wait_for_input(input, REGULAR_INPUT) == MALLOC_FAIL
-	|| lexer(lex, input->buffer) == MALLOC_FAIL)
+	if (wait_for_input(input, REGULAR_INPUT) == MALLOC_FAIL)
+		return (MALLOC_FAIL);
+	if (lexer(lex, input->buffer) == MALLOC_FAIL)
 		return (MALLOC_FAIL);
 	while (lex->state != INIT)
 	{
@@ -65,9 +66,10 @@ static int	get_line(t_lexer *lex, t_input *input)
 		if (wait_for_input(input, UNCLOSED_QUOTES) == MALLOC_FAIL
 		|| lexer(lex, input->buffer) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
-		if ((int)ft_strlen(input->buf_tmp)
+		while ((int)ft_strlen(input->buf_tmp)
 							+ input->buffer_len > input->buffer_size)
-			realloc_buffer(input);
+			if (realloc_buffer(input) == MALLOC_FAIL)
+				return (MALLOC_FAIL);
 		ft_swap((void**)&input->buffer, (void**)&input->buf_tmp);
 		strcat(input->buffer, input->buf_tmp);
 		ft_strdel(&input->buf_tmp);
@@ -107,7 +109,6 @@ static int	readline_process(t_input *input, t_lexer *lexer, t_history *history)
 		ft_strdel(&exp_input.str);
 		return (MALLOC_FAIL);
 	}
-	//input->buffer[--input->buffer_len] = '\0';
 	if ((ret = get_expanded_input(lexer, history, input->buffer, &exp_input)))
 	{
 		ft_strdel(&exp_input.str);
@@ -223,20 +224,18 @@ int main(int argc, char **argv, char **environ)
 						&bsh->history)) == EVENT_NOT_FOUND
 						|| ret == MALLOC_FAIL)
 		{
-			(ret == EVENT_NOT_FOUND) ?
+			(ret == EVENT_NOT_FOUND) ? 
 				dprintf(STDERR, "bsh: event not found\n") : 0;
-			if (ret == MALLOC_FAIL)
-				init_buffers(&bsh->input);
+			(ret == MALLOC_FAIL) ? init_buffers(&bsh->input) : 0;
 			continue ;
 		}
-		if (lexer(&bsh->lexer, bsh->input.buffer) == MALLOC_FAIL)
-			continue ;
-		if (update_history(&bsh->history, &bsh->input) == MALLOC_FAIL)
+		if (lexer(&bsh->lexer, bsh->input.buffer) == MALLOC_FAIL
+		|| update_history(&bsh->history, &bsh->input) == MALLOC_FAIL)
 			continue ;
 		#ifdef DEBUG
 		display_history(bsh->history);
-		#endif
 		display_tokens(bsh->lexer.tokens[0]);
+		#endif
 		//execute_construct(parser, "PROGRAM", &bsh->lexer.tokens[0], take_token);
 	}
 	return (0);
