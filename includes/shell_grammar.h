@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 12:12:51 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/08 09:36:43 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/12 16:50:23 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ static char const	g_shell_grammar[] =
 "|complete_command"
 ";"
 "complete_command"
-":list separator_op"
-"|list"
+":list list_delimitor"
+";"
+"list_delimitor"
+":separator_op"
+"|"
 ";"
 "list"
 ":list separator_op and_or"
@@ -37,8 +40,11 @@ static char const	g_shell_grammar[] =
 "|pipeline"
 ";"
 "pipeline"
-":bang pipe_sequence"
-"|pipe_sequence"
+":pipeline_preop pipe_sequence"
+";"
+"pipeline_preop"
+":Bang"
+"|"
 ";"
 "pipe_sequence"
 ":pipe_sequence PIPE simple_command"
@@ -89,6 +95,7 @@ static char const	*g_token_names[] = {
 	"CLOBBER",
 	"NEWLINE",
 	"SEMICOLON",
+	"Bang",
 	NULL
 };
 
@@ -105,9 +112,15 @@ static t_exec const	g_exec_rules[] = {
 	},{ .name="list",
 		.create=&create_list,
 		.give=&give_list
+	},{ .name="list_delimitor",
+		.create=NULL,
+		.give=NULL
 	},{ .name="and_or",
 		.create=&create_and_or,
 		.give=&give_and_or
+	},{ .name="pipeline_preop",
+		.create=&create_pipeline_preop,
+		.give=&give_pipeline_preop,
 	},{ .name="pipeline",
 		.create=&create_pipeline,
 		.give=&give_pipeline
@@ -176,6 +189,9 @@ static t_exec const	g_exec_rules[] = {
 		.give=NULL
 	},{ .name="SEMICOLON",
 		.create=&create_semicolon,
+		.give=NULL
+	},{ .name="Bang",
+		.create=&create_bang,
 		.give=NULL
 	},{ .name=NULL, .create=NULL, .give=NULL }
 };
