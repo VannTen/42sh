@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 17:58:23 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/26 13:16:40 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/12 12:28:28 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ enum
 	CLOBBER,
 	LESS_GREAT,
 	DLESSDASH,
+	BANG,
 };
 
 typedef struct		s_token
