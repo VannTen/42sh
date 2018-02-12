@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 09:24:49 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/02 14:55:38 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/12 10:08:02 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ struct s_sh_io_redirect
 	char				*target;
 	int					flags;
 	int					mode;
+	int					variant;
 };
 
 #endif
