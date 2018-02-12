@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 09:33:00 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/12 18:14:37 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/12 18:27:54 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,20 @@
 
 # include "shell_ast/io_redirect.h"
 
+struct s_io_param
+{
+	char const			*ionum;
+	enum e_sh_io_type	type;
+	int					flags;
+	int					mode;
+	int					variant;
+};
+
 struct	s_io_reference
 {
-	int	label;
-	struct s_io_param
-	{
-		char const			*ionum;
-		enum e_sh_io_type	type;
-		int					flags;
-		int					mode;
-		int					variant;
-	}	param;
-}
+	int					label;
+	struct s_io_param	param;
+};
 
 # define CLOBBER_OFLAGS O_WRONLY | O_CREAT | O_TRUNC
 # define CLOBBER_PARAM { "1", e_sh_io_type_file, CLOBBER_OFLAGS, 0644, 0 }
