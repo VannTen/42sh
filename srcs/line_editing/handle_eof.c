@@ -6,14 +6,14 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:46:47 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/31 16:40:59 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/12 17:01:36 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 #include "history.h"
 
-int		handle_clear_line(t_input *input)
+int		handle_clear_line_bf_cursor(t_input *input)
 {
 	int		cursor_pos;
 	char	*buf;
@@ -30,6 +30,21 @@ int		handle_clear_line(t_input *input)
 		free(buf);
 		input->buffer_len -= cursor_pos;
 		display_line(input, 0);
+	}
+	return (0);
+}
+
+int		handle_clear_line_af_cursor(t_input *input)
+{
+	if (input->buffer_len > 0)
+	{
+		ft_memset(input->buffer + input->cursor_pos, 0,
+				input->buffer_len - input->cursor_pos + 1);
+		handle_home(input);
+		clear_lines(input, "");
+		tputs(tgetstr("ce", NULL), 1, putchar_termcaps);
+		display_line(input, input->buffer_len);
+		input->buffer_len = input->cursor_pos;
 	}
 	return (0);
 }
