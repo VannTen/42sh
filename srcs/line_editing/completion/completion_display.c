@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 12:37:48 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/10 16:31:35 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/12 18:02:41 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int			completion_display(t_comp *comp, t_input *input)
 	int		i;
 
 	str = (char*)comp->matches->content;
-	//dprintf(input->fd, "%d\n",comp->nb_matches);
 	if (comp->nb_matches == 1)
 	{
 		if (comp->prefix[0] == '$')

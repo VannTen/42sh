@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 13:27:45 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/03 14:44:31 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/12 17:30:30 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		completion_search_path(t_comp *comp)
 		while (tmp && matches[1]->next)
 				matches[1] = matches[1]->next;
 	}
-	comp->matches = merge_sort_matches(matches[0]);
+	comp->matches = matches[0];
 	ft_free_string_tab(&paths);
 	return (0);
 }

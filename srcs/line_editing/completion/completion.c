@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:24:25 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/09 12:55:45 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/12 18:01:02 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,29 @@ static int	eligible_to_env_completion(t_comp *comp)
 	return (0);
 }
 
+static int	add_builtin(t_comp *comp)
+{
+	char	*builtins_name[] = {"declare ", "echo ", "env ", "exit ", "export ",
+								"history ", "setenv ", "unsetenv ", NULL};
+	t_list	*elem;
+	int		i;
+
+	i = -1;
+	while (builtins_name[++i])
+	{
+		if (!ft_strncmp(builtins_name[i], comp->basename, comp->basename_len))
+		{
+			elem = ft_lstnew(builtins_name[i], ft_strlen(builtins_name[i]) + 1);
+			elem->next = comp->matches;
+			comp->matches = elem;
+			comp->nb_matches++;
+		}
+	}
+}
+
 int			completion(t_input *input)
 {
-	int	ret;
+	int		ret;
 
 	if (!input->comp.matches)
 	{
@@ -50,6 +70,8 @@ int			completion(t_input *input)
 			input->comp.matches = open_and_read_directory(&input->comp,
 									input->comp.dirname);
 	}
+	(input->comp.search_location == PATH) ? add_builtin(&input->comp) : 0;
+	input->comp.matches = merge_sort_matches(input->comp.matches);
 	if (input->comp.matches)
 		completion_display(&input->comp, input);
 	return (0);

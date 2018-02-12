@@ -6,11 +6,13 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 11:54:17 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/10 17:48:11 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/12 17:54:10 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+
+
 
 static int	add_escape_backslash(void **content)
 {
@@ -97,7 +99,6 @@ t_list		*open_and_read_directory(t_comp *comp, const char *directory)
 		}
 		(match[0] && !ret) ? update_match(comp, match[1], &ret) : 0;
 	}
-	match[0] =  merge_sort_matches(match[0]);
 	closedir(dirp);
 	return (match[0]);
 }
