@@ -63,7 +63,31 @@ SRC_NAME = env/add_variable_to_env.c \
 		   main/ft_realloc_str.c\
 		   term/prompt.c \
 		   term/term.c \
-		   term/ft_putchar_termcaps.c
+		   term/ft_putchar_termcaps.c \
+		   execution/builtin_placeholder.c \
+		   execution/delete_container.c \
+		   execution/delete_terminal_container.c \
+		   execution/new_container.c \
+		   execution/recreate_env_array.c \
+		   execution/sh_path_search.c \
+		   ast_execution/fd_backup_conflict.c \
+		   ast_execution/shx_complete_command.c \
+		   ast_execution/shx_simple_command.c \
+		   ast_execution/launch_utility.c \
+		   ast_execution/shx_program.c \
+		   ast_execution/shx_pipe_sequence.c \
+		   ast_execution/shx_complete_commands.c \
+		   ast_execution/end_sequence.c \
+		   ast_execution/apply_redirections.c \
+		   ast_execution/setup_piped_instance.c \
+		   ast_execution/io_redir_aggregate.c \
+		   ast_execution/io_redir_file.c \
+		   ast_execution/wait_for_instance.c \
+		   ast_execution/io_redir_here.c \
+		   ast_execution/shx_pipeline.c \
+		   ast_execution/shx_and_or.c \
+		   ast_execution/shx_list.c \
+		   ast_execution/undo_redirections.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
