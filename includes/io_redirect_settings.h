@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 09:33:00 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/12 10:21:41 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/12 18:14:37 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ struct	s_io_reference
 }
 
 # define CLOBBER_OFLAGS O_WRONLY | O_CREAT | O_TRUNC
-# define CLOBBER_PARAM { "1", e_sh_io_type_file, CLOBBER_OFLAGS, 0, 0 }
+# define CLOBBER_PARAM { "1", e_sh_io_type_file, CLOBBER_OFLAGS, 0644, 0 }
 
 # define GREAT_OFLAGS O_WRONLY | O_CREAT | O_TRUNC
 # define GREAT_PARAM { "1", e_sh_io_type_file, GREAT_OFLAGS, 0644, 1 }
