@@ -3,6 +3,8 @@ complete_commands
 complete_command
 list
 and_or
+pipeline_preop
+pipeline
 pipe_sequence
 simple_command
 io_redirect
@@ -21,3 +23,4 @@ great
 dgreat
 greatand
 clobber
+bang

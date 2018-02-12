@@ -5,10 +5,11 @@
 
 while [ $1 ] && [ $1 != "--" ];
 do;
-	cat >create_${1}.c << EOF
+	cat >${1}.c << EOF
 #include "shell_ast/${1}.h"
 #include "shell_ast/container_labels.h"
 #include "container.h"
+#include "bool_interface.h"
 #include <stdlib.h>
 
 void	*create_${1}(void const *lex_value)
@@ -17,17 +18,10 @@ void	*create_${1}(void const *lex_value)
 	struct s_sh_${1}	${1};
 
 	(void)lex_value;
-	${1}-> = ;
+	${1}. = ;
 	container = new_container(${1}, sizeof(${1}), e_ast_container_label_${1});
 	return (container);
 }
-EOF
-	cat >give_${1}.c << EOF
-#include "bool_interface.h"
-#include "shell_ast/${1}.h"
-#include "shell_ast/container_labels.h"
-#include "container.h"
-#include <stddef.h>
 
 t_bool	give_${1}(void *construct, void *sub_construct)
 {
@@ -47,10 +41,6 @@ t_bool	give_${1}(void *construct, void *sub_construct)
 	}
 	return (ret);
 }
-EOF
-	cat >delete_${1}.c << EOF
-#include "shell_ast/${1}.h"
-#include <stdlib.h>
 
 void	delete_${1}(struct s_sh_${1} **const ${1}_loc)
 {
@@ -78,9 +68,10 @@ fi;
 
 while [ $1 ];
 do;
-	cat  >create_${1}.c << EOF
+	cat  >${1}.c << EOF
+#include "libft.h"
+#include "s_container.h"
 #include "shell_ast/container_labels.h"
-#include <stddef.h>
 
 void	*create_${1}(void const *lex_value)
 {
