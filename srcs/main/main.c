@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/26 17:16:54 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/12 17:17:36 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ static int	readline_process(t_input *input, t_lexer *lexer, t_history *history)
 		input->buffer[input->buffer_len++] = '\n';
 	return (0);
 }
-
+/*
 static char const	g_grammar[] =
 " PROGRAM : COMPLETE_COMMAND NEWLINE"
 "| NEWLINE;"
@@ -193,7 +193,7 @@ char const			*tokens_name[] = {
 	"LESSGREAT",
 	NULL
 };
-
+*/
 size_t	get_tok_id(void const *token)
 {
 	t_token const *tok;
@@ -244,14 +244,12 @@ static t_bool	test_parser(t_token *list_tokens, t_parser const *parser)
 	return (syntax_valid);
 }
 
+#include "shell_grammar.h"
+
 int main(int argc, char **argv, char **environ)
 {
 	t_bsh				*bsh;
 	int					ret;
-	t_exec	const		exec_rules[] = {
-		{.name = "PROGRAM", .create = create_program, .destroy = no_destroy, .give = NULL},
-		{.name = NULL, .create = NULL, .give = NULL}
-	};
 	t_parser			*parser;
 
 	(void)argc;
@@ -264,7 +262,7 @@ int main(int argc, char **argv, char **environ)
 	init_input(&bsh->input, &bsh->term, &bsh->history);
 	init_env(&bsh->env, environ);
 	init_termcaps(bsh);
-	parser = generate_parser(g_grammar, tokens_name, exec_rules, get_tok_id);
+	parser = generate_parser(g_grammar, g_tokens_name, g_exec_rules, get_tok_id);
 	print_grammar_back(STDERR_FILENO, parser->grammar);
 	while (42)
 	{
