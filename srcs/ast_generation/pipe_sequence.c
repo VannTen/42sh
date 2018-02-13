@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 13:24:33 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/13 21:31:15 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,21 @@ void	*create_pipe_sequence(void const *lex_value)
 	struct s_sh_pipe_sequence	pipe_sequence;
 
 	(void)lex_value;
-	pipe_sequence->simple_commands = NULL;
-	container = new_container(&pipe_sequence, sizeof(pipe_sequence), e_ast_container_label_pipe_sequence);
+	pipe_sequence.simple_commands = NULL;
+	container = new_container(&pipe_sequence, &destroy_pipe_sequence, sizeof(pipe_sequence), e_ast_container_label_pipe_sequence);
 	return (container);
+}
+
+static t_bool	add_simple_command(struct s_sh_pipe_sequence *pipe_sequence,
+		struct s_container *simple_command_container)
+{
+	if (f_pushend_lst(&(pipe_sequence->simple_commands),
+				simple_command_container->content) == NULL)
+	{
+		simple_command_container->content = NULL;
+		return (TRUE);
+	}
+	return (FALSE);
 }
 
 t_bool	give_pipe_sequence(void *construct, void *sub_construct)
@@ -44,20 +56,20 @@ t_bool	give_pipe_sequence(void *construct, void *sub_construct)
 		else if (sub->label == e_ast_container_label_pipe)
 			ret = TRUE;
 		if (ret == TRUE)
-			delete_container(&sub, NULL);
+			destroy_container((void**)&sub);
 	}
 	return (ret);
 }
 
-void	delete_pipe_sequence(struct s_sh_pipe_sequence **const pipe_sequence_loc)
+void	destroy_pipe_sequence(void **const pipe_sequence_loc)
 {
 	struct s_sh_pipe_sequence	*todel;
 
 	todel = (pipe_sequence_loc != NULL) ? (*pipe_sequence_loc) : (NULL);
 	if (todel != NULL)
 	{
-		f_lstdel(&(todel->simple_command), &delete_simple_command);
-		free(todel)
-		pipe_sequence_loc = NULL;
+		f_lstdel(&(todel->simple_commands), &destroy_simple_command);
+		free(todel);
+		*pipe_sequence_loc = NULL;
 	}
 }

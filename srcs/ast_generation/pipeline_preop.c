@@ -6,11 +6,10 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 13:24:33 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/13 21:31:15 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell_ast/pipeline_preop.h"
 #include "shell_ast/container_labels.h"
 #include "s_container.h"
 #include "bool_interface.h"
@@ -21,7 +20,7 @@ void	*create_pipeline_preop(void const *lex_value)
 	struct s_container	*container;
 
 	(void)lex_value;
-	container = new_container(NULL, 0, e_ast_container_label_pipeline_preop);
+	container = new_container(NULL, NULL, 0, e_ast_container_label_pipeline_preop);
 	return (container);
 }
 
@@ -42,12 +41,7 @@ t_bool	give_pipeline_preop(void *construct, void *sub_construct)
 			ret = TRUE;
 		}
 		if (ret == TRUE)
-			delete_container(&sub, NULL);
+			destroy_container((void**)&sub);
 	}
 	return (ret);
-}
-
-void	delete_pipeline_preop(struct s_sh_pipeline_preop **const pipeline_preop_loc)
-{
-	(void)pipeline_preop_loc;
 }

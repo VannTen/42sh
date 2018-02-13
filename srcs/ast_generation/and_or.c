@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 13:24:32 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/13 21:31:15 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	*create_and_or(void const *lex_value)
 
 	(void)lex_value;
 	and_or.sequence = NULL;
-	container = new_container(&and_or, sizeof(and_or), e_ast_container_label_and_or);
+	container = new_container(&and_or, &destroy_and_or, sizeof(and_or), e_ast_container_label_and_or);
 	return (container);
 }
 
@@ -90,7 +90,7 @@ t_bool			give_and_or(void *construct, void *sub_construct)
 	return (ret);
 }
 
-void	delete_and_or(struct s_sh_and_or **const and_or_loc)
+void	destroy_and_or(void **const and_or_loc)
 {
 	struct s_sh_and_or		*todel;
 	struct s_and_or_logic	*todel_sequence;
@@ -102,10 +102,10 @@ void	delete_and_or(struct s_sh_and_or **const and_or_loc)
 		{
 			todel_sequence = todel->sequence;
 			todel->sequence = todel_sequence->next;
-			delete_pipeline(todel_sequence->pipeline);
+			destroy_pipeline(todel_sequence->pipeline);
 			free(todel_sequence);
 		}
-		free(todel)
-			and_or_loc = NULL;
+		free(todel);
+		*and_or_loc = NULL;
 	}
 }

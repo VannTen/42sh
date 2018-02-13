@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 13:24:33 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/13 21:31:15 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	*create_io_redirect(void const *lex_value)
 	io_redirect.flags = 0;
 	io_redirect.mode = 0;
 	io_redirect.variant = 0;
-	container = new_container(&io_redirect, sizeof(io_redirect),
+	container = new_container(&io_redirect, &destroy_io_redirect, sizeof(io_redirect),
 			e_ast_container_label_io_redirect);
 	return (container);
 }
@@ -121,12 +121,12 @@ t_bool			give_io_redirect(void *construct, void *sub_construct)
 		else if (sub->label == e_ast_container_label_word)
 			ret = add_target(io_operator, sub);
 		if (ret == TRUE)
-			delete_container(&sub, NULL);
+			destroy_container((void**)&sub);
 	}
 	return (ret);
 }
 
-void	delete_io_redirect(struct s_sh_io_redirect **const io_redirect_loc)
+void	destroy_io_redirect(void **const io_redirect_loc)
 {
 	struct s_sh_io_redirect	*todel;
 
@@ -137,7 +137,7 @@ void	delete_io_redirect(struct s_sh_io_redirect **const io_redirect_loc)
 		todel->ionum = NULL;
 		free(todel->target);
 		todel->target = NULL;
-		free(todel)
-			io_redirect_loc = NULL;
+		free(todel);
+		*io_redirect_loc = NULL;
 	}
 }

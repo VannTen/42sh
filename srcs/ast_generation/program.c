@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 13:24:33 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/13 21:31:15 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	*create_program(void const *lex_value)
 	struct s_sh_program	program;
 
 	(void)lex_value;
-	program->complete_commands = NULL;
-	container = new_container(&program, sizeof(program), e_ast_container_label_program);
+	program.complete_commands = NULL;
+	container = new_container(&program, &destroy_program, sizeof(program), e_ast_container_label_program);
 	return (container);
 }
 
@@ -46,20 +46,20 @@ t_bool	give_program(void *construct, void *sub_construct)
 			ret = TRUE;
 		}
 		if (ret == TRUE)
-			delete_container(&sub, NULL);
+			destroy_container((void**)&sub);
 	}
 	return (ret);
 }
 
-void	delete_program(struct s_sh_program **const program_loc)
+void	destroy_program(void **const program_loc)
 {
 	struct s_sh_program	*todel;
 
 	todel = (program_loc != NULL) ? (*program_loc) : (NULL);
 	if (todel != NULL)
 	{
-		delete_complete_commands(&(todel->complete_commands));
+		destroy_complete_commands(&(todel->complete_commands));
 		free(todel);
-		program_loc = NULL;
+		*program_loc = NULL;
 	}
 }

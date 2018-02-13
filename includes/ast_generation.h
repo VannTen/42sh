@@ -6,12 +6,14 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 13:22:27 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 13:24:42 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/13 20:25:34 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AST_GENERATION_H
 # define AST_GENERATION_H
+
+#include "bool_interface.h"
 
 void	*create_program(void const *lex_value);
 t_bool	give_program(void *construct, void *sub_construct);
@@ -35,7 +37,6 @@ void	destroy_and_or(void **and_or_loc);
 
 void	*create_pipeline_preop(void const *lex_value);
 t_bool	give_pipeline_preop(void *construct, void *sub_construct);
-void	destroy_pipeline_preop(void **pipeline_preop_loc);
 
 void	*create_pipeline(void const *lex_value);
 t_bool	give_pipeline(void *construct, void *sub_construct);

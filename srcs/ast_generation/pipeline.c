@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 13:24:33 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/13 21:31:15 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	*create_pipeline(void const *lex_value)
 	struct s_sh_pipeline	pipeline;
 
 	(void)lex_value;
-	pipeline->pipe_sequence = NULL;
-	pipeline->bang = FALSE;
-	container = new_container(&pipeline, sizeof(pipeline), e_ast_container_label_pipeline);
+	pipeline.pipe_sequence = NULL;
+	pipeline.bang = FALSE;
+	container = new_container(&pipeline, &destroy_pipeline, sizeof(pipeline), e_ast_container_label_pipeline);
 	return (container);
 }
 
@@ -64,20 +64,20 @@ t_bool			give_pipeline(void *construct, void *sub_construct)
 		else if (sub->label == e_ast_container_label_pipeline_preop)
 			ret = TRUE;
 		if (ret == TRUE)
-			delete_container(&sub, NULL);
+			destroy_container((void**)&sub);
 	}
 	return (ret);
 }
 
-void	delete_pipeline(struct s_sh_pipeline **const pipeline_loc)
+void	destroy_pipeline(void **const pipeline_loc)
 {
 	struct s_sh_pipeline	*todel;
 
 	todel = (pipeline_loc != NULL) ? (*pipeline_loc) : (NULL);
 	if (todel != NULL)
 	{
-		delete_pipe_sequence(&(todel->pipe_sequence));
-		free(todel)
-		pipeline_loc = NULL;
+		destroy_pipe_sequence(&(todel->pipe_sequence));
+		free(todel);
+		*pipeline_loc = NULL;
 	}
 }

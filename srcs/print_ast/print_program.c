@@ -6,13 +6,18 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 17:18:03 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 10:11:32 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/13 21:52:26 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell_ast.h"
+#include "io_redirect_settings.h"
+#include "bleberr_macros.h"
+#include "lst_defs.h"
+#include "libft.h"
+#include "print_ast.h"
 
-t_bool		io_redirect_cmp(struct s_sh_io_redirect *a,
+t_bool		io_cmp(struct s_io_param *a,
 		struct s_sh_io_redirect *b)
 {
 	if (a != NULL && b != NULL
@@ -22,7 +27,7 @@ t_bool		io_redirect_cmp(struct s_sh_io_redirect *a,
 			&& a->variant == b->variant)
 		return (TRUE);
 	else
-		return (FALSE)
+		return (FALSE);
 }
 
 char const	*deduce_op(struct s_sh_io_redirect *io_redirect)
@@ -35,12 +40,12 @@ char const	*deduce_op(struct s_sh_io_redirect *io_redirect)
 	size_t				i;
 
 	i = 0;
-	while (i < ARRLEN(refs) && io_redirect_cmp(refs + i, io_redirect))
+	while (i < ARRLEN(refs) && io_cmp(refs + i, io_redirect))
 		i += 1;
 	return (opstr_array[i]);
 }
 
-void	print_io_redirect(int fd, struct s_sh_io_redirect *io_redirect, size_t depth,
+void	print_io_redirect(int fd, struct s_sh_io_redirect *io_redirect, int depth,
 		char const *const depth_padding)
 {
 	char const	*opstr;
@@ -52,10 +57,10 @@ void	print_io_redirect(int fd, struct s_sh_io_redirect *io_redirect, size_t dept
 			io_redirect->target);
 }
 
-void	print_simple_command(int fd, struct s_sh_simple_command *simple_command, size_t depth,
+void	print_simple_command(int fd, struct s_sh_simple_command *simple_command, int depth,
 		char const *const depth_padding)
 {
-	t_list	*list;
+	t_lst	*list;
 
 	ft_dprintf(fd, "%.*ssimple_command: %s has %zu args\n", depth, depth_padding,
 			simple_command ? "OK" : "NULL", simple_command->argc);
@@ -78,10 +83,10 @@ void	print_simple_command(int fd, struct s_sh_simple_command *simple_command, si
 	}
 }
 
-void	print_pipe_sequence(int fd, struct s_sh_pipe_sequence *pipe_sequence, size_t depth,
+void	print_pipe_sequence(int fd, struct s_sh_pipe_sequence *pipe_sequence, int depth,
 		char const *const depth_padding)
 {
-	t_list	*sequence;
+	t_lst	*sequence;
 
 	ft_dprintf(fd, "%.*spipe_sequence: %s\n", depth, depth_padding,
 			pipe_sequence ? "OK" : "NULL");
@@ -97,7 +102,7 @@ void	print_pipe_sequence(int fd, struct s_sh_pipe_sequence *pipe_sequence, size_
 	}
 }
 
-void	print_pipeline(int fd, struct s_sh_pipeline *pipeline, size_t depth,
+void	print_pipeline(int fd, struct s_sh_pipeline *pipeline, int depth,
 		char const *const depth_padding)
 {
 	ft_dprintf(fd, "%.*spipeline: %s", depth, depth_padding,
@@ -110,7 +115,7 @@ void	print_pipeline(int fd, struct s_sh_pipeline *pipeline, size_t depth,
 	}
 }
 
-void	print_and_or(int fd, struct s_sh_and_or *and_or, size_t depth,
+void	print_and_or(int fd, struct s_sh_and_or *and_or, int depth,
 		char const *const depth_padding)
 {
 	struct s_and_or_logic	*logic;
@@ -120,7 +125,7 @@ void	print_and_or(int fd, struct s_sh_and_or *and_or, size_t depth,
 			and_or ? "OK" : "NULL");
 	if (and_or != NULL)
 	{
-		logic = and_or->logic;
+		logic = and_or->sequence;
 		while (logic != NULL)
 		{
 			print_pipeline(fd, logic->pipeline, depth + 1,
@@ -138,10 +143,10 @@ void	print_and_or(int fd, struct s_sh_and_or *and_or, size_t depth,
 	}
 }
 
-void	print_list(int fd, struct s_sh_list *list, size_t depth,
+void	print_lst(int fd, struct s_sh_list *list, int depth,
 		char const *const depth_padding)
 {
-	t_list	*sequence;
+	t_lst	*sequence;
 
 	ft_dprintf(fd, "%.*slist: %s\n", depth, depth_padding,
 			list ? "OK" : "NULL");
@@ -158,21 +163,21 @@ void	print_list(int fd, struct s_sh_list *list, size_t depth,
 }
 
 void	print_complete_command(int fd,
-		struct s_sh_complete_command *complete_command, size_t depth,
+		struct s_sh_complete_command *complete_command, int depth,
 		char const *const depth_padding)
 {
 	ft_dprintf(fd, "%.*scomplete_command: %s\n", depth, depth_padding,
 			complete_command ? "OK" : "NULL");
 	if (complete_command != NULL)
-		print_list(fd, complete_command->list, depth + 1,
+		print_lst(fd, complete_command->list, depth + 1,
 				depth_padding);
 }
 
 void	print_complete_commands(int fd,
-		struct s_sh_complete_commands *complete_commands, size_t depth,
+		struct s_sh_complete_commands *complete_commands, int depth,
 		char const *const depth_padding)
 {
-	t_list	*sequence;
+	t_lst	*sequence;
 
 	ft_dprintf(fd, "%.*scomplete_commands: %s\n", depth, depth_padding,
 			complete_commands ? "OK" : "NULL");
@@ -188,7 +193,7 @@ void	print_complete_commands(int fd,
 	}
 }
 
-void	print_program(int fd, struct s_sh_program *program, size_t depth)
+void	print_program(int fd, struct s_sh_program *program, int depth)
 {
 	char	depth_padding[MAX_AST_DEPTH + 1];
 

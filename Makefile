@@ -90,19 +90,8 @@ SRC_NAME = env/add_variable_to_env.c \
 		   ast_generation/simple_command.c \
 		   ast_generation/word.c \
 		   print_ast/print_program.c \
-		   builtin/builtin_cd.c \
-		   builtin/builtin_echo.c \
-		   builtin/builtin_echo_specials.c \
-		   builtin/builtin_env.c \
-		   builtin/builtin_exit.c \
-		   builtin/builtin_setenv.c \
-		   builtin/builtin_unsetenv.c \
-		   builtin/builtopt_errmsg.c \
-		   builtin/canonicalize.c \
-		   builtin/cd_get_options.c \
-		   builtin/dotdot.c \
-		   builtin/get_physical_path.c \
-		   builtin/make_logical.c
+		   execution/new_container.c \
+		   execution/destroy_container.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

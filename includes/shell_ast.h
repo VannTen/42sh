@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 10:00:26 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/08 14:16:55 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/13 21:37:35 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include "shell_ast/simple_command.h"
 # include "shell_ast/io_redirect.h"
 # include "shell_ast/io_operator.h"
+
+# include "s_shx_global.h"
 
 int	shx_program(struct s_sh_program *const program,
 		struct s_shx_global *const global);

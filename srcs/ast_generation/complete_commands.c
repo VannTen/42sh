@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 13:24:33 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/13 21:31:15 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	*create_complete_commands(void const *lex_value)
 	struct s_sh_complete_commands	complete_commands;
 
 	(void)lex_value;
-	complete_commands->sequence = NULL;
-	container = new_container(&complete_commands, sizeof(complete_commands), e_ast_container_label_complete_commands);
+	complete_commands.sequence = NULL;
+	container = new_container(&complete_commands, &destroy_complete_commands, sizeof(complete_commands), e_ast_container_label_complete_commands);
 	return (container);
 }
 
@@ -35,8 +35,7 @@ t_bool	give_complete_commands(void *construct, void *sub_construct)
 	t_bool				ret;
 
 	ret = FALSE;
-	if (construct != NULL && construct->content != NULL
-			&& sub_construct != NULL)
+	if (construct != NULL && sub_construct != NULL)
 	{
 		complete_commands = ((struct s_container*)construct)->content;
 		sub = sub_construct;
@@ -45,17 +44,12 @@ t_bool	give_complete_commands(void *construct, void *sub_construct)
 					sub->content) == NULL)
 			ret = TRUE;
 		if (ret == TRUE)
-			delete_container(&sub, NULL);
+			destroy_container((void**)&sub);
 	}
 	return (ret);
 }
 
-static void		destroy_complete_command(void **complete_command_loc)
-{
-	delete_complete_command((void*)complete_command_loc);
-}
-
-void			delete_complete_commands(struct s_sh_complete_commands **const complete_commands_loc)
+void			destroy_complete_commands(void **const complete_commands_loc)
 {
 	struct s_sh_complete_commands	*todel;
 
@@ -63,7 +57,7 @@ void			delete_complete_commands(struct s_sh_complete_commands **const complete_c
 	if (todel != NULL)
 	{
 		f_lstdel(&(todel->sequence), &destroy_complete_command);
-		free(todel)
-		complete_commands_loc = NULL;
+		free(todel);
+		*complete_commands_loc = NULL;
 	}
 }

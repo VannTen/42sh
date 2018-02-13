@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 13:24:33 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/13 21:31:15 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	*create_list(void const *lex_value)
 	struct s_sh_list	list;
 
 	(void)lex_value;
-	list->and_or_sequence = NULL;
-	container = new_container(&list, sizeof(list), e_ast_container_label_list);
+	list.and_or_sequence = NULL;
+	container = new_container(&list, &destroy_list, sizeof(list), e_ast_container_label_list);
 	return (container);
 }
 
@@ -56,26 +56,21 @@ t_bool			give_list(void *construct, void *sub_construct)
 		sub = sub_construct;
 		if (sub->label == e_ast_container_label_and_or)
 			ret = extend_list(list, sub);
-		else if (sub->label == e_ast_container_label_separator_op)
-		{
-			delete_container(&(sub->content, &delete_separator_op);
-			ret = TRUE;
-		}
 		if (ret == TRUE)
-			delete_container(&sub, NULL);
+			destroy_container((void**)&sub);
 	}
 	return (ret);
 }
 
-void	delete_list(struct s_sh_list **const list_loc)
+void	destroy_list(void **const list_loc)
 {
 	struct s_sh_list	*todel;
 
 	todel = (list_loc != NULL) ? (*list_loc) : (NULL);
 	if (todel != NULL)
 	{
-		f_lstdel(&(todel->and_or_sequence), &delete_and_or);
+		f_lstdel(&(todel->and_or_sequence), &destroy_and_or);
 		free(todel);
-		list_loc = NULL;
+		*list_loc = NULL;
 	}
 }

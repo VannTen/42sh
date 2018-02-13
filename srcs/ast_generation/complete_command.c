@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 13:24:33 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/13 21:31:15 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ void	*create_complete_command(void const *lex_value)
 	struct s_sh_complete_command	complete_command;
 
 	(void)lex_value;
-	complete_command->list = NULL;
-	container = new_container(&complete_command, sizeof(complete_command), e_ast_container_label_complete_command);
+	complete_command.list = NULL;
+	container = new_container(&complete_command, &destroy_complete_command, sizeof(complete_command),
+			e_ast_container_label_complete_command);
 	return (container);
 }
 
@@ -46,20 +47,20 @@ t_bool	give_complete_command(void *construct, void *sub_construct)
 			ret = TRUE;
 		}
 		if (ret == TRUE)
-			delete_container(&sub, );
+			destroy_container((void**)&sub);
 	}
 	return (ret);
 }
 
-void	delete_complete_command(struct s_sh_complete_command **const complete_command_loc)
+void	destroy_complete_command(void **const complete_command_loc)
 {
 	struct s_sh_complete_command	*todel;
 
 	todel = (complete_command_loc != NULL) ? (*complete_command_loc) : (NULL);
 	if (todel != NULL)
 	{
-		delete_list(&(todel->list));
-		free(todel)
-		complete_command_loc = NULL;
+		destroy_list(&(todel->list));
+		free(todel);
+		*complete_command_loc = NULL;
 	}
 }
