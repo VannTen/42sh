@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:24:25 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/12 18:37:29 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/13 13:24:08 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,18 @@ static int	add_builtin(t_comp *comp)
 	int		i;
 
 	i = -1;
-	while (builtins_name[++i])
+	while (g_builtins_name[++i])
 	{
-		if (!ft_strncmp(builtins_name[i], comp->basename, comp->basename_len))
+		if (!ft_strncmp(g_builtins_name[i], comp->basename, comp->basename_len))
 		{
-			elem = ft_lstnew(builtins_name[i], ft_strlen(builtins_name[i]) + 1);
+			elem = ft_lstnew(g_builtins_name[i],
+							ft_strlen(g_builtins_name[i]) + 1);
 			elem->next = comp->matches;
 			comp->matches = elem;
 			comp->nb_matches++;
 		}
 	}
+	return (0);
 }
 
 int			completion(t_input *input)

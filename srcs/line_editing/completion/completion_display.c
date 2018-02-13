@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 12:37:48 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/12 18:02:41 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/13 12:19:40 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,23 @@ static int	display_next_match(t_comp *comp, t_input *input, char *copy)
 	return (0);
 }
 
+static void	remove_previous_match(t_comp *comp, t_input *input)
+{
+	int	i;
+
+	comp->current = (!comp->current) ? comp->matches : comp->current->next;
+	(!comp->current) ? comp->current = comp->matches : 0;
+	if (comp->count)
+		cut_from_buffer(input, input->cursor_pos,
+						comp->init_c_pos, ft_strlen(comp->comp_str));
+	i = input->cursor_pos;
+	while (i-- > comp->init_c_pos)
+		handle_arrow_left(input);
+}
+
 int			completion_display(t_comp *comp, t_input *input)
 {
 	char	*str;
-	int		i;
 
 	str = (char*)comp->matches->content;
 	if (comp->nb_matches == 1)
@@ -47,15 +60,7 @@ int			completion_display(t_comp *comp, t_input *input)
 	}
 	else if (comp->nb_matches)
 	{
-		comp->current = (!comp->current) ? comp->matches : comp->current->next;
-		if (!comp->current)
-			comp->current = comp->matches;
-		if (comp->count)
-			cut_from_buffer(input, input->cursor_pos,
-							comp->init_c_pos, ft_strlen(comp->comp_str));
-		i = input->cursor_pos;
-		while (i-- > comp->init_c_pos)
-			handle_arrow_left(input);
+		remove_previous_match(comp, input);
 		(comp->comp_str) ? clear_lines(input, comp->comp_str) : 0;
 		ft_strdel(&comp->comp_str);
 		str = (char*)comp->current->content;
