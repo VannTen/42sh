@@ -6,10 +6,11 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 13:03:36 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/13 13:24:33 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ast_generation.h"
 #include "shell_ast/list.h"
 #include "shell_ast/container_labels.h"
 #include "s_container.h"
@@ -23,7 +24,7 @@ void	*create_list(void const *lex_value)
 
 	(void)lex_value;
 	list->and_or_sequence = NULL;
-	container = new_container(list, sizeof(list), e_ast_container_label_list);
+	container = new_container(&list, sizeof(list), e_ast_container_label_list);
 	return (container);
 }
 

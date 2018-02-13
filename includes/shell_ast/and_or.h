@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 09:51:58 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/10 08:00:19 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/13 13:16:56 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ struct	s_and_or_logic
 {
 	void					*pipeline;
 	enum e_logic			logic;
-	struct s_sh_and_or_elem	*next;
+	struct s_and_or_logic	*next;
 };
 
 struct	s_sh_and_or

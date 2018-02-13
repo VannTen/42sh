@@ -6,10 +6,11 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 13:03:36 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/13 13:24:33 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ast_generation.h"
 #include "shell_ast/simple_command.h"
 #include "shell_ast/container_labels.h"
 #include "s_container.h"
@@ -26,7 +27,7 @@ void	*create_simple_command(void const *lex_value)
 	simple_command->argc = 0;
 	simple_command->redirs = NULL;
 	simple_command->child = 0;
-	container = new_container(simple_command, sizeof(simple_command), e_ast_container_label_simple_command);
+	container = new_container(&simple_command, sizeof(simple_command), e_ast_container_label_simple_command);
 	return (container);
 }
 

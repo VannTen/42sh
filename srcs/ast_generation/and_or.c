@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 13:00:37 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/13 13:24:32 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "shell_ast/container_labels.h"
 #include "s_container.h"
 #include "bool_interface.h"
+#include "ast_generation.h"
 #include <stdlib.h>
 
 void	*create_and_or(void const *lex_value)
@@ -23,17 +24,30 @@ void	*create_and_or(void const *lex_value)
 
 	(void)lex_value;
 	and_or.sequence = NULL;
-	container = new_container(and_or, sizeof(and_or), e_ast_container_label_and_or);
+	container = new_container(&and_or, sizeof(and_or), e_ast_container_label_and_or);
 	return (container);
 }
 
 static t_bool	extend_and_or(struct s_sh_and_or *const and_or,
 		void *const pipeline)
 {
-	if (pipeline != NULL)
+	struct s_and_or_logic	*new;
+	struct s_and_or_logic	*tmp;
+
+	if (pipeline != NULL
+			&& (new = (struct s_and_or_logic *)malloc(sizeof(*new))) != NULL)
 	{
-		pipeline->next = and_or->sequence;
-		and_or->sequence = pipeline->next;
+		new->logic = e_logic_none;
+		new->pipeline = pipeline;
+		tmp = and_or->sequence;
+		if (tmp != NULL)
+		{
+			while (tmp->next != NULL)
+				tmp = tmp->next;
+			tmp->next = new;
+		}
+		else
+			and_or->sequence = new;
 		return (TRUE);
 	}
 	else
@@ -68,7 +82,7 @@ t_bool			give_and_or(void *construct, void *sub_construct)
 			if (sub->label == e_ast_container_label_pipeline)
 				ret = extend_and_or(and_or, sub);
 			else
-				ret = set_logic(and_or->sequence, label);
+				ret = set_logic(and_or->sequence, sub->label);
 			if (ret == TRUE)
 				;
 		}

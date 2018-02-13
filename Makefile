@@ -8,7 +8,7 @@ LIBFT  = libft/
 
 LIB = libft/libft.a
 
-HEADERS = includes/ grammar_generator/includes
+HEADERS = includes/ grammar_generator/includes libft/includes
 
 SRC_PATH = srcs/
 OBJ_PATH = obj/
