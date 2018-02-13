@@ -64,7 +64,6 @@ SRC_NAME = env/add_variable_to_env.c \
 		   term/prompt.c \
 		   term/term.c \
 		   term/ft_putchar_termcaps.c \
-		   execution/builtin_placeholder.c \
 		   execution/delete_container.c \
 		   execution/delete_terminal_container.c \
 		   execution/new_container.c \
@@ -87,7 +86,46 @@ SRC_NAME = env/add_variable_to_env.c \
 		   ast_execution/shx_pipeline.c \
 		   ast_execution/shx_and_or.c \
 		   ast_execution/shx_list.c \
-		   ast_execution/undo_redirections.c
+		   ast_execution/undo_redirections.c \
+		   ast_generation/and_if.c \
+		   ast_generation/and_or.c \
+		   ast_generation/bang.c \
+		   ast_generation/clobber.c \
+		   ast_generation/complete_command.c \
+		   ast_generation/complete_commands.c \
+		   ast_generation/dgreat.c \
+		   ast_generation/dless.c \
+		   ast_generation/dlessdash.c \
+		   ast_generation/great.c \
+		   ast_generation/greatand.c \
+		   ast_generation/io_number.c \
+		   ast_generation/io_operator.c \
+		   ast_generation/io_redir.c \t.c \
+		   ast_generation/less.c \
+		   ast_generation/lessand.c \
+		   ast_generation/lessgreat.c \
+		   ast_generation/list.c \
+		   ast_generation/or_if.c \
+		   ast_generation/pipe_sequence.c \
+		   ast_generation/pipeline.c \
+		   ast_generation/pipeline_preop.c \
+		   ast_generation/program.c \
+		   ast_generation/simple_command.c \
+		   ast_generation/word.c \
+		   print_ast/print_program.c \
+		   builtin/builtin_cd.c \
+		   builtin/builtin_echo.c \
+		   builtin/builtin_echo_specials.c \
+		   builtin/builtin_env.c \
+		   builtin/builtin_exit.c \
+		   builtin/builtin_setenv.c \
+		   builtin/builtin_unsetenv.c \
+		   builtin/builtopt_errmsg.c \
+		   builtin/canonicalize.c \
+		   builtin/cd_get_options.c \
+		   builtin/dotdot.c \
+		   builtin/get_physical_path.c \
+		   builtin/make_logical.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
