@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/13 09:26:39 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/13 12:58:35 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,9 @@ static int	readline_process(t_input *input, t_lexer *lexer, t_history *history)
 	return (0);
 }
 
+#include "print_ast.h"
+#include "shell_grammar.h"
+
 size_t	get_tok_id(void const *token)
 {
 	t_token const *tok;
@@ -160,11 +163,6 @@ void	*take_token(void *token_list_address)
 #include "parser_interface.h"
 #include "parser_defs.h"
 
-static void	*create_program(__attribute__((unused))void const *no_val)
-{
-	return ((void*)g_grammar);
-}
-
 static t_bool	test_parser(t_token *list_tokens, t_parser const *parser)
 {
 	void						*result;
@@ -182,7 +180,6 @@ static t_bool	test_parser(t_token *list_tokens, t_parser const *parser)
 	return (syntax_valid);
 }
 
-#include "shell_grammar.h"
 
 int main(int argc, char **argv, char **environ)
 {
@@ -200,7 +197,7 @@ int main(int argc, char **argv, char **environ)
 	init_input(&bsh->input, &bsh->term, &bsh->history);
 	init_env(&bsh->env, environ);
 	init_termcaps(bsh);
-	parser = generate_parser(g_grammar, g_tokens_name, g_exec_rules, get_tok_id);
+	parser = generate_parser(g_shell_grammar, tokens_name, g_exec_rules, get_tok_id);
 	print_grammar_back(STDERR_FILENO, parser->grammar);
 	while (42)
 	{
