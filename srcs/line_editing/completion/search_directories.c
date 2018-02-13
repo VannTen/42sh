@@ -6,13 +6,11 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 11:54:17 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/12 17:54:10 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/12 18:23:58 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-
-
 
 static int	add_escape_backslash(void **content)
 {

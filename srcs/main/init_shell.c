@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 16:09:34 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/28 13:54:30 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/12 18:38:20 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_bsh	*init_data(void)
 	return (bsh);
 }
 
-static void	update_shlvl(t_env *env)
+static void		update_shlvl(t_env *env)
 {
 	t_env_list	*shlvl;
 	char		*tmp;
@@ -42,7 +42,7 @@ static void	update_shlvl(t_env *env)
 	}
 }
 
-t_bsh		*get_shell_data(void)
+t_bsh			*get_shell_data(void)
 {
 	static t_bsh	*bsh = NULL;
 
@@ -52,7 +52,7 @@ t_bsh		*get_shell_data(void)
 	return (bsh);
 }
 
-t_bsh		*shell_init(char **environ)
+t_bsh			*shell_init(char **environ)
 {
 	t_bsh	*bsh;
 

@@ -6,13 +6,13 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:32:04 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/09 15:41:38 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/12 18:39:20 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int			copy_selection(t_input *input)
+int		copy_selection(t_input *input)
 {
 	if (input->pivot < 0)
 		return (0);
@@ -30,7 +30,7 @@ int			copy_selection(t_input *input)
 			return (MALLOC_FAIL);
 	}
 	else if (!(input->buf_copy = ft_strndup(input->buffer + input->pivot, 1)))
-			return (MALLOC_FAIL);
+		return (MALLOC_FAIL);
 	if (!ft_strcmp(input->read_buffer, CTRL_F))
 		switch_input_state(input);
 	return (0);
@@ -53,7 +53,7 @@ void	cut_from_buffer(t_input *input, const int cursor,
 			input->buffer_size - input->buffer_len);
 }
 
-int			cut_selection(t_input *input)
+int		cut_selection(t_input *input)
 {
 	int	i;
 	int	cursor;
@@ -74,7 +74,7 @@ int			cut_selection(t_input *input)
 	return (0);
 }
 
-int	paste_str_in_buffer(const char *str, t_input *input)
+int		paste_str_in_buffer(const char *str, t_input *input)
 {
 	int	len;
 
@@ -93,7 +93,7 @@ int	paste_str_in_buffer(const char *str, t_input *input)
 	return (0);
 }
 
-int			paste_selection_buffer(t_input *input)
+int		paste_selection_buffer(t_input *input)
 {
 	if (input->buf_copy)
 	{

@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 13:55:42 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/05 18:27:50 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/12 18:22:33 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ int			reset_completion_data(t_comp *comp)
 	comp->count = 0;
 	ft_lstdel(&comp->matches, del_matches);
 	comp->current = NULL;
-	comp->nb_matches = 0 ;
+	comp->nb_matches = 0;
 	comp->search_location = 0;
 	comp->init_c_pos = -1;
 	return (0);
-
 }

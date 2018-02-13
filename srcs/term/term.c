@@ -6,22 +6,22 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 14:55:29 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/05 16:41:01 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/12 18:21:31 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int					restore_custom_attr(t_term *term)
+int		restore_custom_attr(t_term *term)
 {
 	if (tcsetattr(STDIN_FILENO, TCSANOW, &term->custom_attr) == -1)
 		dprintf(STDERR_FILENO, "Unable to set custom attributes");
 	return (0);
 }
 
-int					init_termcaps(t_bsh *bsh)
+int		init_termcaps(t_bsh *bsh)
 {
-	char			*termtype;
+	char	*termtype;
 
 	if (!(termtype = ft_getenv(bsh->env.env_list, "TERM")->value))
 		dprintf(STDERR_FILENO, "Missing $TERM variable");
@@ -39,14 +39,14 @@ int					init_termcaps(t_bsh *bsh)
 	return (0);
 }
 
-int					restore_initial_attr(t_term *term)
+int		restore_initial_attr(t_term *term)
 {
 	if (tcsetattr(STDIN_FILENO, TCSANOW, &term->initial_attr) == -1)
 		dprintf(STDERR_FILENO, "Unable to reset initial attributes");
 	return (0);
 }
 
-void				get_term_size(t_term *term)
+void	get_term_size(t_term *term)
 {
 	struct winsize	winsize;
 
@@ -54,7 +54,7 @@ void				get_term_size(t_term *term)
 	term->width = winsize.ws_col;
 }
 
-int				init_term(t_term *term)
+int		init_term(t_term *term)
 {
 	term->prompt_len = 0;
 	term->cursor_row = 0;

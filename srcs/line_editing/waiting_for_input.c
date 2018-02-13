@@ -6,13 +6,13 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 11:41:51 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/12 15:24:19 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/12 18:20:49 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-t_keys	g_handle_keys[] = {
+t_keys		g_handle_keys[] = {
 	{ARROW_UP, {handle_arrow_up, skip_key}},
 	{ARROW_DOWN, {handle_arrow_down, skip_key}},
 	{ARROW_LEFT, {handle_arrow_left, select_left}},
@@ -40,7 +40,7 @@ t_keys	g_handle_keys[] = {
 	{NULL, {NULL, NULL}},
 };
 
-static int		get_key(t_input *input)
+static int	get_key(t_input *input)
 {
 	int	i;
 
@@ -65,20 +65,16 @@ static int		get_key(t_input *input)
 	handle_reg_char(input, input->read_buffer[0]) : 0;
 }
 
-int		wait_for_input(t_input *input, int input_type)
+int			wait_for_input(t_input *input, int input_type)
 {
 	int		ret;
-	//char	c;
 
 	input->type = input_type;
 	while (42)
 	{
 		ft_bzero(input->read_buffer, MAX_KEY_LENGTH + 1);
-	//	read(STDIN_FILENO, &c, 1);
 		if (read(STDIN_FILENO, input->read_buffer, MAX_KEY_LENGTH) < 1)
 			return (READ_FAIL);
-	//	input->read_buffer[ft_strlen(input->read_buffer)] = c;
-	//	dprintf(input->fd, "%c\n", c);
 		if ((ret = get_key(input)) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
 		else if (ret)

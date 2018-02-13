@@ -6,11 +6,22 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:24:25 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/12 18:01:02 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/12 18:37:29 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+
+const char	*g_builtins_name[] = {
+	"declare ",
+	"echo ",
+	"env ",
+	"exit ",
+	"export ",
+	"history ",
+	"setenv ",
+	"unsetenv ",
+	NULL};
 
 static int	eligible_to_env_completion(t_comp *comp)
 {
@@ -36,8 +47,6 @@ static int	eligible_to_env_completion(t_comp *comp)
 
 static int	add_builtin(t_comp *comp)
 {
-	char	*builtins_name[] = {"declare ", "echo ", "env ", "exit ", "export ",
-								"history ", "setenv ", "unsetenv ", NULL};
 	t_list	*elem;
 	int		i;
 
@@ -69,8 +78,8 @@ int			completion(t_input *input)
 		else if (input->comp.search_location == DIRECTORY)
 			input->comp.matches = open_and_read_directory(&input->comp,
 									input->comp.dirname);
+		(input->comp.search_location == PATH) ? add_builtin(&input->comp) : 0;
 	}
-	(input->comp.search_location == PATH) ? add_builtin(&input->comp) : 0;
 	input->comp.matches = merge_sort_matches(input->comp.matches);
 	if (input->comp.matches)
 		completion_display(&input->comp, input);

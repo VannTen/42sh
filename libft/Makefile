@@ -6,7 +6,7 @@
 #    By: bjanik <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 16:52:33 by bjanik            #+#    #+#              #
-#    Updated: 2018/01/31 16:36:39 by bjanik           ###   ########.fr        #
+#    Updated: 2018/02/09 17:39:47 by bjanik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -126,8 +126,6 @@ SRCS = ft_putstr.c \
 	   ft_valid_file.c \
 	   ft_error_msg.c \
 	   ft_malloc.c \
-	   ft_realloc_str.c \
-	   ft_init_str.c \
 	   ft_tab_len.c \
 
 OBJ = $(SRCS:.c=.o)

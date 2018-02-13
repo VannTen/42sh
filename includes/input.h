@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 17:57:42 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/11 20:03:59 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/12 17:20:16 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # define MAX_KEY_LENGTH 6
 # define MAX_PROMPT_SIZE 256
-# define INITIAL_BUFFER_SIZE 1
+# define INITIAL_BUFFER_SIZE 4096
 # define STANDARD 0
 # define SELECTION 1
 # define COMPLETION 2
@@ -39,6 +39,7 @@
 # define CTRL_D "\x4"
 # define CTRL_E "\x5"
 # define CTRL_F "\x6"
+# define CTRL_K "\xB"
 # define CTRL_R "\x12"
 # define CTRL_U "\x15"
 # define CTRL_X "\x18"
@@ -109,7 +110,6 @@ int				putchar_termcaps(int c);
 int				wait_for_input(t_input *input, int type);
 int				init_input(t_input *input, t_term *term, t_history *history);
 int				init_buffers(t_input *input);
-int				get_key(t_input *input);
 int				handle_arrow_left(t_input *input);
 int				handle_arrow_right(t_input *input);
 int				handle_arrow_up(t_input *input);
@@ -127,7 +127,8 @@ int				handle_reg_char(t_input *input, char c);
 int				handle_alt_less(t_input *input);
 int				handle_alt_great(t_input *input);
 int				handle_clear_screen(t_input *input);
-int				handle_clear_line(t_input *input);
+int				handle_clear_line_bf_cursor(t_input *input);
+int				handle_clear_line_af_cursor(t_input *input);
 int				handle_eof(t_input *input);
 void			exit_ctrl_d(t_input *input);
 int				handle_history_search(t_input *input);

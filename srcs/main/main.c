@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/11 19:47:30 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/13 12:58:49 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,64 +19,6 @@ void	display_tokens(t_token *tokens)
 		ft_printf("[%s] ==> type = %d\n", tokens->value, tokens->type);
 		tokens = tokens->next;
 	}
-}
-
-static int	remove_backslash_nl(t_input *input, t_lexer *lexer)
-{
-	int	i;
-
-	i = 0;
-	clear_tokens(&lexer->tokens[0]);
-	input->buffer[--input->buffer_len] = '\0';
-	input->buf_tmp = input->buffer;
-	if (!(input->buffer = ft_strnew(input->buffer_size)))
-		return (MALLOC_FAIL);
-	lexer->input = input->buf_tmp;
-	while (*(lexer->input))
-	{
-		get_event(lexer);
-		lexer->state = g_lexer[lexer->state][lexer->event].new_state;
-		if (*(lexer->input) == '\\'
-				&& *(lexer->input + 1) == '\n'
-				&& lexer->state != QUOTE
-				&& lexer->state != COMMENT)
-			lexer->input += 2;
-		else
-			input->buffer[i++] = *(lexer->input++);
-	}
-	input->buffer[input->buffer_len++] = '\n';
-	ft_strdel(&input->buf_tmp);
-	return (0);
-}
-
-static int	get_line(t_lexer *lex, t_input *input)
-{
-	reset_buffer(input);
-	if (wait_for_input(input, REGULAR_INPUT) == MALLOC_FAIL)
-		return (MALLOC_FAIL);
-	if (lexer(lex, input->buffer) == MALLOC_FAIL)
-		return (MALLOC_FAIL);
-	while (lex->state != INIT)
-	{
-		clear_tokens(&lex->tokens[0]);
-		input->buf_tmp = input->buffer;
-		if (!(input->buffer = ft_strnew(input->buffer_size)))
-			return (MALLOC_FAIL);
-		display_basic_prompt(input);
-		if (wait_for_input(input, UNCLOSED_QUOTES) == MALLOC_FAIL
-		|| lexer(lex, input->buffer) == MALLOC_FAIL)
-			return (MALLOC_FAIL);
-		while ((int)ft_strlen(input->buf_tmp)
-							+ input->buffer_len > input->buffer_size)
-			if (realloc_buffer(input) == MALLOC_FAIL)
-				return (MALLOC_FAIL);
-		ft_swap((void**)&input->buffer, (void**)&input->buf_tmp);
-		strcat(input->buffer, input->buf_tmp);
-		ft_strdel(&input->buf_tmp);
-		input->buffer_len = ft_strlen(input->buffer);
-	}
-	remove_backslash_nl(input, lex);
-	return (0);
 }
 
 static int	update_history(t_history *history, t_input *input)
@@ -94,34 +36,6 @@ static int	update_history(t_history *history, t_input *input)
 				ft_strcmp(input->buffer, history->history[history->len - 1])))
 		if (add_cmd_to_history(history, input->buffer))
 			return (MALLOC_FAIL);
-	return (0);
-}
-
-static int	readline_process(t_input *input, t_lexer *lexer, t_history *history)
-{
-	int		ret;
-	t_string	exp_input = {ft_strnew(input->buffer_size), 0,
-							input->buffer_size};
-
-	print_prompt(input, BOLD_CYAN);
-	if (get_line(lexer, input) == MALLOC_FAIL)
-	{
-		ft_strdel(&exp_input.str);
-		return (MALLOC_FAIL);
-	}
-	if ((ret = get_expanded_input(lexer, history, input->buffer, &exp_input)))
-	{
-		ft_strdel(&exp_input.str);
-		return (ret);
-	}
-	else
-	{
-		ft_strdel(&input->buffer);
-		input->buffer = exp_input.str;
-	}
-	input->buffer_len = ft_strlen(input->buffer);
-	if (input->buffer[input->buffer_len - 1] != '\n')
-		input->buffer[input->buffer_len++] = '\n';
 	return (0);
 }
 
@@ -232,10 +146,6 @@ int main(int argc, char **argv, char **environ)
 		if (lexer(&bsh->lexer, bsh->input.buffer) == MALLOC_FAIL
 		|| update_history(&bsh->history, &bsh->input) == MALLOC_FAIL)
 			continue ;
-		#ifdef DEBUG
-		display_history(bsh->history);
-		display_tokens(bsh->lexer.tokens[0]);
-		#endif
 		//execute_construct(parser, "PROGRAM", &bsh->lexer.tokens[0], take_token);
 	}
 	return (0);

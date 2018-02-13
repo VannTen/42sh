@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 16:48:42 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/03 14:13:45 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/12 16:31:54 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			init_buffers(t_input *input)
 		ft_strdel(&input->buf_copy);
 	if (!input->buffer)
 	{
-		if (!(input->buffer = ft_strnew(INITIAL_BUFFER_SIZE + 1)))
+		if (!(input->buffer = ft_strnew(INITIAL_BUFFER_SIZE)))
 			return (MALLOC_FAIL);
 		input->buffer_len = 0;
 		input->buffer_size = INITIAL_BUFFER_SIZE;

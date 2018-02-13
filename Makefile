@@ -42,7 +42,6 @@ SRC_NAME = env/add_variable_to_env.c \
 	   line_editing/completion/sort_matches.c \
 	   line_editing/copy_cut_paste.c \
 	   line_editing/display_line.c \
-	   line_editing/get_key.c \
 	   line_editing/handle_eof.c \
 	   line_editing/history_search.c \
 	   line_editing/input.c \
@@ -53,6 +52,7 @@ SRC_NAME = env/add_variable_to_env.c \
 	   line_editing/keys_delete.c \
 	   line_editing/keys_home_end_return.c \
 	   line_editing/putchar_termcaps.c \
+	   line_editing/readline_tools.c \
 	   line_editing/realloc_buffer.c \
 	   line_editing/selection.c \
 	   line_editing/waiting_for_input.c \
@@ -69,6 +69,8 @@ SRC_NAME = env/add_variable_to_env.c \
 	   lexer/realloc_current_token.c\
 	   main/init_shell.c \
 	   main/main.c \
+	   main/realloc_str.c \
+	   main/readline_process.c \
 	   term/term.c \
 	   term/prompt.c \
 

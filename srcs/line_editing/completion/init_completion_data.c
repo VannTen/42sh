@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 14:03:11 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/10 13:49:47 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/12 18:23:51 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char		*comp_get_prefix(t_lexer lexer, const int cursor_pos,
 		return (ft_strdup(lexer.tokens[1]->value));
 }
 
-static int	get_tokens_up_to_cursor(t_lexer *lexer, char *buffer,
+static int		get_tokens_up_to_cursor(t_lexer *lexer, char *buffer,
 									const int cursor_pos)
 {
 	init_lexer(lexer);
