@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/11 18:48:54 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/13 13:03:36 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@
 
 void	*create_dlessdash(void const *lex_value)
 {
+	(void)lex_value;
 	return (new_container(NULL, 0, e_ast_container_label_dlessdash));
 }
