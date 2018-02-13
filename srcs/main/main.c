@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/12 17:17:36 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/13 09:26:39 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,70 +130,7 @@ static int	readline_process(t_input *input, t_lexer *lexer, t_history *history)
 		input->buffer[input->buffer_len++] = '\n';
 	return (0);
 }
-/*
-static char const	g_grammar[] =
-" PROGRAM : COMPLETE_COMMAND NEWLINE"
-"| NEWLINE;"
-"COMPLETE_COMMAND : LIST;"
-"LIST : LIST SEPARATOR_OP AND_OR_2"
-"| AND_OR;"
-"AND_OR_2: AND_OR | ;"
-"AND_OR : PIPELINE"
-"| AND_OR AND_IF PIPELINE"
-"| AND_OR OR_IF PIPELINE;"
-"PIPELINE : COMMAND"
-"| PIPELINE PIPE COMMAND;"
-"COMMAND : CMD_PREFIX CMD_WORD CMD_SUFFIX"
-"| CMD_PREFIX CMD_WORD"
-"| CMD_PREFIX"
-"| CMD_NAME CMD_SUFFIX"
-"| CMD_NAME;"
-"CMD_NAME : WORD;"
-"CMD_WORD : WORD;"
-"CMD_PREFIX : IO_REDIRECT"
-"| CMD_PREFIX IO_REDIRECT;"
-"CMD_SUFFIX : IO_REDIRECT"
-"| CMD_SUFFIX IO_REDIRECT"
-"| WORD"
-"| CMD_SUFFIX WORD;"
-"IO_REDIRECT : IO_FILE"
-"| IO_NUMBER IO_FILE"
-"| IO_HERE"
-"| IO_NUMBER IO_HERE;"
-"IO_FILE : LESS FILENAME"
-"| LESSAND FILENAME"
-"| GREAT FILENAME"
-"| GREATAND FILENAME"
-"| DGREAT FILENAME"
-"| LESSGREAT FILENAME"
-"| CLOBBER FILENAME;"
-"FILENAME : WORD;"
-"IO_HERE : DLESSDASH HERE_END | DLESS HERE_END;"
-"HERE_END: WORD;"
-"SEPARATOR_OP: AND"
-"|SEMI;";
 
-char const			*tokens_name[] = {
-	"WORD",
-	"NEWLINE",
-	"IO_NUMBER",
-	"DLESS",
-	"DGREAT",
-	"LESSAND",
-	"GREATAND",
-	"LESS",
-	"GREAT",
-	"AND_IF",
-	"OR_IF",
-	"SEMI",
-	"AND",
-	"PIPE",
-	"CLOBBER",
-	"DLESSDASH",
-	"LESSGREAT",
-	NULL
-};
-*/
 size_t	get_tok_id(void const *token)
 {
 	t_token const *tok;
@@ -240,6 +177,7 @@ static t_bool	test_parser(t_token *list_tokens, t_parser const *parser)
 	if (parser == NULL)
 		exit(1);
 	result = execute_construct(parser, "PROGRAM", &input);
+	print_program(STDERR_FILENO, result);
 	syntax_valid = result != NULL;
 	return (syntax_valid);
 }
