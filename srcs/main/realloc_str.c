@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:54:48 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/13 18:04:24 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/14 16:25:08 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ int	realloc_str(t_string *str)
 	}
 	str->size *= 2;
 	ft_strcpy(str->str, tmp);
-	free(tmp);
+	ft_strdel(&tmp);
 	return (0);
 }
