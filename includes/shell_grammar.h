@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 12:12:51 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 21:25:31 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/14 14:12:45 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ static t_exec const	g_exec_rules[] = {
 	},{ .name="list_delimitor",
 		.create=NULL,
 		.give=NULL,
-		.destroy=&destroy_container
+		.destroy=NULL
 	},{ .name="and_or",
 		.create=&create_and_or,
 		.give=&give_and_or,
@@ -154,11 +154,11 @@ static t_exec const	g_exec_rules[] = {
 	},{ .name="newline_list",
 		.create=NULL,
 		.give=NULL,
-		.destroy=&destroy_container
+		.destroy=NULL
 	},{ .name="separator_op",
 		.create=NULL,
 		.give=NULL,
-		.destroy=&destroy_container
+		.destroy=NULL
 	},{ .name="WORD",
 		.create=&create_word,
 		.give=NULL,
@@ -174,7 +174,7 @@ static t_exec const	g_exec_rules[] = {
 	},{ .name="PIPE",
 		.create=NULL,
 		.give=NULL,
-		.destroy=&destroy_container
+		.destroy=NULL
 	},{ .name="IO_NUMBER",
 		.create=&create_io_number,
 		.give=NULL,
@@ -218,11 +218,11 @@ static t_exec const	g_exec_rules[] = {
 	},{ .name="NEWLINE",
 		.create=NULL,
 		.give=NULL,
-		.destroy=&destroy_container
+		.destroy=NULL
 	},{ .name="SEMICOLON",
 		.create=NULL,
 		.give=NULL,
-		.destroy=&destroy_container
+		.destroy=NULL
 	},{ .name="Bang",
 		.create=&create_bang,
 		.give=NULL,
