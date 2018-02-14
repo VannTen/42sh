@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 12:12:51 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/14 14:12:45 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/14 16:06:11 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,51 +18,51 @@
 # include "s_container.h"
 
 static char const	g_shell_grammar[] =
-"program"
-":complete_commands"
+"PROGRAM"
+":COMPLETE_COMMANDS"
 ";"
-"complete_commands"
-":complete_commands newline_list complete_command"
-"|complete_command"
+"COMPLETE_COMMANDS"
+":COMPLETE_COMMANDS NEWLINE_LIST COMPLETE_COMMAND"
+"|COMPLETE_COMMAND"
 ";"
-"complete_command"
-":list list_delimitor"
+"COMPLETE_COMMAND"
+":LIST LIST_DELIMITOR"
 ";"
-"list_delimitor"
-":separator_op"
+"LIST_DELIMITOR"
+":SEPARATOR_OP"
 "|"
 ";"
-"list"
-":list separator_op and_or"
-"|and_or"
+"LIST"
+":LIST SEPARATOR_OP AND_OR"
+"|AND_OR"
 ";"
-"and_or"
-":and_or AND_IF pipeline"
-"|and_or OR_IF pipeline"
-"|pipeline"
+"AND_OR"
+":AND_OR AND_IF PIPELINE"
+"|AND_OR OR_IF PIPELINE"
+"|PIPELINE"
 ";"
-"pipeline"
-":pipeline_preop pipe_sequence"
+"PIPELINE"
+":PIPELINE_PREOP PIPE_SEQUENCE"
 ";"
-"pipeline_preop"
-":Bang"
+"PIPELINE_PREOP"
+":BANG"
 "|"
 ";"
-"pipe_sequence"
-":pipe_sequence PIPE simple_command"
-"|simple_command"
+"PIPE_SEQUENCE"
+":PIPE_SEQUENCE PIPE SIMPLE_COMMAND"
+"|SIMPLE_COMMAND"
 ";"
-"simple_command"
-":simple_command io_redirect"
-"|simple_command WORD"
-"|io_redirect"
+"SIMPLE_COMMAND"
+":SIMPLE_COMMAND IO_REDIRECT"
+"|SIMPLE_COMMAND WORD"
+"|IO_REDIRECT"
 "|WORD"
 ";"
-"io_redirect"
-":IO_NUMBER io_operator WORD"
-"|io_operator WORD"
+"IO_REDIRECT"
+":IO_NUMBER IO_OPERATOR WORD"
+"|IO_OPERATOR WORD"
 ";"
-"io_operator"
+"IO_OPERATOR"
 ":LESS"
 "|LESSAND"
 "|GREAT"
@@ -71,12 +71,13 @@ static char const	g_shell_grammar[] =
 "|LESSGREAT"
 "|DLESS"
 "|DLESSDASH"
+"|CLOBBER"
 ";"
-"newline_list"
-":newline_list NEWLINE"
+"NEWLINE_LIST"
+":NEWLINE_LIST NEWLINE"
 "|NEWLINE"
 ";"
-"separator_op"
+"SEPARATOR_OP"
 ":SEMICOLON"
 ";";
 
@@ -104,58 +105,58 @@ static char const	*tokens_name[] = {
 #include "ast_generation.h"
 
 static t_exec const	g_exec_rules[] = {
-	{ .name="program",
+	{ .name="PROGRAM",
 		.create=&create_program,
 		.give=&give_program,
 		.destroy=&destroy_container
-	},{ .name="complete_commands",
+	},{ .name="COMPLETE_COMMANDS",
 		.create=&create_complete_commands,
 		.give=&give_complete_commands,
 		.destroy=&destroy_container
-	},{ .name="complete_command",
+	},{ .name="COMPLETE_COMMAND",
 		.create=&create_complete_command,
 		.give=&give_complete_command,
 		.destroy=&destroy_container
-	},{ .name="list",
+	},{ .name="LIST",
 		.create=&create_list,
 		.give=&give_list,
 		.destroy=&destroy_container
-	},{ .name="list_delimitor",
+	},{ .name="LIST_DELIMITOR",
 		.create=NULL,
 		.give=NULL,
 		.destroy=NULL
-	},{ .name="and_or",
+	},{ .name="AND_OR",
 		.create=&create_and_or,
 		.give=&give_and_or,
 		.destroy=&destroy_container
-	},{ .name="pipeline_preop",
+	},{ .name="PIPELINE_PREOP",
 		.create=&create_pipeline_preop,
 		.give=&give_pipeline_preop,
-	},{ .name="pipeline",
+	},{ .name="PIPELINE",
 		.create=&create_pipeline,
 		.give=&give_pipeline,
 		.destroy=&destroy_container
-	},{ .name="pipe_sequence",
+	},{ .name="PIPE_SEQUENCE",
 		.create=&create_pipe_sequence,
 		.give=&give_pipe_sequence,
 		.destroy=&destroy_container
-	},{ .name="simple_command",
+	},{ .name="SIMPLE_COMMAND",
 		.create=&create_simple_command,
 		.give=&give_simple_command,
 		.destroy=&destroy_container
-	},{ .name="io_redirect",
+	},{ .name="IO_REDIRECT",
 		.create=&create_io_redirect,
 		.give=&give_io_redirect,
 		.destroy=&destroy_container
-	},{ .name="io_operator",
+	},{ .name="IO_OPERATOR",
 		.create=&create_io_operator,
 		.give=&give_io_operator,
 		.destroy=&destroy_container
-	},{ .name="newline_list",
+	},{ .name="NEWLINE_LIST",
 		.create=NULL,
 		.give=NULL,
 		.destroy=NULL
-	},{ .name="separator_op",
+	},{ .name="SEPARATOR_OP",
 		.create=NULL,
 		.give=NULL,
 		.destroy=NULL
@@ -223,7 +224,7 @@ static t_exec const	g_exec_rules[] = {
 		.create=NULL,
 		.give=NULL,
 		.destroy=NULL
-	},{ .name="Bang",
+	},{ .name="BANG",
 		.create=&create_bang,
 		.give=NULL,
 		.destroy=&destroy_container
