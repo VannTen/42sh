@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/13 12:58:49 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/14 14:53:28 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,27 @@ void	*take_token(void *token_list_address)
 
 #include "parser_interface.h"*/
 
-int main(int argc, char **argv, char **environ)
+static int	error_messages(t_input *input, const int ret)
+{
+	(ret == EVENT_NOT_FOUND) ?
+			dprintf(STDERR_FILENO, "bsh: Event not found\n") : 0;
+	if (ret == MALLOC_FAIL)
+	{
+		init_buffers(input);
+		dprintf(STDERR_FILENO, "bsh: Memory allocation failed."
+				" Aborting process routine\n");
+	}
+	if (ret == INPUT_TOO_LONG)
+	{
+		dprintf(STDERR_FILENO, "bsh: Input is too long."
+							" Aborting process routine!\n");
+		init_buffers(input);
+		input->cursor_pos = 0;
+	}
+	return (0);
+}
+
+int			main(int argc, char **argv, char **environ)
 {
 	t_bsh	*bsh;
 	int		ret;
@@ -136,16 +156,15 @@ int main(int argc, char **argv, char **environ)
 		reset_lexer(&bsh->lexer);
 		if ((ret = readline_process(&bsh->input, &bsh->lexer,
 						&bsh->history)) == EVENT_NOT_FOUND
-						|| ret == MALLOC_FAIL)
+						|| ret == MALLOC_FAIL || ret == INPUT_TOO_LONG)
 		{
-			(ret == EVENT_NOT_FOUND) ? 
-				dprintf(STDERR, "bsh: event not found\n") : 0;
-			(ret == MALLOC_FAIL) ? init_buffers(&bsh->input) : 0;
+			error_messages(&bsh->input, ret);
 			continue ;
 		}
 		if (lexer(&bsh->lexer, bsh->input.buffer) == MALLOC_FAIL
 		|| update_history(&bsh->history, &bsh->input) == MALLOC_FAIL)
 			continue ;
+		display_history(bsh->history);
 		//execute_construct(parser, "PROGRAM", &bsh->lexer.tokens[0], take_token);
 	}
 	return (0);
