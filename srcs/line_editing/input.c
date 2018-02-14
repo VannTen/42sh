@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 14:55:18 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/12 16:30:37 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/14 13:14:37 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void		reset_buffer(t_input *input)
 {
-	ft_bzero(input->buffer, input->buffer_size);
+	ft_memset(input->buffer, 0, input->buffer_size);
 	input->buffer_len = 0;
 	input->cursor_pos = 0;
 }
