@@ -6,14 +6,13 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 17:18:03 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 21:52:26 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/14 10:38:48 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell_ast.h"
 #include "io_redirect_settings.h"
 #include "bleberr_macros.h"
-#include "lst_defs.h"
 #include "libft.h"
 #include "print_ast.h"
 
@@ -61,6 +60,7 @@ void	print_simple_command(int fd, struct s_sh_simple_command *simple_command, in
 		char const *const depth_padding)
 {
 	t_lst	*list;
+	void	*content;
 
 	ft_dprintf(fd, "%.*ssimple_command: %s has %zu args\n", depth, depth_padding,
 			simple_command ? "OK" : "NULL", simple_command->argc);
@@ -69,16 +69,17 @@ void	print_simple_command(int fd, struct s_sh_simple_command *simple_command, in
 		list = simple_command->arglist;
 		while (list != NULL)
 		{
+			content = (void*)f_lst_first_elem(list);
 			ft_dprintf(fd, "%.*s%s\n", depth + 1, depth_padding,
-					(list->content != NULL) ? list->content : "NULL");
-			list = list->next;
+					(content != NULL) ? content : "NULL");
+			list = advance_list(list, 1);
 		}
 		list = simple_command->redirs;
 		while (list != NULL)
 		{
-			print_io_redirect(fd, list->content, depth + 1,
+			print_io_redirect(fd, (void*)f_lst_first_elem(list), depth + 1,
 				depth_padding);
-			list = list->next;
+			list = advance_list(list, 1);
 		}
 	}
 }
@@ -95,9 +96,9 @@ void	print_pipe_sequence(int fd, struct s_sh_pipe_sequence *pipe_sequence, int d
 		sequence = pipe_sequence->simple_commands;
 		while (sequence != NULL)
 		{
-			print_simple_command(fd, sequence->content, depth + 1,
+			print_simple_command(fd, (void*)f_lst_first_elem(sequence), depth + 1,
 				depth_padding);
-			sequence = sequence->next;
+			sequence = advance_list(sequence, 1);
 		}
 	}
 }
@@ -155,9 +156,9 @@ void	print_lst(int fd, struct s_sh_list *list, int depth,
 		sequence = list->and_or_sequence;
 		while (sequence != NULL)
 		{
-			print_and_or(fd, sequence->content, depth + 1,
+			print_and_or(fd, (void*)f_lst_first_elem(sequence), depth + 1,
 				depth_padding);
-			sequence = sequence->next;
+			sequence = advance_list(sequence, 1);
 		}
 	}
 }
@@ -186,9 +187,9 @@ void	print_complete_commands(int fd,
 		sequence = complete_commands->sequence;
 		while (sequence != NULL)
 		{
-			print_complete_commands(fd, sequence->content, depth + 1,
+			print_complete_commands(fd, (void*)f_lst_first_elem(sequence), depth + 1,
 				depth_padding);
-			sequence = sequence->next;
+			sequence = advance_list(sequence, 1);
 		}
 	}
 }

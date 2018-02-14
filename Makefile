@@ -8,7 +8,7 @@ LIBFT  = libft/
 
 LIB = libft/libft.a
 
-HEADERS = includes/ grammar_generator/includes libft/includes
+HEADERS = includes/ grammar_generator/includes
 
 SRC_PATH = srcs/
 OBJ_PATH = obj/
@@ -77,7 +77,7 @@ SRC_NAME = env/add_variable_to_env.c \
 		   ast_generation/greatand.c \
 		   ast_generation/io_number.c \
 		   ast_generation/io_operator.c \
-		   ast_generation/io_redir.c \t.c \
+		   ast_generation/io_redirect.c \
 		   ast_generation/less.c \
 		   ast_generation/lessand.c \
 		   ast_generation/lessgreat.c \

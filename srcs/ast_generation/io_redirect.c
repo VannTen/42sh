@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 21:31:15 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/14 10:07:06 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 #include "shell_ast/io_redirect.h"
 #include "shell_ast/container_labels.h"
 #include "s_container.h"
-#include "bool_interface.h"
+#include "libft.h"
 #include "io_redirect_settings.h"
+#include "bleberr_macros.h"
 #include <stdlib.h>
 
 void	*create_io_redirect(void const *lex_value)
@@ -39,7 +40,8 @@ static t_bool	add_io_number(struct s_sh_io_redirect *const io_redirect,
 		struct s_container *io_number_container)
 {
 	if (io_redirect != NULL && io_redirect->ionum == NULL
-			&& io_number != NULL)
+			&& io_number_container != NULL
+			&& io_number_container->content != NULL)
 	{
 		io_redirect->ionum = io_number_container->content;
 		io_number_container->content = NULL;
@@ -49,7 +51,7 @@ static t_bool	add_io_number(struct s_sh_io_redirect *const io_redirect,
 }
 
 static t_bool	set_io_type(struct s_sh_io_redirect *const io_redirect,
-		struct s_sh_io_redirect const template)
+		struct s_io_param const template)
 {
 	if (io_redirect != NULL && io_redirect->type == e_sh_io_type_none
 			&& (io_redirect->ionum != NULL
@@ -59,15 +61,16 @@ static t_bool	set_io_type(struct s_sh_io_redirect *const io_redirect,
 		io_redirect->flags = template.flags;
 		io_redirect->mode = template.mode;
 		io_redirect->variant = template.variant;
+		return (TRUE);
 	}
 	else
-		return (FALSE)
+		return (FALSE);
 }
 
 static t_bool	add_io_operator(struct s_sh_io_redirect *const io_redirect,
 		enum e_ast_container_label const redirect_label)
 {
-	struct io_reference const	refs[] = {
+	struct s_io_reference const	refs[] = {
 		{ .label=e_ast_container_label_clobber, .param=CLOBBER_PARAM },
 		{ .label=e_ast_container_label_great, .param=GREAT_PARAM },
 		{ .label=e_ast_container_label_dgreat, .param=DGREAT_PARAM },
@@ -86,7 +89,7 @@ static t_bool	add_io_operator(struct s_sh_io_redirect *const io_redirect,
 			return (set_io_type(io_redirect, refs[i].param));
 		else
 			i += 1;
-	return (FALSE)
+	return (FALSE);
 }
 
 static t_bool	add_target(struct s_sh_io_redirect *const io_redirect,
@@ -119,7 +122,7 @@ t_bool			give_io_redirect(void *construct, void *sub_construct)
 		else if (sub->label == e_ast_container_label_io_operator)
 			ret = add_io_operator(io_redirect, sub->label);
 		else if (sub->label == e_ast_container_label_word)
-			ret = add_target(io_operator, sub);
+			ret = add_target(io_redirect, sub);
 		if (ret == TRUE)
 			destroy_container((void**)&sub);
 	}
