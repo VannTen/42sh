@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 17:57:42 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/12 17:20:16 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/14 15:53:59 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define MAX_KEY_LENGTH 6
 # define MAX_PROMPT_SIZE 256
 # define INITIAL_BUFFER_SIZE 4096
+# define MAX_BUFFER_SIZE 1048576
+
 # define STANDARD 0
 # define SELECTION 1
 # define COMPLETION 2
@@ -67,20 +69,20 @@
 # define DIRECTORY 1
 # define PATH 2
 
-typedef struct		s_comp
+typedef struct	s_comp
 {
-	char			*prefix;
-	char			*dirname;
-	char			*basename;
-	char			*comp_str;
-	size_t			count;
-	size_t			basename_len;
-	t_list			*matches;
-	t_list			*current;
-	size_t			nb_matches;
-	size_t			search_location;
-	int				init_c_pos;
-}					t_comp;
+	char		*prefix;
+	char		*dirname;
+	char		*basename;
+	char		*comp_str;
+	size_t		count;
+	size_t		basename_len;
+	t_list		*matches;
+	t_list		*current;
+	size_t		nb_matches;
+	size_t		search_location;
+	int			init_c_pos;
+}				t_comp;
 
 typedef struct	s_input
 {
@@ -149,28 +151,25 @@ void			cut_from_buffer(t_input *input, const int cursor,
 								const int pivot, const size_t len);
 int				cut_selection(t_input *input);
 int				paste_selection_buffer(t_input *input);
-int				paste_str_in_buffer(const char * copy, t_input *input);
-
-
+int				paste_str_in_buffer(const char *copy, t_input *input);
 void			get_prompt(t_term *term);
 void			print_prompt(t_input *input, char *color);
 void			display_basic_prompt(t_input *input);
-
 
 /*
 ** Completion part
 */
 
-int					completion(t_input *input);
-int					init_completion_data(t_comp *comp, char *buffer,
-					const int cursor_pos);
-t_list				*open_and_read_directory(t_comp *comp,
-					const char *directory);
-int					completion_search_path(t_comp *comp);
-t_list				*completion_search_in_env(t_comp *comp);
-int					completion_display(t_comp *comp, t_input *input);
-int					reset_completion_data(t_comp *comp);
-char				*ft_basename(const char *path);
-char				*ft_dirname(const char *path);
-t_list				*merge_sort_matches(t_list *matches);
+int				completion(t_input *input);
+int				init_completion_data(t_comp *comp, char *buffer,
+				const int cursor_pos);
+t_list			*open_and_read_directory(t_comp *comp,
+				const char *directory);
+int				completion_search_path(t_comp *comp);
+t_list			*completion_search_in_env(t_comp *comp);
+int				completion_display(t_comp *comp, t_input *input);
+int				reset_completion_data(t_comp *comp);
+char			*ft_basename(const char *path);
+char			*ft_dirname(const char *path);
+t_list			*merge_sort_matches(t_list *matches);
 #endif

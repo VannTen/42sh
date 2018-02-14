@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 14:58:40 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/09 17:14:00 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/14 11:24:03 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,9 @@ int				handle_bang(t_history *history, char **input,
 							t_string *exp_input);
 int				get_expanded_input(t_lexer *lexer, t_history *history,
 									char *input, t_string *exp_input);
+int				get_cmd_num(t_history *history, t_string *exp_input,
+							const int num);
+int				get_cmd_str(t_history *history, t_string *exp_input,
+							char **input, char *s);
 int				realloc_str(t_string *str);
 #endif
