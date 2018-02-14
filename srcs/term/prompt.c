@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 15:17:41 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/09 13:29:53 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/14 15:43:21 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		get_prompt(t_term *term)
 			term->prompt[0] = *pwd;
 		else
 			ft_strcpy(term->prompt, ft_strrchr(pwd, '/') + 1);
-		free(pwd);
+		ft_strdel(&pwd);
 		term->prompt_len = ft_strlen(term->prompt) + 3;
 	}
 	term->cursor_col = term->prompt_len + 1;
