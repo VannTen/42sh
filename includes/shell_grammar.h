@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 12:12:51 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/14 16:06:11 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/14 16:09:41 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static char const	*tokens_name[] = {
 	"CLOBBER",
 	"NEWLINE",
 	"SEMICOLON",
-	"Bang",
+	"BANG",
 	NULL
 };
 
