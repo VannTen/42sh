@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 15:22:54 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/12 12:28:15 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/14 15:42:44 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ int					reset_lexer(t_lexer *lexer)
 	lexer->event = 0;
 	ft_bzero(lexer->current_token, lexer->token_size);
 	lexer->token_len = 0;
+	lexer->input = NULL;
 	return (0);
 }
 
