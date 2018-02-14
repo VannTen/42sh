@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 12:31:00 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/13 12:56:19 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/14 15:50:24 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,10 @@ int			readline_process(t_input *input, t_lexer *lexer, t_history *history)
 		ft_strdel(&exp_input.str);
 		return (ret);
 	}
-	else
-	{
-		ft_strdel(&input->buffer);
-		input->buffer = exp_input.str;
-	}
+	ft_strdel(&input->buffer);
+	input->buffer = exp_input.str;
 	input->buffer_len = ft_strlen(input->buffer);
+	input->buffer_size = exp_input.size;
 	if (input->buffer[input->buffer_len - 1] != '\n')
 		input->buffer[input->buffer_len++] = '\n';
 	return (0);
