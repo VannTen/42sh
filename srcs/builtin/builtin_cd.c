@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 11:47:26 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/01/22 13:00:02 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/15 11:40:20 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ static int	change_pwd_value(char *new_value, int const options)
 	cur_value = shell_getenv("PWD");
 	if (cur_value != NULL && shell_setenv("OLDPWD", cur_value, 1))
 	{
-		ft_putstr_fd("21sh: cd: Failed to update OLDPWD.\n", 2);
+		ft_putstr_fd("42sh: cd: Failed to update OLDPWD.\n", 2);
 		ret = 1;
 	}
 	if (shell_setenv("PWD", new_value, 1))
 	{
-		ft_putstr_fd("21sh: cd: Failed to update PWD.\n", 2);
+		ft_putstr_fd("42sh: cd: Failed to update PWD.\n", 2);
 		ret = 1;
 	}
 	if (options & e_cdopt_oldpwd)
@@ -41,7 +41,7 @@ static int	change_directory(char *curpath, char **const pwd_loc,
 		if (*pwd_loc != NULL || (*pwd_loc = getcwd(NULL, 1)) != NULL)
 			return (change_pwd_value(*pwd_loc, options));
 		else
-			ft_putstr_fd("21sh: cd: Unable to update PWD and OLDPWD, "
+			ft_putstr_fd("42sh: cd: Unable to update PWD and OLDPWD, "
 					"failed to obtain present working directory.\n", 2);
 	else
 		shell_errmsg(e_shell_errmsg_chdir, "cd");
