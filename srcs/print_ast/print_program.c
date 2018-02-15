@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 17:18:03 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/15 15:13:49 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/15 16:10:55 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,58 @@
 #include "bleberr_macros.h"
 #include "libft.h"
 #include "print_ast.h"
+#include "s_container.h"
+#include "shell_ast/container_labels.h"
+
+void	print_container_label(int label)
+{
+	struct s_container const	refs[] = {
+		{ .content="EMPTY", .label=e_ast_container_label_empty },
+		{ .content="WORD", .label=e_ast_container_label_word },
+		{ .content="IO_NUMBER", .label=e_ast_container_label_io_number },
+		{ .content="AND_IF", .label=e_ast_container_label_and_if },
+		{ .content="OR_IF", .label=e_ast_container_label_or_if },
+		{ .content="CLOBBER", .label=e_ast_container_label_clobber },
+		{ .content="LESS", .label=e_ast_container_label_less },
+		{ .content="LESSAND", .label=e_ast_container_label_lessand },
+		{ .content="GREAT", .label=e_ast_container_label_great },
+		{ .content="DGREAT", .label=e_ast_container_label_dgreat },
+		{ .content="GREATAND", .label=e_ast_container_label_greatand },
+		{ .content="LESSGREAT", .label=e_ast_container_label_lessgreat },
+		{ .content="DLESS", .label=e_ast_container_label_dless },
+		{ .content="DLESSDASH", .label=e_ast_container_label_dlessdash },
+		{ .content="NEWLINE", .label=e_ast_container_label_newline },
+		{ .content="SEMICOLON", .label=e_ast_container_label_semicolon },
+		{ .content="BANG", .label=e_ast_container_label_bang },
+		{ .content="PIPE", .label=e_ast_container_label_pipe },
+		{ .content="PROGRAM", .label=e_ast_container_label_program },
+		{ .content="COMPLETE_COMMANDS", .label=e_ast_container_label_complete_commands },
+		{ .content="COMPLETE_COMMAND", .label=e_ast_container_label_complete_command },
+		{ .content="LIST", .label=e_ast_container_label_list },
+		{ .content="OPTIONAL_AND_OR", .label=e_ast_container_label_optional_and_or },
+		{ .content="AND_OR", .label=e_ast_container_label_and_or },
+		{ .content="PIPELINE", .label=e_ast_container_label_pipeline },
+		{ .content="PIPELINE_PREOP", .label=e_ast_container_label_pipeline_preop },
+		{ .content="PIPE_SEQUENCE", .label=e_ast_container_label_pipe_sequence },
+		{ .content="SIMPLE_COMMAND", .label=e_ast_container_label_simple_command },
+		{ .content="IO_REDIRECT", .label=e_ast_container_label_io_redirect },
+		{ .content="IO_OPERATOR", .label=e_ast_container_label_io_operator },
+		{ .content="NEWLINE_LIST", .label=e_ast_container_label_newline_list },
+		{ .content="SEPARATOR_OP", .label=e_ast_container_label_separator_op }
+	};
+	size_t			i;
+
+	i = 0;
+	while (i < ARRLEN(refs))
+		if (label == refs[i].label)
+		{
+			ft_dprintf(2, "label is -> %s\n", (char*)refs[i].content);
+			return ;
+		}
+		else
+			i += 1;
+	ft_dprintf(2, "label is -> ERROR\n");
+}
 
 t_bool		io_cmp(struct s_io_param *a,
 		struct s_sh_io_redirect *b)
