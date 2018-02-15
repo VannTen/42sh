@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 19:02:54 by ble-berr          #+#    #+#             */
-/*   Updated: 2017/12/15 15:20:34 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/15 11:39:56 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void	exit_badarg(char *arg)
 {
-	ft_putstr_fd("21sh: exit: ", 2);
+	ft_putstr_fd("42sh: exit: ", 2);
 	ft_putstr_fd(arg, 2);
 	ft_putstr_fd(": numeric argument required\n", 2);
 }

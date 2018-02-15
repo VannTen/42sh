@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 12:56:09 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/01/22 13:01:22 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/15 11:38:18 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	prepend_pwd(char **const curpath_loc)
 		return (0);
 	if ((pwd = getcwd(NULL, 1)) == NULL)
 	{
-		ft_putstr_fd("21sh: cd: call to getcwd() failed.", 2);
+		ft_putstr_fd("42sh: cd: call to getcwd() failed.", 2);
 		return (1);
 	}
 	str = prepended_curpath(*curpath_loc, pwd);
@@ -68,7 +68,7 @@ static int	relativize(char *curpath)
 					ft_strlen(curpath + pwd_len) + 1);
 		return (0);
 	}
-	ft_putstr_fd("21sh: cd: PWD not set, path cannot be relativized and "
+	ft_putstr_fd("42sh: cd: PWD not set, path cannot be relativized and "
 			"is too large.\n", 2);
 	return (1);
 }

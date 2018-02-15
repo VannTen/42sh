@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 12:53:57 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/01/22 15:23:48 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/15 11:37:48 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int		component_is_dir(char *curpath, size_t index)
 	curpath[index] = 0;
 	if (lstat(curpath, &component_stat))
 	{
-		ft_putstr_fd("21sh: cd -L: call to lstat() failed.\n", 2);
+		ft_putstr_fd("42sh: cd -L: call to lstat() failed.\n", 2);
 		ret = 0;
 	}
 	else if (!(component_stat.st_mode & S_IFDIR))
@@ -65,7 +65,7 @@ int				dotdot(char *curpath, size_t *const index_loc)
 		return (0);
 	if (!component_is_dir(curpath, prev))
 	{
-		ft_putstr_fd("21sh: cd: A component of the path is not a directory.\n",
+		ft_putstr_fd("42sh: cd: A component of the path is not a directory.\n",
 				2);
 		return (-1);
 	}
