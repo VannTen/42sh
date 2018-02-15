@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 12:12:51 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/14 16:09:41 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/15 14:03:06 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ static char const	g_shell_grammar[] =
 "|COMPLETE_COMMAND"
 ";"
 "COMPLETE_COMMAND"
-":LIST LIST_DELIMITOR"
-";"
-"LIST_DELIMITOR"
-":SEPARATOR_OP"
-"|"
+":LIST"
 ";"
 "LIST"
-":LIST SEPARATOR_OP AND_OR"
+":LIST SEPARATOR_OP OPTIONAL_AND_OR"
 "|AND_OR"
+";"
+"OPTIONAL_AND_OR"
+":AND_OR"
+"|"
 ";"
 "AND_OR"
 ":AND_OR AND_IF PIPELINE"
@@ -121,10 +121,10 @@ static t_exec const	g_exec_rules[] = {
 		.create=&create_list,
 		.give=&give_list,
 		.destroy=&destroy_container
-	},{ .name="LIST_DELIMITOR",
-		.create=NULL,
-		.give=NULL,
-		.destroy=NULL
+	},{ .name="OPTIONAL_AND_OR",
+		.create=&create_optional_and_or,
+		.give=&give_optional_and_or,
+		.destroy=&destroy_container
 	},{ .name="AND_OR",
 		.create=&create_and_or,
 		.give=&give_and_or,
@@ -132,6 +132,7 @@ static t_exec const	g_exec_rules[] = {
 	},{ .name="PIPELINE_PREOP",
 		.create=&create_pipeline_preop,
 		.give=&give_pipeline_preop,
+		.destroy=&destroy_container
 	},{ .name="PIPELINE",
 		.create=&create_pipeline,
 		.give=&give_pipeline,

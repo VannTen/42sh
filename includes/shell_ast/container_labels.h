@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 12:27:42 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 20:23:56 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/15 13:51:18 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ enum	e_ast_container_label
 	e_ast_container_label_complete_commands,
 	e_ast_container_label_complete_command,
 	e_ast_container_label_list,
+	e_ast_container_label_optional_and_or,
 	e_ast_container_label_and_or,
 	e_ast_container_label_pipeline,
 	e_ast_container_label_pipeline_preop,
