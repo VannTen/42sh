@@ -6,24 +6,26 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/15 15:32:21 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/15 15:43:07 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "s_container.h"
 #include "shell_ast/container_labels.h"
+#include "tokens.h"
 
 void	*create_word(void const *lex_value)
 {
-	struct s_container	*container;
+	t_token const		*token;
 
-	if (lex_value != NULL)
+	token = lex_value;
+	if (token != NULL && token->value != NULL)
 	{
-		container = new_container(lex_value, &ft_memdel, ft_strlen(lex_value) + 1,
-					e_ast_container_label_word);
-		ft_dprintf(2, "new word container->%p string:%s\n", container, lex_value);
-		return (container);
+		return (new_container(token->value,
+				&ft_memdel,
+				ft_strlen(token->value) + 1,
+				e_ast_container_label_word));
 	}
 	else
 		return (NULL);
