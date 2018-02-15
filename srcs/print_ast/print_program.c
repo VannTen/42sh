@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 17:18:03 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/15 16:10:55 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/15 18:22:09 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,8 @@ void	print_and_or(int fd, struct s_sh_and_or *and_or, int depth,
 				str = "&&";
 			else if (logic->logic == e_logic_or)
 				str = "||";
+			else if (logic->logic == e_logic_none)
+				str = "NONE";
 			else
 				str = "INVALID";
 			ft_dprintf(fd, "%.*slogic: %s\n", depth + 1, depth_padding,
