@@ -6,11 +6,12 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:04:25 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/15 14:43:12 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/15 18:29:03 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "history.h"
+#include "shell.h"
 
 /*
 ** Function adds parameter COMMAND to the existing history.
