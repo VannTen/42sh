@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 12:12:51 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/15 14:03:06 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/15 17:30:18 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static char const	g_shell_grammar[] =
 "|"
 ";"
 "AND_OR"
-":AND_OR AND_IF PIPELINE"
+":PIPELINE"
+"|AND_OR AND_IF PIPELINE"
 "|AND_OR OR_IF PIPELINE"
-"|PIPELINE"
 ";"
 "PIPELINE"
 ":PIPELINE_PREOP PIPE_SEQUENCE"
