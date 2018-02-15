@@ -2,7 +2,7 @@ NAME = 42sh
 
 CC = gcc
 
-FLAGS = -g -Wall -Wextra 
+FLAGS = -g -Wall -Wextra
 
 LIBFT  = libft/
 
@@ -18,6 +18,7 @@ OBJ_PATH = obj/
 SRC_NAME = env/add_variable_to_env.c \
 		   env/convert_env_to_array.c \
 		   env/convert_environ_to_list.c \
+		   env/clear_env_list.c \
 		   env/display_env.c \
 		   env/ft_getenv.c \
 		   env/init_env.c \
