@@ -83,6 +83,7 @@ SRC_NAME = env/add_variable_to_env.c \
 		   ast_generation/lessand.c \
 		   ast_generation/lessgreat.c \
 		   ast_generation/list.c \
+		   ast_generation/optional_and_or.c \
 		   ast_generation/or_if.c \
 		   ast_generation/pipe_sequence.c \
 		   ast_generation/pipeline.c \

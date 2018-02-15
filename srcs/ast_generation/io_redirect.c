@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/14 10:07:06 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/15 16:50:09 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,11 @@ static t_bool	add_io_number(struct s_sh_io_redirect *const io_redirect,
 static t_bool	set_io_type(struct s_sh_io_redirect *const io_redirect,
 		struct s_io_param const template)
 {
-	if (io_redirect != NULL && io_redirect->type == e_sh_io_type_none
-			&& (io_redirect->ionum != NULL
-				|| (io_redirect->ionum = ft_strdup(template.ionum)) != NULL))
+	if (io_redirect != NULL && io_redirect->type == e_sh_io_type_none)
 	{
+		if (io_redirect->ionum == NULL)
+			if ((io_redirect->ionum = ft_strdup(template.ionum)) == NULL)
+				return (FALSE);
 		io_redirect->type = template.type;
 		io_redirect->flags = template.flags;
 		io_redirect->mode = template.mode;
@@ -68,7 +69,7 @@ static t_bool	set_io_type(struct s_sh_io_redirect *const io_redirect,
 }
 
 static t_bool	add_io_operator(struct s_sh_io_redirect *const io_redirect,
-		enum e_ast_container_label const redirect_label)
+		struct s_container *operator_container)
 {
 	struct s_io_reference const	refs[] = {
 		{ .label=e_ast_container_label_clobber, .param=CLOBBER_PARAM },
@@ -83,12 +84,15 @@ static t_bool	add_io_operator(struct s_sh_io_redirect *const io_redirect,
 	};
 	size_t						i;
 
-	i = 0;
-	while (i < ARRLEN(refs))
-		if (refs[i].label == redirect_label)
-			return (set_io_type(io_redirect, refs[i].param));
-		else
-			i += 1;
+	if (operator_container != NULL)
+	{
+		i = 0;
+		while (i < ARRLEN(refs))
+			if (refs[i].label == operator_container->label)
+				return (set_io_type(io_redirect, refs[i].param));
+			else
+				i += 1;
+	}
 	return (FALSE);
 }
 
@@ -120,7 +124,7 @@ t_bool			give_io_redirect(void *construct, void *sub_construct)
 		if (sub->label == e_ast_container_label_io_number)
 			ret = add_io_number(io_redirect, sub);
 		else if (sub->label == e_ast_container_label_io_operator)
-			ret = add_io_operator(io_redirect, sub->label);
+			ret = add_io_operator(io_redirect, sub->content);
 		else if (sub->label == e_ast_container_label_word)
 			ret = add_target(io_redirect, sub);
 		if (ret == TRUE)
@@ -136,10 +140,8 @@ void	destroy_io_redirect(void **const io_redirect_loc)
 	todel = (io_redirect_loc != NULL) ? (*io_redirect_loc) : (NULL);
 	if (todel != NULL)
 	{
-		free(todel->ionum);
-		todel->ionum = NULL;
-		free(todel->target);
-		todel->target = NULL;
+		ft_strdel(&(todel->ionum));
+		ft_strdel(&(todel->target));
 		free(todel);
 		*io_redirect_loc = NULL;
 	}

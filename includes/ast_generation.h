@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 13:22:27 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/14 10:06:11 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/15 13:52:08 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ void	destroy_complete_command(void **complete_command_loc);
 void	*create_list(void const *lex_value);
 t_bool	give_list(void *construct, void *sub_construct);
 void	destroy_list(void **list_loc);
+
+void	*create_optional_and_or(void const *lex_value);
+t_bool	give_optional_and_or(void *construct, void *sub_construct);
 
 void	*create_and_or(void const *lex_value);
 t_bool	give_and_or(void *construct, void *sub_construct);

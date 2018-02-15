@@ -6,26 +6,30 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 11:17:55 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/15 11:24:01 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/15 13:18:11 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include "env.h"
+#include "libft.h"
+#include <stdlib.h>
 
-void	clear_env_list(t_env_list **env_list)
+void	clear_env_list(t_env_list **env_list_loc)
 {
-	t_env_list	*ptr;
+	t_env_list	*todel;
+	t_env_list	*env_list;
 
-	if (env_list)
+	if (env_list_loc)
 	{
-		ptr = *env_list;
-		while (*env_list)
+		env_list = *env_list_loc;
+		while (env_list)
 		{
-			ptr = ptr->next;
-			ft_strdel(&env_list->name);
-			ft_strdel(&env_list->value);
-			ft_memdel((void**)env_list);
-			*env_list = ptr;
+			todel = env_list;
+			env_list = env_list->next;
+			ft_strdel(&todel->name);
+			ft_strdel(&todel->value);
+			free(todel);
 		}
+		*env_list_loc = NULL;
 	}
 }
