@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/14 10:07:06 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/15 16:45:20 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ static t_bool	extend_redirections(struct s_sh_simple_command *const simple_comma
 			&& io_redirection_container->content != NULL
 			&& f_pushend_lst(&(simple_command->redirs),
 				io_redirection_container->content) == NULL)
+	{
+		io_redirection_container->content = NULL;
 		return (TRUE);
+	}
 	else
 		return (FALSE);
 }
