@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 17:18:03 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/14 10:38:48 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/15 15:13:49 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_bool		io_cmp(struct s_io_param *a,
 		struct s_sh_io_redirect *b)
 {
 	if (a != NULL && b != NULL
-			&&a->type == b->type
+			&& a->type == b->type
 			&& a->flags == b->flags
 			&& a->mode == b->mode
 			&& a->variant == b->variant)

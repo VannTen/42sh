@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/14 10:07:06 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/15 14:57:45 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static t_bool	extend_and_or(struct s_sh_and_or *const and_or,
 	{
 		new->logic = e_logic_none;
 		new->pipeline = pipeline;
+		new->next = NULL;
 		tmp = and_or->sequence;
 		if (tmp != NULL)
 		{
