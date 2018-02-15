@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/15 14:57:45 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/15 18:50:55 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,17 @@ void	*create_and_or(void const *lex_value)
 }
 
 static t_bool	extend_and_or(struct s_sh_and_or *const and_or,
-		void *const pipeline)
+		struct s_container *const pipeline_container)
 {
 	struct s_and_or_logic	*new;
 	struct s_and_or_logic	*tmp;
 
-	if (pipeline != NULL
+	if (pipeline_container != NULL && pipeline_container->content != NULL
 			&& (new = (struct s_and_or_logic *)malloc(sizeof(*new))) != NULL)
 	{
 		new->logic = e_logic_none;
-		new->pipeline = pipeline;
+		new->pipeline = pipeline_container->content;
+		pipeline_container->content = NULL;
 		new->next = NULL;
 		tmp = and_or->sequence;
 		if (tmp != NULL)
@@ -85,27 +86,40 @@ t_bool			give_and_or(void *construct, void *sub_construct)
 			else
 				ret = set_logic(and_or->sequence, sub->label);
 			if (ret == TRUE)
-				;
+				destroy_container((void**)&sub);
 		}
 	}
 	return (ret);
 }
 
+static void	destroy_and_or_sequence(void **sequence_loc)
+{
+	struct s_and_or_logic	*sequence;
+	struct s_and_or_logic	*todel;
+
+	if (sequence_loc != NULL)
+	{
+		sequence = *sequence_loc;
+		while (sequence != NULL)
+		{
+			todel = sequence;
+			sequence = sequence->next;
+			if (todel->pipeline != NULL)
+				destroy_pipeline(&(todel->pipeline));
+			free(todel);
+		}
+		*sequence_loc = NULL;
+	}
+}
+
 void	destroy_and_or(void **const and_or_loc)
 {
 	struct s_sh_and_or		*todel;
-	struct s_and_or_logic	*todel_sequence;
 
 	todel = (and_or_loc != NULL) ? (*and_or_loc) : (NULL);
 	if (todel != NULL)
 	{
-		while (todel->sequence != NULL)
-		{
-			todel_sequence = todel->sequence;
-			todel->sequence = todel_sequence->next;
-			destroy_pipeline(todel_sequence->pipeline);
-			free(todel_sequence);
-		}
+		destroy_and_or_sequence((void**)&(todel->sequence));
 		free(todel);
 		*and_or_loc = NULL;
 	}
