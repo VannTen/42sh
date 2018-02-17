@@ -1,21 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell_unsetenv.c                                   :+:      :+:    :+:   */
+/*   builtin_unsetenv.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/26 19:44:49 by ble-berr          #+#    #+#             */
-/*   Updated: 2017/12/13 16:10:45 by ble-berr         ###   ########.fr       */
+/*   Created: 2018/02/16 08:36:15 by ble-berr          #+#    #+#             */
+/*   Updated: 2018/02/16 09:42:08 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int	shell_unsetenv(char const *name)
+int	builtin_unsetenv(char **argv, t_env *env)
 {
-	union u_envop_data	data;
-
-	data.unsetenv.name = name;
-	return (envop(e_envop_id_unsetenv, data).unsetenv);
+	if (!argv || !argv[0] || !env)
+	{
+		ft_dprintf(STDERR_FILENO, "unsetenv: invalid parameters\n");
+		return (42);
+	}
+	if (argv[1])
+	{
+		if (is_valid_env_variable_name(argv[1]))
+		{
+			(void)remove_variable_from_env(env->env_list, argv[1]);
+			return (0);
+		}
+		else
+			ft_dprintf(STDERR_FILENO, "%s: not a valid variable name\n",
+					argv[1]);
+	}
+	else
+		ft_dprintf(STDERR_FILENO, "unsetenv: too few arguments.\n");
+	return (42);
 }
