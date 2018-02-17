@@ -15,7 +15,7 @@
 # include "tokens.h"
 # include "libft.h"
 # define INITIAL_TOKEN_SIZE 1
-# define MAX_TOKENS 18
+# define MAX_TOKENS 17
 # define MAX_OP_CHAR 7
 
 enum		e_state

@@ -28,12 +28,11 @@ enum
 	AND_IF,
 	OR_IF,
 	SEMI,
-	AND,
+	BANG,
 	PIPE,
 	CLOBBER,
 	LESS_GREAT,
 	DLESSDASH,
-	BANG,
 };
 
 typedef struct		s_token
