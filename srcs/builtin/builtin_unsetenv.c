@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_unsetenv.c                                 :+:      :+:    :+:   */
+/*   shell_unsetenv.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/26 18:59:10 by ble-berr          #+#    #+#             */
-/*   Updated: 2017/12/15 17:55:30 by ble-berr         ###   ########.fr       */
+/*   Created: 2017/11/26 19:44:49 by ble-berr          #+#    #+#             */
+/*   Updated: 2017/12/13 16:10:45 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-int	builtin_unsetenv(char **args)
+int	shell_unsetenv(char const *name)
 {
-	if (args == NULL || *args == NULL)
-	{
-		shell_errmsg(e_shell_errmsg_inval, __FUNCTION__);
-		return (-1);
-	}
-	else if (args[1] == NULL || args[2] != NULL || ft_strchr(args[1], '='))
-	{
-		ft_putstr_fd("usage: unsetenv [name]\n", 1);
-		return (1);
-	}
-	return (shell_unsetenv(args[1]));
+	union u_envop_data	data;
+
+	data.unsetenv.name = name;
+	return (envop(e_envop_id_unsetenv, data).unsetenv);
 }

@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 12:56:09 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/15 11:38:18 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/16 08:28:36 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ static int	prepend_pwd(char **const curpath_loc)
 	return (1);
 }
 
-static int	relativize(char *curpath)
+static int	relativize(char *curpath, t_env *env)
 {
 	char const	*pwd;
 	size_t		pwd_len;
 
-	pwd = shell_getenv("PWD");
+	pwd = ft_getenv(env->env_list, "PWD");
 	if (pwd != NULL)
 	{
 		pwd_len = ft_strlen(pwd);
@@ -73,7 +73,8 @@ static int	relativize(char *curpath)
 	return (1);
 }
 
-int			make_logical(char **const curpath_loc, char **const new_pwd_loc)
+int			make_logical(char **const curpath_loc, char **const new_pwd_loc,
+		t_env *env)
 {
 	if (prepend_pwd(curpath_loc) || canonicalize(*curpath_loc))
 		return (1);
@@ -83,7 +84,7 @@ int			make_logical(char **const curpath_loc, char **const new_pwd_loc)
 		shell_errmsg(e_shell_errmsg_alloc, "cd");
 		return (1);
 	}
-	if (PATH_MAX <= ft_strlen(*curpath_loc) && relativize(*curpath_loc))
+	if (PATH_MAX <= ft_strlen(*curpath_loc) && relativize(*curpath_loc, env))
 		return (1);
 	return (0);
 }

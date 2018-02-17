@@ -6,25 +6,24 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 11:47:26 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/15 11:40:20 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/16 08:23:52 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
-
-static int	change_pwd_value(char *new_value, int const options)
+static int	change_pwd_value(char *new_value, int const options, t_env *env)
 {
 	char const	*cur_value;
 	int			ret;
 
 	ret = 0;
-	cur_value = shell_getenv("PWD");
-	if (cur_value != NULL && shell_setenv("OLDPWD", cur_value, 1))
+	cur_value = ft_getenv("PWD", env->env_list);
+	if (cur_value != NULL
+			&& append_variable_to_env(env, "OLDPWD", cur_value, GLOBAL))
 	{
 		ft_putstr_fd("42sh: cd: Failed to update OLDPWD.\n", 2);
 		ret = 1;
 	}
-	if (shell_setenv("PWD", new_value, 1))
+	if (append_variable_to_env(env, "PWD", new_value, GLOBAL))
 	{
 		ft_putstr_fd("42sh: cd: Failed to update PWD.\n", 2);
 		ret = 1;
@@ -35,11 +34,11 @@ static int	change_pwd_value(char *new_value, int const options)
 }
 
 static int	change_directory(char *curpath, char **const pwd_loc,
-		int const options)
+		int const options, t_env *env)
 {
 	if (!chdir(curpath))
 		if (*pwd_loc != NULL || (*pwd_loc = getcwd(NULL, 1)) != NULL)
-			return (change_pwd_value(*pwd_loc, options));
+			return (change_pwd_value(*pwd_loc, options, env));
 		else
 			ft_putstr_fd("42sh: cd: Unable to update PWD and OLDPWD, "
 					"failed to obtain present working directory.\n", 2);
@@ -48,7 +47,7 @@ static int	change_directory(char *curpath, char **const pwd_loc,
 	return (1);
 }
 
-int			builtin_cd(char **args)
+int			builtin_cd(char **args, t_env *env)
 {
 	int		options;
 	char	*curpath;
@@ -62,8 +61,8 @@ int			builtin_cd(char **args)
 	if ((directory_arg_index = cd_get_options(args, &options)) == 0
 			|| get_physical_path(args[directory_arg_index], &curpath)
 			|| ((options & e_cdopt_logical)
-				&& make_logical(&curpath, &new_pwd_value))
-			|| change_directory(curpath, &new_pwd_value, options))
+				&& make_logical(&curpath, &new_pwd_value, env))
+			|| change_directory(curpath, &new_pwd_value, options, env))
 		ret = 1;
 	else
 		ret = 0;

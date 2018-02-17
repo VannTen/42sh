@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:04:41 by ble-berr          #+#    #+#             */
-/*   Updated: 2017/11/26 17:52:38 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/15 09:47:16 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 #include "ft_echo.h"
 #include <unistd.h>
 
-int				builtin_echo(char **args)
+int				builtin_echo(char **args, t_env *env)
 {
 	size_t	len;
 	int		cancel;
 
+	(void)env;
 	if (args == NULL || *args == NULL)
 		return (-1);
 	cancel = 0;

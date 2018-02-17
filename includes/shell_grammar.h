@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 12:12:51 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/15 17:30:18 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/17 13:37:48 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,22 +83,22 @@ static char const	g_shell_grammar[] =
 
 static char const	*tokens_name[] = {
 	"WORD",
+	"NEWLINE",
+	"IO_NUMBER",
+	"DLESS",
+	"DGREAT",
+	"LESSAND",
+	"GREATAND",
+	"LESS",
+	"GREAT",
 	"AND_IF",
 	"OR_IF",
-	"PIPE",
-	"IO_NUMBER",
-	"LESS",
-	"DLESS",
-	"DLESSDASH",
-	"LESSAND",
-	"LESSGREAT",
-	"GREAT",
-	"DGREAT",
-	"GREATAND",
-	"CLOBBER",
-	"NEWLINE",
 	"SEMICOLON",
 	"BANG",
+	"PIPE",
+	"CLOBBER",
+	"DLESSDASH",
+	"LESSGREAT",
 	NULL
 };
 

@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 19:02:54 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/15 11:39:56 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/16 08:28:19 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ static int	exit_arg_check(char **args)
 	return (0);
 }
 
-int			builtin_exit(char **args)
+int			builtin_exit(char **args, t_env *env)
 {
 	extern int		g_latest_return;
 	unsigned char	exit_value;
 
+	(void)env;
 	if (exit_arg_check(args))
 		return (-1);
 	if (args[1] == NULL)

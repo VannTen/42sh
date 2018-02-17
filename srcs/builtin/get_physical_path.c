@@ -6,17 +6,17 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 12:52:33 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/01/22 13:40:55 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/14 18:24:51 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static char	const	*get_home_dir(void)
+static char	const	*get_home_dir(t_env *env)
 {
 	char const	*home_dir;
 
-	home_dir = shell_getenv("HOME");
+	home_dir = ft_getenv(env->env_list, "HOME");
 	if (home_dir == NULL)
 	{
 		ft_putstr_fd("21sh: cd: HOME not set.\n", 2);
@@ -50,13 +50,13 @@ static int			combine(char const *directory, char const *prepath,
 	return (1);
 }
 
-static char			*parse_cdpath(char const *directory)
+static char			*parse_cdpath(char const *directory, t_env *env)
 {
 	char const	*cdpath;
 	char const	*tmp;
 	char		*path;
 
-	if ((cdpath = shell_getenv("CDPATH")) == NULL)
+	if ((cdpath = ft_getenv(env->env_list, "CDPATH")) == NULL)
 		return (ft_strdup(directory));
 	while (cdpath[0] == ':')
 		cdpath += 1;
@@ -78,12 +78,12 @@ static char			*parse_cdpath(char const *directory)
 }
 
 int					get_physical_path(char const *directory,
-		char **const curpath_loc)
+		char **const curpath_loc, t_env *env)
 {
-	if (directory == NULL && (directory = get_home_dir()) == NULL)
+	if (directory == NULL && (directory = get_home_dir(env)) == NULL)
 		return (1);
 	else if (!ft_strcmp(directory, "-")
-			&& (directory = shell_getenv("OLDPWD")) == NULL)
+			&& (directory = ft_getenv(env->env_list, "OLDPWD")) == NULL)
 	{
 		ft_putstr_fd("21sh: cd: OLDPWD not set\n", 2);
 		return (1);
@@ -94,7 +94,7 @@ int					get_physical_path(char const *directory,
 				&& ft_strchr("/", directory[1])))
 		*curpath_loc = ft_strdup(directory);
 	else
-		*curpath_loc = parse_cdpath(directory);
+		*curpath_loc = parse_cdpath(directory, env);
 	if (*curpath_loc == NULL)
 	{
 		shell_errmsg(e_shell_errmsg_alloc, "cd");
