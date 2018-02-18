@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/15 18:50:55 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/17 13:40:39 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	*create_and_or(void const *lex_value)
 
 	(void)lex_value;
 	and_or.sequence = NULL;
-	container = new_container(&and_or, &destroy_and_or, sizeof(and_or), e_ast_container_label_and_or);
+	container = new_container(&and_or, &destroy_and_or, sizeof(and_or),
+			e_ast_container_label_and_or);
 	return (container);
 }
 
