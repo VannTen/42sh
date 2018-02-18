@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/14 10:07:06 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/18 09:15:28 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_bool	give_complete_command(void *construct, void *sub_construct)
 				&& complete_command->list == NULL)
 		{
 			complete_command->list = sub->content;
+			sub->content = NULL;
 			ret = TRUE;
 		}
 		if (ret == TRUE)
@@ -59,7 +60,7 @@ void	destroy_complete_command(void **const complete_command_loc)
 	todel = (complete_command_loc != NULL) ? (*complete_command_loc) : (NULL);
 	if (todel != NULL)
 	{
-		destroy_list(&(todel->list));
+		destroy_sh_list(&(todel->list));
 		free(todel);
 		*complete_command_loc = NULL;
 	}

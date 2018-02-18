@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 12:12:51 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/17 13:37:48 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/18 09:09:30 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ static t_exec const	g_exec_rules[] = {
 		.give=&give_complete_command,
 		.destroy=&destroy_container
 	},{ .name="LIST",
-		.create=&create_list,
-		.give=&give_list,
+		.create=&create_sh_list,
+		.give=&give_sh_list,
 		.destroy=&destroy_container
 	},{ .name="OPTIONAL_AND_OR",
 		.create=&create_optional_and_or,
