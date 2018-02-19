@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 12:43:04 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/14 15:01:56 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/19 20:47:54 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,29 @@ static int	expand_hashtag(t_string *exp_input, char **input)
 	return (0);
 }
 
-static int	expansion_digit(t_history *history, t_string *exp_input,
-							const char *s, char **input)
+static int	expansion_digit(t_history *history, t_string *exp_input, char *s,
+							char **input)
 {
-	int num;
+	int		num;
+	char	*n;
 
+	n = (*s == '-') ? s + 1 : s;
+	while (ft_isdigit(*n))
+		n++;
+	n = ft_strndup(s, n - s);
+	if (*s == '-')
+	{
+		if (ft_strlen(n) > 11 && ft_strcmp(n, INT_MIN_STR) > 0)
+			return (EVENT_NOT_FOUND);
+	}
+	else
+		if (ft_strlen(n) > 10 && ft_strcmp(n, INT_MAX_STR) > 0)
+			return (EVENT_NOT_FOUND);
 	num = ft_atoi(s);
 	if (get_cmd_num(history, exp_input, num) == 1)
 		return (EVENT_NOT_FOUND);
-	(*input) += ft_nb_digit_base(num, 10);
+	(*input) += ft_strlen(n);
+	ft_strdel(&n);
 	return (0);
 }
 

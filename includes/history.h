@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 14:58:40 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/19 17:06:49 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/19 20:46:22 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <pwd.h>
 
 # define DEFAULT_HISTSIZE 10000
+# define INT_MAX_STR "2147483647"
+# define INT_MIN_STR "-2147483648"
 
 typedef struct	s_string
 {
