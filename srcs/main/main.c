@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/14 14:53:28 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/19 17:18:43 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ int			main(int argc, char **argv, char **environ)
 		if (lexer(&bsh->lexer, bsh->input.buffer) == MALLOC_FAIL
 		|| update_history(&bsh->history, &bsh->input) == MALLOC_FAIL)
 			continue ;
-		display_history(bsh->history);
+		display_history(&bsh->history);
 		//execute_construct(parser, "PROGRAM", &bsh->lexer.tokens[0], take_token);
 	}
 	return (0);
