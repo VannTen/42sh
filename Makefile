@@ -70,7 +70,6 @@ SRC_NAME = env/add_variable_to_env.c \
 		   ast_generation/bang.c \
 		   ast_generation/clobber.c \
 		   ast_generation/complete_command.c \
-		   ast_generation/complete_commands.c \
 		   ast_generation/dgreat.c \
 		   ast_generation/dless.c \
 		   ast_generation/dlessdash.c \

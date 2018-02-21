@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/14 10:07:06 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/21 18:15:30 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ t_bool	give_program(void *construct, void *sub_construct)
 	{
 		program = ((struct s_container*)construct)->content;
 		sub = sub_construct;
-		if (sub->label == e_ast_container_label_complete_commands)
+		if (sub->label == e_ast_container_label_complete_command)
 		{
-			program->complete_commands = sub->content;
+			program->complete_command = sub->content;
 			sub->content = 0;
 			ret = TRUE;
 		}

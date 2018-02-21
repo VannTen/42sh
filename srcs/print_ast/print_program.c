@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 17:18:03 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/15 18:22:09 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/21 18:26:34 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,26 +228,6 @@ void	print_complete_command(int fd,
 				depth_padding);
 }
 
-void	print_complete_commands(int fd,
-		struct s_sh_complete_commands *complete_commands, int depth,
-		char const *const depth_padding)
-{
-	t_lst	*sequence;
-
-	ft_dprintf(fd, "%.*scomplete_commands: %s\n", depth, depth_padding,
-			complete_commands ? "OK" : "NULL");
-	if (complete_commands)
-	{
-		sequence = complete_commands->sequence;
-		while (sequence != NULL)
-		{
-			print_complete_commands(fd, (void*)f_lst_first_elem(sequence), depth + 1,
-				depth_padding);
-			sequence = advance_list(sequence, 1);
-		}
-	}
-}
-
 void	print_program(int fd, struct s_sh_program *program, int depth)
 {
 	char	depth_padding[MAX_AST_DEPTH + 1];
@@ -258,7 +238,7 @@ void	print_program(int fd, struct s_sh_program *program, int depth)
 			program ? "OK" : "NULL");
 	if (program != NULL)
 	{
-		print_complete_commands(fd, program->complete_commands, depth + 1,
+		print_complete_command(fd, program->complete_command, depth + 1,
 				depth_padding);
 	}
 }

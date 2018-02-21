@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 10:00:26 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 21:37:35 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/21 18:08:45 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define SHELL_AST_H
 
 # include "shell_ast/program.h"
-# include "shell_ast/complete_commands.h"
 # include "shell_ast/complete_command.h"
 # include "shell_ast/list.h"
 # include "shell_ast/and_or.h"
