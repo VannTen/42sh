@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 12:43:04 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/19 20:47:54 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/21 15:48:17 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,23 @@ static int	expand_hashtag(t_string *exp_input, char **input)
 	return (0);
 }
 
+static int	check_number_validity(const char *n, const char *s)
+{
+	if (*s == '-')
+	{
+		if (ft_strlen(n) > 10
+				|| (ft_strlen(n) == 10 && ft_strcmp(n, INT_MIN_STR) > 0))
+			return (EVENT_NOT_FOUND);
+	}
+	else
+	{
+		if (ft_strlen(n) > 10
+				|| (ft_strlen(n) == 10 && ft_strcmp(n, INT_MAX_STR) > 0))
+			return (EVENT_NOT_FOUND);
+	}
+	return (0);
+}
+
 static int	expansion_digit(t_history *history, t_string *exp_input, char *s,
 							char **input)
 {
@@ -32,20 +49,18 @@ static int	expansion_digit(t_history *history, t_string *exp_input, char *s,
 	n = (*s == '-') ? s + 1 : s;
 	while (ft_isdigit(*n))
 		n++;
-	n = ft_strndup(s, n - s);
-	if (*s == '-')
+	if (!(n = ft_strndup(s, n - s)))
+		return (MALLOC_FAIL);
+	if (check_number_validity(n, s) == EVENT_NOT_FOUND)
 	{
-		if (ft_strlen(n) > 11 && ft_strcmp(n, INT_MIN_STR) > 0)
-			return (EVENT_NOT_FOUND);
-	}
-	else
-		if (ft_strlen(n) > 10 && ft_strcmp(n, INT_MAX_STR) > 0)
-			return (EVENT_NOT_FOUND);
-	num = ft_atoi(s);
-	if (get_cmd_num(history, exp_input, num) == 1)
+		ft_strdel(&n);
 		return (EVENT_NOT_FOUND);
+	}
+	num = ft_atoi(s);
 	(*input) += ft_strlen(n);
 	ft_strdel(&n);
+	if (get_cmd_num(history, exp_input, num) == 1)
+		return (EVENT_NOT_FOUND);
 	return (0);
 }
 
