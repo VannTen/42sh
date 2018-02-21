@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 08:30:37 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/17 11:11:26 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/21 11:50:29 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	init_env_cpy(t_env *env_cpy, t_env *env)
 	return (0);
 }
 
-static int	modif_env_and_exec(char **argv, t_env *env_cpy, char const *path)
+static char	**modif_env(char **argv, t_env *env_cpy, char const *path)
 {
 	char	*tmp;
 	
@@ -90,6 +90,29 @@ static int	modif_env_and_exec(char **argv, t_env *env_cpy, char const *path)
 	}
 }
 
+static int	builtin_env_utility(char **argv, t_env *env_cpy, char *path)
+{
+	int					ret;
+	struct s_shx_global	tmp;
+
+	if (argv[0] == NULL)
+		ret = display_global_env(env_cpy->env_list);
+	else
+	{
+		if (ft_strchr(argv[0], '/') != NULL)
+			path = argv[0];
+		else if (!path || !(path = path_search(argv[0], path)))
+		{
+			ft_dprintf(2, "%s: command not found.\n", argv[0]);
+			return (42);
+		}
+		tmp.env = env_cpy;
+		tmp.hash_table = NULL;
+		tmp.latest_ret = 0;
+		ret = launch_external(path, argv, &tmp, FALSE);
+	}
+}
+
 int	builtin_env(char **argv, t_env *env)
 {
 	t_env		env_cpy;
@@ -105,9 +128,10 @@ int	builtin_env(char **argv, t_env *env)
 	ignore_env = (argv[1] && ft_strcmp(argv[1], "-i") == 0);
 	if (init_env_cpy(&env_cpy, ingore_env ? NULL : env))
 		return (42);
-	if (!(path = ft_getenv(env->env_list, "PATH")))
-		path = "";
 	argv = modif_env(argv + (ignore_env ? 2 : 1), &env_cpy);
+	if (!(path = ft_getenv(env_cpy.env_list, "PATH")))
+		path = ft_getenv(env->env_list, "PATH");
+	ret = argv ? builtin_env_utility(argv, &env_cpy, path) : 42;
 	clear_env_list(&env_cpy.env_list);
 	return (ret);
 }
