@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/15 16:50:09 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/21 22:42:58 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,13 @@ static t_bool	add_target(struct s_sh_io_redirect *const io_redirect,
 	if (io_redirect != NULL && word_container != NULL
 			&& io_redirect->target == NULL && word_container->content != NULL)
 	{
-		io_redirect->target = word_container->content;
+		if (io_redirect->type != e_sh_io_type_here)
+			io_redirect->target = word_container->content;
+		else
+		{
+			io_redirect->target = create_heredoc(word_container->content);
+			free(word_container->content);
+		}
 		word_container->content = NULL;
 		return (TRUE);
 	}

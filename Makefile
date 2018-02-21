@@ -78,6 +78,7 @@ SRC_NAME = env/add_variable_to_env.c \
 		   ast_generation/io_number.c \
 		   ast_generation/io_operator.c \
 		   ast_generation/io_redirect.c \
+		   ast_generation/create_heredoc.c \
 		   ast_generation/less.c \
 		   ast_generation/lessand.c \
 		   ast_generation/lessgreat.c \

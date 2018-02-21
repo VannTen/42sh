@@ -1,34 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   io_redirect.h                                      :+:      :+:    :+:   */
+/*   io_here.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 09:24:49 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/21 22:42:29 by ble-berr         ###   ########.fr       */
+/*   Created: 2018/02/21 22:38:48 by ble-berr          #+#    #+#             */
+/*   Updated: 2018/02/21 22:40:34 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHELL_AST_REDIRECTION_H
-# define SHELL_AST_REDIRECTION_H
+#ifndef IO_HERE_H
+# define IO_HERE_H
 
-enum	e_sh_io_type
-{
-	e_sh_io_type_none,
-	e_sh_io_type_file,
-	e_sh_io_type_here,
-	e_sh_io_type_aggregate
-};
-
-struct s_sh_io_redirect
-{
-	char				*ionum;
-	enum e_sh_io_type	type;
-	char				*target;
-	int					flags;
-	int					mode;
-	int					variant;
-};
+# define HEREDOC_PREFIX "/tmp/.42sh_heredoc_"
+# define HEREDOC_MAX_ID_LEN 16
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 09:33:00 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 21:39:12 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/21 22:41:06 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,7 @@ struct	s_io_reference
 # define GREATAND_PARAM { "1", e_sh_io_type_aggregate, 0, 0, 0 }
 
 # define LESSAND_PARAM { "0", e_sh_io_type_aggregate, 0, 0, 0 }
+
+char	*create_heredoc(char const *const here_end);
 
 #endif
