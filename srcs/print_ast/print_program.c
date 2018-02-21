@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 17:18:03 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/21 18:26:34 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/21 22:44:17 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	print_container_label(int label)
 		{ .content="BANG", .label=e_ast_container_label_bang },
 		{ .content="PIPE", .label=e_ast_container_label_pipe },
 		{ .content="PROGRAM", .label=e_ast_container_label_program },
-		{ .content="COMPLETE_COMMANDS", .label=e_ast_container_label_complete_commands },
 		{ .content="COMPLETE_COMMAND", .label=e_ast_container_label_complete_command },
 		{ .content="LIST", .label=e_ast_container_label_list },
 		{ .content="OPTIONAL_AND_OR", .label=e_ast_container_label_optional_and_or },
