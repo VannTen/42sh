@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/21 18:15:30 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/21 22:51:41 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*create_program(void const *lex_value)
 	struct s_sh_program	program;
 
 	(void)lex_value;
-	program.complete_commands = NULL;
+	program.complete_command = NULL;
 	container = new_container(&program, &destroy_program, sizeof(program), e_ast_container_label_program);
 	return (container);
 }
@@ -58,7 +58,7 @@ void	destroy_program(void **const program_loc)
 	todel = (program_loc != NULL) ? (*program_loc) : (NULL);
 	if (todel != NULL)
 	{
-		destroy_complete_commands(&(todel->complete_commands));
+		destroy_complete_command(&(todel->complete_command));
 		free(todel);
 		*program_loc = NULL;
 	}

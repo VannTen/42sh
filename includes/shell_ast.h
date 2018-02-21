@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 10:00:26 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/21 18:08:45 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/21 22:44:41 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@
 # include "s_shx_global.h"
 
 int	shx_program(struct s_sh_program *const program,
-		struct s_shx_global *const global);
-int	shx_complete_commands(struct s_sh_complete_commands *const complete_commands,
 		struct s_shx_global *const global);
 int	shx_complete_command(struct s_sh_complete_command *const complete_command,
 		struct s_shx_global *const global);
