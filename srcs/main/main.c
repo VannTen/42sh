@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/13 21:55:14 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/21 17:42:49 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ size_t	get_tok_id(void const *token)
 {
 	t_token const *tok;
 
-	if (token == tokens_name)
+	if (token == g_tokens_name)
 		return (DLESSDASH + 1);
 	tok = token;
 	return (tok->type);
@@ -157,7 +157,7 @@ void	*take_token(void *token_list_address)
 		return (token);
 	}
 	else
-		return ((void*)tokens_name);
+		return ((void*)g_tokens_name);
 }
 
 #include "parser_interface.h"
@@ -197,7 +197,7 @@ int main(int argc, char **argv, char **environ)
 	init_input(&bsh->input, &bsh->term, &bsh->history);
 	init_env(&bsh->env, environ);
 	init_termcaps(bsh);
-	parser = generate_parser(g_shell_grammar, tokens_name, g_exec_rules, get_tok_id);
+	parser = generate_parser(g_shell_grammar, g_tokens_name, g_exec_rules, get_tok_id);
 	print_grammar_back(STDERR_FILENO, parser->grammar);
 	while (42)
 	{

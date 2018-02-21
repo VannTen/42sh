@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 12:12:51 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/18 09:09:30 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/21 17:41:40 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,12 @@
 # include <stddef.h>
 # include "parser_defs.h"
 # include "s_container.h"
+# include "ast_generation.h"
 
 static char const	g_shell_grammar[] =
 "PROGRAM"
-":COMPLETE_COMMANDS"
-";"
-"COMPLETE_COMMANDS"
-":COMPLETE_COMMANDS NEWLINE_LIST COMPLETE_COMMAND"
-"|COMPLETE_COMMAND"
+":COMPLETE_COMMAND NEWLINE"
+"|NEWLINE"
 ";"
 "COMPLETE_COMMAND"
 ":LIST"
@@ -73,15 +71,11 @@ static char const	g_shell_grammar[] =
 "|DLESSDASH"
 "|CLOBBER"
 ";"
-"NEWLINE_LIST"
-":NEWLINE_LIST NEWLINE"
-"|NEWLINE"
-";"
 "SEPARATOR_OP"
 ":SEMICOLON"
 ";";
 
-static char const	*tokens_name[] = {
+static char const	*g_tokens_name[] = {
 	"WORD",
 	"NEWLINE",
 	"IO_NUMBER",
@@ -97,139 +91,113 @@ static char const	*tokens_name[] = {
 	"BANG",
 	"PIPE",
 	"CLOBBER",
-	"DLESSDASH",
 	"LESSGREAT",
+	"DLESSDASH",
 	NULL
 };
-
-#include "ast_generation.h"
 
 static t_exec const	g_exec_rules[] = {
 	{ .name="PROGRAM",
 		.create=&create_program,
 		.give=&give_program,
 		.destroy=&destroy_container
-	},{ .name="COMPLETE_COMMANDS",
-		.create=&create_complete_commands,
-		.give=&give_complete_commands,
-		.destroy=&destroy_container
-	},{ .name="COMPLETE_COMMAND",
+	}, { .name="COMPLETE_COMMAND",
 		.create=&create_complete_command,
 		.give=&give_complete_command,
 		.destroy=&destroy_container
-	},{ .name="LIST",
+	}, { .name="LIST",
 		.create=&create_sh_list,
 		.give=&give_sh_list,
 		.destroy=&destroy_container
-	},{ .name="OPTIONAL_AND_OR",
+	}, { .name="OPTIONAL_AND_OR",
 		.create=&create_optional_and_or,
 		.give=&give_optional_and_or,
 		.destroy=&destroy_container
-	},{ .name="AND_OR",
+	}, { .name="AND_OR",
 		.create=&create_and_or,
 		.give=&give_and_or,
 		.destroy=&destroy_container
-	},{ .name="PIPELINE_PREOP",
+	}, { .name="PIPELINE_PREOP",
 		.create=&create_pipeline_preop,
 		.give=&give_pipeline_preop,
 		.destroy=&destroy_container
-	},{ .name="PIPELINE",
+	}, { .name="PIPELINE",
 		.create=&create_pipeline,
 		.give=&give_pipeline,
 		.destroy=&destroy_container
-	},{ .name="PIPE_SEQUENCE",
+	}, { .name="PIPE_SEQUENCE",
 		.create=&create_pipe_sequence,
 		.give=&give_pipe_sequence,
 		.destroy=&destroy_container
-	},{ .name="SIMPLE_COMMAND",
+	}, { .name="SIMPLE_COMMAND",
 		.create=&create_simple_command,
 		.give=&give_simple_command,
 		.destroy=&destroy_container
-	},{ .name="IO_REDIRECT",
+	}, { .name="IO_REDIRECT",
 		.create=&create_io_redirect,
 		.give=&give_io_redirect,
 		.destroy=&destroy_container
-	},{ .name="IO_OPERATOR",
+	}, { .name="IO_OPERATOR",
 		.create=&create_io_operator,
 		.give=&give_io_operator,
 		.destroy=&destroy_container
-	},{ .name="NEWLINE_LIST",
-		.create=NULL,
-		.give=NULL,
-		.destroy=NULL
-	},{ .name="SEPARATOR_OP",
-		.create=NULL,
-		.give=NULL,
-		.destroy=NULL
-	},{ .name="WORD",
+	}, { .name="WORD",
 		.create=&create_word,
 		.give=NULL,
 		.destroy=&destroy_container
-	},{ .name="AND_IF",
+	}, { .name="AND_IF",
 		.create=&create_and_if,
 		.give=NULL,
 		.destroy=&destroy_container
-	},{ .name="OR_IF",
+	}, { .name="OR_IF",
 		.create=&create_or_if,
 		.give=NULL,
 		.destroy=&destroy_container
-	},{ .name="PIPE",
-		.create=NULL,
-		.give=NULL,
-		.destroy=NULL
-	},{ .name="IO_NUMBER",
+	}, { .name="IO_NUMBER",
 		.create=&create_io_number,
 		.give=NULL,
 		.destroy=&destroy_container
-	},{ .name="LESS",
+	}, { .name="LESS",
 		.create=&create_less,
 		.give=NULL,
 		.destroy=&destroy_container
-	},{ .name="DLESS",
+	}, { .name="DLESS",
 		.create=&create_dless,
 		.give=NULL,
 		.destroy=&destroy_container
-	},{ .name="DLESSDASH",
+	}, { .name="DLESSDASH",
 		.create=&create_dlessdash,
 		.give=NULL,
 		.destroy=&destroy_container
-	},{ .name="LESSAND",
+	}, { .name="LESSAND",
 		.create=&create_lessand,
 		.give=NULL,
 		.destroy=&destroy_container
-	},{ .name="LESSGREAT",
+	}, { .name="LESSGREAT",
 		.create=&create_lessgreat,
 		.give=NULL,
 		.destroy=&destroy_container
-	},{ .name="GREAT",
+	}, { .name="GREAT",
 		.create=&create_great,
 		.give=NULL,
 		.destroy=&destroy_container
-	},{ .name="DGREAT",
+	}, { .name="DGREAT",
 		.create=&create_dgreat,
 		.give=NULL,
 		.destroy=&destroy_container
-	},{ .name="GREATAND",
+	}, { .name="GREATAND",
 		.create=&create_greatand,
 		.give=NULL,
 		.destroy=&destroy_container
-	},{ .name="CLOBBER",
+	}, { .name="CLOBBER",
 		.create=&create_clobber,
 		.give=NULL,
 		.destroy=&destroy_container
-	},{ .name="NEWLINE",
-		.create=NULL,
-		.give=NULL,
-		.destroy=NULL
-	},{ .name="SEMICOLON",
-		.create=NULL,
-		.give=NULL,
-		.destroy=NULL
-	},{ .name="BANG",
+	}, { .name="BANG",
 		.create=&create_bang,
 		.give=NULL,
 		.destroy=&destroy_container
-	},{ .name=NULL, .create=NULL, .give=NULL, .destroy=NULL }
+	}, { .name=NULL, .create=NULL, .give=NULL, .destroy=NULL }
 };
 
 #endif
