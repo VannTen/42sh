@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 15:46:10 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/26 16:06:27 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/21 15:53:39 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft.h"
 # define INITIAL_TOKEN_SIZE 32
 # define MAX_TOKENS 17
-# define MAX_OP_CHAR 6
+# define MAX_OP_CHAR 7
 
 enum		e_state
 {
