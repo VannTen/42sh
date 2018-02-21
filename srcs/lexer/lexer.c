@@ -6,14 +6,14 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 15:22:54 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/19 12:17:03 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/21 17:36:26 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-const char				g_op_char[MAX_OP_CHAR + 1] = "><&|;-!";
-const char				*g_op_list[MAX_TOKENS + 1] = {
+const char			g_op_char[] = "><&|;-!";
+const char			*g_op_list[] = {
 	NULL,
 	NULL,
 	NULL,
@@ -40,7 +40,7 @@ static inline int	skip_char(t_lexer *lexer)
 	return (0);
 }
 
-const t_transition		g_lexer[MAX_STATE][MAX_EVENT] = {
+const t_transition	g_lexer[MAX_STATE][MAX_EVENT] = {
 	{{STD, skip_char},
 		{DQUOTE, append_char},
 		{QUOTE, append_char},
@@ -102,7 +102,7 @@ const t_transition		g_lexer[MAX_STATE][MAX_EVENT] = {
 		{COMMENT, skip_char}}
 };
 
-int				handle_backslash(t_lexer *lexer)
+int					handle_backslash(t_lexer *lexer)
 {
 	if (is_operator(lexer->current_token) > 0)
 		if (delimitate_token(lexer) == MALLOC_FAIL)
@@ -116,7 +116,7 @@ int				handle_backslash(t_lexer *lexer)
 	return (0);
 }
 
-int	reset_lexer(t_lexer *lexer)
+int					reset_lexer(t_lexer *lexer)
 {
 	clear_tokens(&lexer->tokens[0]);
 	lexer->tokens[1] = NULL;
@@ -127,7 +127,7 @@ int	reset_lexer(t_lexer *lexer)
 	return (0);
 }
 
-int				lexer(t_lexer *lexer, char *input)
+int					lexer(t_lexer *lexer, char *input)
 {
 	lexer->input = input;
 	lexer->event = 0;
