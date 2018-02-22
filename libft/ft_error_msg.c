@@ -14,6 +14,6 @@
 
 void	ft_error_msg(char *error)
 {
-	ft_putendl_fd(error, STDERR);
+	ft_putendl_fd(error, STDERR_FILENO);
 	exit(-1);
 }
