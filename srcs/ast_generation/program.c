@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/21 23:45:48 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/22 10:29:55 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,17 @@
 
 void	*create_program(void const *lex_value)
 {
-	struct s_container	*container;
-	struct s_sh_program	program;
+	struct s_sh_program	*program;
 
 	(void)lex_value;
-	program.complete_command = NULL;
-	container = new_container(&program, &destroy_program, sizeof(program), e_ast_container_label_program);
-	return (container);
+	program = (struct s_sh_program*)malloc(sizeof(*program));
+	if (program != NULL)
+	{
+		program->complete_command = NULL;
+		return (program);
+	}
+	else
+		return (NULL);
 }
 
 t_bool	give_program(void *construct, void *sub_construct)
@@ -37,7 +41,7 @@ t_bool	give_program(void *construct, void *sub_construct)
 	ret = FALSE;
 	if (construct != NULL && sub_construct != NULL)
 	{
-		program = ((struct s_container*)construct)->content;
+		program = construct;
 		sub = sub_construct;
 		if (sub->label == e_ast_container_label_complete_command)
 		{

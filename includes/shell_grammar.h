@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 12:12:51 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/21 17:41:40 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/22 10:28:45 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static t_exec const	g_exec_rules[] = {
 	{ .name="PROGRAM",
 		.create=&create_program,
 		.give=&give_program,
-		.destroy=&destroy_container
+		.destroy=&destroy_program
 	}, { .name="COMPLETE_COMMAND",
 		.create=&create_complete_command,
 		.give=&give_complete_command,
