@@ -22,6 +22,11 @@
 # include "tokens.h"
 # include <termios.h>
 # include <dirent.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/ioctl.h>
+# include <unistd.h>
+
 
 # define EVENT_NOT_FOUND 1
 # define MALLOC_FAIL -1
