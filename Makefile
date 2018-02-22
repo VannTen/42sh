@@ -93,7 +93,27 @@ SRC_NAME = env/add_variable_to_env.c \
 		   ast_generation/word.c \
 		   print_ast/print_program.c \
 		   execution/new_container.c \
-		   execution/destroy_container.c
+		   execution/destroy_container.c \
+		   execution/sh_path_search.c \
+		   execution/recreate_env_array.c \
+		   execution/shell_errmsg.c \
+		   ast_execution/apply_redirections.c \
+		   ast_execution/end_sequence.c \
+		   ast_execution/fd_backup_conflict.c \
+		   ast_execution/io_redir_aggregate.c \
+		   ast_execution/io_redir_file.c \
+		   ast_execution/io_redir_here.c \
+		   ast_execution/launch_utility.c \
+		   ast_execution/setup_piped_instance.c \
+		   ast_execution/shx_and_or.c \
+		   ast_execution/shx_complete_command.c \
+		   ast_execution/shx_list.c \
+		   ast_execution/shx_pipe_sequence.c \
+		   ast_execution/shx_pipeline.c \
+		   ast_execution/shx_program.c \
+		   ast_execution/shx_simple_command.c \
+		   ast_execution/undo_redirections.c \
+		   ast_execution/wait_for_instance.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
