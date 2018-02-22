@@ -6,10 +6,13 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 14:32:04 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/07 11:38:38 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/22 11:01:34 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+#include "shell_errmsg.h"
+#include "env.h"
 #include <unistd.h>
 
 static char	*test_one(char const *start, char const *end, char const *name,
@@ -58,7 +61,7 @@ char			*sh_path_search(t_env_list *env_list, char *name)
 {
 	char	*path_val;
 
-	path_val = ft_getenv(env_list, name);
+	path_val = shell_getenv(env_list, name);
 	if (path_val != NULL)
 		return (path_search(name, path_val));
 	return (NULL);
