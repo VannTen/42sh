@@ -81,6 +81,6 @@ int			wait_for_input(t_input *input, int input_type)
 			break ;
 	}
 	if (input->type != HISTORY_SEARCH)
-		write(STDOUT, RETURN_C, 1);
+		write(STDOUT_FILENO, RETURN_C, 1);
 	return (ret);
 }

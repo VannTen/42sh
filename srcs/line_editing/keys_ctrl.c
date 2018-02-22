@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "shell.h"
 
 int		handle_ctrl_down(t_input *input)
 {
@@ -90,7 +90,7 @@ int		handle_clear_screen(t_input *input)
 	if (input->type == REGULAR_INPUT)
 		print_prompt(input, BOLD_CYAN);
 	else if (input->type == HISTORY_SEARCH)
-		ft_putstr_fd("History search> ", STDERR);
+		ft_putstr_fd("History search> ", STDERR_FILENO);
 	else
 		display_basic_prompt(input);
 	input->cursor_pos = 0;
