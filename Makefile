@@ -2,7 +2,7 @@ NAME = 42sh
 
 CC = gcc
 
-FLAGS = -g -Wall -Wextra
+CFLAGS = -g -Wall -Wextra
 
 LIBFT  = libft/
 
@@ -85,7 +85,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 	@make -C $(LIBFT)
-	@$(CC) $(FLAGS) $(OBJ) $(LIB) -ltermcap -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIB) -ltermcap -o $(NAME)
 
 $(OBJ) : $(OBJ_PATH)
 
