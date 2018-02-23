@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/19 17:18:43 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/23 17:16:41 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,66 +39,7 @@ static int	update_history(t_history *history, t_input *input)
 	return (0);
 }
 
-/*static char const	g_grammar[] =
-" PROGRAM : COMPLETE_COMMAND NEWLINE"
-"| NEWLINE;"
-"COMPLETE_COMMAND : LIST SEPARATOR_OP"
-"| LIST;"
-"LIST : LIST SEPARATOR_OP AND_OR"
-"| AND_OR;"
-"AND_OR : PIPELINE"
-"| AND_OR AND_IF PIPELINE"
-"| AND_OR OR_IF PIPELINE;"
-"PIPELINE : COMMAND"
-"| PIPELINE PIPE COMMAND;"
-"COMMAND : CMD_PREFIX CMD_WORD CMD_SUFFIX"
-"| CMD_PREFIX CMD_WORD"
-"| CMD_PREFIX"
-"| CMD_NAME CMD_SUFFIX"
-"| CMD_NAME;"
-"CMD_NAME : WORD;"
-"CMD_WORD : WORD;"
-"CMD_PREFIX : IO_REDIRECT"
-"| CMD_PREFIX IO_REDIRECT;"
-"CMD_SUFFIX : IO_REDIRECT"
-"| CMD_SUFFIX IO_REDIRECT"
-"| WORD"
-"| CMD_SUFFIX WORD;"
-"IO_REDIRECT : IO_FILE"
-"| IO_NUMBER IO_FILE"
-"| IO_HERE"
-"| IO_NUMBER IO_HERE;"
-"IO_FILE : LESS FILENAME"
-"| LESSAND FILENAME"
-"| GREAT FILENAME"
-"| GREATAND FILENAME"
-"| DGREAT FILENAME"
-"| CLOBBER FILENAME;"
-"FILENAME : WORD;"
-"IO_HERE : DLESS HERE_END;"
-"HERE_END: WORD;"
-"SEPARATOR_OP: SEMI;";
-
-char const			*tokens_name[] = {
-	"WORD",
-	"NEWLINE",
-	"IO_NUMBER",
-	"DLESS",
-	"DGREAT",
-	"LESSAND",
-	"GREATAND",
-	"LESS",
-	"GREAT",
-	"AND_IF",
-	"OR_IF",
-	"SEMI",
-	"AND",
-	"PIPE",
-	"CLOBBER",
-	NULL
-};
-
-size_t	get_token_id(void const *token)
+/*size_t	get_token_id(void const *token)
 {
 	t_token const *tok;
 
@@ -122,16 +63,16 @@ void	*take_token(void *token_list_address)
 static int	error_messages(t_input *input, const int ret)
 {
 	(ret == EVENT_NOT_FOUND) ?
-			dprintf(STDERR_FILENO, "bsh: Event not found\n") : 0;
+			dprintf(STDERR_FILENO, "42sh: Event not found\n") : 0;
 	if (ret == MALLOC_FAIL)
 	{
 		init_buffers(input);
-		dprintf(STDERR_FILENO, "bsh: Memory allocation failed."
+		dprintf(STDERR_FILENO, "42sh: Memory allocation failed."
 				" Aborting process routine\n");
 	}
 	if (ret == INPUT_TOO_LONG)
 	{
-		dprintf(STDERR_FILENO, "bsh: Input is too long."
+		dprintf(STDERR_FILENO, "42sh: Input is too long."
 							" Aborting process routine!\n");
 		init_buffers(input);
 		input->cursor_pos = 0;
@@ -144,26 +85,24 @@ int			main(int argc, char **argv, char **environ)
 	t_bsh	*bsh;
 	int		ret;
 	/*t_parser	*parser;
-	t_exec	const		exec_rules[] = {
-		{.name = NULL, .create = NULL, .give = NULL}};*/
-	(void)argc;
-	(void)argv;
-	//parser = generate_parser(g_grammar, tokens_name, exec_rules, get_token_id);
-	bsh = shell_init(environ);
-	init_termcaps(bsh);
+	//parser = generate_parser(g_grammar, tokens_name, exec_rules, get_token_id);*/
+	bsh = shell_init(environ, argc, argv);
+	(bsh->interactive) ? init_termcaps(bsh) : 0;
 	while (42)
 	{
 		reset_lexer(&bsh->lexer);
 		if ((ret = readline_process(&bsh->input, &bsh->lexer,
-						&bsh->history)) == EVENT_NOT_FOUND
+						&bsh->history, bsh->interactive)) == EVENT_NOT_FOUND
 						|| ret == MALLOC_FAIL || ret == INPUT_TOO_LONG)
 		{
 			error_messages(&bsh->input, ret);
 			continue ;
 		}
-		if (lexer(&bsh->lexer, bsh->input.buffer) == MALLOC_FAIL
-		|| update_history(&bsh->history, &bsh->input) == MALLOC_FAIL)
+		if (lexer(&bsh->lexer, bsh->input.buffer) == MALLOC_FAIL)
 			continue ;
+		//if (bsh->interactive)
+			if (update_history(&bsh->history, &bsh->input) == MALLOC_FAIL)
+				continue ;
 		display_history(&bsh->history);
 		//execute_construct(parser, "PROGRAM", &bsh->lexer.tokens[0], take_token);
 	}

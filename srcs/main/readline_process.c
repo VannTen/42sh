@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 12:31:00 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/14 15:50:24 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/23 17:52:41 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,42 @@ static int	remove_backslash_nl(t_input *input, t_lexer *lexer)
 	return (0);
 }
 
-static int	get_line(t_lexer *lex, t_input *input)
+static int	get_line(t_input *input, const int interactive, int mode)
+{
+	char	*line;
+	size_t	len;
+	int		ret;
+
+	if (interactive == 1)
+	{
+		if (wait_for_input(input, mode) == MALLOC_FAIL)
+			return (MALLOC_FAIL);
+	}
+	else
+	{
+		if ((ret = get_next_line(input->fd, &line)) > 0)
+		{
+			len = ft_strlen(line);
+			while (len + 1 >= input->buffer_size)
+				if (realloc_buffer(input) == MALLOC_FAIL)
+					return (MALLOC_FAIL);
+			ft_strcpy(input->buffer, line);
+			input->buffer[len] = '\n';
+			input->buffer_len = len + 1;
+			ft_strdel(&line);
+		}
+		else if (ret < 0)
+			exit(EXIT_FAILURE);
+		else
+			exit(0);
+	}
+}
+
+static int	get_line_to_buffer(t_lexer *lex, t_input *input,
+								const int interactive)
 {
 	reset_buffer(input);
-	if (wait_for_input(input, REGULAR_INPUT) == MALLOC_FAIL
+	if (get_line(input, interactive, REGULAR_INPUT) == MALLOC_FAIL
 					|| lexer(lex, input->buffer) == MALLOC_FAIL)
 		return (MALLOC_FAIL);
 	while (lex->state != INIT)
@@ -53,7 +85,7 @@ static int	get_line(t_lexer *lex, t_input *input)
 		if (!(input->buffer = ft_strnew(input->buffer_size)))
 			return (MALLOC_FAIL);
 		display_basic_prompt(input);
-		if (wait_for_input(input, UNCLOSED_QUOTES) == MALLOC_FAIL
+		if (get_line(input, interactive, UNCLOSED_QUOTES) == MALLOC_FAIL
 		|| lexer(lex, input->buffer) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
 		while ((int)ft_strlen(input->buf_tmp)
@@ -69,28 +101,30 @@ static int	get_line(t_lexer *lex, t_input *input)
 	return (0);
 }
 
-static int	init_exp_input(t_string *exp_input, const int size)
+static int	init_exp_input(t_string *exp_input, const int size,
+							const int interactive)
 {
-	if (!(exp_input->str = ft_strnew(size)))
-		return (MALLOC_FAIL);
+	if (interactive)
+		if (!(exp_input->str = ft_strnew(size)))
+			return (MALLOC_FAIL);
 	exp_input->len = 0;
 	exp_input->size = size;
 	return (0);
 }
 
-int			readline_process(t_input *input, t_lexer *lexer, t_history *history)
+int			readline_process(t_input *input, t_lexer *lexer, t_history *history,
+							const int interact)
 {
 	int			ret;
 	t_string	exp_input;
 
-	if (init_exp_input(&exp_input, input->buffer_size) == MALLOC_FAIL)
+	(interact) ? print_prompt(input, BOLD_CYAN) : 0;
+	if (get_line_to_buffer(lexer, input, interact) == MALLOC_FAIL)
 		return (MALLOC_FAIL);
-	print_prompt(input, BOLD_CYAN);
-	if (get_line(lexer, input) == MALLOC_FAIL)
-	{
-		ft_strdel(&exp_input.str);
+	if (!interact)
+		return (0);
+	if (init_exp_input(&exp_input, input->buffer_size, interact) == MALLOC_FAIL)
 		return (MALLOC_FAIL);
-	}
 	if ((ret = get_expanded_input(lexer, history, input->buffer, &exp_input)))
 	{
 		ft_strdel(&exp_input.str);

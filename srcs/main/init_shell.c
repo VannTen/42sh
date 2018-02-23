@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 16:09:34 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/12 18:38:20 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/23 18:58:26 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,47 @@ t_bsh			*get_shell_data(void)
 	return (bsh);
 }
 
-t_bsh			*shell_init(char **environ)
+static int	is_argument_valid(t_input *input, char *arg)
 {
-	t_bsh	*bsh;
+	struct stat	info;
+
+	if (access(arg, F_OK))
+	{
+		dprintf(STDERR_FILENO, "42sh: %s: No such file or directory\n", arg);
+		exit(EXIT_FAILURE);
+	}
+	else if (access(arg, R_OK))
+	{
+		dprintf(STDERR_FILENO, "42sh: %s: Permission denied\n", arg);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		if (stat(arg, &info) < 0)
+		{
+			dprintf(STDERR_FILENO, "42sh: stat failed\n", arg);
+			exit(EXIT_FAILURE);
+		}
+		if (S_ISDIR(info.st_mode))
+		{
+			dprintf(STDERR_FILENO, "42sh: %s: is a directory\n", arg);
+			exit(EXIT_FAILURE);
+		}
+		input->fd = open(arg, O_RDONLY, 0644);
+		if (input->fd < 0)
+		{
+			dprintf(STDERR_FILENO, "42sh: Opening of %s failed...\n", arg);
+			exit(EXIT_FAILURE);
+		}
+		return (1);
+	}
+	return (0);
+}
+
+t_bsh			*shell_init(char **environ, int argc, char **argv)
+{
+	t_bsh		*bsh;
+	struct stat	info;
 
 	if (!(bsh = get_shell_data()))
 		return (NULL);
@@ -64,5 +102,21 @@ t_bsh			*shell_init(char **environ)
 	if (!ft_getenv(bsh->env.env_list, "TERM"))
 		if (append_variable_to_env(&bsh->env, "TERM", "xterm", GLOBAL))
 			return (NULL);
+	bsh->interactive = (argc > 1 || !isatty(STDIN_FILENO)) ? 0 : 1;
+	if (!bsh->interactive && argc == 1)
+	{
+		if (fstat(STDIN_FILENO, &info) < 0)
+		{
+			dprintf(STDERR_FILENO, "42sh: fstat failed\n");
+			exit(EXIT_FAILURE);
+		}
+		if (S_ISDIR(info.st_mode))
+		{
+			dprintf(STDERR_FILENO, "42sh: stdin: Is a directory\n");
+			exit(EXIT_FAILURE);
+		}
+	}
+	if (argc > 1)
+		is_argument_valid(&bsh->input, argv[1]);
 	return (bsh);
 }

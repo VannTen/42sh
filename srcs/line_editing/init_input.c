@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 16:48:42 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/12 16:31:54 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/23 17:00:31 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int			init_input(t_input *input, t_term *term, t_history *history)
 	input->history = history;
 	input->state = STANDARD;
 	input->pivot = -1;
-	input->fd = open("/dev/ttys002", O_RDWR, 0644);
+	input->fd = STDIN_FILENO;
 	init_completion(&input->comp);
 	return (0);
 }
