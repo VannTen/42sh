@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 14:59:31 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/24 12:32:09 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/23 14:07:33 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ char	*search_in_history_by_str(t_history *history, const char *str)
 	if (!str)
 		return (NULL);
 	len_str = ft_strlen(str);
-	i = -1;
-	while (history->history[++i])
+	i = history->len;
+	while (history->history[--i])
 	{
 		if (ft_strstr(history->history[i], str))
 			return (history->history[i]);
