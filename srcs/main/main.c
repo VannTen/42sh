@@ -6,13 +6,13 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/23 17:16:41 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/24 19:12:11 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void	display_tokens(t_token *tokens)
+void		display_tokens(t_token *tokens)
 {
 	while (tokens)
 	{
@@ -100,7 +100,7 @@ int			main(int argc, char **argv, char **environ)
 		}
 		if (lexer(&bsh->lexer, bsh->input.buffer) == MALLOC_FAIL)
 			continue ;
-		//if (bsh->interactive)
+		if (bsh->interactive)
 			if (update_history(&bsh->history, &bsh->input) == MALLOC_FAIL)
 				continue ;
 		display_history(&bsh->history);
