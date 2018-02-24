@@ -70,9 +70,11 @@ SRC_NAME = env/add_variable_to_env.c \
 	   lexer/lexer.c \
 	   lexer/realloc_current_token.c\
 	   main/init_shell.c \
+	   main/get_line.c \
 	   main/main.c \
 	   main/realloc_str.c \
 	   main/readline_process.c \
+	   main/sh_exit_message.c \
 	   term/term.c \
 	   term/prompt.c \
 
@@ -94,7 +96,7 @@ $(OBJ_PATH) :
 	@mkdir -p $(dir $(OBJ))
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	$(CC) $(FLAGS) -I$(HEADERS) -I$(LIBFT)includes -c $< -o $@
+	$(CC) $(CFLAGS) -I$(HEADERS) -I$(LIBFT)includes -c $< -o $@
 
 clean :
 	/bin/rm -rf $(OBJ_PATH)
