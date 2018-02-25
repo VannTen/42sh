@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/25 19:59:38 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/25 20:00:06 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/25 22:49:24 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			launch_external(char *const bin_path, char **argv,
 			&& recreate_env_array(env) == 0)
 	{
 		father = (is_child) ? 0 : fork();
-		if (!father)
+		if (father == 0)
 		{
 			execve(bin_path, argv, env->env_array);
 			ft_dprintf(2, "42sh: failed to execute %s.\n", bin_path);
