@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 11:47:26 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/24 09:05:31 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/25 20:03:49 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int			builtin_cd(char **args, t_env *env)
 	curpath = NULL;
 	new_pwd_value = NULL;
 	if ((directory_arg_index = cd_get_options(args, &options)) == 0
-			|| get_physical_path(args[directory_arg_index], &curpath)
+			|| get_physical_path(args[directory_arg_index], &curpath, env)
 			|| ((options & e_cdopt_logical)
 				&& make_logical(&curpath, &new_pwd_value, env))
 			|| change_directory(curpath, &new_pwd_value, options, env))

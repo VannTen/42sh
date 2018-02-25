@@ -6,11 +6,14 @@
 /*   By: heynard <heynard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 17:52:16 by heynard           #+#    #+#             */
-/*   Updated: 2018/01/12 17:52:16 by heynard          ###   ########.fr       */
+/*   Updated: 2018/02/25 22:35:14 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hashtable.h"
+#include <stdlib.h>
+#include <stddef.h>
+#include "libft.h"
 
 t_hash_table		*init_hash_table(void)
 {

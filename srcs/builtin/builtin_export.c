@@ -6,11 +6,12 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 15:12:09 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/19 16:24:48 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/25 20:37:17 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+#include <unistd.h>
 
 static int	export_usage(const char opt, const int usage_reason)
 {

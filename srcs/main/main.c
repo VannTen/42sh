@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/24 08:09:21 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/25 22:42:23 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,12 +163,16 @@ void	*take_token(void *token_list_address)
 
 #include "parser_interface.h"
 #include "parser_defs.h"
+#include "execution.h"
+#include "s_shx_global.h"
 
-static t_bool	test_parser(t_token *list_tokens, t_parser const *parser)
+static t_bool	test_parser(t_token *list_tokens, t_parser const *parser,
+		t_bsh *bsh)
 {
 	void						*result;
 	t_bool						syntax_valid;
 	struct s_parse_input		input;
+	struct s_shx_global			global;
 
 	input.input = &list_tokens;
 	input.get_token = take_token;
@@ -177,6 +181,10 @@ static t_bool	test_parser(t_token *list_tokens, t_parser const *parser)
 		exit(1);
 	result = execute_construct(parser, "PROGRAM", &input);
 	print_program(STDERR_FILENO, result, 0);
+	global.env = &(bsh->env);
+	global.hashtable = NULL;
+	global.latest_ret = 0;
+	shx_program(result, &global);
 	syntax_valid = result != NULL;
 	return (syntax_valid);
 }
@@ -224,7 +232,7 @@ int main(int argc, char **argv, char **environ)
 		ft_dprintf(STDERR_FILENO,
 				"\"%s\" : syntax is %svalid\n",
 				bsh->input.buffer,
-				test_parser(bsh->lexer.tokens[0], parser) ? " " : "not ");
+				test_parser(bsh->lexer.tokens[0], parser, bsh) ? " " : "not ");
 	}
 	return (0);
 }

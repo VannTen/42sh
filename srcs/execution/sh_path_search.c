@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 14:32:04 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/24 07:22:32 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/25 19:42:20 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*test_one(char const *start, char const *end, char const *name,
 	return (NULL);
 }
 
-static char		*path_search(char const *const name, char const *path)
+char		*path_search(char const *const name, char const *path)
 {
 	char const	*end;
 	char		*str;

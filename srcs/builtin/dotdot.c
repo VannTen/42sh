@@ -6,11 +6,12 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 12:53:57 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/15 11:37:48 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/25 20:42:19 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include "execution.h"
+#include <sys/stat.h>
 
 static size_t	prev_component_index(char const *curpath, size_t index)
 {

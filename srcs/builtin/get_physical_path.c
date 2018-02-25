@@ -6,17 +6,20 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 12:52:33 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/14 18:24:51 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/25 22:22:17 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include "execution.h"
+#include "shell_errmsg.h"
+#include <unistd.h>
+#include <limits.h>
 
 static char	const	*get_home_dir(t_env *env)
 {
 	char const	*home_dir;
 
-	home_dir = ft_getenv(env->env_list, "HOME");
+	home_dir = shell_getenv(env, "HOME");
 	if (home_dir == NULL)
 	{
 		ft_putstr_fd("21sh: cd: HOME not set.\n", 2);
@@ -56,7 +59,7 @@ static char			*parse_cdpath(char const *directory, t_env *env)
 	char const	*tmp;
 	char		*path;
 
-	if ((cdpath = ft_getenv(env->env_list, "CDPATH")) == NULL)
+	if ((cdpath = shell_getenv(env, "CDPATH")) == NULL)
 		return (ft_strdup(directory));
 	while (cdpath[0] == ':')
 		cdpath += 1;
@@ -83,7 +86,7 @@ int					get_physical_path(char const *directory,
 	if (directory == NULL && (directory = get_home_dir(env)) == NULL)
 		return (1);
 	else if (!ft_strcmp(directory, "-")
-			&& (directory = ft_getenv(env->env_list, "OLDPWD")) == NULL)
+			&& (directory = shell_getenv(env, "OLDPWD")) == NULL)
 	{
 		ft_putstr_fd("21sh: cd: OLDPWD not set\n", 2);
 		return (1);

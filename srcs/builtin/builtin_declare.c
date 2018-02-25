@@ -6,11 +6,12 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 14:58:54 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/25 18:16:37 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/25 22:29:27 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stddef.h"
+#include <unistd.h>
+#include "env.h"
 #include "shell.h"
 
 int	builtin_declare(char **argv, t_env *env)

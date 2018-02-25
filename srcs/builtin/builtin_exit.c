@@ -6,12 +6,13 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 19:02:54 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/16 08:28:19 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/25 22:36:39 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
 #include <stdlib.h>
+#include "execution.h"
+#include "shell_errmsg.h"
 
 static void	exit_badarg(char *arg)
 {
@@ -37,21 +38,19 @@ static int	exit_arg_check(char **args)
 
 int			builtin_exit(char **args, t_env *env)
 {
-	extern int		g_latest_return;
 	unsigned char	exit_value;
 
 	(void)env;
 	if (exit_arg_check(args))
 		return (-1);
 	if (args[1] == NULL)
-		exit_value = g_latest_return;
-	else if (ft_strisdigit(args[1]))
+		exit_value = 42;
+	else if (string_is_digit(args[1]))
 		exit_value = (unsigned char)ft_atoi(args[1]);
 	else
 	{
 		exit_badarg(args[1]);
 		exit_value = -1;
 	}
-	save_history();
 	exit(exit_value);
 }

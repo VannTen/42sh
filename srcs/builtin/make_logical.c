@@ -6,11 +6,15 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 12:56:09 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/16 08:28:36 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/25 22:24:48 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include <unistd.h>
+#include <limits.h>
+#include "execution.h"
+#include "shell_errmsg.h"
+#include "builtin_cd.h"
 
 static char	*prepended_curpath(char *curpath, char *pwd)
 {
@@ -59,7 +63,7 @@ static int	relativize(char *curpath, t_env *env)
 	char const	*pwd;
 	size_t		pwd_len;
 
-	pwd = ft_getenv(env->env_list, "PWD");
+	pwd = shell_getenv(env, "PWD");
 	if (pwd != NULL)
 	{
 		pwd_len = ft_strlen(pwd);

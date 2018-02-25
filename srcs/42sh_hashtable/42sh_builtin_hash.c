@@ -6,11 +6,13 @@
 /*   By: heynard <heynard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 18:28:40 by heynard           #+#    #+#             */
-/*   Updated: 2018/01/12 18:28:42 by heynard          ###   ########.fr       */
+/*   Updated: 2018/02/25 22:34:43 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hashtable.h"
+#include "libft.h"
+#include <unistd.h>
 
 static void			print_current_table(t_hash_table *htable, int i)
 {

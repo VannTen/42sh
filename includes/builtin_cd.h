@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 09:00:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/24 09:11:19 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/25 22:30:44 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ enum	e_cdopt
 size_t	cd_get_options(char **args, int *const options_loc);
 int		get_physical_path(char const *directory, char **const curpath_loc,
 		t_env *env);
-
+int		make_logical(char **const curpath_loc, char **const new_pwd_loc,
+		t_env *env);
+int		dotdot(char *curpath, size_t *const index_loc);
+int		canonicalize(char *curpath);
 
 #endif

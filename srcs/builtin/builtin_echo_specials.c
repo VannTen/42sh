@@ -6,12 +6,11 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 16:05:33 by ble-berr          #+#    #+#             */
-/*   Updated: 2017/12/13 12:36:40 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/25 18:32:30 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
-#include "ft_echo.h"
+#include "libft.h"
 
 static int		basetodeci_digit(char c, int base)
 {
