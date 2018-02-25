@@ -6,11 +6,12 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 10:08:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/08 11:48:52 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/24 07:46:44 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell_ast/pipe_sequence.h"
+#include <unistd.h>
+#include "execution.h"
 
 static void	mark_as_child(struct s_sh_simple_command *const simple_command)
 {
@@ -24,24 +25,25 @@ static int	setup_next_pipe(void)
 
 	if (pipe(pipe_buf) == -1)
 		return (-1);
-	if (pipe[1] != 1)
+	if (pipe_buf[1] != 1)
 	{
-		dup2(pipe[1], 1);
-		close(pipe[1]);
+		dup2(pipe_buf[1], 1);
+		close(pipe_buf[1]);
 	}
-	return (pipe[0]);
+	return (pipe_buf[0]);
 }
 
-static int	spawn_pipe(t_list	*sequence, int pipe_in,
+static int	spawn_pipe(t_lst *sequence, int pipe_in,
 		struct s_shx_global *const global)
 {
-	t_bool const	last_pipe = (sequence->next == NULL);
-	pid_t			father;
+	t_lst	*next;
+	pid_t	father;
 
+	next = advance_list(sequence, 1);
 	dup2(pipe_in, 0);
 	if (pipe_in != 0)
 		close(pipe_in);
-	if (!last_pipe)
+	if (next != NULL)
 		pipe_in = setup_next_pipe();
 	father = fork();
 	if (father == -1)
@@ -49,28 +51,19 @@ static int	spawn_pipe(t_list	*sequence, int pipe_in,
 	else if (!father)
 	{
 		close(pipe_in);
-		mark_as_child(sequence->content);
-		exit(shx_simple_command(sequence->content, global));
+		mark_as_child((void*)get_lst_elem(sequence, 0));
+		exit(shx_simple_command((void*)get_lst_elem(sequence, 0), global));
 	}
-	(void)spawn_pipe(sequence->next, pipe_in, global);
-	wait_for_instance(father, last_pipe, global);
+	if (next != NULL)
+		(void)spawn_pipe(next, pipe_in, global);
+	wait_for_instance(father, (next == NULL), global);
 	return (0);
 }
 
 int			shx_pipe_sequence(struct s_sh_pipe_sequence *const pipe_sequence,
 		struct s_shx_global *const global)
 {
-	t_list	*sequence;
-
 	if (pipe_sequence != NULL)
-	{
-		sequence = pipe_sequence->simple_commands;
-		if (sequence == NULL)
-			return (0);
-		else if (sequence->next == NULL)
-			global.latest_ret = shx_simple_command(sequence->content, global);
-		else
-			return(spawn_pipe(sequence, 0, global));
-	}
+		spawn_pipe(pipe_sequence->simple_commands, 0, global);
 	return (0);
 }

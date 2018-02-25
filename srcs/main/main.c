@@ -6,12 +6,13 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/21 17:42:49 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/24 08:09:21 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 #include "color.h"
+#include "g_builtin_array.h"
 #include <unistd.h>
 
 void	display_tokens(t_token *tokens)

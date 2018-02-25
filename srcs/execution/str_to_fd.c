@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   end_sequence.c                                     :+:      :+:    :+:   */
+/*   str_to_fd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/25 10:34:50 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/01/25 10:35:02 by ble-berr         ###   ########.fr       */
+/*   Created: 2018/02/23 11:32:31 by ble-berr          #+#    #+#             */
+/*   Updated: 2018/02/24 08:51:19 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/wait.h>
+#include "libft.h"
+#include "bleberr_macros.h"
 
-int			end_sequence(void *const simple_command, int prevpipe_read)
+int	str_to_fd(char const *str)
 {
-	pid_t	father;
+	size_t	i;
 
-	if (prevpipe_read == -1)
-		return (shx_simple_command(simple_command));
-	if (0 < (father = fork()))
-		return (wait_for_sequence(father));
-	else if (!father)
-		exit(setup_piped_instance(simple_command, prevpipe_read));
-	else if (father == -1)
-		return (-1);
+	if (str)
+	{
+		i = 0;
+		while (str[i])
+			if (i < sizeof(INTMAX_STR)
+					&& '0' <= str[i] && str[i] <= INTMAX_STR[i])
+				i += 1;
+			else
+				return (-1);
+		return (ft_atoi(str));
+	}
+	return (-1);
 }

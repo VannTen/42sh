@@ -97,23 +97,41 @@ SRC_NAME = env/add_variable_to_env.c \
 		   execution/sh_path_search.c \
 		   execution/recreate_env_array.c \
 		   execution/shell_errmsg.c \
-		   ast_execution/apply_redirections.c \
-		   ast_execution/end_sequence.c \
-		   ast_execution/fd_backup_conflict.c \
-		   ast_execution/io_redir_aggregate.c \
-		   ast_execution/io_redir_file.c \
-		   ast_execution/io_redir_here.c \
-		   ast_execution/launch_utility.c \
-		   ast_execution/setup_piped_instance.c \
-		   ast_execution/shx_and_or.c \
-		   ast_execution/shx_complete_command.c \
-		   ast_execution/shx_list.c \
-		   ast_execution/shx_pipe_sequence.c \
-		   ast_execution/shx_pipeline.c \
-		   ast_execution/shx_program.c \
-		   ast_execution/shx_simple_command.c \
-		   ast_execution/undo_redirections.c \
-		   ast_execution/wait_for_instance.c
+		   execution/launch_utility.c \
+		   execution/shx_and_or.c \
+		   execution/shx_complete_command.c \
+		   execution/shx_io_redirect.c \
+		   execution/shx_list.c \
+		   execution/shx_pipe_sequence.c \
+		   execution/shx_pipeline.c \
+		   execution/shx_program.c \
+		   execution/shx_simple_command.c \
+		   execution/apply_redirections.c \
+		   execution/undo_redirections.c \
+		   execution/shell_getenv.c \
+		   execution/wait_for_instance.c \
+		   execution/io_redir_aggregate.c \
+		   execution/io_redir_file.c \
+		   execution/io_redir_here.c \
+		   execution/str_to_fd.c \
+		   execution/backup_filedescriptor.c \
+		   execution/saved_filedescriptor_conflict.c \
+		   builtin/builtin_cd.c \
+		   builtin/builtin_declare.c \
+		   builtin/builtin_echo.c \
+		   builtin/builtin_echo_specials.c \
+		   builtin/builtin_env.c \
+		   builtin/builtin_exit.c \
+		   builtin/builtin_export.c \
+		   builtin/builtin_history.c \
+		   builtin/builtin_setenv.c \
+		   builtin/builtin_unsetenv.c \
+		   builtin/builtopt_errmsg.c \
+		   builtin/canonicalize.c \
+		   builtin/cd_get_options.c \
+		   builtin/dotdot.c \
+		   builtin/get_physical_path.c \
+		   builtin/make_logical.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -128,13 +146,8 @@ $(NAME) : $(OBJ)
 	@$(CC) $(FLAGS) $(OBJ) $(LIB) -ltermcap \
 	-L grammar_generator -lgrammar_generator -o $(NAME)
 
-$(OBJ) : $(OBJ_PATH)
-
-$(OBJ_PATH) :
-	@mkdir -p $(OBJ_PATH)
-	@mkdir -p $(dir $(OBJ))
-
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	@mkdir -p $(dir $@)
 	$(CC) $(FLAGS) $(foreach inc,$(HEADERS),-iquote$(inc)) -I$(LIBFT) -c $< -o $@
 
 clean :

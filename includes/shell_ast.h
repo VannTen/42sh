@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 10:00:26 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/21 22:44:41 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/24 08:18:10 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ int	shx_pipe_sequence(struct s_sh_pipe_sequence *const pipe_sequence,
 		struct s_shx_global *const global);
 int	shx_simple_command(struct s_sh_simple_command *const simple_command,
 		struct s_shx_global *const global);
+int	shx_io_redirect(struct s_sh_io_redirect *io_redirect, t_lst **fd_backups);
 
 #endif

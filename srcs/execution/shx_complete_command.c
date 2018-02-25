@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wait_for_instance.c                                :+:      :+:    :+:   */
+/*   shx_complete_command.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/08 10:56:41 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/08 10:56:50 by ble-berr         ###   ########.fr       */
+/*   Created: 2018/02/05 09:13:39 by ble-berr          #+#    #+#             */
+/*   Updated: 2018/02/24 07:32:25 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/wait.h>
+#include "s_shx_global.h"
+#include "shell_ast.h"
+#include <stddef.h>
 
-void	wait_for_instance(pid_t father, t_bool const save_return,
+int	shx_complete_command(struct s_sh_complete_command *const complete_command,
 		struct s_shx_global *const global)
 {
-	int	instance_status;
-
-	while (waitpid(father, &instance_status, WNOHANG) < 0)
-		;
-	if (save_return)
-	{
-		if (WIFEXITED(instance_status))
-			global->ret = WEXITSTATUS(instance_status);
-		else if (WIFSIGNALED(instance_status))
-			global->ret = WTERMSIG(instance_status);
-	}
+	if (complete_command != NULL)
+		(void)shx_list(complete_command->list, global);
+	return (0);
 }

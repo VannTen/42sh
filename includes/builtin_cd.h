@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setup_piped_instance.c                             :+:      :+:    :+:   */
+/*   cd_options.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/25 10:35:23 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/01/25 11:10:14 by ble-berr         ###   ########.fr       */
+/*   Created: 2018/02/24 09:00:12 by ble-berr          #+#    #+#             */
+/*   Updated: 2018/02/24 09:11:19 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int			setup_piped_instance(void *const simple_command, int read_fd,
-		int write_fd)
+#ifndef BUILTIN_CD_H
+# define BUILTIN_CD_H
+
+enum	e_cdopt
 {
-	if ((read_fd != 0 && dup2(read_fd, 0) == -1)
-			|| (write_fd != 1 && dup2(write_fd, 1) == -1))
-	{
-		ft_putstr_fd("21sh: failed to redirect to pipe.\n", 2);
-		return (-1);
-	}
-	set_child(simple_command);
-	return (shx_simple_command(simple_command));
-}
+	e_cdopt_logical = 1 << 0,
+	e_cdopt_physical = 1 << 1,
+	e_cdopt_oldpwd = 1 << 2,
+	e_cdopt_default = e_cdopt_logical
+};
+
+size_t	cd_get_options(char **args, int *const options_loc);
+int		get_physical_path(char const *directory, char **const curpath_loc,
+		t_env *env);
+
+
+#endif

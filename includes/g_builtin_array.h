@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   io_redir_aggregate.c                               :+:      :+:    :+:   */
+/*   g_builtin_array.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 13:03:03 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/01/29 13:37:51 by ble-berr         ###   ########.fr       */
+/*   Created: 2018/02/24 06:37:51 by ble-berr          #+#    #+#             */
+/*   Updated: 2018/02/24 06:39:12 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	io_redir_aggregate(struct s_io_redirection const io_redir,
-		t_list **const fd_backups)
-{
-	if (backup_conflict(io_redir.ionum, &fd_backups)
-			|| backup_conflict(io_redir.target.fd, &fd_backups))
-		ADD_ERRMSG;
-	else
-	{
-		if (dup2(target_fd, io_redir.ionum) == -1)
-			dup2_errmsg(target_fd, io_redir.ionum);
-		else
-		{
-			close(io_redir.target.fd);
-			return (0);
-		}
-	}
-	return (1);
-}
+#ifndef G_BUILTIN_ARRAY_H
+# define G_BUILTIN_ARRAY_H
+
+# include "builtins.h"
+
+struct s_sh_builtin const	g_builtin_array[BUILTIN_COUNT] = {
+	{ .name="cd", .ft=&builtin_cd },
+	{ .name="echo", .ft=&builtin_echo },
+	{ .name="exit", .ft=&builtin_exit },
+	{ .name="env", .ft=&builtin_env },
+	{ .name="setenv", .ft=&builtin_setenv },
+	{ .name="unsetenv", .ft=&builtin_unsetenv }
+};
+
+#endif

@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shx_pipeline.c                                     :+:      :+:    :+:   */
+/*   io_redir_here.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/05 09:24:45 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/08 10:06:52 by ble-berr         ###   ########.fr       */
+/*   Created: 2018/01/29 13:39:16 by ble-berr          #+#    #+#             */
+/*   Updated: 2018/02/24 08:48:51 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	shx_pipeline(struct s_sh_pipeline *const pipeline,
-		struct s_sh_global *const global)
+#include <unistd.h>
+#include "redirection.h"
+
+int	io_redir_here(struct s_sh_io_redirect const *io_redir,
+		t_lst **const fd_backups_loc)
 {
-	if (pipeline != NULL)
+	int	ret;
+
+	if (io_redir != NULL && io_redir->target != NULL)
 	{
-		(void)shx_pipe_sequence(pipeline->pipe_sequence);
-		if (pipeline->logical_not)
-			global->latest_ret = !(global->latest_ret);
+		ret = io_redir_file(io_redir, fd_backups_loc);
+		(void)unlink(io_redir->target);
+		return (ret);
 	}
-	return (0);
+	else
+		return (42);
 }

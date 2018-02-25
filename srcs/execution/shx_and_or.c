@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 09:43:16 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/08 14:25:43 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/24 07:31:50 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ static t_bool	continue_logic(enum e_logic logic_type,
 int				shx_and_or(struct s_sh_and_or *const and_or,
 		struct s_shx_global *const global)
 {
-	struct s_and_or_logic	*logic;
+	struct s_and_or_logic	*sequence;
 
 	if (and_or != NULL && global != NULL)
 	{
-		logic = and_or->logic;
-		while (logic != NULL)
+		sequence = and_or->sequence;
+		while (sequence != NULL)
 		{
-			(void)shx_pipeline(logic->pipeline, global);
-			if (logic->next != NULL
-					&& continue_logic(logic->type, global->latest_ret))
-				logic = logic->next;
+			(void)shx_pipeline(sequence->pipeline, global);
+			if (sequence->next != NULL
+					&& continue_logic(sequence->logic, global->latest_ret))
+				sequence = sequence->next;
 			else
 				break;
 		}

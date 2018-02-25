@@ -6,9 +6,14 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 11:47:26 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/16 08:23:52 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/24 09:05:31 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <unistd.h>
+#include "env.h"
+#include "builtin_cd.h"
+#include "shell_errmsg.h"
 
 static int	change_pwd_value(char *new_value, int const options, t_env *env)
 {
@@ -16,7 +21,7 @@ static int	change_pwd_value(char *new_value, int const options, t_env *env)
 	int			ret;
 
 	ret = 0;
-	cur_value = ft_getenv("PWD", env->env_list);
+	cur_value = shell_getenv(env, "PWD");
 	if (cur_value != NULL
 			&& append_variable_to_env(env, "OLDPWD", cur_value, GLOBAL))
 	{

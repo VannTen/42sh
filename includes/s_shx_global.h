@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 13:26:21 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/08 13:58:37 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/24 07:03:51 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 struct s_shx_global
 {
 	void 			*env;
-	void			*hash_table;
+	void			*hashtable;
 	unsigned char	latest_ret;
 };
 
