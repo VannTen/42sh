@@ -19,7 +19,7 @@ static int	remove_backslash_nl(t_input *input, t_lexer *lexer)
 	i = 0;
 	clear_tokens(&lexer->tokens[0]);
 	input->buffer[--input->buffer_len] = '\0';
-	if (input->buffer[input->buffer_len - 1] == '\\')
+	if (input->buffer_len > 0 && input->buffer[input->buffer_len - 1] == '\\')
 		input->buffer[--input->buffer_len] = '\0';
 	input->buf_tmp = input->buffer;
 	if (!(input->buffer = ft_strnew(input->buffer_size)))
