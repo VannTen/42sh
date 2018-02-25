@@ -98,6 +98,7 @@ SRC_NAME = env/add_variable_to_env.c \
 		   execution/recreate_env_array.c \
 		   execution/shell_errmsg.c \
 		   execution/launch_utility.c \
+		   execution/launch_external.c \
 		   execution/shx_and_or.c \
 		   execution/shx_complete_command.c \
 		   execution/shx_io_redirect.c \
@@ -116,14 +117,13 @@ SRC_NAME = env/add_variable_to_env.c \
 		   execution/str_to_fd.c \
 		   execution/backup_filedescriptor.c \
 		   execution/saved_filedescriptor_conflict.c \
+		   execution/is_valid_variable_name.c \
 		   builtin/builtin_cd.c \
 		   builtin/builtin_declare.c \
 		   builtin/builtin_echo.c \
 		   builtin/builtin_echo_specials.c \
 		   builtin/builtin_env.c \
 		   builtin/builtin_exit.c \
-		   builtin/builtin_export.c \
-		   builtin/builtin_history.c \
 		   builtin/builtin_setenv.c \
 		   builtin/builtin_unsetenv.c \
 		   builtin/builtopt_errmsg.c \
@@ -131,7 +131,9 @@ SRC_NAME = env/add_variable_to_env.c \
 		   builtin/cd_get_options.c \
 		   builtin/dotdot.c \
 		   builtin/get_physical_path.c \
-		   builtin/make_logical.c
+		   builtin/make_logical.c \
+		   42sh_hashtable/42sh_builtin_hash.c \
+		   42sh_hashtable/42sh_hashtable.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
