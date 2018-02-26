@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 15:46:10 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/12 12:28:44 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/26 15:26:22 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 # define LEXER_H
 # include "tokens.h"
 # include "libft.h"
-# define INITIAL_TOKEN_SIZE 1
-# define MAX_TOKENS 17
-# define MAX_OP_CHAR 7
+# define INITIAL_TOKEN_SIZE 32
 
 enum		e_state
 {
@@ -76,6 +74,6 @@ int					reset_lexer(t_lexer *lexer);
 void				display_tokens(t_token *tokens);
 
 extern const t_transition	g_lexer[MAX_STATE][MAX_EVENT];
-extern const char			g_op_char[MAX_OP_CHAR + 1];
-extern const char			*g_op_list[MAX_TOKENS + 1];
+extern const char			g_op_char[];
+extern const char			*g_op_list[];
 #endif

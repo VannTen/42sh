@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 17:58:23 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/12 12:28:28 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/26 15:12:04 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ enum
 	AND_IF,
 	OR_IF,
 	SEMI,
-	BANG,
 	PIPE,
 	CLOBBER,
 	LESS_GREAT,
 	DLESSDASH,
+	BANG,
 };
 
 typedef struct		s_token
