@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 08:29:53 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/24 08:51:57 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/26 09:52:57 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ static struct s_fd_backup	*create_fd_backup(int const fd)
 int					backup_filedescriptor(int const fd,
 		t_lst **const fd_backups)
 {
-	void	*backup;
+	struct s_fd_backup	*backup;
 
 	backup = create_fd_backup(fd);
 	if (backup != NULL)
 	{
-		if (f_lstpush(fd_backups, backup))
+		if (f_lstpush(backup, fd_backups))
 			return (0);
 		else
 		{
