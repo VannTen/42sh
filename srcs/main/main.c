@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/26 15:13:20 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/26 15:41:06 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ static t_bool	test_parser(t_token *list_tokens, t_parser const *parser,
 	global.latest_ret = 0;
 	shx_program(result, &global);
 	syntax_valid = result != NULL;
+	destroy_program(&result);
 	return (syntax_valid);
 }
 
