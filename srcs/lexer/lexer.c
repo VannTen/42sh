@@ -6,14 +6,14 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 15:22:54 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/14 15:42:44 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/26 15:27:04 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-const char				g_op_char[MAX_OP_CHAR + 1] = "><&|;-!";
-const char				*g_op_list[MAX_TOKENS + 1] = {
+const char				g_op_char[] = "><&|;";
+const char				*g_op_list[] = {
 	NULL,
 	NULL,
 	NULL,
@@ -26,7 +26,6 @@ const char				*g_op_list[MAX_TOKENS + 1] = {
 	"&&",
 	"||",
 	";",
-	"!",
 	"|",
 	">|",
 	"<>",
