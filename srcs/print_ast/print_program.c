@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 17:18:03 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/21 22:44:17 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/26 09:35:57 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char const	*deduce_op(struct s_sh_io_redirect *io_redirect)
 	size_t				i;
 
 	i = 0;
-	while (i < ARRLEN(refs) && io_cmp(refs + i, io_redirect))
+	while (i < ARRLEN(refs) && !io_cmp(refs + i, io_redirect))
 		i += 1;
 	return (opstr_array[i]);
 }
