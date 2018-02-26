@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 12:43:04 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/23 14:41:05 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/26 11:41:41 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int			handle_bang(t_history *history, char **input, t_string *exp_input)
 	char	*s;
 
 	s = *input + 1;
-	if (*s == '0' || (!ft_isalnum(*s) && *s != '!' && *s != '#'))
+	if (*s == '0' || (!ft_isalnum(*s) && *s != '!' && *s != '#' && *s != '-'))
 		return (EVENT_NOT_FOUND);
 	if (*s == '!')
 	{
