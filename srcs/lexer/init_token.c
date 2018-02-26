@@ -6,18 +6,18 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 15:23:36 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/12 15:12:20 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/26 15:17:28 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static int	evaluate_bang(size_t token_type)
+static int	evaluate_bang(t_token *token)
 {
-	if (token_type == AND_IF
-			|| token_type == OR_IF
-			|| token_type == PIPE
-			|| token_type == SEMI)
+	if (!token || (token->type == AND_IF
+				|| token->type == OR_IF
+				|| token->type == PIPE
+				|| token->type == SEMI))
 		return (BANG);
 	return (WORD);
 }
@@ -39,8 +39,8 @@ t_token		*init_token_node(t_lexer *lexer)
 		token->type = NEWLINE;
 	else
 		token->type = WORD;
-	if (lexer->tokens[1] && token->type == BANG)
-		token->type = evaluate_bang(lexer->tokens[1]->type);
+	if (!ft_strcmp(token->value, "!"))
+		token->type = evaluate_bang(lexer->tokens[1]);
 	if (ft_str_isdigit(token->value) && (*(lexer->input) == '<' ||
 			*(lexer->input) == '>'))
 		token->type = IO_NUMBER;
