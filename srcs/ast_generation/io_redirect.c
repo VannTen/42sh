@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/21 22:42:58 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/26 16:35:33 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static t_bool	add_io_operator(struct s_sh_io_redirect *const io_redirect,
 		{ .label=e_ast_container_label_dless, .param=DLESS_PARAM },
 		{ .label=e_ast_container_label_dlessdash, .param=DLESSDASH_PARAM },
 		{ .label=e_ast_container_label_greatand, .param=GREATAND_PARAM },
-		{ .label=e_ast_container_label_lessand, .param=LESSGREAT_PARAM }
+		{ .label=e_ast_container_label_lessand, .param=LESSAND_PARAM }
 	};
 	size_t						i;
 
