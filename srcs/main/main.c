@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/25 22:42:23 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/26 15:13:20 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,22 +205,24 @@ int main(int argc, char **argv, char **environ)
 	init_term(&bsh->term);
 	init_input(&bsh->input, &bsh->term, &bsh->history);
 	init_env(&bsh->env, environ);
-	init_termcaps(bsh);
 	parser = generate_parser(g_shell_grammar, g_tokens_name, g_exec_rules, get_tok_id);
 	print_grammar_back(STDERR_FILENO, parser->grammar);
 	while (42)
 	{
 		reset_lexer(&bsh->lexer);
+		init_termcaps(bsh);
 		if ((ret = readline_process(&bsh->input, &bsh->lexer,
 						&bsh->history)) == EVENT_NOT_FOUND
 				|| ret == MALLOC_FAIL)
 		{
+			restore_initial_attr(bsh->term);
 			(ret == EVENT_NOT_FOUND) ?
 				ft_dprintf(STDERR_FILENO, "bsh: event not found\n") : 0;
 			if (ret == MALLOC_FAIL)
 				init_buffers(&bsh->input);
 			continue ;
 		}
+		restore_initial_attr(bsh->term);
 		if (lexer(&bsh->lexer, bsh->input.buffer) == MALLOC_FAIL)
 			continue ;
 		if (update_history(&bsh->history, &bsh->input) == MALLOC_FAIL)
