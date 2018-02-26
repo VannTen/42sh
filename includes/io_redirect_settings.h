@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 09:33:00 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/21 22:41:06 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/26 15:21:50 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ struct	s_io_reference
 # define LESS_OFLAGS O_RDONLY
 # define LESS_PARAM { "0", e_sh_io_type_file, LESS_OFLAGS, 0, 0 }
 
-# define DLESS_OFLAGS O_RDONLY | O_CREAT | O_EXCL
+# define DLESS_OFLAGS O_RDONLY
 # define DLESS_PARAM { "0", e_sh_io_type_here, DLESS_OFLAGS, 0644, 0 }
 
-# define DLESSDASH_OFLAGS O_RDONLY | O_CREAT | O_EXCL
+# define DLESSDASH_OFLAGS O_RDONLY
 # define DLESSDASH_PARAM { "0", e_sh_io_type_here, DLESSDASH_OFLAGS, 0644, 1 }
 
 # define GREATAND_PARAM { "1", e_sh_io_type_aggregate, 0, 0, 0 }
