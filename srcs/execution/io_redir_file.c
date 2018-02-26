@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:40:46 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/24 08:47:29 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/26 09:46:38 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	io_redir_file(struct s_sh_io_redirect const *const io_redir,
 
 	if (io_redir && fd_backups_loc
 			&& (io_number = str_to_fd(io_redir->ionum)) != -1
-			&& backup_filedescriptor(io_number, fd_backups_loc))
+			&& !backup_filedescriptor(io_number, fd_backups_loc))
 	{
 		target_fd = open(io_redir->target, io_redir->flags, io_redir->mode);
 		if (target_fd != -1)
