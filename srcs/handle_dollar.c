@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_dollar.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/26 12:43:17 by bjanik            #+#    #+#             */
+/*   Updated: 2018/02/26 13:41:27 by bjanik           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "shell.h"
 
 static int	get_process_pid(t_expander *exp)
 {
 	char	*s;
 
-	if (!(s = ft_itoa(get_bsh()->pid)))
+	if (!(s = ft_itoa(get_shell_data()->pid)))
 		return (MALLOC_FAIL);
 	exp->buffer_len += ft_strlen(s);
 	if (exp->buffer_len >= exp->buffer_size)
@@ -19,7 +31,7 @@ static int	get_exit_status(t_expander *exp)
 {
 	char	*s;
 
-	if (!(s = ft_itoa(get_bsh()->exit_status)))
+	if (!(s = ft_itoa(get_shell_data()->exit_status)))
 		return (MALLOC_FAIL);
 	exp->buffer_len += ft_strlen(s);
 	if (exp->buffer_len >= exp->buffer_size)
@@ -32,7 +44,7 @@ static int	get_exit_status(t_expander *exp)
 
 static int	get_shell_name(t_expander *exp)
 {
-	ft_strcat(exp->buffer, get_bsh()->shell_name);
+	ft_strcat(exp->buffer, get_shell_data()->shell_name);
 	exp->buffer_len += 4;
 	if (exp->buffer_len >= exp->buffer_size)
 		realloc_exp_buffer(exp);
@@ -67,13 +79,13 @@ static int	get_env_variable(t_expander *exp, char *s)
 	return (0);
 }
 
-int		handle_dollar(t_expander *exp)
+int			handle_dollar(t_expander *exp)
 {
 	char	*s;
 
 	s = exp->tmp + 1;
 	if (!*s)
-		return (append(exp);
+		return (append(exp));
 	else if (*s == '?')
 		return (get_exit_status(exp));
 	else if (*s == '$')

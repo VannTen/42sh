@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expansion.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/26 12:59:26 by bjanik            #+#    #+#             */
+/*   Updated: 2018/02/26 13:27:38 by bjanik           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef EXPANSION_H
 # define EXPANSION_H
 # define INITIAL_SIZE 256
@@ -7,25 +19,25 @@
 # define NOT_HERE_END_EXP 0
 # define HERE_END_EXP 1
 
-enum			exp_state
+enum
 {
-	INIT1,
-	STD1,
-	DQUOTE1,
-	QUOTE1,
-	MAX_STATE1,
+	INIT_EXP,
+	STD_EXP,
+	DQUOTE_EXP,
+	QUOTE_EXP,
+	MAX_STATE_EXP,
 };
 
-enum			exp_event
+enum
 {
-	START,
-	EV_DQUOTE1,
-	EV_QUOTE1,
-	EV_DOLLAR,
-	EV_TILDE,
-	EV_BACKSLASH1,
-	EV_REG_CHAR1,
-	MAX_EVENT1,
+	START_EXP,
+	EV_DQUOTE_EXP,
+	EV_QUOTE_EXP,
+	EV_DOLLAR_EXP,
+	EV_TILDE_EXP,
+	EV_BACKSLASH_EXP,
+	EV_REG_CHAR_EXP,
+	MAX_EVENT_EXP,
 };
 
 typedef struct	s_expander
@@ -54,5 +66,5 @@ int				handle_bckslsh_dquote(t_expander *exp);
 int				get_event_exp(char c);
 int				realloc_exp_buffer(t_expander *exp);
 
-const t_transit		g_expander[MAX_STATE1][MAX_EVENT1];
+const t_transit		g_exp[MAX_STATE_EXP][MAX_EVENT_EXP];
 #endif

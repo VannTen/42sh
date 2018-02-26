@@ -1,16 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_func.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/26 12:43:34 by bjanik            #+#    #+#             */
+/*   Updated: 2018/02/26 13:00:45 by bjanik           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "shell.h"
 
-int	realloc_exp_buffer(t_expander *exp)
+int			realloc_exp_buffer(t_expander *exp)
 {
 	char	*tmp;
 
 	tmp = exp->buffer;
-	if (!(exp->buffer = (char*)malloc((exp->buffer_size * 2) * sizeof(char))))
+	if (!(exp->buffer = ft_strnew(exp->buffer_size * 2)))
 		return (MALLOC_FAIL);
 	exp->buffer_size *= 2;
-	ft_bzero(exp->buffer, exp->buffer_size);
 	ft_strcpy(exp->buffer, tmp);
-	free(tmp);
+	ft_strdel(&tmp);
 	return (0);
 }
 
