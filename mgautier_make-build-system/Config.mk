@@ -34,7 +34,7 @@ SYNTAX_FLAGS := -fsyntax-only -ferror-limit=0
 OPTI_CFLAGS := -flto -Ofast
 OPTI_LDFLAGS := -flto
 PROFILE_FLAGS :=
-CFLAGS := $(CFLAGS) $(ERROR_FLAGS) $(DEBUG_FLAGS)
+CFLAGS := $(CFLAGS) $(ERROR_FLAGS)
 ARFLAGS = rc
 
 # OS dependendant flags 
