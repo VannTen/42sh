@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 10:55:18 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/27 11:40:05 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/27 12:42:45 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,5 @@ char				*ft_strnjoin(char *s1, int n, ...);
 char				*ft_strndup(const char *s1, size_t n);
 t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
+size_t				ft_tab_len(char **tab);
 #endif
