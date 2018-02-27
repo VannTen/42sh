@@ -4,7 +4,7 @@ CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra
 
-INCLUDES = includes libft
+INCLUDES = includes libft grammar_generator/includes
 
 IFLAGS = $(INCLUDES:%=-I%)
 
