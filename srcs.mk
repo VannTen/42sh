@@ -33,8 +33,6 @@ SRCS = \
 	   $(SRCS_DIR)/builtin/builtin_echo_specials.c \
 	   $(SRCS_DIR)/builtin/builtin_env.c \
 	   $(SRCS_DIR)/builtin/builtin_exit.c \
-	   $(SRCS_DIR)/builtin/builtin_export.c \
-	   $(SRCS_DIR)/builtin/builtin_history.c \
 	   $(SRCS_DIR)/builtin/builtin_setenv.c \
 	   $(SRCS_DIR)/builtin/builtin_unsetenv.c \
 	   $(SRCS_DIR)/builtin/builtopt_errmsg.c \
