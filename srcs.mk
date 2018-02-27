@@ -61,7 +61,6 @@ SRCS = \
 	   $(SRCS_DIR)/execution/new_container.c \
 	   $(SRCS_DIR)/execution/recreate_env_array.c \
 	   $(SRCS_DIR)/execution/saved_filedescriptor_conflict.c \
-	   $(SRCS_DIR)/execution/setup_piped_instance.c \
 	   $(SRCS_DIR)/execution/sh_path_search.c \
 	   $(SRCS_DIR)/execution/shell_errmsg.c \
 	   $(SRCS_DIR)/execution/shell_getenv.c \
