@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   custom_string.h                                    :+:      :+:    :+:   */
+/*   ft_str_isdigit.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 14:39:20 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/29 14:39:20 by mgautier         ###   ########.fr       */
+/*   Created: 2017/12/04 14:11:03 by bjanik            #+#    #+#             */
+/*   Updated: 2017/12/04 14:11:04 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUSTOM_STRING_H
-# define CUSTOM_STRING_H
+#include "libft.h"
 
-typedef struct		s_string
+int		ft_str_isdigit(char *str)
 {
-	char			*str;
-	int				len;
-	int				size;
-}					t_string;
+	int	i;
 
-#endif
+	i = -1;
+	while (str[++i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+	}
+	return (1);
+}
