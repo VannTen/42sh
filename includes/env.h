@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:50:58 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/15 17:52:55 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/27 11:22:49 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct			s_env
 int						init_env(t_env *env, char **environ);
 t_env_list				*ft_getenv(t_env_list *env_list,
 						const char *const name);
+char					*shell_getenv(t_env *env, char *name);
 
 char					**convert_env_to_array(t_env_list *env_list,
 						const size_t len);
