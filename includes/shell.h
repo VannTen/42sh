@@ -6,13 +6,14 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 12:31:57 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/24 17:52:22 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/27 12:30:49 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHELL_H
 # define SHELL_H
 
+# include "libbj.h"
 # include "libft.h"
 # include "lexer.h"
 # include "input.h"
