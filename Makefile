@@ -25,6 +25,9 @@ all: $(NAME)
 $(NAME): $(OBJ) $(LIBS)
 	$(CC) $(LFLAGS) -o $(NAME) $(OBJ) -ltermcap
 
+%.a:
+	make -C $(dir $@) $(notdir $@)
+
 $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
 	-@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
