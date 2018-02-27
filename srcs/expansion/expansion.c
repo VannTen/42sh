@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:42:58 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/26 13:34:46 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/27 12:59:02 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*expanded_str(t_expander *exp, char *string, const size_t type)
 			return (NULL);
 		}
 		(exp->state != INIT_EXP) ? exp->tmp++ : 0;
-		exp->state = g_expander[exp->state][exp->event].new_state;
+		exp->state = g_exp[exp->state][exp->event].new_state;
 		exp->event = get_event_exp(*(exp->tmp));
 	}
 	if (!(str = ft_strdup(exp->buffer)))
