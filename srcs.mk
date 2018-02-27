@@ -141,6 +141,7 @@ SRCS = \
 	   $(SRCS_DIR)/main/get_line.c \
 	   $(SRCS_DIR)/main/init_shell.c \
 	   $(SRCS_DIR)/main/main.c \
+	   $(SRCS_DIR)/main/pass_tokens_to_parser.c \
 	   $(SRCS_DIR)/main/readline_process.c \
 	   $(SRCS_DIR)/main/realloc_str.c \
 	   $(SRCS_DIR)/main/sh_exit_message.c \
