@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 12:31:57 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/27 12:30:49 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/27 12:54:26 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "history.h"
 # include "term.h"
 # include "env.h"
+# include "expander.h"
 # include "tokens.h"
 # include <termios.h>
 # include <dirent.h>
