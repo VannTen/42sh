@@ -1,4 +1,5 @@
-SRCS = $(SRCS_DIR)/42sh_hashtable/42sh_builtin_hash.c \
+SRCS = \
+	   $(SRCS_DIR)/42sh_hashtable/42sh_builtin_hash.c \
 	   $(SRCS_DIR)/42sh_hashtable/42sh_hashtable.c \
 	   $(SRCS_DIR)/ast_generation/and_if.c \
 	   $(SRCS_DIR)/ast_generation/and_or.c \
@@ -42,8 +43,6 @@ SRCS = $(SRCS_DIR)/42sh_hashtable/42sh_builtin_hash.c \
 	   $(SRCS_DIR)/builtin/dotdot.c \
 	   $(SRCS_DIR)/builtin/get_physical_path.c \
 	   $(SRCS_DIR)/builtin/make_logical.c \
-	   $(SRCS_DIR)/completion/completion_lexer.c \
-	   $(SRCS_DIR)/completion/search_directories.c \
 	   $(SRCS_DIR)/env/add_variable_to_env.c \
 	   $(SRCS_DIR)/env/clear_env_list.c \
 	   $(SRCS_DIR)/env/convert_env_to_array.c \
@@ -110,6 +109,14 @@ SRCS = $(SRCS_DIR)/42sh_hashtable/42sh_builtin_hash.c \
 	   $(SRCS_DIR)/lexer/is_operator.c \
 	   $(SRCS_DIR)/lexer/lexer.c \
 	   $(SRCS_DIR)/lexer/realloc_current_token.c \
+	   $(SRCS_DIR)/lib_bj/ft_abs.c \
+	   $(SRCS_DIR)/lib_bj/ft_free_string_tab.c \
+	   $(SRCS_DIR)/lib_bj/ft_lstdel.c \
+	   $(SRCS_DIR)/lib_bj/ft_lstnew.c \
+	   $(SRCS_DIR)/lib_bj/ft_str_isdigit.c \
+	   $(SRCS_DIR)/lib_bj/ft_strndup.c \
+	   $(SRCS_DIR)/lib_bj/ft_strnjoin.c \
+	   $(SRCS_DIR)/lib_bj/ft_swap.c \
 	   $(SRCS_DIR)/line_editing/completion/completion.c \
 	   $(SRCS_DIR)/line_editing/completion/completion_display.c \
 	   $(SRCS_DIR)/line_editing/completion/completion_search_in_env.c \
@@ -122,7 +129,6 @@ SRCS = $(SRCS_DIR)/42sh_hashtable/42sh_builtin_hash.c \
 	   $(SRCS_DIR)/line_editing/completion/sort_matches.c \
 	   $(SRCS_DIR)/line_editing/copy_cut_paste.c \
 	   $(SRCS_DIR)/line_editing/display_line.c \
-	   $(SRCS_DIR)/line_editing/get_key.c \
 	   $(SRCS_DIR)/line_editing/handle_eof.c \
 	   $(SRCS_DIR)/line_editing/history_search.c \
 	   $(SRCS_DIR)/line_editing/init_input.c \
