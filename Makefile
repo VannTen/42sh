@@ -35,4 +35,12 @@ $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
 norme:
 	norminette $(SRCS)
 
+clean:
+	rm -f $(OBJ)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
 .PHONY: all clean fclean re norme
