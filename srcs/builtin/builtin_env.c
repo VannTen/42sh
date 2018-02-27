@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 08:30:37 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/25 20:29:30 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/27 19:49:16 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,44 @@
 #include <stdlib.h>
 #include "execution.h"
 
-static void	*ft_memdup(void const *src, size_t size)
+static struct s_env_list	*dup_env_list_elem(struct s_env_list *elem)
 {
-	void	*dst;
+	struct s_env_list	*elem_copy;
 
-	dst = malloc(size);
-	if (dst)
-		ft_memcpy(dst, src, size);
-	return (dst);
+	elem_copy = elem ? ft_memalloc(sizeof(struct s_env_list)) : NULL;
+	if (elem_copy)
+	{
+		elem_copy->name = elem->name ? ft_strdup(elem->name) : NULL;
+		if (elem_copy->name || !elem->name)
+		{
+			elem_copy->value = elem->value ? ft_strdup(elem->value) : NULL;
+			if (elem_copy->value || !elem->value)
+			{
+				elem_copy->exportable = elem->exportable;
+				elem_copy->next = NULL;
+				return (elem_copy);
+			}
+			ft_strdel(&elem_copy->name);
+		}
+		ft_memdel((void**)&elem_copy);
+	}
+	return (NULL);
 }
 
-static struct s_env_list	*copy_env_list(struct s_env_list *env_list)
+static struct s_env_list	*dup_env_list(struct s_env_list *env_list)
 {
 	struct s_env_list	*env_list_cpy;
 	struct s_env_list	*env_cpy_elem;
 
 	if (env_list != NULL)
 	{
-		env_list_cpy = ft_memdup(env_list, sizeof(t_env_list));
+		env_list_cpy = dup_env_list_elem(env_list);
 		if (env_list_cpy == NULL)
 			return (NULL);
 		env_cpy_elem = env_list_cpy;
 		while ((env_list = env_list->next) != NULL)
 		{
-			env_cpy_elem->next = ft_memdup(env_list, sizeof(t_env_list));
+			env_cpy_elem->next = dup_env_list_elem(env_list);
 			if (env_cpy_elem->next == NULL)
 			{
 				clear_env_list(&env_list_cpy);
@@ -52,19 +66,19 @@ static struct s_env_list	*copy_env_list(struct s_env_list *env_list)
 		return (NULL);
 }
 
-static int	init_env_cpy(t_env *env_cpy, t_env *env)
+static int	init_env_cpy(t_env *env_cpy, t_env *env, t_bool ignore_env)
 {
-	if (env_cpy)
+	if (env_cpy && env)
 	{
-		if (env && env->env_list)
+		if (!ignore_env && env->env_list)
 		{
-			if (!(env_cpy->env_list = copy_env_list(env->env_list)))
+			if (!(env_cpy->env_list = dup_env_list(env->env_list)))
 				return (42);
 		}
 		else
 			env_cpy->env_list = NULL;
 		env_cpy->env_array = NULL;
-		env_cpy->env_len = env ? env->env_len : 0;
+		env_cpy->env_len = ignore_env ? 0 : env->env_len;
 		env_cpy->has_changed = TRUE;
 	}
 	else
@@ -128,8 +142,8 @@ int	builtin_env(char **argv, t_env *env)
 		return (42);
 	}
 	ignore_env = (argv[1] && ft_strcmp(argv[1], "-i") == 0);
-	if (init_env_cpy(&env_cpy, ignore_env ? NULL : env))
-		return (42);
+	if (init_env_cpy(&env_cpy, env, ignore_env))
+		return (42);;
 	argv = modif_env(argv + (ignore_env ? 2 : 1), &env_cpy);
 	if (argv)
 	{
