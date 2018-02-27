@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 12:31:57 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/27 13:13:37 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/27 15:58:08 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include "env.h"
 # include "expander.h"
 # include "tokens.h"
+# include "parser_interface.h"
+# include "parser_defs.h"
+# include "shell_grammar.h"
 # include "colors.h"
 # include <termios.h>
 # include <dirent.h>
@@ -42,6 +45,7 @@ typedef struct	s_bsh
 {
 	t_input		input;
 	t_lexer		lexer;
+	t_parser	*parser;
 	t_env		env;
 	t_history	history;
 	t_term		term;
@@ -62,4 +66,7 @@ void			sh_no_such_file_or_directory(const char *file);
 void			sh_permission_denied(const char *file);
 void			sh_is_a_directory(const char *file);
 void			sh_opening_failed(const char *file);
+
+size_t			get_tok_id(void const *token);
+void			*take_token(void *token_list_adress);
 #endif
