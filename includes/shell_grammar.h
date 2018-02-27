@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 12:12:51 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/22 10:28:45 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/27 18:32:45 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ static char const	*g_tokens_name[] = {
 	"AND_IF",
 	"OR_IF",
 	"SEMICOLON",
-	"BANG",
 	"PIPE",
 	"CLOBBER",
 	"LESSGREAT",
 	"DLESSDASH",
+	"BANG",
 	NULL
 };
 
