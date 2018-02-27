@@ -6,17 +6,18 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/24 19:12:11 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/27 13:23:20 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+#include "g_builtin_array.h"
 
 void		display_tokens(t_token *tokens)
 {
 	while (tokens)
 	{
-		ft_printf("[%s] ==> type = %d\n", tokens->value, tokens->type);
+		ft_printf("[%s] ==> type = %zu\n", tokens->value, tokens->type);
 		tokens = tokens->next;
 	}
 }
@@ -63,16 +64,16 @@ void	*take_token(void *token_list_address)
 static int	error_messages(t_input *input, const int ret)
 {
 	(ret == EVENT_NOT_FOUND) ?
-			dprintf(STDERR_FILENO, "42sh: Event not found\n") : 0;
+			ft_dprintf(STDERR_FILENO, "42sh: Event not found\n") : 0;
 	if (ret == MALLOC_FAIL)
 	{
 		init_buffers(input);
-		dprintf(STDERR_FILENO, "42sh: Memory allocation failed."
+		ft_dprintf(STDERR_FILENO, "42sh: Memory allocation failed."
 				" Aborting process routine\n");
 	}
 	if (ret == INPUT_TOO_LONG)
 	{
-		dprintf(STDERR_FILENO, "42sh: Input is too long."
+		ft_dprintf(STDERR_FILENO, "42sh: Input is too long."
 							" Aborting process routine!\n");
 		init_buffers(input);
 		input->cursor_pos = 0;

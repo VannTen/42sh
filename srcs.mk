@@ -109,9 +109,9 @@ SRCS = \
 	   $(SRCS_DIR)/lib_bj/ft_lstdel.c \
 	   $(SRCS_DIR)/lib_bj/ft_lstnew.c \
 	   $(SRCS_DIR)/lib_bj/ft_str_isdigit.c \
-	   $(SRCS_DIR)/lib_bj/ft_strndup.c \
 	   $(SRCS_DIR)/lib_bj/ft_strnjoin.c \
 	   $(SRCS_DIR)/lib_bj/ft_swap.c \
+	   $(SRCS_DIR)/lib_bj/ft_tab_len.c \
 	   $(SRCS_DIR)/line_editing/completion/completion.c \
 	   $(SRCS_DIR)/line_editing/completion/completion_display.c \
 	   $(SRCS_DIR)/line_editing/completion/completion_search_in_env.c \

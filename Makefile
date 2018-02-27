@@ -23,7 +23,7 @@ LFLAGS = $(patsubst %,-L%,$(dir $(LIBS))) $(patsubst lib%.a,-l%,$(notdir $(LIBS)
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBS)
-	$(CC) $(LFLAGS) -o $(NAME) $(OBJ)
+	$(CC) $(LFLAGS) -o $(NAME) $(OBJ) -ltermcap
 
 $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
 	-@mkdir -p $(dir $@)

@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 16:35:51 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/24 18:53:26 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/27 13:11:15 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	get_line_from_file(t_input *input, size_t *state)
 		sh_exit_message("42sh: get_next_line failed\n");
 	else if ((*state == DQUOTE || *state == QUOTE))
 	{
-		dprintf(STDERR_FILENO, "42sh: unexpected EOF while looking for"
+		ft_dprintf(STDERR_FILENO, "42sh: unexpected EOF while looking for"
 				" matching `%c'\n", (*state == DQUOTE) ? '"' : '\'');
 		exit(UNMATCHED_QUOTES);
 	}

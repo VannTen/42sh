@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 12:31:57 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/27 12:54:26 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/27 13:13:37 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "env.h"
 # include "expander.h"
 # include "tokens.h"
+# include "colors.h"
 # include <termios.h>
 # include <dirent.h>
 # include <sys/stat.h>
@@ -45,6 +46,7 @@ typedef struct	s_bsh
 	t_history	history;
 	t_term		term;
 	int			interactive;
+	int			exit_status;
 }				t_bsh;
 
 int				init_termcaps(t_bsh *bsh);
@@ -59,4 +61,5 @@ void			sh_exit_message(const char *error_message);
 void			sh_no_such_file_or_directory(const char *file);
 void			sh_permission_denied(const char *file);
 void			sh_is_a_directory(const char *file);
+void			sh_opening_failed(const char *file);
 #endif

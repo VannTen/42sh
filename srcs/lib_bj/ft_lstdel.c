@@ -6,10 +6,11 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 13:25:39 by bjanik            #+#    #+#             */
-/*   Updated: 2017/11/08 18:23:42 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/27 13:09:17 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libbj.h"
 #include "libft.h"
 
 void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))

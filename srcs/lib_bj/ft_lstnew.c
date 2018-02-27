@@ -6,11 +6,12 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 13:07:10 by bjanik            #+#    #+#             */
-/*   Updated: 2016/11/25 18:17:16 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/27 13:09:00 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "libbj.h"
 
 t_list	*ft_lstnew(void const *content, size_t content_size)
 {
