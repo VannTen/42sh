@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:43:28 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/26 12:43:30 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/27 12:59:30 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ int	get_event_exp(char c)
 		return (EV_BACKSLASH_EXP);
 	else if (c != '\0')
 		return (EV_REG_CHAR_EXP);
+	return (0);
 }
