@@ -6,12 +6,16 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/27 13:23:20 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/27 17:20:01 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 #include "g_builtin_array.h"
+#include "s_shx_global.h"
+#include "execution.h"
+#include "print_ast.h"
+#include "parser_defs.h"
 
 void		display_tokens(t_token *tokens)
 {
@@ -40,27 +44,6 @@ static int	update_history(t_history *history, t_input *input)
 	return (0);
 }
 
-/*size_t	get_token_id(void const *token)
-{
-	t_token const *tok;
-
-	tok = token;
-	return (tok->type);
-}
-
-void	*take_token(void *token_list_address)
-{
-	t_token **list_address;
-	void	*token;
-
-	list_address = token_list_address;
-	token = *list_address;
-	*list_address = (*list_address)->next;
-	return (token);
-}
-
-#include "parser_interface.h"*/
-
 static int	error_messages(t_input *input, const int ret)
 {
 	(ret == EVENT_NOT_FOUND) ?
@@ -80,15 +63,34 @@ static int	error_messages(t_input *input, const int ret)
 	}
 	return (0);
 }
-
-int			main(int argc, char **argv, char **environ)
+static t_bool	test_parser(t_token *list_tokens, t_parser const *parser,
+				t_bsh *bsh)
 {
-	t_bsh	*bsh;
+	void					*result;
+	t_bool					syntax_valid;
+	struct s_parse_input	input;
+	struct s_shx_global		global;
+
+	input.input = &list_tokens;
+	input.get_token = take_token;
+	input.del_token = no_destroy;
+	if (parser == NULL)
+		exit(1);
+	result = execute_construct(parser, "PROGRAM", &input);
+	print_program(STDERR_FILENO, result, 0);
+	global.env = &(bsh->env);
+	global.hashtable = NULL;
+	global.latest_ret = 0;
+	shx_program(result, &global);
+	syntax_valid = result != NULL;
+	destroy_program(&result);
+	return (syntax_valid);
+}
+
+int			sh_loop(t_bsh *bsh)
+{
 	int		ret;
-	/*t_parser	*parser;
-	//parser = generate_parser(g_grammar, tokens_name, exec_rules, get_token_id);*/
-	bsh = shell_init(environ, argc, argv);
-	(bsh->interactive) ? init_termcaps(bsh) : 0;
+
 	while (42)
 	{
 		reset_lexer(&bsh->lexer);
@@ -104,8 +106,17 @@ int			main(int argc, char **argv, char **environ)
 		if (bsh->interactive)
 			if (update_history(&bsh->history, &bsh->input) == MALLOC_FAIL)
 				continue ;
-		display_history(&bsh->history);
-		//execute_construct(parser, "PROGRAM", &bsh->lexer.tokens[0], take_token);
+		test_parser(bsh->lexer.tokens[0], bsh->parser, bsh);
 	}
+	return (0);
+}
+
+int			main(int argc, char **argv, char **environ)
+{
+	t_bsh	*bsh;
+
+	bsh = shell_init(environ, argc, argv);
+	(bsh->interactive) ? init_termcaps(bsh) : 0;
+	sh_loop(bsh);
 	return (0);
 }
