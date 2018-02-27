@@ -25,7 +25,7 @@ $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
 	-@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
-norme: $(SRCS:%=%.norme)
+norme:
+	norminette $(SRCS)
 
-%.norme: %
-	@norminette $<
+.PHONY: all clean fclean re norme
