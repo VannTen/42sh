@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:50:58 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/27 11:22:49 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/27 12:33:31 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char					**convert_env_to_array(t_env_list *env_list,
 t_env_list				*convert_environ_to_list(char **environ);
 int						display_global_env(t_env_list const *env_list);
 int						display_local_env(t_env_list const *env_list);
-int						display_global_local_env(t_env_list const *env_list);
+int						display_local_global_env(t_env_list const *env_list);
 int						append_variable_to_env(t_env *env,
 						const char *const name, const char *const value,
 						unsigned short exportable);
