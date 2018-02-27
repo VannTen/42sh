@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 11:15:02 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/22 11:15:02 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/02/27 16:15:36 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static t_bool		non_terminal_transition(
 
 static t_bool		one_symbol_transition(
 		struct s_parse_state *state,
-		struct s_input const *token_flow,
+		struct s_parse_input const *token_flow,
 		size_t (*get_token_id)(void const *token))
 {
 	t_symbol const	*sym;
@@ -91,7 +91,7 @@ static t_bool	init(
 void		*execute_construct(
 		t_parser const *parser,
 		char const *construct,
-		struct s_input const *input)
+		struct s_parse_input const *input)
 {
 	struct s_parse_state	state;
 	t_exec_construct		*meta_construct;
