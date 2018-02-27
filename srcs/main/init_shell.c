@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 16:09:34 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/24 15:26:44 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/27 15:30:32 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ static t_bsh	*init_data(void)
 			|| init_term(&bsh->term) == MALLOC_FAIL
 			|| init_input(&bsh->input, &bsh->term,
 				&bsh->history) == MALLOC_FAIL)
+		return (NULL);
+	if (!(bsh->parser = generate_parser(g_shell_grammar, g_tokens_name,
+					g_exec_rules, get_tok_id)))
 		return (NULL);
 	return (bsh);
 }
