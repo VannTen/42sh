@@ -16,10 +16,14 @@ OBJ_DIR = obj
 
 OBJ = $(SRCS:$(SRCS_DIR)/%.c=$(OBJ_DIR)/%.o)
 
+LIBS = grammar_generator/libgrammar_generator.a libft/libft.a
+
+LFLAGS = $(patsubst %,-L%,$(dir $(LIBS))) $(patsubst lib%.a,-l%,$(notdir $(LIBS)))
+
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@echo obj are ready
+$(NAME): $(OBJ) $(LIBS)
+	$(CC) $(LFLAGS) -o $(NAME) $(OBJ)
 
 $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
 	-@mkdir -p $(dir $@)
