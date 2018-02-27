@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 16:35:51 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/27 13:11:15 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/27 17:11:59 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,15 @@ static int	get_line_from_file(t_input *input, size_t *state)
 int			getline(t_input *input, const int interactive, const int mode,
 					size_t *state)
 {
+	t_term	*term;
+
+	term = &get_shell_data()->term;
 	if (interactive == 1)
 	{
+		restore_custom_attr(term);
 		if (wait_for_input(input, mode) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
+		restore_initial_attr(term);
 	}
 	else
 	{
