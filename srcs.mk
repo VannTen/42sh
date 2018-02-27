@@ -52,7 +52,6 @@ SRCS = \
 	   $(SRCS_DIR)/execution/apply_redirections.c \
 	   $(SRCS_DIR)/execution/backup_filedescriptor.c \
 	   $(SRCS_DIR)/execution/destroy_container.c \
-	   $(SRCS_DIR)/execution/fd_backup_conflict.c \
 	   $(SRCS_DIR)/execution/io_redir_aggregate.c \
 	   $(SRCS_DIR)/execution/io_redir_file.c \
 	   $(SRCS_DIR)/execution/io_redir_here.c \
