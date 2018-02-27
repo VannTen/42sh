@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 15:17:41 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/14 15:43:21 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/27 17:13:28 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void		get_prompt(t_term *term)
 		else
 			ft_strcpy(term->prompt, ft_strrchr(pwd, '/') + 1);
 		ft_strdel(&pwd);
-		term->prompt_len = ft_strlen(term->prompt) + 3;
+		term->prompt_len = ft_strlen(term->prompt) + 1;
 	}
 	term->cursor_col = term->prompt_len + 1;
 	term->first_line_len = term->width - term->prompt_len;
@@ -51,9 +51,6 @@ void		print_prompt(t_input *input, char *color)
 	get_prompt(input->term);
 	if (input->type != HISTORY_SEARCH)
 		ft_putchar_fd('\n', STDERR_FILENO);
-	ft_putstr_fd(BOLD_GRN, STDERR_FILENO);
-	ft_printf("%C ", 0x21E8);
-	ft_putstr_fd(RESET, STDERR_FILENO);
 	ft_putstr_fd(color, STDERR_FILENO);
 	ft_putstr_fd(input->term->prompt, STDERR_FILENO);
 	ft_putstr_fd(RESET, STDERR_FILENO);
