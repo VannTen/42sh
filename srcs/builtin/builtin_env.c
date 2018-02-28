@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 08:30:37 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/27 19:49:16 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/28 11:44:56 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,5 +154,6 @@ int	builtin_env(char **argv, t_env *env)
 	else
 		ret = 42;
 	clear_env_list(&env_cpy.env_list);
+	ft_free_string_array(&(env_cpy.env_array));
 	return (ret);
 }
