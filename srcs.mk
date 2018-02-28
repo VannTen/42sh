@@ -138,6 +138,7 @@ SRCS = \
 	   $(SRCS_DIR)/line_editing/realloc_buffer.c \
 	   $(SRCS_DIR)/line_editing/selection.c \
 	   $(SRCS_DIR)/line_editing/waiting_for_input.c \
+	   $(SRCS_DIR)/main/set_shell_sigmode.c \
 	   $(SRCS_DIR)/main/get_line.c \
 	   $(SRCS_DIR)/main/init_shell.c \
 	   $(SRCS_DIR)/main/main.c \

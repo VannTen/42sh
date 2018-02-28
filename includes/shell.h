@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 12:31:57 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/27 15:58:08 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/28 10:52:48 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include "parser_defs.h"
 # include "shell_grammar.h"
 # include "colors.h"
+# include "shell_signal.h"
 # include <termios.h>
 # include <dirent.h>
 # include <sys/stat.h>

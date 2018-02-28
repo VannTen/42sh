@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/27 17:20:01 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/28 10:58:01 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int			main(int argc, char **argv, char **environ)
 {
 	t_bsh	*bsh;
 
+	set_shell_sigmode(e_shell_sigmode_shell);
 	bsh = shell_init(environ, argc, argv);
 	(bsh->interactive) ? init_termcaps(bsh) : 0;
 	sh_loop(bsh);
