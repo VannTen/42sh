@@ -35,5 +35,5 @@ int						init_term(t_term *term);
 int						restore_initial_attr(t_term *term);
 int						restore_custom_attr(t_term *term);
 void					get_term_size(t_term *term);
-
+void					resize_term(int sigid);
 #endif
