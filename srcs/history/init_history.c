@@ -37,5 +37,6 @@ int			init_history(t_history *history, int size)
 	history->current = 0;
 	history->len = 0;
 	history->size = size;
+	import_history_from_file(history);
 	return (0);
 }

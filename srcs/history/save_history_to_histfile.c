@@ -18,7 +18,7 @@ int	save_history_to_histfile(t_history *history)
 	int	fd;
 
 	i = -1;
-	if ((fd = open(history->file, O_CREAT | O_TRUNC | O_WRONLY, 0644)) < 0)
+	if ((fd = open(history->file, O_CREAT | O_WRONLY, 0644)) < 0)
 		return (1);
 	while (++i < history->len)
 	{

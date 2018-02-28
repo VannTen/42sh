@@ -21,7 +21,7 @@ int			import_history_from_file(t_history *history)
 	char	*line;
 	int		fd;
 
-	if ((fd = open(history->file, O_CREAT | O_RDWR | O_APPEND, 0644)) < 0)
+	if ((fd = open(history->file, O_CREAT | O_RDONLY | O_APPEND, 0644)) < 0)
 		return (2);
 	while (get_next_line(fd, &line) > 0)
 	{
