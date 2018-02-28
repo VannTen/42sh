@@ -6,26 +6,22 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 12:09:31 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/28 13:28:21 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/28 14:42:27 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-#include "expander.h"
+#include "shell.h"
 
 static char	*resolved_arg(char *arg, struct s_shx_global *global)
 {
 	t_expander	*exp;
 	char		*ret;
 
-	if ((exp = init_expander(global->env)))
-	{
-		ret = arg ? expanded_str(exp, arg, NOT_HERE_END_EXP) : NULL;
-		ft_strdel(&exp->buffer);
-		ft_memdel((void**)&exp);
-		return (ret);
-	}
-	return (NULL);
+	(void)global;
+	exp = &get_shell_data()->exp;
+	ret = arg ? expanded_str(exp, arg, NOT_HERE_END_EXP) : NULL;
+	return (ret);
 }
 
 static void	delete_argv(char **argv)
