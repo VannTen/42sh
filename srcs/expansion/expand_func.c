@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:43:34 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/27 12:53:45 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/28 14:16:33 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int			realloc_exp_buffer(t_expander *exp)
 
 	tmp = exp->buffer;
 	if (!(exp->buffer = ft_strnew(exp->buffer_size * 2)))
+	{
+		ft_strdel(&tmp);
 		return (MALLOC_FAIL);
+	}
 	exp->buffer_size *= 2;
 	ft_strcpy(exp->buffer, tmp);
 	ft_strdel(&tmp);
