@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 14:55:18 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/14 13:14:37 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/28 12:45:13 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,23 @@ int			cursor_on_last_line(t_input *input)
 
 int			handle_reg_char(t_input *input, char c)
 {
-	if (input->buffer_len == input->buffer_size)
-		if (realloc_buffer(input) == MALLOC_FAIL)
-			return (MALLOC_FAIL);
-	if (input->cursor_pos == input->buffer_len)
-		input->buffer[input->cursor_pos] = c;
-	else
+	if (input->state == STANDARD)
 	{
-		ft_memmove((char*)input->buffer + input->cursor_pos + 1,
-		(char*)input->buffer + input->cursor_pos,
-		ft_strlen(input->buffer + input->cursor_pos));
-		input->buffer[input->cursor_pos] = c;
+		if (input->buffer_len == input->buffer_size)
+			if (realloc_buffer(input) == MALLOC_FAIL)
+				return (MALLOC_FAIL);
+		if (input->cursor_pos == input->buffer_len)
+			input->buffer[input->cursor_pos] = c;
+		else
+		{
+			ft_memmove((char*)input->buffer + input->cursor_pos + 1,
+			(char*)input->buffer + input->cursor_pos,
+			ft_strlen(input->buffer + input->cursor_pos));
+			input->buffer[input->cursor_pos] = c;
+		}
+		input->buffer_len++;
+		display_line(input, input->cursor_pos + 1);
 	}
-	input->buffer_len++;
-	display_line(input, input->cursor_pos + 1);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 17:57:42 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/14 15:53:59 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/28 12:30:09 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct	s_input
 	int			buffer_len;
 	int			buffer_size;
 	int			cursor_pos;
+	int			read_buf_ind;
 	char		read_buffer[MAX_KEY_LENGTH + 1];
 	t_comp		comp;
 	t_term		*term;

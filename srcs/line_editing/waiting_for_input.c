@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 11:41:51 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/12 18:20:49 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/28 13:05:33 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,32 @@ t_keys		g_handle_keys[] = {
 	{NULL, {NULL, NULL}},
 };
 
+static int	apply_key(t_input *input)
+{
+	int		ret;
+	int		i;
+
+	input->read_buf_ind++;
+	i = -1;
+	while (g_handle_keys[++i].key)
+		if (!ft_strncmp(input->read_buffer, g_handle_keys[i].key,
+				input->read_buf_ind))
+		{
+			if (g_handle_keys[i].key[input->read_buf_ind] == 0)
+			{
+				ret = g_handle_keys[i].handle_keystroke[input->state](input);
+				ft_bzero(input->read_buffer, MAX_KEY_LENGTH);
+				input->read_buf_ind = 0;
+			}
+			else
+				ret = 0;
+			return (ret);
+		}
+	ft_bzero(input->read_buffer, MAX_KEY_LENGTH);
+	input->read_buf_ind = 0;
+	return (0);
+}
+
 static int	get_key(t_input *input)
 {
 	int	i;
@@ -54,15 +80,18 @@ static int	get_key(t_input *input)
 	if (input->state == COMPLETION)
 		return (completion(input));
 	reset_completion_data(&input->comp);
-	while (g_handle_keys[++i].key)
-	{
-		if (ft_isprint(input->read_buffer[0]))
-			break ;
-		if (!ft_strcmp(g_handle_keys[i].key, input->read_buffer))
-			return (g_handle_keys[i].handle_keystroke[input->state](input));
-	}
-	return (ft_isprint(input->read_buffer[0]) && input->state == STANDARD) ?
-	handle_reg_char(input, input->read_buffer[0]) : 0;
+	if (!ft_isprint(input->read_buffer[0]))
+		return (apply_key(input));
+	return (handle_reg_char(input, input->read_buffer[0]));
+}
+
+static int	buffer_read_one(char *buffer, int offset)
+{
+	int	ret;
+
+	ret = read(STDIN_FILENO, buffer + offset, 1);
+	buffer[offset + 1] = 0;
+	return (ret);
 }
 
 int			wait_for_input(t_input *input, int input_type)
@@ -70,10 +99,11 @@ int			wait_for_input(t_input *input, int input_type)
 	int		ret;
 
 	input->type = input_type;
+	input->read_buf_ind = 0;
+	ft_bzero(input->read_buffer, MAX_KEY_LENGTH + 1);
 	while (42)
 	{
-		ft_bzero(input->read_buffer, MAX_KEY_LENGTH + 1);
-		if (read(STDIN_FILENO, input->read_buffer, MAX_KEY_LENGTH) < 1)
+		if (buffer_read_one(input->read_buffer, input->read_buf_ind) < 1)
 			return (READ_FAIL);
 		if ((ret = get_key(input)) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
