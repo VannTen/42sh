@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 12:31:57 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/28 14:42:43 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/28 15:55:39 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include "shell_grammar.h"
 # include "colors.h"
 # include "shell_signal.h"
+# include "hashtable.h"
 # include <termios.h>
 # include <dirent.h>
 # include <sys/stat.h>
@@ -44,15 +45,16 @@
 
 typedef struct	s_bsh
 {
-	t_input		input;
-	t_lexer		lexer;
-	t_parser	*parser;
-	t_env		env;
-	t_history	history;
-	t_term		term;
-	t_expander	exp;
-	int			interactive;
-	int			exit_status;
+	t_input			input;
+	t_lexer			lexer;
+	t_parser		*parser;
+	t_env			env;
+	t_history		history;
+	t_term			term;
+	t_expander		exp;
+	t_hash_table	hashtable;
+	int				interactive;
+	int				exit_status;
 }				t_bsh;
 
 int				init_termcaps(t_bsh *bsh);

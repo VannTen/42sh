@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 06:37:51 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/24 06:39:12 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/28 15:30:09 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ struct s_sh_builtin const	g_builtin_array[BUILTIN_COUNT] = {
 	{ .name="exit", .ft=&builtin_exit },
 	{ .name="env", .ft=&builtin_env },
 	{ .name="setenv", .ft=&builtin_setenv },
-	{ .name="unsetenv", .ft=&builtin_unsetenv }
+	{ .name="unsetenv", .ft=&builtin_unsetenv },
+	{ .name="hash", .ft=&builtin_hash }
 };
 
 #endif

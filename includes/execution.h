@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 19:17:47 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/25 20:14:02 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/28 15:03:28 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ int		apply_redirections(t_lst *redirs, t_lst **fd_backups);
 void	undo_redirections(t_lst **fd_backups);
 
 t_bool	is_valid_variable_name(char const *str);
+
+void	clear_hashtable(void);
 
 #endif

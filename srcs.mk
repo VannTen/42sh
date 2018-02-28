@@ -3,6 +3,7 @@ SRCS = \
 	   $(SRCS_DIR)/hashtable/hashtable.c \
 	   $(SRCS_DIR)/ast_generation/and_if.c \
 	   $(SRCS_DIR)/ast_generation/and_or.c \
+	   $(SRCS_DIR)/ast_generation/give_and_or.c \
 	   $(SRCS_DIR)/ast_generation/bang.c \
 	   $(SRCS_DIR)/ast_generation/clobber.c \
 	   $(SRCS_DIR)/ast_generation/complete_command.c \
@@ -49,6 +50,7 @@ SRCS = \
 	   $(SRCS_DIR)/env/ft_getenv.c \
 	   $(SRCS_DIR)/env/init_env.c \
 	   $(SRCS_DIR)/env/remove_variable_from_env.c \
+	   $(SRCS_DIR)/execution/clear_hashtable.c \
 	   $(SRCS_DIR)/execution/apply_redirections.c \
 	   $(SRCS_DIR)/execution/backup_filedescriptor.c \
 	   $(SRCS_DIR)/execution/destroy_container.c \

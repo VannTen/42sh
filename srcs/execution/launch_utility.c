@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 11:39:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/25 19:59:25 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/28 15:38:40 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 #include "execution.h"
 #include "hashtable.h"
 #include "builtins.h"
+#include "shell.h"
 
 static char			*find_external(char *const name,
 		struct s_shx_global *const global)
 {
+	t_bsh	*const bsh = get_shell_data();
 	char	*external;
 
-	external = get_path_table(global->hashtable, name);
+	external = bsh ? get_path_table(&bsh->hashtable, name) : NULL;
 	if (external != NULL)
 	{
 		if ((external = ft_strdup(external)) == NULL)
@@ -29,6 +31,9 @@ static char			*find_external(char *const name,
 	}
 	else
 		external = sh_path_search(global->env, name);
+	if (external && bsh && add_hash_table(&bsh->hashtable, name, external))
+		ft_dprintf(STDERR_FILENO, "42sh: failed to add %s to hashtable\n",
+				external);
 	return (external);
 }
 

@@ -6,7 +6,7 @@
 /*   By: heynard <heynard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 17:51:58 by heynard           #+#    #+#             */
-/*   Updated: 2018/01/12 17:51:58 by heynard          ###   ########.fr       */
+/*   Updated: 2018/02/28 15:28:58 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,10 @@ typedef struct		s_hash_data
 int					hash_42sh(const char *bin_name);
 
 /*
-** function to call to execute a simple builtin "hash", print on stdout
-** all the binary that have been called by the current shell session and
-** how many times.
-*/
-
-int					builtin_hash(t_hash_table *htable);
-
-/*
 ** function to allocate hash table structure and his components.
 */
 
-t_hash_table		*init_hash_table(void);
+void				init_hash_table(t_hash_table *hashtable);
 
 /*
 ** function to add a binary path inside the hash table using his name.
@@ -59,7 +51,7 @@ int					add_hash_table(t_hash_table *htable,
 ** function to free all the hash table structure and things inside.
 */
 
-int					free_hash_table(t_hash_table *htable);
+void				free_hash_table(t_hash_table *htable);
 
 /*
 ** function returning path of a binary file if it exist in the hash table.

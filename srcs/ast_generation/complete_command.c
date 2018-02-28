@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/18 09:15:28 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/28 14:29:37 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,23 @@
 
 void	*create_complete_command(void const *lex_value)
 {
-	struct s_container	*container;
+	struct s_container				*container;
 	struct s_sh_complete_command	complete_command;
 
 	(void)lex_value;
 	complete_command.list = NULL;
-	container = new_container(&complete_command, &destroy_complete_command, sizeof(complete_command),
+	container = new_container(&complete_command,
+			&destroy_complete_command,
+			sizeof(complete_command),
 			e_ast_container_label_complete_command);
 	return (container);
 }
 
 t_bool	give_complete_command(void *construct, void *sub_construct)
 {
-	struct s_container	*sub;
+	struct s_container				*sub;
 	struct s_sh_complete_command	*complete_command;
-	t_bool				ret;
+	t_bool							ret;
 
 	ret = FALSE;
 	if (construct != NULL && sub_construct != NULL)

@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 18:57:04 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/28 13:47:44 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/28 16:12:03 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int		open_heredoc(char **const doc_name_loc)
 		return (-1);
 }
 
-static int	fill_heredoc(int const doc_fd, char const *const here_end,
+static int		fill_heredoc(int const doc_fd, char const *const here_end,
 		size_t const here_end_len)
 {
 	int		gnl_ret;
@@ -87,10 +87,10 @@ static int	fill_heredoc(int const doc_fd, char const *const here_end,
 			if (ft_strncmp(line, here_end, here_end_len))
 				(void)ft_dprintf(doc_fd, "%s\n", line);
 			else
-				break;
+				break ;
 		}
 		else if (gnl_ret == 0)
-			break;
+			break ;
 		else
 			return (42);
 	}

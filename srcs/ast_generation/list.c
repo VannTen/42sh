@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/18 09:18:47 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/28 14:34:36 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@
 #include "libft.h"
 #include <stdlib.h>
 
-void	*create_sh_list(void const *lex_value)
+void			*create_sh_list(void const *lex_value)
 {
 	struct s_container	*container;
 	struct s_sh_list	list;
 
 	(void)lex_value;
 	list.and_or_sequence = NULL;
-	container = new_container(&list, &destroy_sh_list, sizeof(list), e_ast_container_label_list);
+	container = new_container(&list, &destroy_sh_list, sizeof(list),
+			e_ast_container_label_list);
 	return (container);
 }
 
@@ -64,7 +65,7 @@ t_bool			give_sh_list(void *construct, void *sub_construct)
 	return (ret);
 }
 
-void	destroy_sh_list(void **const list_loc)
+void			destroy_sh_list(void **const list_loc)
 {
 	struct s_sh_list	*todel;
 

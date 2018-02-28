@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 16:09:34 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/28 14:45:44 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/28 16:17:13 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static t_bsh	*init_data(void)
 
 	if (!(bsh = (t_bsh*)malloc(sizeof(t_bsh))))
 		return (NULL);
+	init_hash_table(&bsh->hashtable);
 	if (init_lexer(&bsh->lexer) == MALLOC_FAIL
 			|| init_history(&bsh->history, DEFAULT_HISTSIZE) == MALLOC_FAIL
 			|| init_term(&bsh->term) == MALLOC_FAIL

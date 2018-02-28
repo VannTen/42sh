@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/26 15:46:53 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/28 14:33:31 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@
 #include "libft.h"
 #include <stdlib.h>
 
-void	*create_io_operator(void const *lex_value)
+void			*create_io_operator(void const *lex_value)
 {
 	struct s_container	*container;
 
 	(void)lex_value;
-	container = new_container(NULL, &destroy_container, 0, e_ast_container_label_io_operator);
+	container = new_container(NULL, &destroy_container, 0,
+			e_ast_container_label_io_operator);
 	return (container);
 }
 
@@ -46,7 +47,7 @@ static t_bool	is_operator_label(enum e_ast_container_label const label)
 	return (FALSE);
 }
 
-t_bool	give_io_operator(void *construct, void *sub_construct)
+t_bool			give_io_operator(void *construct, void *sub_construct)
 {
 	struct s_container	*sub;
 	struct s_container	*top;
@@ -64,7 +65,7 @@ t_bool	give_io_operator(void *construct, void *sub_construct)
 	return (FALSE);
 }
 
-void	destroy_io_operator(void **const io_operator_loc)
+void			destroy_io_operator(void **const io_operator_loc)
 {
 	struct s_container	*todel;
 

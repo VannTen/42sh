@@ -6,7 +6,7 @@
 /*   By: heynard <heynard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 17:52:16 by heynard           #+#    #+#             */
-/*   Updated: 2018/02/25 22:35:14 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/28 15:35:17 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,16 @@
 #include <stddef.h>
 #include "libft.h"
 
-t_hash_table		*init_hash_table(void)
+void				init_hash_table(t_hash_table *hashtable)
 {
-	t_hash_table	*new_table;
 	size_t			i;
 
-	if ((new_table = malloc(sizeof(t_hash_table))) == NULL)
-		return (NULL);
-	i = 0;
-	while (i < MAX_BIN)
-		new_table->hash_table[i++] = NULL;
-	return (new_table);
+	if (hashtable)
+	{
+		i = 0;
+		while (i < MAX_BIN)
+			hashtable->hash_table[i++] = NULL;
+	}
 }
 
 int					add_hash_table(t_hash_table *htable,
@@ -58,7 +57,7 @@ int					add_hash_table(t_hash_table *htable,
 	return (2);
 }
 
-int					free_hash_table(t_hash_table *htable)
+void				free_hash_table(t_hash_table *htable)
 {
 	size_t			i;
 
@@ -69,13 +68,10 @@ int					free_hash_table(t_hash_table *htable)
 		{
 			ft_strdel(&(htable->hash_table[i]->name));
 			ft_strdel(&(htable->hash_table[i]->path));
-			free(htable->hash_table[i]);
+			ft_memdel((void**)&(htable->hash_table[i]));
 		}
 		i++;
 	}
-	free(htable);
-	htable = NULL;
-	return (0);
 }
 
 char				*get_path_table(t_hash_table *htable,
