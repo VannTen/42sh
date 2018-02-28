@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 18:57:04 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/26 15:23:29 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/28 13:47:44 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static int	fill_heredoc(int const doc_fd, char const *const here_end,
 	while (42)
 	{
 		ft_strdel(&line);
-		(void)ft_dprintf(STDERR_FILENO, "heredoc>");
+		(void)ft_dprintf(STDERR_FILENO, "heredoc> ");
 		gnl_ret = get_next_line(STDIN_FILENO, &line);
 		if (0 < gnl_ret)
 		{
