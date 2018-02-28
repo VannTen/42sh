@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 13:28:26 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/11 19:57:55 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/28 12:18:14 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int					append_variable_to_env(t_env *env, const char *name,
 			var->next = new_var;
 		}
 	}
+	env->env_len++;
 	env->has_changed = TRUE;
 	return (0);
 }
