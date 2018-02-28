@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 14:05:15 by mgautier          #+#    #+#             */
-/*   Updated: 2017/10/09 11:05:26 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/02/28 11:48:44 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,5 @@ t_bool		is_unix_constants(int c)
 
 t_bool		ft_isspace(int const c)
 {
-	return (is_among(" ", c));
+	return (is_among(" \t\n\v\f\r", c));
 }
