@@ -43,4 +43,7 @@ fclean: clean
 
 re: fclean all
 
+print-%:
+	@echo $* = $($*)
+
 .PHONY: all clean fclean re norme
