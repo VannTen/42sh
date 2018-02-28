@@ -107,6 +107,9 @@ SRCS = \
 	   $(SRCS_DIR)/lexer/lexer.c \
 	   $(SRCS_DIR)/lexer/realloc_current_token.c \
 	   $(SRCS_DIR)/lib_bj/ft_abs.c \
+	   $(SRCS_DIR)/lib_bj/ft_dlstadd.c \
+	   $(SRCS_DIR)/lib_bj/ft_dlstdel.c \
+	   $(SRCS_DIR)/lib_bj/ft_dlstnew.c \
 	   $(SRCS_DIR)/lib_bj/ft_free_string_tab.c \
 	   $(SRCS_DIR)/lib_bj/ft_lstdel.c \
 	   $(SRCS_DIR)/lib_bj/ft_lstnew.c \
@@ -114,6 +117,7 @@ SRCS = \
 	   $(SRCS_DIR)/lib_bj/ft_strnjoin.c \
 	   $(SRCS_DIR)/lib_bj/ft_swap.c \
 	   $(SRCS_DIR)/lib_bj/ft_tab_len.c \
+	   $(SRCS_DIR)/lib_bj/get_next_line.c \
 	   $(SRCS_DIR)/line_editing/completion/completion.c \
 	   $(SRCS_DIR)/line_editing/completion/completion_display.c \
 	   $(SRCS_DIR)/line_editing/completion/completion_search_in_env.c \
@@ -146,9 +150,11 @@ SRCS = \
 	   $(SRCS_DIR)/main/main.c \
 	   $(SRCS_DIR)/main/pass_tokens_to_parser.c \
 	   $(SRCS_DIR)/main/readline_process.c \
+	   $(SRCS_DIR)/main/readline_sigint.c \
 	   $(SRCS_DIR)/main/realloc_str.c \
 	   $(SRCS_DIR)/main/sh_exit_message.c \
 	   $(SRCS_DIR)/print_ast/print_program.c \
 	   $(SRCS_DIR)/term/ft_putchar_termcaps.c \
 	   $(SRCS_DIR)/term/prompt.c \
+	   $(SRCS_DIR)/term/resize_term.c \
 	   $(SRCS_DIR)/term/term.c
