@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:46:47 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/12 17:01:36 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/28 15:37:48 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		handle_clear_line_af_cursor(t_input *input)
 void	exit_ctrl_d(t_input *input)
 {
 	ft_putendl_fd("exit", STDERR_FILENO);
-	save_history_to_histfile(*(input->history));
+	save_history_to_histfile(input->history);
 	restore_initial_attr(input->term);
 	exit(0);
 }
