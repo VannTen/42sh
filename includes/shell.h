@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 12:31:57 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/28 10:52:48 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/28 14:42:43 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct	s_bsh
 	t_env		env;
 	t_history	history;
 	t_term		term;
+	t_expander	exp;
 	int			interactive;
 	int			exit_status;
 }				t_bsh;
