@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:59:26 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/28 13:24:11 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/28 14:38:19 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int				handle_bckslsh_dquote(t_expander *exp);
 int				get_event_exp(char c);
 int				realloc_exp_buffer(t_expander *exp);
 char			*expanded_str(t_expander *exp, char *str, const size_t type);
-t_expander		*init_expander(t_env *env);
+int				init_expander(t_expander *exp, t_env *env);
 
 const t_transit		g_exp[MAX_STATE_EXP][MAX_EVENT_EXP];
 #endif
