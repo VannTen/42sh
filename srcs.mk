@@ -1,6 +1,6 @@
 SRCS = \
-	   $(SRCS_DIR)/42sh_hashtable/42sh_builtin_hash.c \
-	   $(SRCS_DIR)/42sh_hashtable/42sh_hashtable.c \
+	   $(SRCS_DIR)/hashtable/builtin_hash.c \
+	   $(SRCS_DIR)/hashtable/hashtable.c \
 	   $(SRCS_DIR)/ast_generation/and_if.c \
 	   $(SRCS_DIR)/ast_generation/and_or.c \
 	   $(SRCS_DIR)/ast_generation/bang.c \
