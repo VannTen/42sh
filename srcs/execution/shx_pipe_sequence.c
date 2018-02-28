@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 10:08:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/26 11:50:48 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/28 17:13:00 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,20 @@ static int	setup_next_pipe(void)
 	return (pipe_buf[0]);
 }
 
+static pid_t	create_child(int pipe_in, void *simple_command,
+		struct s_shx_global *const global)
+{
+	pid_t	father;
+
+	if (!(father = fork()))
+	{
+		close(pipe_in);
+		mark_as_child(simple_command);
+		exit(shx_simple_command(simple_command, global));
+	}
+	return (father);
+}
+
 static int	spawn_pipe(t_lst *sequence, int pipe_in,
 		struct s_shx_global *const global, int stdout_backup)
 {
@@ -54,23 +68,24 @@ static int	spawn_pipe(t_lst *sequence, int pipe_in,
 	pid_t	father;
 
 	next = advance_list(sequence, 1);
-	dup2(pipe_in, 0);
-	if (pipe_in != 0)
+	dup2(pipe_in, STDIN_FILENO);
+	if (pipe_in != STDIN_FILENO)
 		close(pipe_in);
-	next != NULL ? pipe_in = setup_next_pipe() : dup2(stdout_backup, 1);
-	father = fork();
-	if (father == -1)
-		return (1);
-	else if (!father)
+	next != NULL ?
+		pipe_in = setup_next_pipe() : dup2(stdout_backup, STDOUT_FILENO);
+	father = create_child(pipe_in, (void*)get_lst_elem(sequence, 0), global);
+	close(STDIN_FILENO);
+	if (0 < father)
 	{
-		close(pipe_in);
-		mark_as_child((void*)get_lst_elem(sequence, 0));
-		exit(shx_simple_command((void*)get_lst_elem(sequence, 0), global));
+		if (next != NULL)
+			(void)spawn_pipe(next, pipe_in, global, stdout_backup);
+		wait_for_instance(father, (next == NULL), global);
+		return (0);
 	}
-	if (next != NULL)
-		(void)spawn_pipe(next, pipe_in, global, stdout_backup);
-	wait_for_instance(father, (next == NULL), global);
-	return (0);
+	ft_dprintf(2, "42sh: failed to fork.\n");
+	close(pipe_in);
+	dup2(stdout_backup, STDOUT_FILENO);
+	return (42);
 }
 
 int			shx_pipe_sequence(struct s_sh_pipe_sequence *const pipe_sequence,
