@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 16:09:34 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/27 15:30:32 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/02/28 14:45:44 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ t_bsh			*shell_init(char **environ, int argc, char **argv)
 	if (!ft_getenv(bsh->env.env_list, "TERM"))
 		if (append_variable_to_env(&bsh->env, "TERM", "xterm", GLOBAL))
 			return (NULL);
+	if (init_expander(&bsh->exp, &bsh->env) == MALLOC_FAIL)
+		return (NULL);
 	bsh->interactive = (argc > 1 || !isatty(STDIN_FILENO)) ? 0 : 1;
 	if (!bsh->interactive && argc == 1)
 	{
