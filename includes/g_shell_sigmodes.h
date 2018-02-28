@@ -14,6 +14,7 @@
 # define G_SHELL_SIGMODES_H
 
 # include "shell_signal.h"
+# include "shell.h"
 
 struct s_signal_param const
 g_shell_sigmodes[e_shell_sigmode_max][SHELL_SIGNAL_SETUP_LEN] =
@@ -52,7 +53,7 @@ g_shell_sigmodes[e_shell_sigmode_max][SHELL_SIGNAL_SETUP_LEN] =
 		{ .sigid=SIGUSR2, .handler=SIG_DFL }
 	}, {
 		{ .sigid=SIGHUP, .handler=SIG_DFL },
-		{ .sigid=SIGINT, .handler=SIG_DFL },
+		{ .sigid=SIGINT, .handler=readline_sigint },
 		{ .sigid=SIGQUIT, .handler=SIG_DFL },
 		{ .sigid=SIGILL, .handler=SIG_DFL },
 		{ .sigid=SIGTRAP, .handler=SIG_DFL },
@@ -68,7 +69,7 @@ g_shell_sigmodes[e_shell_sigmode_max][SHELL_SIGNAL_SETUP_LEN] =
 		{ .sigid=SIGTERM, .handler=SIG_DFL },
 		{ .sigid=SIGURG, .handler=SIG_DFL },
 		{ .sigid=SIGSTOP, .handler=SIG_DFL },
-		{ .sigid=SIGTSTP, .handler=SIG_DFL },
+		{ .sigid=SIGTSTP, .handler=SIG_IGN },
 		{ .sigid=SIGCONT, .handler=SIG_DFL },
 		{ .sigid=SIGCHLD, .handler=SIG_DFL },
 		{ .sigid=SIGTTIN, .handler=SIG_DFL },
@@ -78,7 +79,7 @@ g_shell_sigmodes[e_shell_sigmode_max][SHELL_SIGNAL_SETUP_LEN] =
 		{ .sigid=SIGXFSZ, .handler=SIG_DFL },
 		{ .sigid=SIGVTALRM, .handler=SIG_DFL },
 		{ .sigid=SIGPROF, .handler=SIG_DFL },
-		{ .sigid=SIGWINCH, .handler=SIG_DFL },
+		{ .sigid=SIGWINCH, .handler=resize_term },
 		{ .sigid=SIGINFO, .handler=SIG_DFL },
 		{ .sigid=SIGUSR1, .handler=SIG_DFL },
 		{ .sigid=SIGUSR2, .handler=SIG_DFL }

@@ -73,4 +73,6 @@ void			sh_opening_failed(const char *file);
 
 size_t			get_tok_id(void const *token);
 void			*take_token(void *token_list_adress);
+
+void			readline_sigint(int sigid);
 #endif

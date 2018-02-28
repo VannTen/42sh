@@ -55,13 +55,16 @@ int			getline(t_input *input, const int interactive, const int mode,
 					size_t *state)
 {
 	t_term	*term;
+	int		ret;
 
 	term = &get_shell_data()->term;
 	if (interactive == 1)
 	{
+		set_shell_sigmode(e_shell_sigmode_line_editing);
 		restore_custom_attr(term);
-		if (wait_for_input(input, mode) == MALLOC_FAIL)
-			return (MALLOC_FAIL);
+		if ((ret = wait_for_input(input, mode)) == MALLOC_FAIL)
+			return (ret);
+		set_shell_sigmode(e_shell_sigmode_shell);
 		restore_initial_attr(term);
 	}
 	else
