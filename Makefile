@@ -4,13 +4,15 @@ CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra
 
-INCLUDES = includes libft grammar_generator/includes
+INCLUDES_DIR = includes libft grammar_generator/includes
 
-IFLAGS = $(INCLUDES:%=-I%)
+include ./includes.mk
+
+IFLAGS = $(INCLUDES_DIR:%=-I%)
 
 SRCS_DIR = srcs
 
-include srcs.mk
+include ./srcs.mk
 
 OBJ_DIR = obj
 
@@ -22,7 +24,7 @@ LFLAGS = $(patsubst %,-L%,$(dir $(LIBS))) $(patsubst lib%.a,-l%,$(notdir $(LIBS)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBS)
+$(NAME): $(OBJ) $(LIBS) $(INCLUDES)
 	$(CC) $(LFLAGS) -o $(NAME) $(OBJ) -ltermcap
 
 %.a:
