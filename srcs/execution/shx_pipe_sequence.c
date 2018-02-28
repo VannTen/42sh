@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 10:08:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/28 17:13:00 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/28 18:12:50 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@
 
 static int	backup_stdfd(int stdfd_backup[2])
 {
-	if ((stdfd_backup[0] = dup(0)) != -1 || fcntl(0, F_GETFD) == -1)
+	if ((stdfd_backup[0] = dup(STDIN_FILENO)) != -1
+			|| fcntl(STDIN_FILENO, F_GETFD) == -1)
 	{
-		if ((stdfd_backup[1] = dup(1)) != -1 || fcntl(1, F_GETFD) == -1)
+		stdfd_backup[1] = stdfd_backup[0] == STDOUT_FILENO ?
+			-1 : dup(STDOUT_FILENO);
+		if (stdfd_backup[1] != -1
+				|| stdfd_backup[0] == STDOUT_FILENO
+				|| fcntl(STDOUT_FILENO, F_GETFD) == -1)
 			return (0);
-		else if (stdfd_backup[0] != -1)
-			close(stdfd_backup[0]);
+		close(stdfd_backup[0]);
 	}
 	ft_dprintf(2, "42sh: Unable to backup STDIN and STDOUT.\n");
 	return (1);
@@ -102,6 +106,8 @@ int			shx_pipe_sequence(struct s_sh_pipe_sequence *const pipe_sequence,
 			{
 				spawn_pipe(sequence, 0, global, stdfd_backup[1]);
 				dup2(stdfd_backup[0], 0);
+				close(stdfd_backup[0]);
+				close(stdfd_backup[1]);
 			}
 		}
 		else

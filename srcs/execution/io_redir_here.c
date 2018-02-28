@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:39:16 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/24 08:48:51 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/28 18:21:52 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,9 @@ int	io_redir_here(struct s_sh_io_redirect const *io_redir,
 		return (ret);
 	}
 	else
+	{
+		ft_dprintf(STDERR_FILENO, "42sh: %s: invalid parameters.\n",
+				__FUNCTION__);
 		return (42);
+	}
 }
