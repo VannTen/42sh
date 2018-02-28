@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/17 13:40:39 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/28 11:15:56 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static t_bool	extend_and_or(struct s_sh_and_or *const and_or,
 static t_bool	set_logic(struct s_and_or_logic *logic,
 		enum e_ast_container_label label)
 {
+	while (logic->next != NULL)
+		logic = logic->next;
 	if (label == e_ast_container_label_and_if)
 		logic->logic = e_logic_and;
 	else if (label == e_ast_container_label_or_if)
