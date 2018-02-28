@@ -156,7 +156,7 @@ int				paste_str_in_buffer(const char *copy, t_input *input);
 void			get_prompt(t_term *term);
 void			print_prompt(t_input *input, char *color);
 void			display_basic_prompt(t_input *input);
-
+void			go_to_beg_line(t_input *input);
 /*
 ** Completion part
 */

@@ -12,13 +12,6 @@
 
 #include "shell.h"
 
-static void	go_to_beg_line(t_input *input)
-{
-	handle_home(input);
-	reset_buffer(input);
-	tputs(tgetstr("cr", NULL), 1, putchar_termcaps);
-	tputs(tgetstr("cd", NULL), 1, putchar_termcaps);
-}
 
 static void	init_search(t_input *input)
 {
