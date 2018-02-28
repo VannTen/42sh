@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/28 10:58:01 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/02/28 15:06:25 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,11 @@ int			main(int argc, char **argv, char **environ)
 	t_bsh	*bsh;
 
 	set_shell_sigmode(e_shell_sigmode_shell);
-	bsh = shell_init(environ, argc, argv);
+	if (!(bsh = shell_init(environ, argc, argv)))
+	{
+		ft_dprintf(STDERR_FILENO, "42sh: Shell initialization failed\n");
+		exit(EXIT_FAILURE);
+	}
 	(bsh->interactive) ? init_termcaps(bsh) : 0;
 	sh_loop(bsh);
 	return (0);
