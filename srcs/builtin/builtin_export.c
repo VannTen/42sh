@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 15:12:09 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/01 12:26:37 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/01 19:41:21 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	export_option_n(t_env_list *env_list, char *arg)
 	return (0);
 }
 
-int	builtin_export(char **argv, t_env *env)
+int			builtin_export(char **argv, t_env *env)
 {
 	char const	*export_options = "n";
 	char		options[2];
@@ -50,7 +50,7 @@ int	builtin_export(char **argv, t_env *env)
 		{
 			ft_putendl_fd("42sh: history: `-': not a valid identifier",
 						STDERR_FILENO);
-				return (1);
+			return (1);
 		}
 		if ((wrong_opt = check_arg_opt(argv[i] + 1, export_options, options)))
 			return (export_usage(wrong_opt, 0));

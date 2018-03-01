@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:42:58 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/01 17:31:11 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/01 19:39:32 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void		reset_expander(t_expander *exp)
 	ft_bzero(exp->buffer, exp->buffer_size);
 }
 
-char		*expanded_str(t_expander *exp, char *string, const size_t type)
+char			*expanded_str(t_expander *exp, char *string, const size_t type)
 {
 	char	*str;
 

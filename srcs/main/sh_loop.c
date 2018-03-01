@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:49:09 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 17:01:24 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 19:39:58 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "print_ast.h"
 #include "parser_defs.h"
 
-void		display_tokens(t_token *tokens)
+void			display_tokens(t_token *tokens)
 {
 	while (tokens)
 	{
@@ -24,7 +24,7 @@ void		display_tokens(t_token *tokens)
 	}
 }
 
-static int	update_history(t_history *history, t_input *input)
+static int		update_history(t_history *history, t_input *input)
 {
 	int	i;
 
@@ -42,7 +42,7 @@ static int	update_history(t_history *history, t_input *input)
 	return (0);
 }
 
-static int	error_messages(t_input *input, const int ret)
+static int		error_messages(t_input *input, const int ret)
 {
 	(ret == EVENT_NOT_FOUND) ?
 			ft_dprintf(STDERR_FILENO, "42sh: Event not found\n") : 0;

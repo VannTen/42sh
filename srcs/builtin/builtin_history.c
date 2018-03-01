@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 12:53:10 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/01 16:09:46 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/01 19:41:48 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 static int	history_usage(const char opt, const int usage_reason)
 {
 	if (usage_reason == NUMERIC_ARG_REQUIRED)
-		ft_dprintf(STDERR_FILENO, "42sh: history: option requires an argument\n");
+		ft_dprintf(STDERR_FILENO,
+				"42sh: history: option requires an argument\n");
 	if (usage_reason == INVALID_OPT)
 		ft_dprintf(STDERR_FILENO, "42sh: history: -%c: invalid option\n", opt);
 	ft_dprintf(STDERR_FILENO, "history: usage: history [-c] [-d offset] [n]\n");
@@ -48,10 +49,10 @@ static int	history_del_one_entry(t_history *history, char *num)
 	n = 0;
 	if (num)
 	{
-		if (!num_is_eligible_to_be_an_entry(num) || (n =ft_atoi(num)))
+		if (!num_is_eligible_to_be_an_entry(num) || (n = ft_atoi(num)))
 			if (remove_cmd_from_history(history, n))
-			ft_dprintf(STDERR_FILENO, "42sh: history: -d: history position out"
-						" of range\n");
+				ft_dprintf(STDERR_FILENO, "42sh: history: -d: history position "
+						"out of range\n");
 	}
 	else
 		ft_dprintf(STDERR_FILENO, "42sh: history: -d: option requires an "
@@ -59,7 +60,7 @@ static int	history_del_one_entry(t_history *history, char *num)
 	return (0);
 }
 
-int	builtin_history(char **args, t_env *env)
+int			builtin_history(char **args, t_env *env)
 {
 	t_history	*history;
 	char		wrong_opt;
@@ -74,7 +75,7 @@ int	builtin_history(char **args, t_env *env)
 		if (!args[i][1])
 		{
 			ft_putendl_fd("bsh: history: `-': not a valid identifier", 2);
-				return (1);
+			return (1);
 		}
 		if ((wrong_opt = check_arg_opt(args[i] + 1, "cd", options)))
 			return (history_usage(wrong_opt, INVALID_OPT));
