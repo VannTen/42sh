@@ -6,13 +6,29 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:40:46 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/28 18:19:57 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 13:16:17 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <unistd.h>
 #include "redirection.h"
+#include "shell.h"
+
+static int	get_target_fd(struct s_sh_io_redirect const *const io_redir)
+{
+	t_bsh	*const bsh = get_shell_data();
+	char	*filename;
+	int		target_fd;
+
+	if (bsh && io_redir->target)
+		filename = expanded_str(&bsh->exp, io_redir->target, NOT_HERE_END_EXP);
+	else
+		filename = NULL;
+	target_fd = filename ? open(filename, io_redir->flags, io_redir->mode) : -1;
+	ft_strdel(&filename);
+	return (target_fd);
+}
 
 int	io_redir_file(struct s_sh_io_redirect const *const io_redir,
 		t_lst **const fd_backups_loc)
@@ -28,7 +44,7 @@ int	io_redir_file(struct s_sh_io_redirect const *const io_redir,
 	else if (((io_number = str_to_fd(io_redir->ionum)) != -1)
 		&& !backup_filedescriptor(io_number, fd_backups_loc))
 	{
-		target_fd = open(io_redir->target, io_redir->flags, io_redir->mode);
+		target_fd = get_target_fd(io_redir);
 		if (target_fd != -1)
 		{
 			ret = dup2(target_fd, io_number);
