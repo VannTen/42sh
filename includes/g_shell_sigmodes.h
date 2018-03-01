@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 10:41:49 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 08:39:01 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 08:47:05 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 # include "shell_signal.h"
 # include "shell.h"
 
+/*
+** Signal handlers to use depending on program mode.
+** 1 - Normal shell mode.
+** 2 - Line editing mode.
+** 3 - All default mode, to use before calling execve.
+*/
 struct s_signal_param const
 g_shell_sigmodes[e_shell_sigmode_max][SHELL_SIGNAL_SETUP_LEN] =
 {
