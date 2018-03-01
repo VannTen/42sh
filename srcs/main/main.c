@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/01 09:33:51 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 13:37:19 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static t_bool	test_parser(t_token *list_tokens, t_parser const *parser)
 	if (parser == NULL)
 		exit(1);
 	result = execute_construct(parser, "PROGRAM", &input);
-	print_program(STDERR_FILENO, result, 0);
 	shx_program(result);
 	syntax_valid = result != NULL;
 	destroy_program(&result);
