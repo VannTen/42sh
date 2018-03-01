@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 12:31:57 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/28 15:55:39 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 11:53:47 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,6 @@ size_t			get_tok_id(void const *token);
 void			*take_token(void *token_list_adress);
 
 void			readline_sigint(int sigid);
+char			check_arg_opt(char *arg_opt, char const *avail_opts,
+							char *options);
 #endif
