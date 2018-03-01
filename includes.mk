@@ -23,7 +23,6 @@ INCLUDES = \
 		   includes/redirection.h \
 		   includes/s_container.h \
 		   includes/s_fd_backup.h \
-		   includes/s_shx_global.h \
 		   includes/shell.h \
 		   includes/shell_ast/and_or.h \
 		   includes/shell_ast/complete_command.h \

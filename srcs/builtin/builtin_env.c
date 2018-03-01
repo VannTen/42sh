@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 08:30:37 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/28 11:44:56 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 09:41:46 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,8 @@ static char	**modif_env(char **argv, t_env *env_cpy)
 
 static int	builtin_env_utility(char **argv, t_env *env_cpy, char const *path)
 {
-	int					ret;
-	struct s_shx_global env_wrapper;
-	char				*bin_path;
+	int		ret;
+	char	*bin_path;
 
 	if (argv[0] == NULL)
 		return (display_global_env(env_cpy->env_list));
@@ -121,9 +120,7 @@ static int	builtin_env_utility(char **argv, t_env *env_cpy, char const *path)
 			ft_dprintf(2, "42sh: allocation error.\n");
 		if (!bin_path)
 			return (42);
-		env_wrapper.env = env_cpy;
-		env_wrapper.hashtable = NULL;
-		ret = launch_external(bin_path, argv, &env_wrapper, FALSE);
+		ret = launch_external(bin_path, argv, env_cpy, FALSE);
 		free(bin_path);
 	}
 	return (ret);

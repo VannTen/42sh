@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 11:39:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/28 15:38:40 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 09:50:38 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 #include "builtins.h"
 #include "shell.h"
 
-static char			*find_external(char *const name,
-		struct s_shx_global *const global)
+static char			*find_external(char *const name)
 {
 	t_bsh	*const bsh = get_shell_data();
 	char	*external;
@@ -30,7 +29,7 @@ static char			*find_external(char *const name,
 			ft_putstr_fd("42sh: allocation error\n", 2);
 	}
 	else
-		external = sh_path_search(global->env, name);
+		external = sh_path_search(&bsh->env, name);
 	if (external && bsh && add_hash_table(&bsh->hashtable, name, external))
 		ft_dprintf(STDERR_FILENO, "42sh: failed to add %s to hashtable\n",
 				external);
@@ -51,24 +50,24 @@ static t_builtin	find_builtin(char *name)
 	return (NULL);
 }
 
-int					launch_utility(char **argv, t_bool is_child,
-		struct s_shx_global *const global)
+int					launch_utility(char **argv, t_bool is_child)
 {
+	t_bsh		*const bsh = get_shell_data();
 	t_builtin	builtin;
 	char		*external;
 	int			ret;
 
-	if (argv != NULL && argv[0] != NULL)
+	if (bsh && argv != NULL && argv[0] != NULL)
 	{
 		if (ft_strchr(argv[0], '/'))
-			return (launch_external(argv[0], argv, global, is_child));
+			return (launch_external(argv[0], argv, &bsh->env, is_child));
 		builtin = find_builtin(argv[0]);
 		if (builtin != NULL)
-			return(builtin(argv, global->env));
-		external = find_external(argv[0], global);
+			return(builtin(argv, &bsh->env));
+		external = find_external(argv[0]);
 		if (external != NULL)
 		{
-			ret = launch_external(external, argv, global, is_child);
+			ret = launch_external(external, argv, &bsh->env, is_child);
 			free(external);
 			return (ret);
 		}
