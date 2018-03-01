@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 13:28:26 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/28 12:18:14 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 12:28:14 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,19 @@ static t_env_list	*add_to_env_list(const char *name, const char *value,
 */
 
 static int			update_env_variable(t_env_list *const var,
-										const char *const value)
+										const char *const value,
+										const int exportable)
 {
-	if (ft_strcmp(var->value, value))
+	if (value)
 	{
-		ft_strdel(&var->value);
-		if (!(var->value = ft_strdup(value)))
-			return (MALLOC_FAIL);
+		if (ft_strcmp(var->value, value))
+		{
+			ft_strdel(&var->value);
+			if (!(var->value = ft_strdup(value)))
+				return (MALLOC_FAIL);
+		}
 	}
+	var->exportable = exportable;
 	return (0);
 }
 
@@ -66,7 +71,7 @@ int					append_variable_to_env(t_env *env, const char *name,
 
 	if ((var = ft_getenv(env->env_list, name)))
 	{
-		if (update_env_variable(var, value))
+		if (update_env_variable(var, value, exportable))
 			return (MALLOC_FAIL);
 	}
 	else
