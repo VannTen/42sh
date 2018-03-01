@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 15:39:03 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/12 15:21:47 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/01 17:12:36 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	go_to_beg_line(t_input *input)
 	tputs(tgetstr("cd", NULL), 1, putchar_termcaps);
 }
 
-int	clear_lines(t_input *input, const char *str)
+int		clear_lines(t_input *input, const char *str)
 {
 	if (input->buffer_len + (int)ft_strlen(str) > input->term->first_line_len)
 	{
