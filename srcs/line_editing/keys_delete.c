@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 20:38:51 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/31 16:41:32 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/01 15:42:29 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	delete_char(t_input *input)
 	ft_strcpy(input->buffer + input->cursor_pos,
 				input->buffer + input->cursor_pos + 1);
 	cursor_pos = input->cursor_pos;
+	tputs(tgetstr("vi", NULL), 1, putchar_termcaps);
 	handle_home(input);
 	tputs(tgetstr("sc", NULL), 1, putchar_termcaps);
 	tputs(tgetstr("ce", NULL), 1, putchar_termcaps);
@@ -35,6 +36,7 @@ static void	delete_char(t_input *input)
 	i = --input->buffer_len;
 	while (i-- > cursor_pos)
 		handle_arrow_left(input);
+	tputs(tgetstr("ve", NULL), 1, putchar_termcaps);
 }
 
 int			handle_backspace(t_input *input)

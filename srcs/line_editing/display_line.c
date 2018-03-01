@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 11:59:28 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/31 16:40:56 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/01 15:41:07 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,11 @@ void		display_line(t_input *input, int cursor)
 {
 	int	i;
 
+	tputs(tgetstr("vi", NULL), 1, putchar_termcaps);
 	handle_home(input);
 	display_buffer(input, cursor);
 	i = input->buffer_len;
 	while (i-- > cursor)
 		handle_arrow_left(input);
+	tputs(tgetstr("ve", NULL), 1, putchar_termcaps);
 }
