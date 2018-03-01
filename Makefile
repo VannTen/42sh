@@ -35,7 +35,7 @@ $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c $(INCLUDES)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 norme:
-	norminette $(SRCS)
+	@norminette $(SRCS)
 
 clean:
 	rm -f $(OBJ)
