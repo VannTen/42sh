@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:42:58 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/27 12:59:02 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 17:31:11 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,31 +46,36 @@ const t_transit	g_exp[MAX_STATE_EXP][MAX_EVENT_EXP] = {
 		{QUOTE_EXP, {append, append}}},
 };
 
-char	*expanded_str(t_expander *exp, char *string, const size_t type)
+static void		reset_expander(t_expander *exp)
+{
+	exp->buffer_len = 0;
+	exp->tmp = NULL;
+	exp->state = INIT_EXP;
+	exp->event = START_EXP;
+	ft_bzero(exp->buffer, exp->buffer_size);
+}
+
+char		*expanded_str(t_expander *exp, char *string, const size_t type)
 {
 	char	*str;
 
-	exp->state = INIT_EXP;
-	exp->event = START_EXP;
+	if (!exp->buffer)
+	{
+		if (!(exp->buffer = ft_strnew(INITIAL_SIZE)))
+			return (NULL);
+		exp->buffer_size = INITIAL_SIZE;
+	}
 	exp->tmp = string;
 	while (*(exp->tmp))
 	{
 		if (g_exp[exp->state][exp->event].p_transit[type](exp) == MALLOC_FAIL)
-		{
-			ft_strdel(&exp->buffer);
 			return (NULL);
-		}
 		(exp->state != INIT_EXP) ? exp->tmp++ : 0;
 		exp->state = g_exp[exp->state][exp->event].new_state;
 		exp->event = get_event_exp(*(exp->tmp));
 	}
 	if (!(str = ft_strdup(exp->buffer)))
-	{
-		ft_strdel(&exp->buffer);
 		return (NULL);
-	}
-	exp->tmp = NULL;
-	exp->buffer_len = 0;
-	ft_bzero(exp->buffer, exp->buffer_size);
+	reset_expander(exp);
 	return (str);
 }

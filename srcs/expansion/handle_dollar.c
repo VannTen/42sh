@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:43:17 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/28 14:27:54 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/01 17:17:31 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	get_shell_name(t_expander *exp)
 static int	get_env_variable(t_expander *exp, char *s)
 {
 	t_env_list	*env_var;
-	int		len;
+	int			len;
 
 	len = 0;
 	while (ft_isalnum(*(s + len)) || *(s + len) == '_')

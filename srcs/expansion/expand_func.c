@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:43:34 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/28 14:16:33 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/01 17:16:15 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int			realloc_exp_buffer(t_expander *exp)
 
 inline int	append(t_expander *exp)
 {
-	if (exp->buffer_len == exp->buffer_size)
+	if (exp->buffer_len >= exp->buffer_size)
 		if (realloc_exp_buffer(exp) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
 	exp->buffer[exp->buffer_len++] = *(exp->tmp);
