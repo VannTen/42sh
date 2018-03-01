@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 08:30:37 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 09:41:46 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 10:03:38 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,14 +116,16 @@ static int	builtin_env_utility(char **argv, t_env *env_cpy, char const *path)
 			if (!(bin_path = path ? path_search(argv[0], path) : NULL))
 				ft_dprintf(2, "42sh: %s: command not found.\n", argv[0]);
 		}
-		else if ((bin_path = ft_strdup(argv[0])))
+		else if (!(bin_path = ft_strdup(argv[0])))
 			ft_dprintf(2, "42sh: allocation error.\n");
-		if (!bin_path)
-			return (42);
-		ret = launch_external(bin_path, argv, env_cpy, FALSE);
-		free(bin_path);
+		else
+		{
+			ret = launch_external(bin_path, argv, env_cpy, FALSE);
+			free(bin_path);
+			return (ret);
+		}
 	}
-	return (ret);
+	return (42);
 }
 
 int	builtin_env(char **argv, t_env *env)
