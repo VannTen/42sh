@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/28 14:31:44 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 15:55:13 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "ast_generation.h"
 #include <stdlib.h>
 
-void	*create_and_or(void const *lex_value)
+void		*create_and_or(void const *lex_value)
 {
 	struct s_container	*container;
 	struct s_sh_and_or	and_or;
@@ -49,7 +49,7 @@ static void	destroy_and_or_sequence(void **sequence_loc)
 	}
 }
 
-void	destroy_and_or(void **const and_or_loc)
+void		destroy_and_or(void **const and_or_loc)
 {
 	struct s_sh_and_or		*todel;
 

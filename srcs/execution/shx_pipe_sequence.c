@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 10:08:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 09:32:38 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 16:57:00 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <fcntl.h>
 #include "shell.h"
 
-static int	backup_stdfd(int stdfd_backup[2])
+static int		backup_stdfd(int stdfd_backup[2])
 {
 	if ((stdfd_backup[0] = dup(STDIN_FILENO)) != -1
 			|| fcntl(STDIN_FILENO, F_GETFD) == -1)
@@ -32,13 +32,7 @@ static int	backup_stdfd(int stdfd_backup[2])
 	return (1);
 }
 
-static void	mark_as_child(struct s_sh_simple_command *const simple_command)
-{
-	if (simple_command != NULL)
-		simple_command->child = TRUE;
-}
-
-static int	setup_next_pipe(void)
+static int		setup_next_pipe(void)
 {
 	int	pipe_buf[2];
 
@@ -52,20 +46,28 @@ static int	setup_next_pipe(void)
 	return (pipe_buf[0]);
 }
 
-static pid_t	create_child(int pipe_in, void *simple_command)
+static pid_t	create_child(int pipe_in, int stdfd_backup[2],
+		struct s_sh_simple_command *simple_command)
 {
 	pid_t	father;
 
 	if (!(father = fork()))
 	{
 		close(pipe_in);
-		mark_as_child(simple_command);
+		close(stdfd_backup[0]);
+		close(stdfd_backup[1]);
+		if (simple_command)
+			simple_command->child = TRUE;
 		exit(shx_simple_command(simple_command));
 	}
-	return (father);
+	else
+	{
+		close(STDIN_FILENO);
+		return (father);
+	}
 }
 
-static int	spawn_pipe(t_lst *sequence, int pipe_in, int stdout_backup)
+static int		spawn_pipe(t_lst *sequence, int pipe_in, int stdfd_backup[2])
 {
 	t_lst	*next;
 	pid_t	father;
@@ -75,23 +77,24 @@ static int	spawn_pipe(t_lst *sequence, int pipe_in, int stdout_backup)
 	if (pipe_in != STDIN_FILENO)
 		close(pipe_in);
 	next != NULL ?
-		pipe_in = setup_next_pipe() : dup2(stdout_backup, STDOUT_FILENO);
-	father = create_child(pipe_in, (void*)get_lst_elem(sequence, 0));
-	close(STDIN_FILENO);
+		pipe_in = setup_next_pipe() : dup2(stdfd_backup[1], STDOUT_FILENO);
+	father = create_child(pipe_in, stdfd_backup,
+			(void*)get_lst_elem(sequence, 0));
 	if (0 < father)
 	{
 		if (next != NULL)
-			(void)spawn_pipe(next, pipe_in, stdout_backup);
+			(void)spawn_pipe(next, pipe_in, stdfd_backup);
 		wait_for_instance(father, (next == NULL));
 		return (0);
 	}
-	ft_dprintf(2, "42sh: failed to fork.\n");
 	close(pipe_in);
-	dup2(stdout_backup, STDOUT_FILENO);
+	ft_dprintf(2, "42sh: failed to fork.\n");
+	dup2(stdfd_backup[1], STDOUT_FILENO);
 	return (42);
 }
 
-int			shx_pipe_sequence(struct s_sh_pipe_sequence *const pipe_sequence)
+int				shx_pipe_sequence(
+		struct s_sh_pipe_sequence *const pipe_sequence)
 {
 	t_lst	*sequence;
 	int		stdfd_backup[2];
@@ -102,7 +105,7 @@ int			shx_pipe_sequence(struct s_sh_pipe_sequence *const pipe_sequence)
 		{
 			if (backup_stdfd(stdfd_backup) == 0)
 			{
-				spawn_pipe(sequence, 0, stdfd_backup[1]);
+				spawn_pipe(sequence, 0, stdfd_backup);
 				dup2(stdfd_backup[0], 0);
 				close(stdfd_backup[0]);
 				close(stdfd_backup[1]);

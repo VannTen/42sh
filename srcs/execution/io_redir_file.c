@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:40:46 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 13:16:17 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 16:20:55 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 static int	get_target_fd(struct s_sh_io_redirect const *const io_redir)
 {
-	t_bsh	*const bsh = get_shell_data();
-	char	*filename;
-	int		target_fd;
+	t_bsh *const	bsh = get_shell_data();
+	char			*filename;
+	int				target_fd;
 
 	if (bsh && io_redir->target)
 		filename = expanded_str(&bsh->exp, io_redir->target, NOT_HERE_END_EXP);
@@ -30,7 +30,7 @@ static int	get_target_fd(struct s_sh_io_redirect const *const io_redir)
 	return (target_fd);
 }
 
-int	io_redir_file(struct s_sh_io_redirect const *const io_redir,
+int			io_redir_file(struct s_sh_io_redirect const *const io_redir,
 		t_lst **const fd_backups_loc)
 {
 	int	ret;

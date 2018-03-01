@@ -6,65 +6,14 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 08:30:37 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 10:03:38 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 16:20:05 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include "execution.h"
-
-static struct s_env_list	*dup_env_list_elem(struct s_env_list *elem)
-{
-	struct s_env_list	*elem_copy;
-
-	elem_copy = elem ? ft_memalloc(sizeof(struct s_env_list)) : NULL;
-	if (elem_copy)
-	{
-		elem_copy->name = elem->name ? ft_strdup(elem->name) : NULL;
-		if (elem_copy->name || !elem->name)
-		{
-			elem_copy->value = elem->value ? ft_strdup(elem->value) : NULL;
-			if (elem_copy->value || !elem->value)
-			{
-				elem_copy->exportable = elem->exportable;
-				elem_copy->next = NULL;
-				return (elem_copy);
-			}
-			ft_strdel(&elem_copy->name);
-		}
-		ft_memdel((void**)&elem_copy);
-	}
-	return (NULL);
-}
-
-static struct s_env_list	*dup_env_list(struct s_env_list *env_list)
-{
-	struct s_env_list	*env_list_cpy;
-	struct s_env_list	*env_cpy_elem;
-
-	if (env_list != NULL)
-	{
-		env_list_cpy = dup_env_list_elem(env_list);
-		if (env_list_cpy == NULL)
-			return (NULL);
-		env_cpy_elem = env_list_cpy;
-		while ((env_list = env_list->next) != NULL)
-		{
-			env_cpy_elem->next = dup_env_list_elem(env_list);
-			if (env_cpy_elem->next == NULL)
-			{
-				clear_env_list(&env_list_cpy);
-				return (NULL);
-			}
-			env_cpy_elem = env_cpy_elem->next;
-		}
-		env_cpy_elem->next = NULL;
-		return (env_list_cpy);
-	}
-	else
-		return (NULL);
-}
+#include "builtin_env.h"
 
 static int	init_env_cpy(t_env *env_cpy, t_env *env, t_bool ignore_env)
 {
@@ -89,13 +38,13 @@ static int	init_env_cpy(t_env *env_cpy, t_env *env, t_bool ignore_env)
 static char	**modif_env(char **argv, t_env *env_cpy)
 {
 	char	*tmp;
-	
+
 	while (*argv && (tmp = ft_strchr(*argv, '=')))
 	{
 		*tmp = 0;
 		if (!is_valid_variable_name(*argv)
 				|| append_variable_to_env(env_cpy, *argv, tmp + 1, GLOBAL) != 0)
-				return (NULL);
+			return (NULL);
 		*tmp = '=';
 		argv += 1;
 	}
@@ -128,12 +77,12 @@ static int	builtin_env_utility(char **argv, t_env *env_cpy, char const *path)
 	return (42);
 }
 
-int	builtin_env(char **argv, t_env *env)
+int			builtin_env(char **argv, t_env *env)
 {
 	t_env		env_cpy;
 	t_bool		ignore_env;
 	int			ret;
-	char const *path;
+	char const	*path;
 
 	if (!argv || !argv[0] || !env)
 	{
@@ -142,7 +91,7 @@ int	builtin_env(char **argv, t_env *env)
 	}
 	ignore_env = (argv[1] && ft_strcmp(argv[1], "-i") == 0);
 	if (init_env_cpy(&env_cpy, env, ignore_env))
-		return (42);;
+		return (42);
 	argv = modif_env(argv + (ignore_env ? 2 : 1), &env_cpy);
 	if (argv)
 	{

@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/14 10:07:06 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 16:09:20 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@
 #include "libft.h"
 #include <stdlib.h>
 
-void	*create_pipeline(void const *lex_value)
+void			*create_pipeline(void const *lex_value)
 {
-	struct s_container	*container;
+	struct s_container		*container;
 	struct s_sh_pipeline	pipeline;
 
 	(void)lex_value;
 	pipeline.pipe_sequence = NULL;
 	pipeline.bang = FALSE;
-	container = new_container(&pipeline, &destroy_pipeline, sizeof(pipeline), e_ast_container_label_pipeline);
+	container = new_container(&pipeline, &destroy_pipeline, sizeof(pipeline),
+			e_ast_container_label_pipeline);
 	return (container);
 }
 
@@ -69,7 +70,7 @@ t_bool			give_pipeline(void *construct, void *sub_construct)
 	return (ret);
 }
 
-void	destroy_pipeline(void **const pipeline_loc)
+void			destroy_pipeline(void **const pipeline_loc)
 {
 	struct s_sh_pipeline	*todel;
 

@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 14:32:04 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/26 08:32:01 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 16:30:06 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char		*path_search(char const *const name, char const *path)
 	return (NULL);
 }
 
-char			*sh_path_search(t_env *env, char *name)
+char		*sh_path_search(t_env *env, char *name)
 {
 	char	*path_val;
 

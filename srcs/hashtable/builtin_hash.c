@@ -6,7 +6,7 @@
 /*   By: heynard <heynard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 18:28:40 by heynard           #+#    #+#             */
-/*   Updated: 2018/02/28 15:29:20 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 15:54:53 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static short int	print_hashed_commands(t_hash_table *htable)
 
 int					builtin_hash(char **argv, t_env *env)
 {
-	t_bsh			*const bsh = get_shell_data();
+	t_bsh *const	bsh = get_shell_data();
 	t_hash_table	*htable;
 
 	(void)argv;

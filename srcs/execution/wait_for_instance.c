@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 10:56:41 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 09:29:37 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 16:34:39 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 void	wait_for_instance(pid_t father, t_bool const save_return)
 {
-	t_bsh	*const bsh = get_shell_data();
-	int		instance_status;
-	int		wait_ret;
+	t_bsh *const	bsh = get_shell_data();
+	int				instance_status;
+	int				wait_ret;
 
 	while ((wait_ret = waitpid(father, &instance_status, WNOHANG)) == 0)
 		;

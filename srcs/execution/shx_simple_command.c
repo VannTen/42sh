@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 12:09:31 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 09:25:37 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 16:51:49 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 static char	*resolved_arg(char *arg)
 {
-	t_bsh		*const bsh = get_shell_data();
-	char		*ret;
+	t_bsh *const	bsh = get_shell_data();
+	char			*ret;
 
 	ret = bsh && arg ? expanded_str(&bsh->exp, arg, NOT_HERE_END_EXP) : NULL;
 	return (ret);
@@ -43,7 +43,7 @@ static char	**create_argv(t_lst *arglist, size_t const argc)
 	char	**argv;
 	size_t	i;
 
-	argv = (char**)malloc((argc + 1)* sizeof(char*));
+	argv = (char**)malloc((argc + 1) * sizeof(char*));
 	if (argv != NULL)
 	{
 		i = 0;

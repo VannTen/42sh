@@ -16,6 +16,7 @@ SRCS = \
 	   $(SRCS_DIR)/ast_generation/io_number.c \
 	   $(SRCS_DIR)/ast_generation/io_operator.c \
 	   $(SRCS_DIR)/ast_generation/io_redirect.c \
+	   $(SRCS_DIR)/ast_generation/give_io_redirect.c \
 	   $(SRCS_DIR)/ast_generation/less.c \
 	   $(SRCS_DIR)/ast_generation/lessand.c \
 	   $(SRCS_DIR)/ast_generation/lessgreat.c \
@@ -34,6 +35,7 @@ SRCS = \
 	   $(SRCS_DIR)/builtin/builtin_echo_specials.c \
 	   $(SRCS_DIR)/builtin/builtin_env.c \
 	   $(SRCS_DIR)/builtin/builtin_export.c \
+	   $(SRCS_DIR)/builtin/dup_env_list.c \
 	   $(SRCS_DIR)/builtin/builtin_exit.c \
 	   $(SRCS_DIR)/builtin/builtin_history.c \
 	   $(SRCS_DIR)/builtin/builtin_setenv.c \
@@ -150,6 +152,7 @@ SRCS = \
 	   $(SRCS_DIR)/main/set_shell_sigmode.c \
 	   $(SRCS_DIR)/main/get_line.c \
 	   $(SRCS_DIR)/main/init_shell.c \
+	   $(SRCS_DIR)/main/sh_loop.c \
 	   $(SRCS_DIR)/main/main.c \
 	   $(SRCS_DIR)/main/pass_tokens_to_parser.c \
 	   $(SRCS_DIR)/main/readline_process.c \

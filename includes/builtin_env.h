@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   resize_term.c                                      :+:      :+:    :+:   */
+/*   builtin_env.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/01 16:53:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 16:53:13 by ble-berr         ###   ########.fr       */
+/*   Created: 2018/03/01 16:15:55 by ble-berr          #+#    #+#             */
+/*   Updated: 2018/03/01 16:16:33 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#ifndef BUILTIN_ENV_H
+# define BUILTIN_ENV_H
 
-void	resize_term(int sigid)
-{
-	t_input	*input;
+struct s_env_list			*dup_env_list(struct s_env_list *env_list);
 
-	(void)sigid;
-	input = &get_shell_data()->input;
-	get_term_size(input->term);
-	handle_clear_screen(input);
-}
+#endif

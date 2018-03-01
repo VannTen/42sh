@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/14 10:07:06 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 15:59:49 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@
 #include "libft.h"
 #include <stdlib.h>
 
-void	*create_pipe_sequence(void const *lex_value)
+void			*create_pipe_sequence(void const *lex_value)
 {
-	struct s_container	*container;
+	struct s_container			*container;
 	struct s_sh_pipe_sequence	pipe_sequence;
 
 	(void)lex_value;
 	pipe_sequence.simple_commands = NULL;
-	container = new_container(&pipe_sequence, &destroy_pipe_sequence, sizeof(pipe_sequence), e_ast_container_label_pipe_sequence);
+	container = new_container(&pipe_sequence, &destroy_pipe_sequence,
+			sizeof(pipe_sequence), e_ast_container_label_pipe_sequence);
 	return (container);
 }
 
@@ -40,11 +41,11 @@ static t_bool	add_simple_command(struct s_sh_pipe_sequence *pipe_sequence,
 	return (FALSE);
 }
 
-t_bool	give_pipe_sequence(void *construct, void *sub_construct)
+t_bool			give_pipe_sequence(void *construct, void *sub_construct)
 {
-	struct s_container	*sub;
+	struct s_container			*sub;
 	struct s_sh_pipe_sequence	*pipe_sequence;
-	t_bool				ret;
+	t_bool						ret;
 
 	ret = FALSE;
 	if (construct != NULL && sub_construct != NULL)
@@ -61,7 +62,7 @@ t_bool	give_pipe_sequence(void *construct, void *sub_construct)
 	return (ret);
 }
 
-void	destroy_pipe_sequence(void **const pipe_sequence_loc)
+void			destroy_pipe_sequence(void **const pipe_sequence_loc)
 {
 	struct s_sh_pipe_sequence	*todel;
 

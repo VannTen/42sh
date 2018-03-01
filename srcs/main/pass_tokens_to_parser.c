@@ -6,11 +6,11 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 15:27:43 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/27 15:41:41 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/01 16:47:41 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "shell.h"
+#include "shell.h"
 
 size_t	get_tok_id(void const *token)
 {
@@ -37,4 +37,3 @@ void	*take_token(void *token_list_address)
 	else
 		return ((void*)g_tokens_name);
 }
-

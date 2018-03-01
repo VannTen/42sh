@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 11:39:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 09:50:38 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 16:51:15 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@
 #include "builtins.h"
 #include "shell.h"
 
-static char			*find_external(char *const name)
+static char			*find_external(char *const name, t_bsh *const bsh)
 {
-	t_bsh	*const bsh = get_shell_data();
-	char	*external;
+	char			*external;
 
-	external = bsh ? get_path_table(&bsh->hashtable, name) : NULL;
+	external = get_path_table(&bsh->hashtable, name);
 	if (external != NULL)
 	{
 		if ((external = ft_strdup(external)) == NULL)
@@ -52,10 +51,10 @@ static t_builtin	find_builtin(char *name)
 
 int					launch_utility(char **argv, t_bool is_child)
 {
-	t_bsh		*const bsh = get_shell_data();
-	t_builtin	builtin;
-	char		*external;
-	int			ret;
+	t_bsh *const	bsh = get_shell_data();
+	t_builtin		builtin;
+	char			*external;
+	int				ret;
 
 	if (bsh && argv != NULL && argv[0] != NULL)
 	{
@@ -63,8 +62,8 @@ int					launch_utility(char **argv, t_bool is_child)
 			return (launch_external(argv[0], argv, &bsh->env, is_child));
 		builtin = find_builtin(argv[0]);
 		if (builtin != NULL)
-			return(builtin(argv, &bsh->env));
-		external = find_external(argv[0]);
+			return (builtin(argv, &bsh->env));
+		external = find_external(argv[0], bsh);
 		if (external != NULL)
 		{
 			ret = launch_external(external, argv, &bsh->env, is_child);

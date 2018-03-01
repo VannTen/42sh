@@ -6,12 +6,11 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 14:19:38 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/31 16:41:07 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/01 16:46:53 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-
 
 static void	init_search(t_input *input)
 {

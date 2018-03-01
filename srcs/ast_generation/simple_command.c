@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/15 16:45:20 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 16:00:42 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 #include "libft.h"
 #include <stdlib.h>
 
-void	*create_simple_command(void const *lex_value)
+void			*create_simple_command(void const *lex_value)
 {
-	struct s_container	*container;
+	struct s_container			*container;
 	struct s_sh_simple_command	simple_command;
 
 	(void)lex_value;
@@ -27,7 +27,8 @@ void	*create_simple_command(void const *lex_value)
 	simple_command.argc = 0;
 	simple_command.redirs = NULL;
 	simple_command.child = 0;
-	container = new_container(&simple_command, &destroy_simple_command, sizeof(simple_command), e_ast_container_label_simple_command);
+	container = new_container(&simple_command, &destroy_simple_command,
+			sizeof(simple_command), e_ast_container_label_simple_command);
 	return (container);
 }
 
@@ -47,7 +48,8 @@ static t_bool	extend_arglist(struct s_sh_simple_command *const simple_command,
 	return (FALSE);
 }
 
-static t_bool	extend_redirections(struct s_sh_simple_command *const simple_command,
+static t_bool	extend_redirections(
+		struct s_sh_simple_command *const simple_command,
 		struct s_container *const io_redirection_container)
 {
 	if (simple_command != NULL && io_redirection_container != NULL
@@ -64,9 +66,9 @@ static t_bool	extend_redirections(struct s_sh_simple_command *const simple_comma
 
 t_bool			give_simple_command(void *construct, void *sub_construct)
 {
-	struct s_container	*sub;
+	struct s_container			*sub;
 	struct s_sh_simple_command	*simple_command;
-	t_bool				ret;
+	t_bool						ret;
 
 	ret = FALSE;
 	if (construct != NULL && sub_construct != NULL)
@@ -83,7 +85,7 @@ t_bool			give_simple_command(void *construct, void *sub_construct)
 	return (ret);
 }
 
-void	destroy_simple_command(void **const simple_command_loc)
+void			destroy_simple_command(void **const simple_command_loc)
 {
 	struct s_sh_simple_command	*todel;
 

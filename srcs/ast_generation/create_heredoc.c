@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 18:57:04 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 10:38:35 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 15:55:52 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ static int		fill_heredoc(int const doc_fd, char const *const here_end,
 
 char			*create_heredoc(char *here_end)
 {
-	t_bsh	*const bsh = get_shell_data();
-	char	*doc_name;
-	int		doc_fd;
+	t_bsh *const	bsh = get_shell_data();
+	char			*doc_name;
+	int				doc_fd;
 
 	here_end = bsh && here_end ? expanded_str(&bsh->exp, here_end, HERE_END_EXP)
 		: NULL;
