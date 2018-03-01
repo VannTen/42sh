@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 09:43:16 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 09:14:23 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 13:39:03 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_bool	continue_logic(enum e_logic logic_type)
 {
 	t_bsh	*const bsh = get_shell_data();
 
-	return (bsh && logic_type == (bsh->exit_status ? e_logic_and : e_logic_or));
+	return (bsh && logic_type == (bsh->exit_status ? e_logic_or : e_logic_and));
 }
 
 int				shx_and_or(struct s_sh_and_or *const and_or)
