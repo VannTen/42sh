@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 09:33:00 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/26 15:21:50 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 10:32:07 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ struct	s_io_reference
 
 # define LESSAND_PARAM { "0", e_sh_io_type_aggregate, 0, 0, 0 }
 
-char	*create_heredoc(char const *const here_end);
+char	*create_heredoc(char *here_end);
 
 #endif

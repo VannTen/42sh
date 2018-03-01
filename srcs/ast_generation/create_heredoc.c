@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 18:57:04 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/28 16:12:03 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/01 10:38:35 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "libft.h"
 #include "bleberr_macros.h"
 #include "io_here.h"
+#include "shell.h"
 
 static int		increment_id(char *id)
 {
@@ -98,14 +99,18 @@ static int		fill_heredoc(int const doc_fd, char const *const here_end,
 	return (0);
 }
 
-char			*create_heredoc(char const *const here_end)
+char			*create_heredoc(char *here_end)
 {
+	t_bsh	*const bsh = get_shell_data();
 	char	*doc_name;
 	int		doc_fd;
 
+	here_end = bsh && here_end ? expanded_str(&bsh->exp, here_end, HERE_END_EXP)
+		: NULL;
 	if (here_end != NULL && (doc_fd = open_heredoc(&doc_name)) != -1)
 	{
 		(void)fill_heredoc(doc_fd, here_end, ft_strlen(here_end));
+		ft_strdel(&here_end);
 		close(doc_fd);
 		return (doc_name);
 	}
