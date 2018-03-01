@@ -7,6 +7,7 @@ void	readline_sigint(int sigid)
 	(void)sigid;
 	bsh = get_shell_data();
 	reset_buffer(&bsh->input);
+	tputs(tgetstr("me", NULL), 1, putchar_termcaps);
 	if (bsh->input.buf_tmp)
 		ft_memset(bsh->input.buf_tmp, 0, ft_strlen(bsh->input.buf_tmp));
 	if (bsh->input.type == HISTORY_SEARCH)
