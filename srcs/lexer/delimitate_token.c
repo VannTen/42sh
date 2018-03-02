@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 15:13:50 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/11 19:15:47 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/02 13:32:13 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	delimitate_token(t_lexer *lexer)
 
 	if (lexer->token_len > 0)
 	{
-		if (!(token = init_token_node(lexer)))
+		if (!(token = init_token(lexer)))
 			return (MALLOC_FAIL);
 		if (!lexer->tokens[0])
 		{
