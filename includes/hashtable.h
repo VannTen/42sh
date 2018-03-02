@@ -6,7 +6,7 @@
 /*   By: heynard <heynard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 17:51:58 by heynard           #+#    #+#             */
-/*   Updated: 2018/02/28 15:28:58 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/02 11:38:49 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,16 @@ typedef struct		s_hash_data
 int					hash_42sh(const char *bin_name);
 
 /*
-** function to allocate hash table structure and his components.
+** function to set all hash table entries to NULL.
 */
 
 void				init_hash_table(t_hash_table *hashtable);
+
+/*
+** function to allocate a new hash table entry.
+*/
+
+t_hash_data			*new_hash_data(const char *bin_name, const char *bin_path);
 
 /*
 ** function to add a binary path inside the hash table using his name.

@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 14:11:46 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/02 10:09:03 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/02 10:27:29 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_dlst		*ft_dlstnew(void const *data, size_t data_size)
 	{
 		if ((elem->data = (void*)malloc(data_size)) == NULL)
 		{
-			free(elem);
+			ft_memdel((void**)&elem);
 			return (NULL);
 		}
 		ft_memcpy(elem->data, data, data_size);

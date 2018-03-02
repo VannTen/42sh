@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:48:17 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/25 17:47:19 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/02 10:53:04 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,23 @@ t_env_list		*create_env_node(const char *const var, const int flag)
 		return (NULL);
 	if (!(splitted = ft_strsplit(var, '=')))
 		return (NULL);
-	if (!(env = malloc(sizeof(struct s_env_list))))
-		return (NULL);
-	if (!(env->name = ft_strdup(splitted[0])))
-		return (NULL);
-	if (splitted[1])
+	if ((env = malloc(sizeof(struct s_env_list))))
 	{
-		if (!(env->value = ft_strdup(splitted[1])))
-			return (NULL);
+		if ((env->value = ft_strdup(splitted[1] ? splitted[1] : "")))
+		{
+			if ((env->name = ft_strdup(splitted[0])))
+			{
+				env->next = NULL;
+				env->exportable = flag;
+				ft_free_string_tab(&splitted);
+				return (env);
+			}
+			ft_strdel(&env->value);
+		}
+		ft_memdel((void**)&env);
 	}
-	else if (!(env->value = ft_strdup("")))
-		return (NULL);
-	env->next = NULL;
-	env->exportable = flag;
 	ft_free_string_tab(&splitted);
-	return (env);
+	return (NULL);
 }
 
 /*
@@ -57,15 +59,18 @@ t_env_list		*convert_environ_to_list(char **environ)
 	{
 		if (env_list[0] == NULL)
 		{
-			if (!(env_list[0] = create_env_node(environ[i++], GLOBAL)))
-				return (NULL);
+			env_list[0] = create_env_node(environ[i++], GLOBAL);
 			env_list[1] = env_list[0];
 		}
 		else
 		{
-			if (!(env_list[1]->next = create_env_node(environ[i++], GLOBAL)))
-				return (NULL);
+			env_list[1]->next = create_env_node(environ[i++], GLOBAL);
 			env_list[1] = env_list[1]->next;
+		}
+		if (!env_list[1])
+		{
+			clear_env_list(env_list);
+			return (NULL);
 		}
 	}
 	return (env_list[0]);

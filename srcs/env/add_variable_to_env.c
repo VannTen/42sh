@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 13:28:26 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/01 12:28:14 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/02 10:52:06 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,16 @@ static t_env_list	*add_to_env_list(const char *name, const char *value,
 	if (!(new_variable = malloc(sizeof(t_env_list))))
 		return (NULL);
 	if (!(new_variable->name = ft_strdup(name)))
+	{
+		ft_memdel((void**)&new_variable);
 		return (NULL);
+	}
 	if (!(new_variable->value = ft_strdup(value)))
+	{
+		ft_strdel(&new_variable->name);
+		ft_memdel((void**)&new_variable);
 		return (NULL);
+	}
 	new_variable->exportable = exportable;
 	new_variable->next = NULL;
 	return (new_variable);

@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:23:39 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/22 17:05:06 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/02 10:34:48 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ char		**convert_env_to_array(t_env_list *env_list, const size_t env_len)
 			if (!(env_array[i] = (char*)malloc(sizeof(char) *
 							(ft_strlen(env_list->name)
 							+ ft_strlen(env_list->value) + 2))))
+			{
+				ft_free_string_tab(&env_array);
 				return (NULL);
+			}
 			ft_strcpy(env_array[i], env_list->name);
 			ft_strcat(env_array[i], "=");
 			ft_strcat(env_array[i++], env_list->value);

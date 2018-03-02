@@ -6,7 +6,7 @@
 /*   By: heynard <heynard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 17:52:16 by heynard           #+#    #+#             */
-/*   Updated: 2018/02/28 15:35:17 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/02 12:24:11 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include "libft.h"
+#include <unistd.h>
 
 void				init_hash_table(t_hash_table *hashtable)
 {
@@ -31,27 +32,26 @@ int					add_hash_table(t_hash_table *htable,
 									const char *bin_name,
 									const char *bin_path)
 {
-	t_hash_data		*data;
 	int				hash;
 
 	if (htable && bin_name && bin_path)
 	{
 		hash = hash_42sh(bin_name);
-		while (htable->hash_table[hash] != NULL &&
+		while (hash < MAX_BIN && htable->hash_table[hash] != NULL &&
 			ft_strcmp(htable->hash_table[hash]->name, bin_name))
 			hash++;
-		if (htable->hash_table[hash] != NULL &&
+		if (hash < MAX_BIN && htable->hash_table[hash] != NULL &&
 			!ft_strcmp(htable->hash_table[hash]->name, bin_name))
 			htable->hash_table[hash]->hits += 1;
-		else
+		else if (hash < MAX_BIN)
 		{
-			if ((data = malloc(sizeof(t_hash_data))) == NULL)
-				return (1);
-			data->name = ft_strdup(bin_name);
-			data->path = ft_strdup(bin_path);
-			data->hits = 1;
-			htable->hash_table[hash] = data;
+			if (!(htable->hash_table[hash] = new_hash_data(bin_name, bin_path)))
+				ft_dprintf(STDERR_FILENO, "42sh: %s: Failed to create hashtable"
+						" entry, insufficient memory.\n", bin_name);
 		}
+		else
+			ft_dprintf(STDERR_FILENO, "42sh: %s: hash table is full.\n",
+					bin_name);
 		return (0);
 	}
 	return (2);
@@ -82,10 +82,10 @@ char				*get_path_table(t_hash_table *htable,
 	if (htable && bin_name)
 	{
 		hash = hash_42sh(bin_name);
-		while (htable->hash_table[hash] != NULL &&
+		while (hash < MAX_BIN && htable->hash_table[hash] != NULL &&
 			ft_strcmp(htable->hash_table[hash]->name, bin_name))
 			hash++;
-		if (htable->hash_table[hash] != NULL &&
+		if (hash < MAX_BIN && htable->hash_table[hash] != NULL &&
 			!ft_strcmp(htable->hash_table[hash]->name, bin_name))
 			return (htable->hash_table[hash]->path);
 	}
