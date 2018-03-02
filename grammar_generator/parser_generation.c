@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:00:13 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/18 18:00:13 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:02:51 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_bool	create_symbols_have_destructor(t_exec const *sym_rules)
 	return (sym_rules[index].create == NULL);
 }
 
-t_parser	*generate_parser(
+t_parser		*generate_parser(
 		char const *grammar,
 		char const **tokens_names,
 		t_exec const *rules,
@@ -37,7 +37,8 @@ t_parser	*generate_parser(
 	if (new_parser != NULL)
 	{
 		new_parser->grammar = parse_grammar_string(grammar);
-		new_parser->tokens = create_tokens_table(tokens_names, new_parser->grammar);
+		new_parser->tokens = create_tokens_table(tokens_names,
+				new_parser->grammar);
 		if (new_parser->grammar == NULL || new_parser->tokens == NULL
 				|| !eliminate_all_left_recursion(new_parser->grammar)
 				|| !left_factor_grammar(new_parser->grammar)
@@ -51,12 +52,11 @@ t_parser	*generate_parser(
 			new_parser->get_token_id = get_token_id;
 			(void)rules;
 		}
-
 	}
 	return (new_parser);
 }
 
-void		destroy_parser(t_parser **parser)
+void			destroy_parser(t_parser **parser)
 {
 	t_parser	*to_destroy;
 

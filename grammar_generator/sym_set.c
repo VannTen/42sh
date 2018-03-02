@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 20:03:33 by mgautier          #+#    #+#             */
-/*   Updated: 2017/11/16 15:12:28 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:18:46 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <assert.h>
 #include <stdlib.h>
 
-t_prod		*add_prod(t_symbol *sym, t_prod *prod)
+t_prod			*add_prod(t_symbol *sym, t_prod *prod)
 {
 	return (f_pushend_lst(&sym->prods, prod));
 }

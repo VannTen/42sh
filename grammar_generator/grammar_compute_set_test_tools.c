@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 17:06:01 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/13 17:06:01 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 16:16:55 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_bool	compare_first_sets(void const *sym,
 	return (lst_same_contents(first_sets_list, get_first_set(sym), equ));
 }
 
-t_bool	gram_check_first_sets(
+t_bool			gram_check_first_sets(
 		t_grammar const *gram, t_lst const *first_sets)
 {
 	return (lst_same_contents(
@@ -41,7 +41,7 @@ static t_bool	compare_follow_sets(void const *sym,
 	return (lst_same_contents(follow_sets_list, get_follow_set(sym), equ));
 }
 
-t_bool	gram_check_follow_sets(
+t_bool			gram_check_follow_sets(
 		t_grammar const *gram, t_lst const *follow_sets)
 {
 	return (lst_same_contents(

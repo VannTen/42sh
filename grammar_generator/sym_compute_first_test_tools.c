@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 18:19:51 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/10 21:22:26 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:13:27 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void		print(void const *sym, va_list args)
 	ft_dprintf(va_arg(args, int), "%s ", get_name(sym));
 }
 
-t_bool	compute_first_sets(
+t_bool			compute_first_sets(
 		t_symbol **syms, size_t nb_sym)
 {
 	size_t	index;
@@ -55,12 +55,12 @@ t_bool	compute_first_sets(
 	return (TRUE);
 }
 
-void	print_symbol_first_set(t_symbol const *sym, int const fd)
+void			print_symbol_first_set(t_symbol const *sym, int const fd)
 {
 	f_lstiter_va(get_first_set(sym), print, fd);
 }
 
-t_bool	check_first_sets(
+t_bool			check_first_sets(
 		t_symbol **syms, t_lst **first_sets, size_t nb_sym)
 {
 	size_t	index;

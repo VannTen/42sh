@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 16:02:51 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/21 16:02:51 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 15:45:04 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_bool	check_sets(void *set_cmp, void *item_array,
 	void	**tested;
 
 	index = 0;
-
 	cmp = set_cmp;
 	tested = item_array;
 	while (index < nb_item)

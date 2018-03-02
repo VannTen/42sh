@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 16:07:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/12/05 16:15:00 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 16:28:01 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void		sym_del(void **sym)
 
 static t_bool	lfactor_sym(void *sym, va_list args)
 {
-	return (left_factor_sym(sym, va_arg(args,t_fifo*)));
+	return (left_factor_sym(sym, va_arg(args, t_fifo*)));
 }
 
 t_bool			left_factor_grammar(t_grammar *gram)

@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prod_ressources.c                                  :+:      :+:    :+:   */
+/*   sym_ressources2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: heynard <heynard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/17 15:23:37 by mgautier          #+#    #+#             */
-/*   Updated: 2017/11/15 10:49:12 by mgautier         ###   ########.fr       */
+/*   Created: 2018/03/02 17:52:09 by heynard           #+#    #+#             */
+/*   Updated: 2018/03/02 18:17:32 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prods_defs.h"
+#include "sym_defs.h"
+#include "prods_interface.h"
 
-int main()
+void			iter_del_sym(void **sym)
 {
-	t_prod	*prod;
-
-	prod = NULL;
-	destroy_prod(&prod);
+	destroy_symbol((t_symbol**)sym);
 }

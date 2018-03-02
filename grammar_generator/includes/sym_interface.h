@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 14:11:44 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/12 18:32:23 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:32:45 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ t_symbol		*eliminate_left_recursion(t_symbol *sym);
 ** productions
 ** Implementation file : sym_transform_indirect_lrec.c
 */
-
 
 t_bool			elim_indirect_left_recursion(
 		t_symbol *sym,

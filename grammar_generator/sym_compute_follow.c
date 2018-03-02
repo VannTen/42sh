@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 15:19:23 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/12 18:35:22 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 18:16:13 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,30 +50,4 @@ t_bool			add_one_to_follow(
 	}
 	else
 		return (TRUE);
-}
-
-static t_bool	prod_follow(void *prod)
-{
-	return (compute_follow_prod(prod));
-}
-
-t_bool			compute_follow_from_first_in_sym(t_symbol *sym)
-{
-	return (f_lstiterr(sym->prods, prod_follow));
-}
-
-
-static t_bool	prod_va(void *prod, va_list args)
-{
-	t_bool		*sym_added;
-	t_symbol	*sym;
-
-	sym = va_arg(args, t_symbol*);
-	sym_added = va_arg(args, t_bool*);
-	return (compute_follow_prod_step_3(prod, sym, sym_added));
-}
-
-t_bool			compute_follow_sym_step_3(t_symbol *sym, t_bool *sym_added)
-{
-	return (f_lstiterr_va(sym->prods, prod_va, sym, sym_added));
 }

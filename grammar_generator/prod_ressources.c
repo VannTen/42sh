@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/12 11:00:42 by mgautier          #+#    #+#             */
-/*   Updated: 2017/11/30 13:02:35 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:10:04 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_prod		*create_prod(void)
 	return (new);
 }
 
-void		destroy_prod(t_prod	**to_destroy)
+void		destroy_prod(t_prod **to_destroy)
 {
 	t_prod	*prod;
 

@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 12:48:56 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/25 12:48:56 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 16:09:25 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 ** execute_construct, and the end_of_input token.
 */
 
-static t_bool		give_to_meta_construct(
+static t_bool			give_to_meta_construct(
 		void *meta_construct_ref, void *start_symbol)
 {
 	t_exec_construct *meta_construct;
@@ -38,10 +38,10 @@ static t_bool		give_to_meta_construct(
 t_exec_construct		*create_init_meta_construct(void)
 {
 	t_exec_construct	*meta_construct;
-	static t_exec const		meta_functions =
-	{.name = "META", .give = give_to_meta_construct};
 	size_t const		start_symbol_plus_end_of_input = 2;
+	static t_exec const	meta_functions =
 
+	{.name = "META", .give = give_to_meta_construct};
 	meta_construct = create_construct(&meta_functions);
 	if (meta_construct != NULL)
 	{

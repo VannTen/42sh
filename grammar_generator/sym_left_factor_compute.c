@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 16:02:22 by mgautier          #+#    #+#             */
-/*   Updated: 2017/12/21 15:52:41 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:16:36 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "prods_interface.h"
 #include "libft.h"
 
-static void	*left_factor_prods(t_lst *prods, size_t const index,
+static void		*left_factor_prods(t_lst *prods, size_t const index,
 		void *sym_ind)
 {
 	if (index == 0)

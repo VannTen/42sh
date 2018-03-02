@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:54:54 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/23 18:54:54 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:29:44 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_exec_construct	t_exec_construct;
 ** Implementation file : exec_stack_ressources.c
 */
 
-void		clean_exec_struct(void **exec_struct);
+void							clean_exec_struct(void **exec_struct);
 
 /*
 ** exec stack operation
@@ -31,11 +31,11 @@ void		clean_exec_struct(void **exec_struct);
 ** Implemenation file : parser_exec_stack.c
 */
 
-t_bool		put_token_in_stack(
+t_bool							put_token_in_stack(
 		void const *value,
 		t_lst **exec_stack,
 		t_exec const *functions);
-t_bool		put_sym_in_stack(
+t_bool							put_sym_in_stack(
 		t_lst **exec_stack,
 		t_exec const *functions,
 		size_t const prod_len);
@@ -45,10 +45,12 @@ t_bool		put_sym_in_stack(
 ** Implementation file : exec_stack_test.c
 */
 
-t_exec const		*get_construct_functions(t_exec_construct const *interface);
-size_t				get_remaining_symbols(t_exec_construct const *construct);
-t_give_construct	get_give(t_exec_construct const *construct);
-void				*get_value(t_exec_construct const *construct);
+t_exec const					*get_construct_functions(t_exec_construct
+															const *interface);
+size_t							get_remaining_symbols(t_exec_construct
+															const *construct);
+t_give_construct				get_give(t_exec_construct const *construct);
+void							*get_value(t_exec_construct const *construct);
 
 /*
 ** Meta construct
@@ -62,7 +64,8 @@ void				*get_value(t_exec_construct const *construct);
 ** Implementation file : exec_stack_meta_construct.c
 */
 
-t_exec_construct	*create_init_meta_construct(void);
-void				*extract_top_symbol_value(t_exec_construct **meta);
+t_exec_construct				*create_init_meta_construct(void);
+void							*extract_top_symbol_value(
+									t_exec_construct **meta);
 
 #endif

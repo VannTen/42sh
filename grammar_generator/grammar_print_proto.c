@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/12 14:20:45 by mgautier          #+#    #+#             */
-/*   Updated: 2017/10/13 14:18:22 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:27:53 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void		print_symbol_proto(t_symbol const *symbol,
 	ft_dprintf(file, "%s%s%s", prefix, name, suffix);
 }
 
-static void	adapt_print(void const *symbol, va_list args)
+static void		adapt_print(void const *symbol, va_list args)
 {
 	int			fd;
 	const char	*prefix_suffix[2];
@@ -34,7 +34,7 @@ static void	adapt_print(void const *symbol, va_list args)
 	print_symbol_proto(symbol, fd, prefix_suffix[0], prefix_suffix[1]);
 }
 
-void		print_grammar_proto(t_grammar const *grammar, int const file,
+void			print_grammar_proto(t_grammar const *grammar, int const file,
 		char const *name)
 {
 	print_header_guard_in(file, name);

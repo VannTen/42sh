@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 11:03:57 by mgautier          #+#    #+#             */
-/*   Updated: 2017/12/21 14:47:25 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 16:38:40 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 typedef struct	s_left_fac
 {
-	t_symbol const *sym;
+	t_symbol const	*sym;
 	size_t			index;
 	t_lst			*sym_left_factored;
 }				t_left_fac;
@@ -29,7 +29,7 @@ typedef struct	s_left_fac
 ** Implementation file : prod_left_factor.c
 */
 
-t_prod		*prod_group_left_factor(t_lst *prods, size_t index,
-		t_left_fac *ref_sym);
+t_prod			*prod_group_left_factor(t_lst *prods, size_t index,
+					t_left_fac *ref_sym);
 
 #endif

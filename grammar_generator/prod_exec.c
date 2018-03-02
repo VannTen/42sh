@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 14:52:00 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/22 14:52:00 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:01:24 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void		*copy(void const *src)
 	return ((void*)src);
 }
 
-t_bool		add_prod_to_stack(t_prod const *prod, t_lst **stack)
+t_bool			add_prod_to_stack(t_prod const *prod, t_lst **stack)
 {
 	t_lst	*prod_dup;
 	t_lst	*new_stack;

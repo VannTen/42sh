@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 13:37:22 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/23 13:37:22 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 16:51:39 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,7 @@ static t_bool			put_on_stack(
 			new_child->real = functions->create(value);
 			if (new_child->real == NULL
 					|| NULL == f_lstpush(new_child, exec_stack))
-			{
-				//functions->destroy(&new_child->real);
-				//TODO: add member destroy.
 				destroy_construct(&new_child);
-			}
 		}
 		current = new_child;
 	}
@@ -79,7 +75,7 @@ static t_bool			put_one_prod_in_stack(
 			&& consume_stack(exec_stack));
 }
 
-t_bool		put_token_in_stack(
+t_bool					put_token_in_stack(
 		void const *value,
 		t_lst **exec_stack,
 		t_exec const *functions)
@@ -87,7 +83,7 @@ t_bool		put_token_in_stack(
 	return (put_one_prod_in_stack(value, exec_stack, functions, 0));
 }
 
-t_bool		put_sym_in_stack(
+t_bool					put_sym_in_stack(
 		t_lst **exec_stack,
 		t_exec const *functions,
 		size_t const prod_len)

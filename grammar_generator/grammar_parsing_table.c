@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 18:32:37 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/18 18:32:37 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 16:32:35 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_bool			compute_parsing_table(
 				fill_parse_row, tokens_names));
 }
 
-void const	**create_tokens_table(
+void const		**create_tokens_table(
 		char const **tokens_name,
 		t_grammar const *gram)
 {

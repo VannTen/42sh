@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 15:12:51 by mgautier          #+#    #+#             */
-/*   Updated: 2018/02/27 16:14:02 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/02 17:30:37 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,25 @@ typedef struct s_parser	t_parser;
 ** Parser generation
 */
 
-t_parser	*generate_parser(
+t_parser				*generate_parser(
 		char const *grammar,
 		char const **tokens_names,
 		t_exec const *rules,
 		size_t (*get_token_id)(void const *token));
-void		destroy_parser(t_parser **parser);
+void					destroy_parser(t_parser **parser);
 
 /*
 ** Parser execution
 */
 
-struct	s_parse_input
+struct					s_parse_input
 {
 	void	*input;
 	void	*(*get_token)(void *input);
 	void	(*del_token)(void **token);
 };
 
-void		*execute_construct(
+void					*execute_construct(
 		t_parser const *parser,
 		char const *construct,
 		struct s_parse_input const *input);

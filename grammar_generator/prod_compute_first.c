@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 13:42:31 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/05 12:17:05 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:00:09 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_bool	add_first_and_has_not_empty(void const *sym, va_list arg)
 	return (has_symbol_in_first(sym, EMPTY_SYMBOL));
 }
 
-t_bool		add_firsts_of_sub_symbols(
+t_bool			add_firsts_of_sub_symbols(
 		t_prod const *prod,
 		t_symbol *add_to,
 		t_bool *sym_added)

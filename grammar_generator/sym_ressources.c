@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/12 10:16:08 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/12 18:33:53 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:52:00 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 t_symbol		*create_symbol(char const *name)
 {
 	t_symbol	*new;
+
 	new = malloc(sizeof(t_symbol));
 	if (new != NULL)
 	{
@@ -59,17 +60,12 @@ void			destroy_symbol(t_symbol **to_destroy)
 	destroy_symbol_and_prods(to_destroy, TRUE);
 }
 
-void			iter_del_sym(void **sym)
-{
-	destroy_symbol((t_symbol**)sym);
-}
-
 void			iter_del_sym_not_prod(void **sym)
 {
 	destroy_symbol_and_prods((t_symbol**)sym, FALSE);
 }
 
-t_symbol	*derivate_new_sym(t_symbol const *src,
+t_symbol		*derivate_new_sym(t_symbol const *src,
 		char const *reason_why)
 {
 	t_symbol	*new;

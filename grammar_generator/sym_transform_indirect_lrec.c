@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 15:59:29 by mgautier          #+#    #+#             */
-/*   Updated: 2017/11/30 16:52:54 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 18:38:58 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,13 @@ static t_bool	replace_sym_with_prods(
 t_bool			elim_indirect_left_recursion(
 		t_symbol *sym,
 		t_symbol const *sym_indir,
-		__attribute__((unused))t_bool dev_if_left)
+		t_bool dev_if_left)
 {
 	t_lst	*indirect_left_recur_prods;
 	t_fifo	*new_prods;
 	t_bool	success;
 
+	(void)dev_if_left;
 	new_prods = f_fifo_create();
 	success = FALSE;
 	if (new_prods != NULL)

@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/12 12:26:17 by mgautier          #+#    #+#             */
-/*   Updated: 2017/11/08 11:56:10 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 18:36:32 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ static void	adapt_print(void const *symbol, va_list args)
 }
 
 void		print_grammar_init(t_grammar const *grammar, int const file,
-		__attribute__((unused))char const *header_proto_name)
+							char const *header_proto_name)
 {
+	(void *)header_proto_name;
 	print_grammar_source(grammar, file, NULL);
 	ft_dprintf(file,
 			"\nt_symbol\t\t**create_%s_grammar(void)\n{\n"

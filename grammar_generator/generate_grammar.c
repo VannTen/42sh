@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/09 10:34:57 by mgautier          #+#    #+#             */
-/*   Updated: 2017/11/08 11:36:48 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 16:25:21 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,10 @@
 ** (The fourth paramater might serve in the future for the generated makefile)
 */
 
-
-static	int	print_each_file(t_grammar const *grammar, char **final_names)
+static int		print_each_file(t_grammar const *grammar, char **final_names)
 {
-	size_t	index;
-	void (*const	print[])(t_grammar const*, int, char const*) = {
+	size_t			index;
+	void			(*const	print[])(t_grammar const*, int, char const*) = {
 		print_grammar_init, print_grammar_names, print_grammar_header};
 	size_t const	t_index[] = {0, 2, 2};
 	int				fd;
@@ -56,14 +55,14 @@ static	int	print_each_file(t_grammar const *grammar, char **final_names)
 				CODE_FILE_PERMISSION);
 		if (fd == -1)
 			return (FAIL_TO_WRITE_FILE);
-		print[index](grammar, fd , final_names[t_index[index]]);
+		print[index](grammar, fd, final_names[t_index[index]]);
 		close(fd);
 		index++;
 	}
 	return (SUCCESS);
 }
 
-int			print_grammar(t_grammar const *grammar, char const *gram_name,
+int				print_grammar(t_grammar const *grammar, char const *gram_name,
 		char const *header_dir, char const *src_dir)
 {
 	char const		*names[] = {
@@ -90,7 +89,7 @@ int			print_grammar(t_grammar const *grammar, char const *gram_name,
 	return (ret);
 }
 
-int		main(int argc, const char **argv)
+int				main(int argc, const char **argv)
 {
 	t_grammar	*grammar;
 	char		*stem;

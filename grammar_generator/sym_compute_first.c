@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 11:19:37 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/10 21:26:08 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:59:47 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_bool			compute_sym_first_set(t_symbol *sym, t_bool *sym_added)
 	{
 		if (has_empty_prod(sym))
 			error_state = add_symbol_to_first_set(EMPTY_SYMBOL, sym, sym_added);
-		//		assert(sym_does_not_derive_itself(sym));
 		error_state = f_lstiterr_va(sym->prods,
 				prod_add_to_first, sym, sym_added);
 	}
@@ -61,22 +60,6 @@ t_bool			add_first_set_to_first_set(
 		t_bool *sym_added)
 {
 	return (add_first_set_to_set(sym, &add_to->first, sym_added));
-}
-
-t_bool			add_first_set_to_set(
-		t_symbol const *sym,
-		t_lst **add_to,
-		t_bool *sym_added)
-{
-	return (f_lstiterr_va(sym->first, add_symbol, add_to, sym_added));
-}
-
-t_bool			add_symbol_to_first_set(
-		t_symbol const *sym,
-		t_symbol *add_to,
-		t_bool *sym_added)
-{
-	return (add_symbol_to_set(sym, &add_to->first, sym_added));
 }
 
 t_bool			add_symbol_to_set(

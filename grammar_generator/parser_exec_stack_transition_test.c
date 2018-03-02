@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 18:07:08 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/25 18:07:08 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 16:59:42 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static t_bool	test_len_prod_abstract(
 ** transition
 */
 
-t_bool	test_one_construct_transition(
+t_bool			test_one_construct_transition(
 		t_lst **stack,
 		t_exec const *functions,
 		size_t const prod_len,
@@ -109,6 +109,6 @@ t_bool	test_one_construct_transition(
 	else
 		return ((functions != NULL ?
 				test_len_prod_concrete :
-				test_len_prod_abstract)
-				(stack, stack_size[STACK_SIZE], prod_len, last_elem_count));
+				test_len_prod_abstract)(stack, stack_size[STACK_SIZE],
+					prod_len, last_elem_count));
 }

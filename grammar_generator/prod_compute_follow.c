@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 19:00:14 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/12 18:19:32 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:06:11 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include "sym_interface.h"
 
 /*
-** variable sym_added is never_used, but lst_add_to_filter interface requires it.
+** variable sym_added is never_used,
+** but lst_add_to_filter interface requires it.
 */
 
 static t_bool	is_empty_first(t_lst const *lst)
@@ -46,7 +47,7 @@ static void		*comp_sym_follow(void *sym, void *first_set_of_following)
 				&first_set_of_next, get_first_set(sym), &sym_added));
 }
 
-t_bool		compute_follow_prod(t_prod *prod)
+t_bool			compute_follow_prod(t_prod *prod)
 {
 	t_lst	*empty_lst;
 
@@ -63,7 +64,8 @@ t_bool		compute_follow_prod(t_prod *prod)
 	}
 }
 
-static void	*sym_add_follow_parent(void *sym, void *prev_result, va_list args)
+static void		*sym_add_follow_parent(void *sym,
+								void *prev_result, va_list args)
 {
 	t_bool			*sym_added;
 	t_symbol const	*parent_sym;
@@ -80,7 +82,7 @@ static void	*sym_add_follow_parent(void *sym, void *prev_result, va_list args)
 	return (prev_result);
 }
 
-t_bool		compute_follow_prod_step_3(
+t_bool			compute_follow_prod_step_3(
 		t_prod *prod, t_symbol const *parent_sym, t_bool *sym_added)
 {
 	return (NULL != lst_do_from_end_va(prod->sym_list,
@@ -99,4 +101,3 @@ t_bool		compute_follow_prod_step_3(
 ** -1 its previous iteration did not modify prev_result
 ** -2 it has EMPTY_SYMBOL in the current symbol
 */
-

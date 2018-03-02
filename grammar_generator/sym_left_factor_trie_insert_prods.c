@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 16:31:56 by mgautier          #+#    #+#             */
-/*   Updated: 2017/12/14 17:26:37 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:15:37 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ static void const	*get_sym_of_prod_n(void const *prod, size_t const index)
 	return (get_sym_of_prod(prod, index));
 }
 
-static t_bool	is_same_sym(void const *sym1, void const *sym2)
+static t_bool		is_same_sym(void const *sym1, void const *sym2)
 {
 	return (symbol_are_identical(sym1, sym2));
 }
 
-t_bool		insert_in_trie(void *prod, va_list args)
+t_bool				insert_in_trie(void *prod, va_list args)
 {
 	return (trie_insert(
 				va_arg(args, t_trie*),

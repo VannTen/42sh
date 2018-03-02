@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:55:39 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/23 18:55:39 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 16:36:43 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "exec_interface.h"
 # include <stddef.h>
 
-struct	s_exec_construct
+struct				s_exec_construct
 {
 	t_exec const	*functions;
 	void			*real;

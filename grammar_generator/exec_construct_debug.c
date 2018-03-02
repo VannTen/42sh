@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 18:49:59 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/25 18:49:59 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 15:48:43 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,17 @@
 #include "test_interface.h"
 #include <unistd.h>
 
-static void	print(void *tmp)
+static void		print(void *tmp)
 {
 	print_exec_construct(tmp);
 }
 
-void	print_exec_stack(t_lst *stack)
+void			print_exec_stack(t_lst *stack)
 {
 	f_lstiter(stack, print);
 }
-void	print_exec_construct(t_exec_construct const *construct)
+
+void			print_exec_construct(t_exec_construct const *construct)
 {
 	ft_dprintf(STDERR_FILENO, "%zu\n", construct->remaining_symbols);
 }

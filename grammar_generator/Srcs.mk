@@ -43,13 +43,16 @@ SYMBOL :=\
 	sym_empty_symbol.c\
 	sym_cmp.c\
 	sym_ressources.c\
+	sym_ressources2.c\	
 	sym_transform_lrec.c\
 	sym_transform_indirect_lrec.c\
 	sym_left_factor.c\
 	sym_left_factor_compute.c\
 	sym_left_factor_trie_insert_prods.c\
 	sym_compute_first.c\
+	sym_compute_first2.c\
 	sym_compute_follow.c\
+	sym_compute_follow2.c\
 	sym_associate_functions.c\
 	sym_parse_table.c\
 	sym_parse_table_get.c
@@ -87,6 +90,7 @@ TEST_TOOLS :=\
 	compute_set_test_tools.c\
 	arith_expr_test_1.c\
 	arith_expr_test_2.c\
+	arith_expr_test_3.c\
 	arith_expr_test_destructors.c\
 	exec_stack_test.c\
 	parser_exec_stack_transition_test.c\

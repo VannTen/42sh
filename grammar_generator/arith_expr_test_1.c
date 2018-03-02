@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 13:12:54 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/22 13:12:54 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 18:41:49 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 #include "libft.h"
 #include <stdlib.h>
 
-void	*create_expr(__attribute__((unused))void const *no_val)
+void	*create_expr(void const *no_val)
 {
 	int	*expr;
 
+	(void const*)no_val;
 	expr = malloc(sizeof(*expr));
 	if (expr != NULL)
 		*expr = 0;
@@ -36,10 +37,11 @@ t_bool	give_expr(void *v_expr, void *to_give)
 	return (TRUE);
 }
 
-void	*create_term(__attribute__((unused))void const *no_val)
+void	*create_term(void const *no_val)
 {
 	int	*term;
 
+	(void const *)no_val;
 	term = malloc(sizeof(*term));
 	if (term != NULL)
 		*term = 1;
@@ -58,10 +60,11 @@ t_bool	give_term(void *v_term, void *to_give)
 	return (TRUE);
 }
 
-void	*create_factor(__attribute__((unused))void const *no_val)
+void	*create_factor(void const *no_val)
 {
 	int	*factor;
 
+	(void const *)no_val;
 	factor = malloc(sizeof(*factor));
 	if (factor != NULL)
 		*factor = 0;

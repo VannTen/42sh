@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 23:52:41 by mgautier          #+#    #+#             */
-/*   Updated: 2018/02/01 23:52:41 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:23:22 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_bool	follow_from_follow(void *sym, va_list args)
 	return (compute_follow_sym_step_3(sym, va_arg(args, t_bool*)));
 }
 
-t_bool	compute_sets_all_syms(t_fifo *tokens, t_fifo *sym)
+t_bool			compute_sets_all_syms(t_fifo *tokens, t_fifo *sym)
 {
 	t_bool	sym_added;
 

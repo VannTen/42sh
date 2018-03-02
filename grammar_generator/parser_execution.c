@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 11:15:02 by mgautier          #+#    #+#             */
-/*   Updated: 2018/02/27 16:15:36 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/02 17:09:38 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_bool		token_transition(
 		size_t const token_id,
 		t_exec const *functions)
 {
-	return(get_token_id(token) == token_id
+	return (get_token_id(token) == token_id
 			&& put_token_in_stack(state->token, &state->exec_stack,
 				functions));
 }
@@ -56,8 +56,8 @@ static t_bool		one_symbol_transition(
 	t_symbol const	*sym;
 	t_bool			result;
 	t_bool			(*transition)(t_symbol const*,
-			struct s_parse_state*, size_t, t_exec const*);
 
+	struct s_parse_state*, size_t, t_exec const*);
 	sym = f_lstpop(&state->parse_stack);
 	if (state->token == NULL)
 		state->token = token_flow->get_token(token_flow->input);
@@ -71,7 +71,7 @@ static t_bool		one_symbol_transition(
 	return (result);
 }
 
-static t_bool	init(
+static t_bool		init(
 		t_lst **parse_stack,
 		char const *construct,
 		t_grammar const *gram)
@@ -88,7 +88,7 @@ static t_bool	init(
 	return (*parse_stack != NULL);
 }
 
-void		*execute_construct(
+void				*execute_construct(
 		t_parser const *parser,
 		char const *construct,
 		struct s_parse_input const *input)
@@ -118,22 +118,4 @@ void		*execute_construct(
 	}
 	input->del_token(&state.token);
 	return (extract_top_symbol_value(&meta_construct));
-}
-
-/*
-** Debug
-*/
-
-static void	print_sym(void *sym)
-{
-	ft_dprintf(STDERR_FILENO, "%s\n", get_name(sym));
-}
-
-void	print_token(void const *token, t_parser const *parser)
-{
-	ft_dprintf(STDERR_FILENO, "%zu\n", parser->get_token_id(token));
-}
-void	print_stack(t_lst *stack)
-{
-	f_lstiter(stack, print_sym);
 }

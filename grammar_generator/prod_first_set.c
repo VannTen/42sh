@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 19:36:29 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/18 19:36:29 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 18:48:39 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,21 @@
 #include "sym_interface.h"
 #include "libft.h"
 
-t_bool		empty_in_sym_first(void const *sym, __attribute__((unused))va_list args)
+t_bool		empty_in_sym_first(void const *sym, va_list args)
 {
-
+	(void)args;
 	if (!has_symbol_in_first(sym, EMPTY_SYMBOL))
 	{
 		(void)va_arg(args, t_lst**);
-		*(va_arg(args, t_bool*))= FALSE;
+		*(va_arg(args, t_bool*)) = FALSE;
 		return (FALSE);
 	}
 	else
 		return (TRUE);
-
 }
 
 t_bool		add_to_prod_first_set(void *sym, va_list args)
 {
-	t_bool	__attribute__((unused))sym_added;
-
 	return (add_first_set_to_set(sym, va_arg(args, t_lst**), &sym_added));
 }
 

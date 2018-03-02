@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 17:43:43 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/10 22:08:34 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 16:14:25 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void		print(void const *sym, va_list args)
 	ft_dprintf(va_arg(args, int), "%s ", get_name(sym));
 }
 
-static void print_sym_set(void const *sym, va_list args)
+static void		print_sym_set(void const *sym, va_list args)
 {
 	int			fd;
 	t_lst const	*(*get_set)(t_symbol const *sym);
@@ -32,12 +32,12 @@ static void print_sym_set(void const *sym, va_list args)
 	ft_dprintf(fd, "\n");
 }
 
-void	print_follow_sets(t_grammar const *gramm, int const fd)
+void			print_follow_sets(t_grammar const *gramm, int const fd)
 {
 	f_fifoiter_va(gramm->sym_list, print_sym_set, fd, get_follow_set);
 }
 
-void	print_first_sets(t_grammar const *gramm, int const fd)
+void			print_first_sets(t_grammar const *gramm, int const fd)
 {
 	f_fifoiter_va(gramm->sym_list, print_sym_set, fd, get_first_set);
 }

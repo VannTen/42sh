@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 12:13:37 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/12 18:21:16 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 18:27:56 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 #include <stddef.h>
 #include <assert.h>
 
-static t_bool	is_empty_prod(void const *prod,
-		__attribute__((unused))va_list args)
+static t_bool	is_empty_prod(void const *prod, va_list args)
 {
+	(void)args;
 	return (get_prod_len(prod) == 0);
 }
 

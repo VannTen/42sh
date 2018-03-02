@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 19:47:56 by mgautier          #+#    #+#             */
-/*   Updated: 2017/11/21 16:21:45 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:17:43 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static void	print_prods(void const *prod, size_t index, va_list args)
 	int	fd;
 
 	fd = va_arg(args, int);
-		ft_dprintf(fd, "\t\t\tnew->productions[%zu]"
+	ft_dprintf(fd, "\t\t\tnew->productions[%zu]"
 				" = generate_one_production(%zu, ",
 				index, get_prod_len(prod));
-		print_prod(prod, fd);
-		ft_putstr_fd(");\n", fd);
+	print_prod(prod, fd);
+	ft_putstr_fd(");\n", fd);
 }
 
 static void	print_prod_list(t_symbol const *sym, int const fd, size_t nb_prod)
@@ -40,7 +40,7 @@ static void	print_prod_list(t_symbol const *sym, int const fd, size_t nb_prod)
 
 void		print_sym_initializer(t_symbol const *sym, int const fd)
 {
-	const char	type_name[]	= "t_symbol";
+	const char	type_name[] = "t_symbol";
 	char		*lower_case;
 	size_t		nb_prod;
 
