@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 15:46:10 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/26 15:26:22 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/02 13:50:51 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct		s_transition
 
 int					lexer(t_lexer *lexer, char *input);
 int					init_lexer(t_lexer *lexer);
-t_token				*init_token_node(t_lexer *lexer);
+t_token				*init_token(t_lexer *lexer);
 int					append_char(t_lexer *lexer);
 int					delimitate_token(t_lexer *lexer);
 int					get_operator(t_lexer *lexer);
