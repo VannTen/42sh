@@ -6,11 +6,17 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 12:31:00 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/26 18:33:58 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/02 15:29:38 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+
+static void	remove(t_input *input)
+{
+	if (!ft_strcmp(input->buf_tmp, "\\\n"))
+		ft_memset(input->buf_tmp, '\0', 2);
+}
 
 static int	remove_backslash_nl(t_input *input, t_lexer *lexer)
 {
@@ -18,10 +24,8 @@ static int	remove_backslash_nl(t_input *input, t_lexer *lexer)
 
 	i = 0;
 	clear_tokens(&lexer->tokens[0]);
-	input->buffer[--input->buffer_len] = '\0';
-	if (input->buffer_len > 0 && input->buffer[input->buffer_len - 1] == '\\')
-		input->buffer[--input->buffer_len] = '\0';
 	input->buf_tmp = input->buffer;
+	remove(input);
 	if (!(input->buffer = ft_strnew(input->buffer_size)))
 		return (MALLOC_FAIL);
 	lexer->input = input->buf_tmp;
@@ -30,7 +34,8 @@ static int	remove_backslash_nl(t_input *input, t_lexer *lexer)
 		get_event(lexer);
 		lexer->state = g_lexer[lexer->state][lexer->event].new_state;
 		if (*(lexer->input) == '\\' && *(lexer->input + 1) == '\n'
-				&& lexer->state != QUOTE && lexer->state != COMMENT)
+				&& lexer->state != QUOTE && lexer->state != COMMENT
+				&& *(lexer->input + 2) != '\0')
 			lexer->input += 2;
 		else
 			input->buffer[i++] = *(lexer->input++);
@@ -67,8 +72,7 @@ static int	get_complete_line_to_buffer(t_lexer *lex, t_input *input,
 		ft_strdel(&input->buf_tmp);
 		input->buffer_len = ft_strlen(input->buffer);
 	}
-	remove_backslash_nl(input, lex);
-	return (0);
+	return (remove_backslash_nl(input, lex));
 }
 
 static int	init_exp_input(t_string *exp_input, const int size)
