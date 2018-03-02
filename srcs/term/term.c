@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 14:55:29 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/28 15:19:43 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/02 18:56:42 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		init_termcaps(t_bsh *bsh)
 	else
 	{
 		bsh->term.custom_attr.c_lflag &= ~(ICANON | ECHO);
-		bsh->term.custom_attr.c_cc[VMIN] = 1;
+		bsh->term.custom_attr.c_cc[VMIN] = 0;
 		bsh->term.custom_attr.c_cc[VTIME] = 0;
 		if (tcsetattr(STDIN_FILENO, TCSANOW, &bsh->term.custom_attr) == -1)
 			ret = ft_dprintf(STDERR_FILENO, "42sh: Unable to set custom"
