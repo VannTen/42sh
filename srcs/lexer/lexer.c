@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 15:22:54 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/26 15:27:04 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/02 14:47:37 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,13 +118,26 @@ int					handle_backslash(t_lexer *lexer)
 	return (0);
 }
 
+static int			init_current_token(t_lexer *lexer)
+{
+	if (!lexer->current_token)
+	{
+		lexer->token_size = INITIAL_TOKEN_SIZE;
+		if ((lexer->current_token = ft_strnew(INITIAL_TOKEN_SIZE)))
+			return (MALLOC_FAIL);
+	}
+	return (0);
+}
+
 int					reset_lexer(t_lexer *lexer)
 {
 	clear_tokens(&lexer->tokens[0]);
 	lexer->tokens[1] = NULL;
 	lexer->state = INIT;
 	lexer->event = 0;
-	ft_bzero(lexer->current_token, lexer->token_size);
+	if (lexer->current_token)
+		ft_bzero(lexer->current_token, lexer->token_size);
+	init_current_token(lexer);
 	lexer->token_len = 0;
 	lexer->input = NULL;
 	return (0);
@@ -132,6 +145,8 @@ int					reset_lexer(t_lexer *lexer)
 
 int					lexer(t_lexer *lexer, char *input)
 {
+	if (init_current_token(lexer) == MALLOC_FAIL)
+		return (MALLOC_FAIL);
 	lexer->input = input;
 	lexer->event = 0;
 	if (lexer->state != INIT)
