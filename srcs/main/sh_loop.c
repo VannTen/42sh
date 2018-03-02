@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:49:09 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 19:39:58 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/02 15:53:08 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ static int		update_history(t_history *history, t_input *input)
 	}
 	if (input->buffer_len > 0 && (!history->len ||
 				ft_strcmp(input->buffer, history->history[history->len - 1])))
-		if (add_cmd_to_history(history, input->buffer))
-			return (MALLOC_FAIL);
+		add_cmd_to_history(history, input->buffer);
 	return (0);
 }
 
@@ -97,8 +96,7 @@ int				sh_loop(t_bsh *bsh)
 		if (lexer(&bsh->lexer, bsh->input.buffer) == MALLOC_FAIL)
 			continue ;
 		if (bsh->interactive)
-			if (update_history(&bsh->history, &bsh->input) == MALLOC_FAIL)
-				continue ;
+			update_history(&bsh->history, &bsh->input);
 		test_parser(bsh->lexer.tokens[0], bsh->parser);
 	}
 }
