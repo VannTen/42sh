@@ -50,7 +50,7 @@ int			completion_display(t_comp *comp, t_input *input)
 	if (comp->nb_matches == 1)
 	{
 		if (comp->prefix[0] == '$')
-			comp->comp_str = ft_strdup(str + ft_strlen(comp->prefix + 1));
+			comp->comp_str = ft_strdup(str + comp->basename_len);
 		else
 			comp->comp_str = ft_strdup(str + comp->basename_len);
 		paste_str_in_buffer(comp->comp_str, input);

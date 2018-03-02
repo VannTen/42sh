@@ -13,6 +13,7 @@
 #include "shell.h"
 
 const char	*g_builtins_name[] = {
+	"cd ",
 	"declare ",
 	"echo ",
 	"env ",
