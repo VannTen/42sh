@@ -6,13 +6,13 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 15:23:36 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/26 15:17:28 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/02 14:47:18 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-static int	evaluate_bang(t_token *token)
+static int		evaluate_bang(t_token *token)
 {
 	if (!token || (token->type == AND_IF
 				|| token->type == OR_IF
@@ -22,15 +22,27 @@ static int	evaluate_bang(t_token *token)
 	return (WORD);
 }
 
-t_token		*init_token_node(t_lexer *lexer)
+static t_token	*init_token_node(const char *cur_token)
+{
+	t_token	*token;
+
+	if (!(token = (t_token*)malloc(sizeof(t_token))))
+		return (NULL);
+	if (!(token->value = ft_strdup(cur_token)))
+	{
+		ft_memdel((void**)token);
+		return (NULL);
+	}
+	return (token);
+}
+
+t_token			*init_token(t_lexer *lexer)
 {
 	t_token	*token;
 	int		op;
 
 	op = 0;
-	if (!(token = (t_token*)malloc(sizeof(t_token))))
-		return (NULL);
-	if (!(token->value = ft_strdup(lexer->current_token)))
+	if (!(token = init_token_node(lexer->current_token)))
 		return (NULL);
 	if ((op = is_operator(token->value)) != -1)
 		token->type = op;
