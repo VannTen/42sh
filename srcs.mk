@@ -1,6 +1,7 @@
 SRCS = \
 	   $(SRCS_DIR)/hashtable/builtin_hash.c \
 	   $(SRCS_DIR)/hashtable/hashtable.c \
+	   $(SRCS_DIR)/hashtable/new_hash_data.c \
 	   $(SRCS_DIR)/ast_generation/and_if.c \
 	   $(SRCS_DIR)/ast_generation/and_or.c \
 	   $(SRCS_DIR)/ast_generation/give_and_or.c \
@@ -67,7 +68,7 @@ SRCS = \
 	   $(SRCS_DIR)/execution/launch_utility.c \
 	   $(SRCS_DIR)/execution/new_container.c \
 	   $(SRCS_DIR)/execution/recreate_env_array.c \
-	   $(SRCS_DIR)/execution/saved_filedescriptor_conflict.c \
+	   $(SRCS_DIR)/execution/filedescriptor_is_a_backup.c \
 	   $(SRCS_DIR)/execution/sh_path_search.c \
 	   $(SRCS_DIR)/execution/shell_errmsg.c \
 	   $(SRCS_DIR)/execution/shell_getenv.c \
