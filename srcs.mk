@@ -160,7 +160,6 @@ SRCS = \
 	   $(SRCS_DIR)/main/readline_sigint.c \
 	   $(SRCS_DIR)/main/realloc_str.c \
 	   $(SRCS_DIR)/main/sh_exit_message.c \
-	   $(SRCS_DIR)/print_ast/print_program.c \
 	   $(SRCS_DIR)/term/ft_putchar_termcaps.c \
 	   $(SRCS_DIR)/term/prompt.c \
 	   $(SRCS_DIR)/term/resize_term.c \
