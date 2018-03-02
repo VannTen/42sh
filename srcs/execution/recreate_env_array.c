@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 21:57:22 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/28 12:19:33 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/02 09:31:29 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,13 @@ int			recreate_env_array(t_env *const env)
 			ft_free_string_tab(&(env->env_array));
 		env->env_array = convert_env_to_array(env->env_list, env->env_len);
 		env->has_changed = 0;
-		return (env->env_array == NULL);
+		if (env->env_array != NULL)
+			return (0);
+		else
+		{
+			ft_dprintf(2, "42sh: Failed to recreate environment.\n");
+			return (1);
+		}
 	}
 	else
 		return (0);
