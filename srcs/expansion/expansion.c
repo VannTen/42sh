@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:42:58 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/01 19:39:32 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/02 09:29:23 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static void		reset_expander(t_expander *exp)
 	exp->tmp = NULL;
 	exp->state = INIT_EXP;
 	exp->event = START_EXP;
-	ft_bzero(exp->buffer, exp->buffer_size);
+	if (exp->buffer)
+		ft_bzero(exp->buffer, exp->buffer_size);
 }
 
 char			*expanded_str(t_expander *exp, char *string, const size_t type)
@@ -69,13 +70,15 @@ char			*expanded_str(t_expander *exp, char *string, const size_t type)
 	while (*(exp->tmp))
 	{
 		if (g_exp[exp->state][exp->event].p_transit[type](exp) == MALLOC_FAIL)
+		{
+			reset_expander(exp);
 			return (NULL);
+		}
 		(exp->state != INIT_EXP) ? exp->tmp++ : 0;
 		exp->state = g_exp[exp->state][exp->event].new_state;
 		exp->event = get_event_exp(*(exp->tmp));
 	}
-	if (!(str = ft_strdup(exp->buffer)))
-		return (NULL);
+	str = ft_strdup(exp->buffer);
 	reset_expander(exp);
 	return (str);
 }
