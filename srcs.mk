@@ -9,6 +9,7 @@ SRCS = \
 	   $(SRCS_DIR)/ast_generation/clobber.c \
 	   $(SRCS_DIR)/ast_generation/complete_command.c \
 	   $(SRCS_DIR)/ast_generation/create_heredoc.c \
+	   $(SRCS_DIR)/ast_generation/fill_heredoc.c \
 	   $(SRCS_DIR)/ast_generation/dgreat.c \
 	   $(SRCS_DIR)/ast_generation/dless.c \
 	   $(SRCS_DIR)/ast_generation/dlessdash.c \

@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 18:57:04 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 15:55:52 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:52:51 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,35 +71,7 @@ static int		open_heredoc(char **const doc_name_loc)
 		return (-1);
 }
 
-static int		fill_heredoc(int const doc_fd, char const *const here_end,
-		size_t const here_end_len)
-{
-	int		gnl_ret;
-	char	*line;
-
-	line = NULL;
-	while (42)
-	{
-		ft_strdel(&line);
-		(void)ft_dprintf(STDERR_FILENO, "heredoc> ");
-		gnl_ret = get_next_line(STDIN_FILENO, &line);
-		if (0 < gnl_ret)
-		{
-			if (ft_strncmp(line, here_end, here_end_len))
-				(void)ft_dprintf(doc_fd, "%s\n", line);
-			else
-				break ;
-		}
-		else if (gnl_ret == 0)
-			break ;
-		else
-			return (42);
-	}
-	ft_strdel(&line);
-	return (0);
-}
-
-char			*create_heredoc(char *here_end)
+char			*create_heredoc(char *here_end, t_bool is_dlessdash)
 {
 	t_bsh *const	bsh = get_shell_data();
 	char			*doc_name;
@@ -109,7 +81,7 @@ char			*create_heredoc(char *here_end)
 		: NULL;
 	if (here_end != NULL && (doc_fd = open_heredoc(&doc_name)) != -1)
 	{
-		(void)fill_heredoc(doc_fd, here_end, ft_strlen(here_end));
+		(void)fill_heredoc(doc_fd, here_end, ft_strlen(here_end), is_dlessdash);
 		ft_strdel(&here_end);
 		close(doc_fd);
 		return (doc_name);
