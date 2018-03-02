@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 19:02:54 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 16:08:00 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/02 16:36:04 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,12 @@ static int	get_shell_exit_status(void)
 
 int			builtin_exit(char **args, t_env *env)
 {
+	t_bsh			*const bsh = get_shell_data();
 	unsigned char	exit_value;
 
 	(void)env;
+	if (bsh)
+		save_history_to_histfile(&bsh->history);
 	if (exit_arg_check(args))
 		return (-1);
 	if (args[1] == NULL)
