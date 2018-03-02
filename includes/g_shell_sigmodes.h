@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 10:41:49 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 08:47:05 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/02 20:12:06 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ g_shell_sigmodes[e_shell_sigmode_max][SHELL_SIGNAL_SETUP_LEN] =
 	}, {
 		{ .sigid=SIGHUP, .handler=SIG_DFL },
 		{ .sigid=SIGINT, .handler=readline_sigint },
-		{ .sigid=SIGQUIT, .handler=SIG_DFL },
+		{ .sigid=SIGQUIT, .handler=SIG_IGN },
 		{ .sigid=SIGILL, .handler=SIG_DFL },
 		{ .sigid=SIGTRAP, .handler=SIG_DFL },
 		{ .sigid=SIGABRT, .handler=SIG_DFL },
