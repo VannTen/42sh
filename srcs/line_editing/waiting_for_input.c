@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 11:41:51 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/28 13:05:33 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/02 18:57:12 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,22 @@ static int	get_key(t_input *input)
 	return (handle_reg_char(input, input->read_buffer[0]));
 }
 
-static int	buffer_read_one(char *buffer, int offset)
+static int	buf_read_one(char *buffer, int offset)
 {
 	int	ret;
 
-	ret = read(STDIN_FILENO, buffer + offset, 1);
+	ret = 0;
+	while (!ret)
+	{
+		ret = read(STDIN_FILENO, buffer + offset, 1);
+		if (g_sigint_detected)
+			break ;
+	}
+	if (g_sigint_detected)
+	{
+		g_sigint_detected = 0;
+		return (CATCH_SIGINT);
+	}
 	buffer[offset + 1] = 0;
 	return (ret);
 }
@@ -97,14 +108,17 @@ static int	buffer_read_one(char *buffer, int offset)
 int			wait_for_input(t_input *input, int input_type)
 {
 	int		ret;
+	int		r_ret;
 
 	input->type = input_type;
 	input->read_buf_ind = 0;
 	ft_bzero(input->read_buffer, MAX_KEY_LENGTH + 1);
 	while (42)
 	{
-		if (buffer_read_one(input->read_buffer, input->read_buf_ind) < 1)
+		if ((r_ret = buf_read_one(input->read_buffer, input->read_buf_ind)) < 1)
 			return (READ_FAIL);
+		else if (r_ret == CATCH_SIGINT)
+			return (CATCH_SIGINT);
 		if ((ret = get_key(input)) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
 		else if (ret)
