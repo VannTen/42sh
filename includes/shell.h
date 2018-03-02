@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 12:31:57 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/01 18:23:40 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/02 18:14:20 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@
 # define PERMISSION_DENIED 126
 # define IS_DIRECTORY 126
 # define NO_SUCH_FILE_DIRECTORY 127
+
+extern int			g_sigint_detected;
 
 typedef struct	s_bsh
 {
