@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 12:31:00 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/02 15:29:38 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/02 17:18:15 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static int	remove_backslash_nl(t_input *input, t_lexer *lexer)
 		else
 			input->buffer[i++] = *(lexer->input++);
 	}
-	input->buffer[input->buffer_len++] = '\n';
 	ft_strdel(&input->buf_tmp);
 	reset_lexer(lexer);
 	return (0);
