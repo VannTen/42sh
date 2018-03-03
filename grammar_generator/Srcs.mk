@@ -43,7 +43,7 @@ SYMBOL :=\
 	sym_empty_symbol.c\
 	sym_cmp.c\
 	sym_ressources.c\
-	sym_ressources2.c\	
+	sym_ressources2.c\
 	sym_transform_lrec.c\
 	sym_transform_indirect_lrec.c\
 	sym_left_factor.c\
@@ -71,6 +71,7 @@ GRAMMAR :=\
 EXEC_STACK :=\
 	exec_stack_ressources.c\
 	exec_stack_meta_construct.c\
+	exec_stack_test.c\
 	parser_exec_stack.c
 PARSER :=\
 	parser_generation.c\
@@ -92,7 +93,6 @@ TEST_TOOLS :=\
 	arith_expr_test_2.c\
 	arith_expr_test_3.c\
 	arith_expr_test_destructors.c\
-	exec_stack_test.c\
 	parser_exec_stack_transition_test.c\
 	exec_construct_debug.c
 
@@ -101,8 +101,8 @@ SRC :=\
 	$(SYMBOL)\
 	$(GRAMMAR)\
 	$(EXEC_STACK)\
-	$(PARSER)\
-	$(TEST_TOOLS)
+	$(PARSER)
+#	$(TEST_TOOLS)
 
 #	grammar_print_init.c\
 #	grammar_print_proto.c\

@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 17:53:15 by mgautier          #+#    #+#             */
-/*   Updated: 2018/03/02 17:16:07 by heynard          ###   ########.fr       */
+/*   Updated: 2018/01/03 18:45:15 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,18 @@ t_bool			has_symbol_in_follow(
 		t_symbol const *search_in, t_symbol const *to_find)
 {
 	return (has_symbol_in_set(search_in->follow, to_find));
+}
+
+/*
+** Used in debug.
+*/
+
+t_lst const		*get_first_set(t_symbol const *sym)
+{
+	return (sym->first);
+}
+
+t_lst const		*get_follow_set(t_symbol const *sym)
+{
+	return (sym->follow);
 }

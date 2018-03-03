@@ -29,6 +29,9 @@ t_bool		empty_in_sym_first(void const *sym, va_list args)
 
 t_bool		add_to_prod_first_set(void *sym, va_list args)
 {
+	t_bool	sym_added;
+
+	(void)sym_added;
 	return (add_first_set_to_set(sym, va_arg(args, t_lst**), &sym_added));
 }
 

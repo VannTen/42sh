@@ -11,6 +11,19 @@
 /* ************************************************************************** */
 
 #include "sym_defs.h"
+#include "libft.h"
+
+static t_bool	add_symbol(void *sym_to_add, va_list args)
+{
+	t_lst	**add_to_set;
+	t_bool	*sym_added;
+
+	add_to_set = va_arg(args, t_lst**);
+	sym_added = va_arg(args, t_bool*);
+	return (sym_to_add != EMPTY_SYMBOL ?
+			add_symbol_to_set(sym_to_add, add_to_set, sym_added) :
+			TRUE);
+}
 
 t_bool			add_first_set_to_set(
 					t_symbol const *sym,
