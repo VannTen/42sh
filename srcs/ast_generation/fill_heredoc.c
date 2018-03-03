@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 18:12:03 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/02 18:12:04 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/03 17:59:26 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void		init_prompt(t_term *term, char const *prompt)
 		term->prompt_len = ft_strlen(term->prompt);
 		ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
 		term->width = ws.ws_col;
+		term->cursor_col = term->prompt_len + 1;
 		term->first_line_len = term->width - term->prompt_len;
 	}
 }
@@ -54,8 +55,11 @@ static char		*get_heredoc_line(t_bool is_dlessdash)
 
 	if (bsh)
 	{
-		init_prompt(bsh->input.term, "heredoc> ");
-		ft_dprintf(2, "%s", bsh->input.term->prompt);
+		if (bsh->interactive)
+		{
+			init_prompt(bsh->input.term, "heredoc> ");
+			ft_dprintf(2, "%s", bsh->term.prompt);
+		}
 		ft_memset(bsh->input.buffer, 0, bsh->input.buffer_size);
 		bsh->input.buffer_len = 0;
 		if (!getline(&bsh->input, bsh->interactive, HEREDOC_INPUT,
@@ -63,6 +67,7 @@ static char		*get_heredoc_line(t_bool is_dlessdash)
 		{
 			if (is_dlessdash)
 				remove_leading_tabs(bsh->input.buffer);
+			bsh->input.buffer[ft_strlen(bsh->input.buffer) - 1] = '\0';
 			return (bsh->input.buffer);
 		}
 	}
@@ -73,14 +78,19 @@ int				fill_heredoc(int const doc_fd, char const *const here_end,
 		size_t const here_end_len, t_bool is_dlessdash)
 {
 	char	*line;
+	int		len;
 
+	(void)here_end_len;
 	line = NULL;
 	while (42)
 	{
 		if ((line = get_heredoc_line(is_dlessdash)))
 		{
-			if (ft_strlen(line) && ft_strncmp(line, here_end, here_end_len))
+			if ((len = ft_strlen(line)) && ft_strcmp(line, here_end))
+			{
+				line[len] = '\n';
 				(void)ft_dprintf(doc_fd, "%s", line);
+			}
 			else
 				break ;
 		}
