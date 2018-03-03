@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:32:04 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/01 15:24:31 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/03 16:30:08 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int		copy_selection(t_input *input)
 	}
 	else if (!(input->buf_copy = ft_strndup(input->buffer + input->pivot, 1)))
 		return (MALLOC_FAIL);
-	switch_input_state(input);
+	if (!ft_strcmp(input->read_buffer, CTRL_F))
+		switch_input_state(input);
 	return (0);
 }
 
@@ -61,6 +62,7 @@ int		cut_selection(t_input *input)
 	copy_selection(input);
 	cut_from_buffer(input, input->cursor_pos, input->pivot,
 							ft_strlen(input->buf_copy));
+	switch_input_state(input);
 	tputs(tgetstr("me", NULL), 1, putchar_termcaps);
 	handle_home(input);
 	clear_lines(input, input->buf_copy);
