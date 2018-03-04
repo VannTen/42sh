@@ -39,9 +39,11 @@ norme:
 
 clean:
 	rm -f $(OBJ)
+	make -C grammar_generator clean
+	make -C libft clean
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(LIBS)
 
 re: fclean all
 
