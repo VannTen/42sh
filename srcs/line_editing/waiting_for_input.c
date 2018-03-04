@@ -76,7 +76,12 @@ static int	get_key(t_input *input)
 	else if (input->state != SELECTION)
 		input->state = STANDARD;
 	if (input->state == COMPLETION && input->comp.prefix == NULL)
-		init_completion_data(&input->comp, input->buffer, input->cursor_pos);
+		if (init_completion_data(&input->comp, input->buffer,
+								input->cursor_pos))
+		{
+			reset_completion_data(&input->comp);
+			return (MALLOC_FAIL);
+		}
 	if (input->state == COMPLETION)
 		return (completion(input));
 	reset_completion_data(&input->comp);
