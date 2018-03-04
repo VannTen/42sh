@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 12:02:11 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/04 11:19:27 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/04 14:13:00 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ int	backup_filedescriptor(int fd, t_lst **fd_backups_loc);
 int	filedescriptor_is_a_backup(int fd, t_lst *fd_backups);
 
 int	str_to_fd(char const *str);
+int	fd_is_active(int fd);
 
 #endif

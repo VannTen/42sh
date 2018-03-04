@@ -6,21 +6,21 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 08:29:53 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 16:20:29 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/04 14:14:02 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
 #include <unistd.h>
 #include "libft.h"
 #include "s_fd_backup.h"
+#include "redirection.h"
 
 static struct s_fd_backup	*create_fd_backup(int const fd)
 {
 	struct s_fd_backup	*new_backup;
 	int					save;
 
-	if (fcntl(fd, F_GETFD) == -1)
+	if (!fd_is_active(fd))
 		save = -1;
 	else if ((save = dup(fd)) == -1)
 	{

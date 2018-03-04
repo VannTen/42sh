@@ -6,25 +6,25 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 10:08:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 16:57:00 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/04 14:14:25 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "execution.h"
-#include <fcntl.h>
 #include "shell.h"
+#include "redirection.h"
 
 static int		backup_stdfd(int stdfd_backup[2])
 {
 	if ((stdfd_backup[0] = dup(STDIN_FILENO)) != -1
-			|| fcntl(STDIN_FILENO, F_GETFD) == -1)
+			|| !fd_is_active(STDIN_FILENO))
 	{
 		stdfd_backup[1] = stdfd_backup[0] == STDOUT_FILENO ?
 			-1 : dup(STDOUT_FILENO);
 		if (stdfd_backup[1] != -1
 				|| stdfd_backup[0] == STDOUT_FILENO
-				|| fcntl(STDOUT_FILENO, F_GETFD) == -1)
+				|| !fd_is_active(STDOUT_FILENO))
 			return (0);
 		close(stdfd_backup[0]);
 	}

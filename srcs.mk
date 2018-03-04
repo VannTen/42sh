@@ -64,6 +64,7 @@ SRCS = \
 	   $(SRCS_DIR)/execution/io_redir_aggregate.c \
 	   $(SRCS_DIR)/execution/io_redir_file.c \
 	   $(SRCS_DIR)/execution/io_redir_here.c \
+	   $(SRCS_DIR)/execution/fd_is_active.c \
 	   $(SRCS_DIR)/execution/is_valid_variable_name.c \
 	   $(SRCS_DIR)/execution/launch_external.c \
 	   $(SRCS_DIR)/execution/launch_utility.c \
