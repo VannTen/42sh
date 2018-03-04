@@ -58,6 +58,7 @@ int			getline(t_input *input, const int interactive, const int mode,
 	int		ret;
 
 	term = &get_shell_data()->term;
+	ret = 0;
 	if (interactive == 1)
 	{
 		set_shell_sigmode(e_shell_sigmode_line_editing);
@@ -72,5 +73,5 @@ int			getline(t_input *input, const int interactive, const int mode,
 		if (get_line_from_file(input, state) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
 	}
-	return (0);
+	return (ret);
 }
