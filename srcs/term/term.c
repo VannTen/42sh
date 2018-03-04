@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 14:55:29 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/02 18:56:42 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/04 15:22:24 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		restore_custom_attr(t_term *term)
 {
 	if (tcsetattr(STDIN_FILENO, TCSANOW, &term->custom_attr) == -1)
-		ft_dprintf(STDERR_FILENO, "42sh: Unable to set custom attributes");
+		ft_dprintf(STDERR_FILENO, "42sh: Unable to set custom attributes\n");
 	return (0);
 }
 
@@ -26,13 +26,15 @@ int		init_termcaps(t_bsh *bsh)
 
 	ret = 0;
 	if (!(termtype = ft_getenv(bsh->env.env_list, "TERM")->value))
-		ret = ft_dprintf(STDERR_FILENO, "Missing TERM variable");
+		ret = ft_dprintf(STDERR_FILENO, "42sh: Missing TERM variable\n");
 	else if (tgetent(NULL, termtype) < 1)
 		ret = ft_dprintf(STDERR_FILENO, "42sh: Tgetent failed\n");
 	else if (tcgetattr(STDIN_FILENO, &bsh->term.initial_attr) == -1)
-		ret = ft_dprintf(STDERR_FILENO, "42sh: Unable to get term attributes");
+		ret = ft_dprintf(STDERR_FILENO, "42sh: Unable to get term attributes"
+				"\n");
 	else if (tcgetattr(STDIN_FILENO, &bsh->term.custom_attr) == -1)
-		ret = ft_dprintf(STDERR_FILENO, "42sh: Unable to get term attributes");
+		ret = ft_dprintf(STDERR_FILENO, "42sh: Unable to get term attributes"
+				"\n");
 	else
 	{
 		bsh->term.custom_attr.c_lflag &= ~(ICANON | ECHO);
@@ -42,15 +44,14 @@ int		init_termcaps(t_bsh *bsh)
 			ret = ft_dprintf(STDERR_FILENO, "42sh: Unable to set custom"
 					"attributes\n");
 	}
-	if (ret)
-		exit(EXIT_FAILURE);
+	(ret) ? exit(EXIT_FAILURE) : 0;
 	return (0);
 }
 
 int		restore_initial_attr(t_term *term)
 {
 	if (tcsetattr(STDIN_FILENO, TCSANOW, &term->initial_attr) == -1)
-		ft_dprintf(STDERR_FILENO, "42sh: Unable to reset initial attributes");
+		ft_dprintf(STDERR_FILENO, "42sh: Unable to reset initial attributes\n");
 	return (0);
 }
 
