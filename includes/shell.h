@@ -62,6 +62,7 @@ typedef struct	s_bsh
 int				init_termcaps(t_bsh *bsh);
 t_bsh			*get_shell_data(void);
 t_bsh			*shell_init(char **environ, int argc, char **argv);
+int				sh_loop(t_bsh *bsh);
 int				getline(t_input *input, const int interactive,
 							const int mode, size_t *state);
 int				readline_process(t_input *input, t_lexer *lexer,
@@ -79,6 +80,5 @@ void			*take_token(void *token_list_adress);
 void			readline_sigint(int sigid);
 char			check_arg_opt(char *arg_opt, char const *avail_opts,
 							char *options);
-int				sh_loop(t_bsh *bsh);
-
+char			*get_home_dir(void);
 #endif
