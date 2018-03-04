@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:46:47 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/04 18:10:18 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/04 18:54:20 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	exit_ctrl_d(t_input *input)
 
 int		handle_eof(t_input *input)
 {
-	t_bsh const	*bsh = get_shell_data();
+	t_bsh *const	bsh = get_shell_data();
 
 	if (input->buffer_len == 0 && input->type == REGULAR_INPUT)
 		exit_ctrl_d(input);
