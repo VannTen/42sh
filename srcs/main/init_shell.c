@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 16:09:34 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/02 14:55:14 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/04 19:01:27 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ t_bsh			*shell_init(char **environ, int argc, char **argv)
 	if (!bsh->interactive && argc == 1)
 	{
 		if (fstat(STDIN_FILENO, &info) < 0)
-			sh_exit_message("42sh: failed to retrieve STDIN status.\n");
+			sh_exit_message("42sh: failed to retrieve STDIN status");
 		if (S_ISDIR(info.st_mode))
-			sh_exit_message("42sh: stdin: Is a directory\n");
+			sh_exit_message("42sh: stdin: Is a directory");
 	}
 	if (argc > 1)
 		is_file_valid(&bsh->input, argv[1]);
