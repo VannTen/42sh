@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:46:47 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/28 15:37:48 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/04 18:10:18 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,28 @@ void	exit_ctrl_d(t_input *input)
 
 int		handle_eof(t_input *input)
 {
+	t_bsh const	*bsh = get_shell_data();
+
 	if (input->buffer_len == 0 && input->type == REGULAR_INPUT)
 		exit_ctrl_d(input);
 	if (input->buffer_len == 0 && input->type == HEREDOC_INPUT)
 		return (STOP_HEREDOC);
 	if (input->buffer_len == 0 && input->type == UNCLOSED_QUOTES)
+	{
+		if (bsh->lexer.state == DQUOTE || bsh->lexer.state == QUOTE)
+		{
+			ft_dprintf(STDERR_FILENO, "42sh: unexpected EOF while looking for"
+				" matching `%c'", bsh->lexer.state == DQUOTE ? '"' : '\'');
+			reset_buffer(input);
+			reset_lexer(&bsh->lexer);
+			ft_bzero(input->buf_tmp, input->buffer_size);
+			return (UNEXPECTED_EOF);
+		}
+		bsh->input.buf_tmp[ft_strlen(bsh->input.buf_tmp) - 1] = '\0';
+		bsh->input.buf_tmp[ft_strlen(bsh->input.buf_tmp) - 1] = '\n';
+		reset_lexer(&bsh->lexer);
 		return (UNEXPECTED_EOF);
+	}
 	if (input->buffer_len == 0 && input->type == HISTORY_SEARCH)
 		return (UNEXPECTED_EOF);
 	return (0);
