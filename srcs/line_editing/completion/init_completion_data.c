@@ -38,12 +38,25 @@ static size_t	get_search_location(t_lexer lexer, t_comp comp)
 static char		*comp_get_prefix(t_lexer lexer, const int cursor_pos,
 									const char *buffer)
 {
+	char	*home_dir;
+	char	*prefix;
+
 	if (!lexer.tokens[0] || (lexer.state != DQUOTE && lexer.state != QUOTE
 				&& buffer[cursor_pos - 1] == ' ')
 				|| lexer.tokens[1]->type != WORD)
 		return (ft_strdup(""));
-	else
-		return (ft_strdup(lexer.tokens[1]->value));
+	else if (lexer.tokens[1]->value[0] == '~')
+	{
+			if (!(home_dir = get_home_dir()))
+				return (NULL);
+			if (!(prefix = ft_strnew(ft_strlen(home_dir) +
+							ft_strlen(lexer.tokens[1]->value))))
+				return (NULL);
+			ft_strcpy(prefix, home_dir);
+			ft_strcat(prefix, lexer.tokens[1]->value + 1);
+			return (prefix);
+	}
+	return (ft_strdup(lexer.tokens[1]->value));
 }
 
 static int		get_tokens_up_to_cursor(t_lexer *lexer, char *buffer,
@@ -75,8 +88,10 @@ int				init_completion_data(t_comp *comp, char *buffer,
 		return (MALLOC_FAIL);
 	if (!(comp->prefix = comp_get_prefix(lexer, cursor_pos, buffer)))
 		return (MALLOC_FAIL);
-	comp->dirname = ft_dirname(comp->prefix);
-	comp->basename = ft_basename(comp->prefix);
+	if (!(comp->dirname = ft_dirname(comp->prefix)))
+		return (MALLOC_FAIL);
+	if (!(comp->basename = ft_basename(comp->prefix)))
+		return (MALLOC_FAIL);
 	comp->basename_len = ft_strlen(comp->basename);
 	comp->search_location = get_search_location(lexer, *comp);
 	comp->count = 0;
