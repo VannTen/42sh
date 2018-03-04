@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 15:12:09 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/04 18:14:26 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/04 18:52:19 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int			builtin_export(char **av, t_env *env)
 			ft_putendl_fd("42sh: history: `-': not a valid identifier", 2);
 			return (1);
 		}
-		if ((wrong_opt = check_arg_opt(argv[i] + 1, export_options, options)))
+		if ((wrong_opt = check_arg_opt(av[i] + 1, export_options, options)))
 			return (export_usage(wrong_opt, 0));
 	}
 	if (ft_strchr(options, 'n'))
