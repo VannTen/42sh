@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 18:12:03 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/03 17:59:26 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/04 14:09:48 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,19 +78,15 @@ int				fill_heredoc(int const doc_fd, char const *const here_end,
 		size_t const here_end_len, t_bool is_dlessdash)
 {
 	char	*line;
-	int		len;
 
-	(void)here_end_len;
 	line = NULL;
 	while (42)
 	{
 		if ((line = get_heredoc_line(is_dlessdash)))
 		{
-			if ((len = ft_strlen(line)) && ft_strcmp(line, here_end))
-			{
-				line[len] = '\n';
-				(void)ft_dprintf(doc_fd, "%s", line);
-			}
+			if (ft_strncmp(line, here_end, here_end_len)
+					|| !ft_strchr("\n", line[here_end_len]))
+				(void)ft_dprintf(doc_fd, "%s\n", line);
 			else
 				break ;
 		}
