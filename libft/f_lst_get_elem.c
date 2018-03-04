@@ -6,13 +6,13 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 14:27:03 by mgautier          #+#    #+#             */
-/*   Updated: 2017/11/24 11:57:59 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 11:40:25 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lst_defs.h"
 
-void	*f_lstsearch(const t_lst *list, const int ref,
+void		*f_lstsearch(const t_lst *list, const int ref,
 		int (*match)(const void *elem))
 {
 	while (list != NULL)

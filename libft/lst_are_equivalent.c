@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 16:01:46 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/05 20:06:46 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 12:14:27 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ t_bool	lst_same_contents(t_lst const *lst1, t_lst const *lst2,
 			NULL == f_lst_every_valid_va(lst1, TRUE,
 					content_has_equ, &copy_lst2, equ)
 			&& copy_lst2 == NULL;
-
 	else
 		result = FALSE;
 	f_lstdel(&copy_lst2, no_destroy);

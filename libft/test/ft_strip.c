@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 16:35:22 by mgautier          #+#    #+#             */
-/*   Updated: 2017/11/27 16:44:20 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 12:16:15 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static t_bool	shall(char c)
 {
 	return (!is_among("\t ", c));
 }
-int	main(void)
+
+int				main(void)
 {
 	char const	*str[] = {
 		" this is a string\t\t\t    dede h",

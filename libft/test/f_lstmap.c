@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 13:48:23 by mgautier          #+#    #+#             */
-/*   Updated: 2017/12/18 19:38:57 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 12:19:34 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void		iter(void *str)
 {
 	ft_dprintf(STDERR_FILENO, "%s\n", str);
 }
+
 int				main(void)
 {
 	char const	*str[] = {"A", "B", "D", "C", NULL};
@@ -74,5 +75,5 @@ int				main(void)
 	f_lstdel(&lst[2], ft_gen_strdel);
 	f_lstdel(&lst[3], no_destroy);
 	f_lstdel(&lst[4], no_destroy);
-	RET_TEST (result);
+	return (result ? EXIT_SUCCESS : EXIT_FAILURE);
 }

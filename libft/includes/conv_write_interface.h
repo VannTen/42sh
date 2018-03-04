@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 14:20:52 by mgautier          #+#    #+#             */
-/*   Updated: 2017/03/28 10:51:29 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 11:49:32 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,5 @@ void ft_print_to_p(char *to_write, const t_conversion *conv);
 void ft_print_to_n(char *to_write, const t_conversion *conv);
 void ft_print_to_no_conversion(char *to_write, const t_conversion *conv);
 void ft_print_to_unsupported(char *to_write, const t_conversion *conv);
-
-# define CONST_PRINT_TO_INITIALIZER \
-	&ft_print_to_di,\
-	&ft_print_to_di,\
-	&ft_print_to_o,\
-	&ft_print_to_u,\
-	&ft_print_to_x,\
-	&ft_print_to_x,\
-	&ft_print_to_unsupported,\
-	&ft_print_to_unsupported,\
-	&ft_print_to_unsupported,\
-	&ft_print_to_unsupported,\
-	&ft_print_to_unsupported,\
-	&ft_print_to_unsupported,\
-	&ft_print_to_unsupported,\
-	&ft_print_to_unsupported,\
-	&ft_print_to_c,\
-	&ft_print_to_s,\
-	&ft_print_to_p,\
-	&ft_print_to_unsupported,\
-	&ft_print_to_no_conversion,\
-	&ft_print_to_unsupported
 
 #endif

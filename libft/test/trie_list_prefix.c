@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 13:01:50 by mgautier          #+#    #+#             */
-/*   Updated: 2017/12/18 11:21:52 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 12:49:35 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,26 @@ static t_bool	is_that_prefix(void const *content, va_list args)
 				get_lst_elem(content, 0), prefix, ft_strlen(prefix)) == 0);
 }
 
+static t_bool	test_prefix_group_len_error(t_lst *prefix_groups)
+{
+	ft_dprintf(2, "\nnb groups : %u\n", f_lst_len(prefix_groups));
+	return (FALSE);
+}
+
 static t_bool	test_list_prefix_group(t_trie const *trie)
 {
 	t_lst				*prefix_groups;
 	size_t const		nb[] = {2, 2, 2, 2, 4};
 	char const			*prefix[] = {"AB", "A", "DEF", "XWER", ""};
 	size_t				index;
-	t_trie_ope const	ope =
-	{test_trie_summarize, ft_gen_strdup, ft_gen_strdel, NULL};
+	t_trie_ope			ope;
+
+	index = 0;
+	ope = (t_trie_ope){ test_trie_summarize, ft_gen_strdup, ft_gen_strdel,
+		NULL };
 	prefix_groups = list_prefix_groups(trie, &ope);
 	if (!(f_lst_len(prefix_groups) == 5))
-	{
-		ft_dprintf(STDERR_FILENO, "\nnb groups : %u\n",
-				f_lst_len(prefix_groups));
-		return (FALSE);
-	}
-	index = 0;
+		return (test_prefix_group_len_error(prefix_groups));
 	while (index < ARRAY_LENGTH(prefix)
 			&& f_lst_len(f_lst_every_valid_va(prefix_groups,
 					FALSE, is_that_prefix, prefix[index])) == nb[index])

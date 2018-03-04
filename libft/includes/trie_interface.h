@@ -6,16 +6,17 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 12:49:56 by mgautier          #+#    #+#             */
-/*   Updated: 2017/12/18 12:06:29 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 12:14:07 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TRIE_INTERFACE_H
 # define TRIE_INTERFACE_H
+
 # include "bool_interface.h"
 # include "lst_interface.h"
 
-typedef	struct	s_trie	t_trie;
+typedef	struct s_trie	t_trie;
 
 /*
 ** The trie structure is a tree structure where each data is an ordered set of
@@ -38,8 +39,8 @@ typedef	struct	s_trie	t_trie;
 ** Implementation file : trie_ressources.c
 */
 
-t_trie	*create_trie(void);
-void	destroy_trie(t_trie **trie, void (*del)(void**));
+t_trie					*create_trie(void);
+void					destroy_trie(t_trie **trie, void (*del)(void**));
 
 /*
 ** Insertion in the tree
@@ -54,7 +55,7 @@ void	destroy_trie(t_trie **trie, void (*del)(void**));
 ** caller.
 */
 
-t_bool	trie_insert(
+t_bool					trie_insert(
 		t_trie *trie,
 		void *content,
 		t_bool (*equ)(
@@ -67,16 +68,15 @@ t_bool	trie_insert(
 ** Implementation file : trie_list_prefix.c
 */
 
-typedef struct	s_trie_ope
+typedef struct			s_trie_ope
 {
 	void		*(*summarize)(t_lst *lst, size_t index, void *ext_ref);
 	void		*(*copy)(const void *content);
 	void		(*del)(void **);
 	void		*ext_ref;
-}				t_trie_ope;
+}						t_trie_ope;
 
-
-t_lst	*list_prefix_groups(
+t_lst					*list_prefix_groups(
 		t_trie const *trie,
 		t_trie_ope const *f);
 
@@ -85,15 +85,15 @@ t_lst	*list_prefix_groups(
 ** Implementation file : trie_get.c
 */
 
-size_t	max_common_prefix(t_trie const *trie);
-size_t	trie_count_members(t_trie const *trie);
+size_t					max_common_prefix(t_trie const *trie);
+size_t					trie_count_members(t_trie const *trie);
 
 /*
 ** Debug print
 ** Implementation file trie_print.c
 */
 
-void	print_node(int const fd,
+void					print_node(int const fd,
 		t_trie const *trie,
 		void (*print_content)(int, void const *),
 		void (*print_ref)(int, void const *));

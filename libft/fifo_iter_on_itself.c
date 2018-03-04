@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 16:15:40 by mgautier          #+#    #+#             */
-/*   Updated: 2017/11/28 17:00:13 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 11:40:56 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "bool_interface.h"
 #include <stdarg.h>
 
-t_bool				f_fifo_insert_on_itself_va(
+t_bool		f_fifo_insert_on_itself_va(
 		t_fifo *fifo,
 		void *(*insert)(void *content, t_lst const *itself, va_list),
 		void (*destroy)(void **content),

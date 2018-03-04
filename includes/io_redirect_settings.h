@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 09:33:00 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/02 16:43:34 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/04 11:28:51 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <fcntl.h>
 # include "shell_ast/io_redirect.h"
 
-struct s_io_param
+struct	s_io_param
 {
 	char const			*ionum;
 	enum e_sh_io_type	type;

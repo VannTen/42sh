@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 17:51:49 by mgautier          #+#    #+#             */
-/*   Updated: 2017/12/18 11:05:57 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 12:50:39 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 static void	*va_get_trie_content(void const *trie, va_list args)
 {
-	t_lst			**add_to;
+	t_lst				**add_to;
 	t_trie_ope const	*f;
-	size_t			depth;
+	size_t				depth;
 
 	add_to = va_arg(args, t_lst**);
 	f = va_arg(args, t_trie_ope const*);

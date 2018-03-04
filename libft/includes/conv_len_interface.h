@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:00:06 by mgautier          #+#    #+#             */
-/*   Updated: 2017/03/25 10:56:53 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 11:47:27 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,28 +30,6 @@ int	ft_printf_len_n(const t_conversion *conv);
 int	ft_printf_len_no_conversion(const t_conversion *conv);
 int	ft_printf_len_unknown(const t_conversion *conv);
 int	ft_printf_len_unsupported(const t_conversion *conv);
-
-# define CONST_GET_LEN_INITIALIZER \
-	&ft_printf_len_di,\
-	&ft_printf_len_di,\
-	&ft_printf_len_o,\
-	&ft_printf_len_u,\
-	&ft_printf_len_x,\
-	&ft_printf_len_x,\
-	&ft_printf_len_unsupported,\
-	&ft_printf_len_unsupported,\
-	&ft_printf_len_unsupported,\
-	&ft_printf_len_unsupported,\
-	&ft_printf_len_unsupported,\
-	&ft_printf_len_unsupported,\
-	&ft_printf_len_unsupported,\
-	&ft_printf_len_unsupported,\
-	&ft_printf_len_c,\
-	&ft_printf_len_s,\
-	&ft_printf_len_p,\
-	&ft_printf_len_unsupported,\
-	&ft_printf_len_no_conversion,\
-	&ft_printf_len_unsupported
 
 # define UNSUPPORTED_CONV sizeof(g_print_len)
 #endif

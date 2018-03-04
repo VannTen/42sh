@@ -6,14 +6,14 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 11:02:13 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/23 11:04:48 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/04 11:34:02 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef S_FD_BACKUP_H
 # define S_FD_BACKUP_H
 
-struct s_fd_backup
+struct	s_fd_backup
 {
 	int	origin;
 	int	save;

@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 16:31:42 by mgautier          #+#    #+#             */
-/*   Updated: 2017/12/21 10:59:01 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 12:23:08 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ t_bool	equ(void const *letter1, void const *letter2)
 	return (*(char const*)letter1 == *(char const*)letter2);
 }
 
-int main(void)
+int		main(void)
 {
-	char const *str[] = {
+	char const	*str[] = {
 		"HKWEY",
 		"HKWEY",
 		"WKHYE",
@@ -46,5 +46,5 @@ int main(void)
 	f_lstdel(&lst[2], no_destroy);
 	f_lstdel(&lst[3], no_destroy);
 	f_lstdel(&lst[4], no_destroy);
-	RET_TEST(result);
+	return (result ? EXIT_SUCCESS : EXIT_FAILURE);
 }

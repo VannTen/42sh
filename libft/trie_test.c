@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 11:10:54 by mgautier          #+#    #+#             */
-/*   Updated: 2017/12/18 11:49:50 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 12:50:06 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void const	*test_trie_get_elem(void const *s1, size_t index)
 	return (str + index);
 }
 
-void		*test_trie_summarize(t_lst *lst, size_t length,
-		__attribute__((unused))void *ext_ref)
+void		*test_trie_summarize(t_lst *lst, size_t length, void *ext_ref)
 {
 	char	*new_content;
 
+	(void)ext_ref;
 	new_content = ft_strnew(ft_strlen(get_lst_elem(lst, 0)) + 1);
 	ft_strncpy(new_content, get_lst_elem(lst, 0), length);
 	new_content[length] = '~';

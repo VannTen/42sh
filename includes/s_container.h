@@ -6,17 +6,17 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 12:25:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 21:25:08 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/04 11:29:22 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef S_CONTAINER_H
 # define S_CONTAINER_H
 
-#include "libft.h"
-#include <stddef.h>
+# include "libft.h"
+# include <stddef.h>
 
-struct	s_container
+struct				s_container
 {
 	void	*content;
 	void	(*destroy_content)(void **content_loc);

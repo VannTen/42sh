@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_sequence.h                                    :+:      :+:    :+:   */
+/*   sym_get_sets_debug.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/25 09:55:41 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/04 11:38:46 by ble-berr         ###   ########.fr       */
+/*   Created: 2018/03/04 11:24:00 by ble-berr          #+#    #+#             */
+/*   Updated: 2018/03/04 11:24:26 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHELL_AST_PIPE_SEQUENCE_H
-# define SHELL_AST_PIPE_SEQUENCE_H
+#include "libft.h"
+#include "sym_defs.h"
+#include <stdarg.h>
 
-# include "libft.h"
+/*
+** Used in debug.
+*/
 
-struct	s_sh_pipe_sequence
+t_lst const		*get_first_set(t_symbol const *sym)
 {
-	t_lst	*simple_commands;
-};
+	return (sym->first);
+}
 
-#endif
+t_lst const		*get_follow_set(t_symbol const *sym)
+{
+	return (sym->follow);
+}

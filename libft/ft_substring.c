@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 14:34:07 by mgautier          #+#    #+#             */
-/*   Updated: 2017/05/16 12:53:32 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 11:42:08 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ size_t	is_substring_up_to(const char *to_search, const char *to_be_searched)
 	size_t	index;
 
 	index = 0;
-	while (to_search[index] == to_be_searched[index] && to_search[index] != '\0')
+	while (to_search[index] == to_be_searched[index]
+			&& to_search[index] != '\0')
 		index++;
 	return (index);
 }

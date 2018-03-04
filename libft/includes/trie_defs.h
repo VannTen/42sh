@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 14:34:33 by mgautier          #+#    #+#             */
-/*   Updated: 2017/12/13 16:26:41 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 13:30:39 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,6 @@
 # define TRIE_DEFS_H
 # include "trie_interface.h"
 # include "lst_interface.h"
-
-struct s_trie
-{
-	union
-	{
-		void const	*ref;
-		void		*data;
-	}		content;
-	t_lst	*children;
-};
 
 /*
 ** children: the list contains children nodes (struct s_trie*)
@@ -44,6 +34,16 @@ struct s_trie
 ** Implementation file : trie_ressources.c
 */
 
-t_trie	*create_node(void const *ref_elem);
+struct		s_trie
+{
+	union	u_trie_content
+	{
+		void const	*ref;
+		void		*data;
+	}		content;
+	t_lst	*children;
+};
+
+t_trie		*create_node(void const *ref_elem);
 
 #endif

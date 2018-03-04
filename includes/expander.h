@@ -6,12 +6,12 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:59:26 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/28 14:38:19 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/04 11:28:13 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPANSION_H
-# define EXPANSION_H
+#ifndef EXPANDER_H
+# define EXPANDER_H
 # define INITIAL_SIZE 256
 # include "libft.h"
 # include "env.h"

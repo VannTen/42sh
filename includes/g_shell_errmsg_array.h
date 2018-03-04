@@ -6,12 +6,12 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 14:23:52 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/22 11:20:29 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/04 11:27:54 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHELL_ERRMSG_ARRAY_H
-# define SHELL_ERRMSG_ARRAY_H
+#ifndef G_SHELL_ERRMSG_ARRAY_H
+# define G_SHELL_ERRMSG_ARRAY_H
 
 # include "shell_errmsg.h"
 

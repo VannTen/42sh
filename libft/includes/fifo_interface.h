@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 13:00:00 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/09 17:50:02 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 11:53:37 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,6 @@ t_bool				f_fifo_insert_on_itself_vas(
 		void *(*insert)(void *content, t_lst const *itself, va_list),
 		void (*destroy)(void **content),
 		va_list args);
-
 
 /*
 ** Internal access

@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 16:37:07 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/11 18:50:02 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 12:26:59 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static void	*iter(void *content, void *prev_result)
 	if (prev_result != NULL)
 	{
 		received_number = prev_result;
-		number_[0] = (char)('0' + (char)((ft_atoi(number_) + *received_number) % 10));
+		number_[0] = (char)('0'
+				+ (char)((ft_atoi(number_) + *received_number) % 10));
 		free(received_number);
 	}
 	number = malloc(sizeof(int));
@@ -36,12 +37,12 @@ static void	*iter(void *content, void *prev_result)
 	return (number);
 }
 
-int	main(void)
+int			main(void)
 {
-	char	*tab[] = {"1", "2", "3", "4", "5", NULL};
-	char	*tab2[] = {"5", "4", "2", "9" , "5", NULL};
-	t_lst	*lst_numbers[3];
-	t_bool	result;
+	char const	*tab[] = {"1", "2", "3", "4", "5", NULL};
+	char const	*tab2[] = {"5", "4", "2", "9", "5", NULL};
+	t_lst		*lst_numbers[3];
+	t_bool		result;
 
 	lst_numbers[0] = array_to_lst(tab);
 	lst_numbers[2] = f_lstmap(lst_numbers[0], ft_gen_strdup, ft_gen_strdel);

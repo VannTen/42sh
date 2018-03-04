@@ -6,12 +6,13 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:15:35 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/29 15:15:35 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 11:26:14 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#ifndef COLORS_H
+# define COLORS_H
+
 # define BLK "\x1B[30m"
 # define RED "\x1B[31m"
 # define GRN "\x1B[32m"

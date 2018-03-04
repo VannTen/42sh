@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 15:30:47 by mgautier          #+#    #+#             */
-/*   Updated: 2017/12/18 17:03:13 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 11:40:03 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_lst	*array_to_lst(void const *array_ptr)
 	t_lst				*new_list;
 	t_lst				*end;
 	size_t				index;
-	void const *const 	*array;
+	void const *const	*array;
 
 	end = NULL;
 	new_list = NULL;
@@ -112,7 +112,7 @@ t_lst	*array_to_lst_index(void const *array_ptr, size_t size)
 	t_lst				*new_list;
 	t_lst				*end;
 	size_t				index;
-	void const *const 	*array;
+	void const *const	*array;
 
 	end = NULL;
 	new_list = NULL;

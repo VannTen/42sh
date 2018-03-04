@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 10:56:19 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/19 10:56:19 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 12:53:54 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,22 @@
 #include "useful_macros.h"
 #include <unistd.h>
 
-t_bool	inc_i(__attribute__((unused))void *lst_content, va_list args)
+t_bool	inc_i(void *lst_content, va_list args)
 {
 	(*(va_arg(args, int*)))++;
 	return (TRUE);
 }
 
-t_bool	str_not_4(void const *lst_content,
-		__attribute__((unused))va_list args)
+t_bool	str_not_4(void const *lst_content, va_list args)
 {
 	return (!ft_strequ(lst_content, "4"));
 }
 
-int	main(void)
+int		main(void)
 {
-	char	*tab[] = {"1", "2", "3", "4", "5", NULL};
-	t_lst	*numbers;
-	int		i;
+	char *const	tab[] = {"1", "2", "3", "4", "5", NULL};
+	t_lst		*numbers;
+	int			i;
 
 	numbers = array_to_lst(tab);
 	i = 0;

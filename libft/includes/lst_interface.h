@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 13:29:22 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/11 16:36:48 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 11:55:43 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,10 @@ t_bool				f_lstremoveif_one(t_lst **lst, int ref,
 t_lst				*join_lst(t_lst *lst_1, t_lst const *to_join);
 t_lst				*lst_join(t_lst const *lst_1, t_lst const *to_join);
 t_bool				lst_equ(t_lst const *lst1, t_lst const *lst2,
-		t_bool (*equ)(void const*, void const*))
-	__attribute__((pure));
+		t_bool (*equ)(void const*, void const*));
 t_bool				lst_equ_to_n(t_lst const *lst1, t_lst const *lst2,
 		size_t index,
-		t_bool (*equ)(void const*, void const*))
-	__attribute__((pure));
+		t_bool (*equ)(void const*, void const*));
 
 /*
 ** Test list equivalence order-independently
@@ -67,7 +65,7 @@ t_bool				lst_equ_to_n(t_lst const *lst1, t_lst const *lst2,
 ** of lst2.
 */
 
-t_bool	lst_same_contents(t_lst const *lst1, t_lst const *lst2,
+t_bool				lst_same_contents(t_lst const *lst1, t_lst const *lst2,
 		t_bool (*equ)(void const *content1, void const *content2));
 
 /*
@@ -134,7 +132,7 @@ t_lst				*f_split_lst_va(
 ** Implemenation file : lst_take_elem.c
 */
 
-void	*take_lst_elem(t_lst **lst, size_t index);
+void				*take_lst_elem(t_lst **lst, size_t index);
 
 /*
 ** Variadic functions on list, with error reports.
@@ -181,7 +179,7 @@ t_bool				f_lst_insert_on_itself_va(
 		void *(*insert)(void *content, t_lst const *itself, va_list),
 		void (*destroy)(void **content),
 		...);
-t_bool		f_lst_insert_on_itself_vas(
+t_bool				f_lst_insert_on_itself_vas(
 		t_lst *lst,
 		void *(*insert)(void *content, t_lst const *itself, va_list),
 		void (*destroy)(void **content),
@@ -312,15 +310,15 @@ t_lst				*lst_cpy(t_lst const *lst);
 ** call.
 */
 
-void	*lst_do_from_end(
+void				*lst_do_from_end(
 		t_lst *lst,
 		void *initial_result,
 		void *(*iter)(void *content, void *result_on_next));
-void	*lst_do_from_end_va(t_lst *lst,
+void				*lst_do_from_end_va(t_lst *lst,
 		void *initial_result,
 		void *(*iter)(void *content, void *result_on_next, va_list args),
 		...);
-void	*lst_do_from_end_vas(t_lst *lst,
+void				*lst_do_from_end_vas(t_lst *lst,
 		void *initial_result,
 		void *(*iter)(void *content, void *result_on_next, va_list args),
 		va_list args);
@@ -331,12 +329,12 @@ void	*lst_do_from_end_vas(t_lst *lst,
 ** Implementation file : lst_while.c
 */
 
-t_bool	lst_do_while_err_vas(
+t_bool				lst_do_while_err_vas(
 		t_lst *lst,
 		t_bool (*loop_body)(void *, va_list),
 		t_bool (*loop_condition)(void const *, va_list),
 		va_list args);
-t_bool	lst_do_while_err_va(
+t_bool				lst_do_while_err_va(
 		t_lst *lst,
 		t_bool (*loop_body)(void *, va_list),
 		t_bool (*loop_condition)(void const *, va_list),

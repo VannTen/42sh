@@ -6,12 +6,12 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 11:24:44 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/22 10:45:20 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/04 11:38:26 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHELL_ERROR_H
-# define SHELL_ERROR_H
+#ifndef SHELL_ERRMSG_H
+# define SHELL_ERRMSG_H
 
 # include <string.h>
 

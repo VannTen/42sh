@@ -6,14 +6,14 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 21:31:45 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/31 21:31:45 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 12:14:46 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lst_defs.h"
 #include "misc_interface.h"
 
-static void *cpy_ref(void const *ref)
+static void	*cpy_ref(void const *ref)
 {
 	return ((void *)ref);
 }

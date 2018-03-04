@@ -6,7 +6,7 @@
 /*   By: heynard <heynard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 17:51:58 by heynard           #+#    #+#             */
-/*   Updated: 2018/03/02 11:38:49 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/04 11:28:38 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,5 @@ void				free_hash_table(t_hash_table *htable);
 
 char				*get_path_table(t_hash_table *htable,
 									const char *bin_name);
-
 
 #endif

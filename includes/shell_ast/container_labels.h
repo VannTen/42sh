@@ -6,21 +6,25 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 12:27:42 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/21 18:16:40 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/04 11:32:13 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHELL_AST_CONTAINER_LABELS_H
 # define SHELL_AST_CONTAINER_LABELS_H
 
+/*
+** Generic empty label
+**
+** Token labels
+**
+** Construct labels
+*/
+
 enum	e_ast_container_label
 {
 
 	e_ast_container_label_empty,
-
-/*
-** Token labels
-*/
 
 	e_ast_container_label_word,
 	e_ast_container_label_io_number,
@@ -39,10 +43,6 @@ enum	e_ast_container_label
 	e_ast_container_label_semicolon,
 	e_ast_container_label_bang,
 	e_ast_container_label_pipe,
-
-/*
-** Construct labels
-*/
 
 	e_ast_container_label_program,
 	e_ast_container_label_complete_command,

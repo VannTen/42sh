@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 11:02:57 by mgautier          #+#    #+#             */
-/*   Updated: 2017/11/27 15:22:31 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 12:17:13 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 
 int	main(void)
 {
-	t_lst		*list[6];
-	const char	*str[] = { " This  is ", "This is a sentence to split", "" };
-	size_t		index;
-	size_t		result[] = {2, 5, 6, 6, 0, 1};
+	t_lst			*list[6];
+	const char		*str[] = { " This  is ", "This is a sentence to split", ""};
+	size_t			index;
+	const size_t	result[] = { 2, 5, 6, 6, 0, 1 };
 
 	list[0] = f_strsplit_lst_mod(str[0], " ", TRUE);
 	list[1] = f_strsplit_lst_mod(str[0], " ", FALSE);

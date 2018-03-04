@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 11:45:17 by mgautier          #+#    #+#             */
-/*   Updated: 2017/12/13 14:50:57 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 12:28:02 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static t_bool	test_search(t_trie const *trie)
 	return (result);
 }
 
-int	main(void)
+int				main(void)
 {
 	t_trie		*trie;
 	size_t		index;

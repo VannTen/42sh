@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 15:39:44 by mgautier          #+#    #+#             */
-/*   Updated: 2018/01/03 19:07:30 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 12:15:06 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_bool	add(void *add_from, va_list args)
 	return (NULL != f_lstpush(add_from, va_arg(args, t_lst**)));
 }
 
-t_lst		*lst_add_to(t_lst **add_to, t_lst const *add_from)
+t_lst			*lst_add_to(t_lst **add_to, t_lst const *add_from)
 {
 	assert(add_to != NULL);
 	if (f_lstiterr_va((t_lst*)add_from, add, add_to))
@@ -49,7 +49,7 @@ static t_bool	add_if_not_present(void *add_from, va_list arg)
 		return (TRUE);
 }
 
-t_lst		*lst_add_to_filter(
+t_lst			*lst_add_to_filter(
 		t_lst **add_to,
 		t_lst const *add_from,
 		t_bool *something_added)

@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 14:17:11 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/14 10:07:36 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/04 11:38:05 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "libft.h"
 
-struct s_sh_pipeline
+struct	s_sh_pipeline
 {
 	void	*pipe_sequence;
 	t_bool	bang;

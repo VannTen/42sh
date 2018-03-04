@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:43:39 by mgautier          #+#    #+#             */
-/*   Updated: 2017/11/24 12:24:11 by mgautier         ###   ########.fr       */
+/*   Updated: 2018/03/04 12:15:54 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 #include "misc_interface.h"
 #include <stdlib.h>
 
-static t_bool	test(void) {
+static t_bool	test(void)
+{
 	t_fifo		*fifo;
 	char const	str[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	size_t		index;

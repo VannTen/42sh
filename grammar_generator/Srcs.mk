@@ -40,6 +40,7 @@ SYMBOL :=\
 	sym_get.c\
 	sym_get_properties.c\
 	sym_get_sets.c\
+	sym_get_sets_debug.c\
 	sym_empty_symbol.c\
 	sym_cmp.c\
 	sym_ressources.c\
