@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 11:41:51 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/02 18:57:12 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/04 15:22:07 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ static int	buf_read_one(char *buffer, int offset)
 		ret = read(STDIN_FILENO, buffer + offset, 1);
 		if (g_sigint_detected)
 			break ;
+		if (getppid() == 1)
+			exit(EXIT_FAILURE);
 	}
 	if (g_sigint_detected)
 	{
@@ -121,7 +123,7 @@ int			wait_for_input(t_input *input, int input_type)
 	while (42)
 	{
 		if ((r_ret = buf_read_one(input->read_buffer, input->read_buf_ind)) < 1)
-			return (READ_FAIL);
+			sh_exit_message("42sh: Read failed\n");
 		else if (r_ret == CATCH_SIGINT)
 			return (CATCH_SIGINT);
 		if ((ret = get_key(input)) == MALLOC_FAIL)
