@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:49:09 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/02 15:53:08 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/04 17:41:28 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int				sh_loop(t_bsh *bsh)
 {
 	int		ret;
 
-	while (42)
+	while (getppid() != 1)
 	{
 		reset_lexer(&bsh->lexer);
 		if ((ret = readline_process(&bsh->input, &bsh->lexer,
@@ -99,4 +99,5 @@ int				sh_loop(t_bsh *bsh)
 			update_history(&bsh->history, &bsh->input);
 		test_parser(bsh->lexer.tokens[0], bsh->parser);
 	}
+	return (0);
 }
