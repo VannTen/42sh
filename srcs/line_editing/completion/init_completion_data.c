@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 14:03:11 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/12 18:23:51 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/04 14:15:15 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ static char		*comp_get_prefix(t_lexer lexer, const int cursor_pos,
 		return (ft_strdup(""));
 	else if (lexer.tokens[1]->value[0] == '~')
 	{
-			if (!(home_dir = get_home_dir()))
-				return (NULL);
-			if (!(prefix = ft_strnew(ft_strlen(home_dir) +
-							ft_strlen(lexer.tokens[1]->value))))
-				return (NULL);
-			ft_strcpy(prefix, home_dir);
-			ft_strcat(prefix, lexer.tokens[1]->value + 1);
-			return (prefix);
+		if (!(home_dir = get_home_dir()))
+			return (NULL);
+		if (!(prefix = ft_strnew(ft_strlen(home_dir) +
+						ft_strlen(lexer.tokens[1]->value))))
+			return (NULL);
+		ft_strcpy(prefix, home_dir);
+		ft_strcat(prefix, lexer.tokens[1]->value + 1);
+		return (prefix);
 	}
 	return (ft_strdup(lexer.tokens[1]->value));
 }
