@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:01:20 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/04 13:58:55 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/05 17:46:03 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "io_here.h"
 #include "bleberr_macros.h"
 #include <stdlib.h>
+#include <errno.h>
 
 static t_bool	add_io_number(struct s_sh_io_redirect *const io_redirect,
 		struct s_container *io_number_container)
@@ -92,6 +93,11 @@ static t_bool	add_target(struct s_sh_io_redirect *const io_redirect,
 		{
 			io_redirect->target = create_heredoc(word_container->content,
 					io_redirect->variant);
+			if (!io_redirect->target)
+			{
+				errno = 4;
+				return (FALSE);
+			}
 			free(word_container->content);
 		}
 		word_container->content = NULL;

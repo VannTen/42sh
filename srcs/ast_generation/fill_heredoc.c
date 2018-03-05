@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 18:12:03 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/04 14:09:48 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/05 17:42:28 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ static void		init_prompt(t_term *term, char const *prompt)
 
 static char		*get_heredoc_line(t_bool is_dlessdash)
 {
-	t_bsh	*const bsh = get_shell_data();
+	t_bsh *const	bsh = get_shell_data();
+	int				getline_ret;
 
 	if (bsh)
 	{
@@ -62,14 +63,16 @@ static char		*get_heredoc_line(t_bool is_dlessdash)
 		}
 		ft_memset(bsh->input.buffer, 0, bsh->input.buffer_size);
 		bsh->input.buffer_len = 0;
-		if (!getline(&bsh->input, bsh->interactive, HEREDOC_INPUT,
-					&bsh->lexer.state))
+		getline_ret = getline(&bsh->input, bsh->interactive, HEREDOC_INPUT,
+					&bsh->lexer.state);
+		if (!getline_ret)
 		{
 			if (is_dlessdash)
 				remove_leading_tabs(bsh->input.buffer);
 			bsh->input.buffer[ft_strlen(bsh->input.buffer) - 1] = '\0';
 			return (bsh->input.buffer);
 		}
+		return (getline_ret == CATCH_SIGINT ? NULL : "");
 	}
 	return (NULL);
 }
@@ -84,7 +87,7 @@ int				fill_heredoc(int const doc_fd, char const *const here_end,
 	{
 		if ((line = get_heredoc_line(is_dlessdash)))
 		{
-			if (ft_strncmp(line, here_end, here_end_len)
+			if (*line != 0 || ft_strncmp(line, here_end, here_end_len)
 					|| !ft_strchr("\n", line[here_end_len]))
 				(void)ft_dprintf(doc_fd, "%s\n", line);
 			else

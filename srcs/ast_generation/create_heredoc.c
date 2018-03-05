@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 18:57:04 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/05 17:23:08 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/05 17:43:18 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char			*create_heredoc(char *here_end, t_bool is_dlessdash)
 		ret = fill_heredoc(doc_fd, here_end, ft_strlen(here_end), is_dlessdash);
 		ft_strdel(&here_end);
 		close(doc_fd);
-		if (ret)
+		if (!ret)
 			return (doc_name);
 		else
 		{
