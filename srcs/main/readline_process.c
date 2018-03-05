@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 12:31:00 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/02 17:18:15 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/05 13:11:01 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,9 @@ static int	remove_backslash_nl(t_input *input, t_lexer *lexer)
 	return (0);
 }
 
-static int	get_complete_line_to_buffer(t_lexer *lex, t_input *input,
-								const int interct)
+static int	loop_while_unclosed_quotes(t_lexer *lex, t_input *input,
+										int interct)
 {
-	reset_buffer(input);
-	if (getline(input, interct, REGULAR_INPUT, &lex->state) == MALLOC_FAIL
-					|| lexer(lex, input->buffer) == MALLOC_FAIL)
-		return (MALLOC_FAIL);
 	while (lex->state != INIT)
 	{
 		clear_tokens(&lex->tokens[0]);
@@ -63,7 +59,7 @@ static int	get_complete_line_to_buffer(t_lexer *lex, t_input *input,
 		|| lexer(lex, input->buffer) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
 		while ((int)ft_strlen(input->buf_tmp)
-							+ input->buffer_len > input->buffer_size)
+					+ input->buffer_len > input->buffer_size)
 			if (realloc_buffer(input) == MALLOC_FAIL)
 				return (MALLOC_FAIL);
 		ft_swap((void**)&input->buffer, (void**)&input->buf_tmp);
@@ -71,16 +67,23 @@ static int	get_complete_line_to_buffer(t_lexer *lex, t_input *input,
 		ft_strdel(&input->buf_tmp);
 		input->buffer_len = ft_strlen(input->buffer);
 	}
-	return (remove_backslash_nl(input, lex));
+	return (0);
 }
 
-static int	init_exp_input(t_string *exp_input, const int size)
+static int	get_complete_line_to_buffer(t_lexer *lex, t_input *input,
+								const int is_interactive)
 {
-	if (!(exp_input->str = ft_strnew(size)))
-		return (MALLOC_FAIL);
-	exp_input->len = 0;
-	exp_input->size = size;
-	return (0);
+	int	ret;
+
+	reset_buffer(input);
+	if ((ret = getline(input, is_interactive, REGULAR_INPUT,
+					&lex->state)) == MALLOC_FAIL
+			|| lexer(lex, input->buffer) == MALLOC_FAIL || ret == END_OF_FILE)
+		return (ret);
+	if ((ret = loop_while_unclosed_quotes(lex, input,
+					is_interactive)) == MALLOC_FAIL || ret == END_OF_FILE)
+		return (ret);
+	return (remove_backslash_nl(input, lex));
 }
 
 int			readline_process(t_input *input, t_lexer *lexer, t_history *history,
@@ -90,8 +93,9 @@ int			readline_process(t_input *input, t_lexer *lexer, t_history *history,
 	t_string	exp_input;
 
 	(interact) ? print_prompt(input, BOLD_CYAN) : 0;
-	if (get_complete_line_to_buffer(lexer, input, interact) == MALLOC_FAIL)
-		return (MALLOC_FAIL);
+	if ((ret = get_complete_line_to_buffer(lexer, input,
+					interact)) == MALLOC_FAIL || ret == END_OF_FILE)
+		return (ret);
 	if (!interact)
 		return (0);
 	if (init_exp_input(&exp_input, input->buffer_size) == MALLOC_FAIL)
