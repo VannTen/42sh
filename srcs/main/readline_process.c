@@ -105,7 +105,8 @@ int			readline_process(t_input *input, t_lexer *lexer, t_history *history,
 	input->buffer = exp_input.str;
 	input->buffer_len = ft_strlen(input->buffer);
 	input->buffer_size = exp_input.size;
-	if (input->buffer[input->buffer_len - 1] != '\n')
+	if ((input->buffer_len > 0 && input->buffer[input->buffer_len - 1] != '\n')
+			|| !input->buffer_len)
 		input->buffer[input->buffer_len++] = '\n';
 	return (0);
 }
