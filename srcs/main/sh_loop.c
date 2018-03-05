@@ -78,7 +78,7 @@ static t_bool	test_parser(t_token *list_tokens, t_parser const *parser)
 	result = execute_construct(parser, "PROGRAM", &input, &bad_token);
 	if (result == NULL && errno == 0)
 		ft_dprintf(STDERR_FILENO,
-				"syntax error near unexpected token %s\n",
+				"42sh: syntax error near unexpected token %s\n",
 				g_tokens_name[get_tok_id(bad_token)]);
 	shx_program(result);
 	syntax_valid = result != NULL;
