@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell_getenv.c                                     :+:      :+:    :+:   */
+/*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/22 10:51:22 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/05 15:37:20 by ble-berr         ###   ########.fr       */
+/*   Created: 2018/03/05 15:41:10 by ble-berr          #+#    #+#             */
+/*   Updated: 2018/03/05 15:56:27 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
-char	*shell_getenv(t_env *env, char const *const name)
+int	builtin_unset(char **argv, t_env *env)
 {
-	t_env_list	*ret;
-
-	if (env && env->env_list && name)
+	if (argv && argv[0] && env)
 	{
-		ret = ft_getenv(env->env_list, name);
-		if (ret && ret->exportable == LOCAL)
-			ret = NULL;
+		if (argv[1])
+		{
+			remove_variable_from_env(env, argv[1], GLOBAL);
+			remove_variable_from_env(env, argv[1], LOCAL);
+		}
 	}
-	else
-		ret = NULL;
-	return (ret ? ret->value : NULL);
+	return (1);
 }

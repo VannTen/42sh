@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:50:58 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/27 14:26:23 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/05 15:38:15 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int						append_variable_to_env(t_env *env,
 						unsigned short exportable);
 
 int						remove_variable_from_env(t_env *env,
-						const char *const name);
+						const char *const name, unsigned short exportable);
 void					clear_env_list(t_env_list **env_list_loc);
 
 #endif
