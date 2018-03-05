@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 17:57:42 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/04 18:51:13 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/05 12:21:44 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@
 # define UNEXPECTED_EOF 3
 # define RETURN 4
 # define CATCH_SIGINT 5
+# define END_OF_FILE 6
 
 # define DIRECTORY 1
 # define PATH 2
