@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 11:39:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 16:51:15 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/05 14:37:16 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ int					launch_utility(char **argv, t_bool is_child)
 			return (launch_external(argv[0], argv, &bsh->env, is_child));
 		builtin = find_builtin(argv[0]);
 		if (builtin != NULL)
-			return (builtin(argv, &bsh->env));
+		{
+			bsh->exit_status = builtin(argv, &bsh->env);
+			return (bsh->exit_status);
+		}
 		external = find_external(argv[0], bsh);
 		if (external != NULL)
 		{
