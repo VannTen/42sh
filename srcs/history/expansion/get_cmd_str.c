@@ -26,7 +26,8 @@ static int	fuck_norm(t_history *history, char **tmp, char **tmp2, char **s)
 	}
 	else
 	{
-		*tmp2 = ft_strndup(*s, *tmp - *s);
+		if (!(*tmp2 = ft_strndup(*s, *tmp - *s)))
+			return (MALLOC_FAIL);
 		if (!(*tmp = search_in_history_by_str(history, *tmp2)))
 		{
 			ft_strdel(tmp2);
@@ -42,9 +43,12 @@ int			get_cmd_str(t_history *history, t_string *exp_input, char **input,
 	char	*tmp;
 	char	*tmp2;
 	int		len;
+	int		ret;
 
-	if (fuck_norm(history, &tmp, &tmp2, &s) == 1)
+	if ((ret = fuck_norm(history, &tmp, &tmp2, &s) == 1))
 		return (1);
+	if (ret == MALLOC_FAIL)
+		return (MALLOC_FAIL);
 	len = ft_strlen(tmp);
 	while (exp_input->len + len > exp_input->size)
 		if (realloc_str(exp_input) == MALLOC_FAIL)
