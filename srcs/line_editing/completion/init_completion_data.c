@@ -85,7 +85,11 @@ int				init_completion_data(t_comp *comp, char *buffer,
 	t_lexer	lexer;
 
 	if (get_tokens_up_to_cursor(&lexer, buffer, cursor_pos) == MALLOC_FAIL)
+	{
+		ft_strdel(&lexer.current_token);
+		clear_tokens(&lexer.tokens[0]);
 		return (MALLOC_FAIL);
+	}
 	if (!(comp->prefix = comp_get_prefix(lexer, cursor_pos, buffer)))
 		return (MALLOC_FAIL);
 	if (!(comp->dirname = ft_dirname(comp->prefix)))
