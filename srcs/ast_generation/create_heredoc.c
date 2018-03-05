@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 18:57:04 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/05 17:43:18 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/05 22:38:06 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include <unistd.h>
 #include "libft.h"
 #include "bleberr_macros.h"
-#include "io_here.h"
 #include "shell.h"
+#include "heredoc_creation.h"
 
 static int		increment_id(char *id)
 {

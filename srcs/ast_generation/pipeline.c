@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 16:09:20 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/05 22:40:27 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void			destroy_pipeline(void **const pipeline_loc)
 	todel = (pipeline_loc != NULL) ? (*pipeline_loc) : (NULL);
 	if (todel != NULL)
 	{
-		destroy_pipe_sequence(&(todel->pipe_sequence));
+		destroy_pipe_sequence((void**)&(todel->pipe_sequence));
 		free(todel);
 		*pipeline_loc = NULL;
 	}

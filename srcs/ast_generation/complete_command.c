@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/28 14:29:37 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/05 22:37:43 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	destroy_complete_command(void **const complete_command_loc)
 	todel = (complete_command_loc != NULL) ? (*complete_command_loc) : (NULL);
 	if (todel != NULL)
 	{
-		destroy_sh_list(&(todel->list));
+		destroy_sh_list((void**)&(todel->list));
 		free(todel);
 		*complete_command_loc = NULL;
 	}

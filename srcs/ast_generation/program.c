@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/22 10:29:55 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/05 22:40:38 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	destroy_program(void **const program_loc)
 	todel = (program_loc != NULL) ? (*program_loc) : (NULL);
 	if (todel != NULL)
 	{
-		destroy_complete_command(&(todel->complete_command));
+		destroy_complete_command((void**)&(todel->complete_command));
 		free(todel);
 		*program_loc = NULL;
 	}

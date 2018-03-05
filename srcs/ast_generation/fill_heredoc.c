@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 18:12:03 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/05 17:42:28 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/05 22:38:23 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include "libft.h"
 #include "bleberr_macros.h"
-#include "io_here.h"
+#include "heredoc_creation.h"
 #include "shell.h"
 #include <sys/ioctl.h>
 #include <signal.h>
@@ -87,11 +87,12 @@ int				fill_heredoc(int const doc_fd, char const *const here_end,
 	{
 		if ((line = get_heredoc_line(is_dlessdash)))
 		{
-			if (*line != 0 || ft_strncmp(line, here_end, here_end_len)
-					|| !ft_strchr("\n", line[here_end_len]))
-				(void)ft_dprintf(doc_fd, "%s\n", line);
-			else
+			if ((!ft_strncmp(line, here_end, here_end_len)
+						&& ft_strchr("\n", line[here_end_len]))
+					|| *line == 0)
 				break ;
+			else
+				(void)ft_dprintf(doc_fd, "%s\n", line);
 		}
 		else
 			return (42);

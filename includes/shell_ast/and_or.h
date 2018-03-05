@@ -6,12 +6,14 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 09:51:58 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/13 13:16:56 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/05 22:33:03 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHELL_AST_AND_OR_H
 # define SHELL_AST_AND_OR_H
+
+# include "shell_ast/pipeline.h"
 
 enum	e_logic
 {
@@ -22,7 +24,7 @@ enum	e_logic
 
 struct	s_and_or_logic
 {
-	void					*pipeline;
+	struct s_sh_pipeline	*pipeline;
 	enum e_logic			logic;
 	struct s_and_or_logic	*next;
 };

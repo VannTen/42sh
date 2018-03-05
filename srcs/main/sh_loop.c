@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:49:09 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/05 12:29:04 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/05 23:12:13 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "execution.h"
 #include "print_ast.h"
 #include "parser_defs.h"
+#include "heredoc_creation.h"
 #include <errno.h>
 
 void			display_tokens(t_token *tokens)
@@ -62,10 +63,9 @@ static int		error_messages(t_input *input, const int ret)
 	return (0);
 }
 
-static t_bool	test_parser(t_token *list_tokens, t_parser const *parser)
+static void	parse_and_execute(t_token *list_tokens, t_parser const *parser)
 {
 	void					*result;
-	t_bool					syntax_valid;
 	struct s_parse_input	input;
 	void					*bad_token;
 
@@ -80,10 +80,9 @@ static t_bool	test_parser(t_token *list_tokens, t_parser const *parser)
 		ft_dprintf(STDERR_FILENO,
 				"42sh: syntax error near unexpected token %s\n",
 				g_tokens_name[get_tok_id(bad_token)]);
-	shx_program(result);
-	syntax_valid = result != NULL;
+	if (!create_all_heredocs(result))
+		shx_program(result);
 	destroy_program(&result);
-	return (syntax_valid);
 }
 
 int				sh_loop(t_bsh *bsh)
@@ -106,7 +105,7 @@ int				sh_loop(t_bsh *bsh)
 			continue ;
 		if (bsh->interactive)
 			update_history(&bsh->history, &bsh->input);
-		test_parser(bsh->lexer.tokens[0], bsh->parser);
+		parse_and_execute(bsh->lexer.tokens[0], bsh->parser);
 	}
 	return (0);
 }

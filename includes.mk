@@ -15,7 +15,7 @@ INCLUDES = \
 		   includes/hashtable.h \
 		   includes/history.h \
 		   includes/input.h \
-		   includes/io_here.h \
+		   includes/heredoc_creation.h \
 		   includes/io_redirect_settings.h \
 		   includes/lexer.h \
 		   includes/libbj.h \

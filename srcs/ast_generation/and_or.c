@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 15:55:13 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/05 22:37:26 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	destroy_and_or_sequence(void **sequence_loc)
 			todel = sequence;
 			sequence = sequence->next;
 			if (todel->pipeline != NULL)
-				destroy_pipeline(&(todel->pipeline));
+				destroy_pipeline((void**)&(todel->pipeline));
 			free(todel);
 		}
 		*sequence_loc = NULL;
