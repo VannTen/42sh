@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 11:24:44 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/04 11:38:26 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/05 12:31:52 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,8 @@ enum	e_shell_errmsg
 
 void	shell_errmsg(int const index, char const *const buf);
 void	builtopt_errmsg(char const *name, char c);
+
+void	chdir_error(char const *path);
+void	execve_error(char const *path, char **argv, char **envp);
 
 #endif

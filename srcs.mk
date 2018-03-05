@@ -73,6 +73,10 @@ SRCS = \
 	   $(SRCS_DIR)/execution/filedescriptor_is_a_backup.c \
 	   $(SRCS_DIR)/execution/sh_path_search.c \
 	   $(SRCS_DIR)/execution/shell_errmsg.c \
+	   $(SRCS_DIR)/execution/sh_errstr.c \
+	   $(SRCS_DIR)/execution/chdir_error.c \
+	   $(SRCS_DIR)/execution/execve_error.c \
+	   $(SRCS_DIR)/execution/sh_path_error.c \
 	   $(SRCS_DIR)/execution/shell_getenv.c \
 	   $(SRCS_DIR)/execution/shx_and_or.c \
 	   $(SRCS_DIR)/execution/shx_complete_command.c \

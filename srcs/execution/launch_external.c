@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/25 19:59:38 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 09:49:54 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/05 12:30:46 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "execution.h"
 #include "shell_signal.h"
 #include "shell.h"
+#include "shell_errmsg.h"
 
 int			launch_external(char *const bin_path, char **argv, t_env *env,
 		t_bool is_child)
@@ -27,7 +28,7 @@ int			launch_external(char *const bin_path, char **argv, t_env *env,
 		{
 			set_shell_sigmode(e_shell_sigmode_all_default);
 			execve(bin_path, argv, env->env_array);
-			ft_dprintf(2, "42sh: failed to execute %s.\n", bin_path);
+			execve_error(bin_path, argv, env->env_array);
 			exit(-1);
 		}
 		else if (0 < father)

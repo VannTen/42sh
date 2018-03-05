@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 11:47:26 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/25 20:03:49 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/05 11:15:20 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	change_directory(char *curpath, char **const pwd_loc,
 			ft_putstr_fd("42sh: cd: Unable to update PWD and OLDPWD, "
 					"failed to obtain present working directory.\n", 2);
 	else
-		shell_errmsg(e_shell_errmsg_chdir, "cd");
+		chdir_error(curpath);
 	return (1);
 }
 
