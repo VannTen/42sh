@@ -14,6 +14,7 @@
 #include "execution.h"
 #include "print_ast.h"
 #include "parser_defs.h"
+#include <errno.h>
 
 void			display_tokens(t_token *tokens)
 {
@@ -66,13 +67,19 @@ static t_bool	test_parser(t_token *list_tokens, t_parser const *parser)
 	void					*result;
 	t_bool					syntax_valid;
 	struct s_parse_input	input;
+	void					*bad_token;
 
 	input.input = &list_tokens;
 	input.get_token = take_token;
 	input.del_token = no_destroy;
 	if (parser == NULL)
 		exit(1);
-	result = execute_construct(parser, "PROGRAM", &input);
+	errno = 0;
+	result = execute_construct(parser, "PROGRAM", &input, &bad_token);
+	if (result == NULL && errno == 0)
+		ft_dprintf(STDERR_FILENO,
+				"syntax error near unexpected token %s\n",
+				g_tokens_name[get_tok_id(bad_token)]);
 	shx_program(result);
 	syntax_valid = result != NULL;
 	destroy_program(&result);
