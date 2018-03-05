@@ -34,7 +34,8 @@ void	readline_sigint(int sigid)
 		write(STDERR_FILENO, "\n", 1);
 	bsh->input.pivot = -1;
 	bsh->input.state = STANDARD;
+	reset_completion_data(&bsh->input.comp);
+	(bsh->input.type != HEREDOC_INPUT) ? reset_lexer(&bsh->lexer) : 0;
 	bsh->input.type = REGULAR_INPUT;
 	bsh->history.current = bsh->history.len;
-	reset_lexer(&bsh->lexer);
 }
