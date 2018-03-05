@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 15:12:09 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/05 16:18:54 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/05 17:11:24 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ static int	export_option_n(t_env *env, char **argv)
 	t_env_list	*var;
 	int			ret;
 
+	if (argv[0] && !is_valid_variable_name(argv[0]))
+		return (ft_dprintf(STDERR_FILENO, "%s: not a valid variable name\n",
+					argv[0]));
 	if (argv[0])
 	{
 		if ((var = ft_getenv(env->env_list, argv[0])))
@@ -46,23 +49,18 @@ static int	set_to_global(t_env *env, char *av1, char *av2)
 	t_env_list	*var;
 	int			ret;
 
-	ret = 0;
+	ret = 1;
 	if ((var = ft_getenv(env->env_list, av1)))
 	{
 		if (av2)
-		{
 			ret = append_variable_to_env(env, av1, av2, GLOBAL);
-			if (!ret && !ft_strcmp("PATH", av1))
-				clear_hashtable();
-		}
-		(!ret) ? var->exportable = 1 : 0;
+		else
+			var->exportable = 1;
 	}
 	else
-	{
 		ret = append_variable_to_env(env, av1, av2 ? av2 : "", GLOBAL);
-		if (!ret && !ft_strcmp("PATH", av1))
-			clear_hashtable();
-	}
+	if (!ret && !ft_strcmp("PATH", av1))
+		clear_hashtable();
 	(!ret) ? env->has_changed = TRUE : 0;
 	return (0);
 }
