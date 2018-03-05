@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:24:25 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/13 13:24:08 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/05 16:03:07 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ const char	*g_builtins_name[] = {
 	"env ",
 	"exit ",
 	"export ",
+	"hash ",
 	"history ",
 	"setenv ",
+	"unset ",
 	"unsetenv ",
 	NULL};
 
