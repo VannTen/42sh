@@ -155,6 +155,7 @@ SRCS = \
 	   $(SRCS_DIR)/main/set_shell_sigmode.c \
 	   $(SRCS_DIR)/main/get_home_dir.c \
 	   $(SRCS_DIR)/main/get_line.c \
+	   $(SRCS_DIR)/main/init_exp_input.c \
 	   $(SRCS_DIR)/main/init_shell.c \
 	   $(SRCS_DIR)/main/sh_loop.c \
 	   $(SRCS_DIR)/main/main.c \
