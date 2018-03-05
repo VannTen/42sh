@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 18:57:04 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/05 17:22:20 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/05 17:23:08 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ char			*create_heredoc(char *here_end, t_bool is_dlessdash)
 		else
 		{
 			close(doc_fd);
+			unlink(doc_name);
 			ft_strdel(&doc_name);
 		}
 	}
