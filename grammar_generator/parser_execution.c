@@ -91,7 +91,8 @@ static t_bool		init(
 void				*execute_construct(
 		t_parser const *parser,
 		char const *construct,
-		struct s_parse_input const *input)
+		struct s_parse_input const *input,
+		void **bad_token)
 {
 	struct s_parse_state	state;
 	t_exec_construct		*meta_construct;
@@ -109,13 +110,12 @@ void				*execute_construct(
 						input,
 						parser->get_token_id))
 			{
-				ft_dprintf(STDERR_FILENO, "Syntax error\n");
+				*bad_token = state.token;
 				f_lstdel(&state.parse_stack, no_destroy);
 				f_lstdel(&state.exec_stack, clean_exec_struct);
 				break ;
 			}
 		}
 	}
-	input->del_token(&state.token);
 	return (extract_top_symbol_value(&meta_construct));
 }

@@ -42,7 +42,8 @@ struct					s_parse_input
 void					*execute_construct(
 		t_parser const *parser,
 		char const *construct,
-		struct s_parse_input const *input);
+		struct s_parse_input const *input,
+		void **bad_token);
 
 /*
 ** *** generate_parser ***
