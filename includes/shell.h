@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 12:31:57 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/02 18:14:20 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/05 12:41:33 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,5 @@ void			readline_sigint(int sigid);
 char			check_arg_opt(char *arg_opt, char const *avail_opts,
 							char *options);
 char			*get_home_dir(void);
+int				init_exp_input(t_string *exp_input, const int size);
 #endif
