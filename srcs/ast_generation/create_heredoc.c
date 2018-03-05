@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 18:57:04 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/05 17:04:49 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/05 17:22:20 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ char			*create_heredoc(char *here_end, t_bool is_dlessdash)
 	int				doc_fd;
 	int				ret;
 
-	here_end = bsh && here_end ? expanded_str(&bsh->exp, here_end, HERE_END_EXP)
-		: NULL;
+	here_end = bsh && here_end ?
+		expanded_str(&bsh->exp, here_end, HERE_END_EXP) : NULL;
 	if (here_end != NULL && (doc_fd = open_heredoc(&doc_name)) != -1)
 	{
 		ret = fill_heredoc(doc_fd, here_end, ft_strlen(here_end), is_dlessdash);
@@ -93,6 +93,5 @@ char			*create_heredoc(char *here_end, t_bool is_dlessdash)
 			ft_strdel(&doc_name);
 		}
 	}
-	else
-		return (NULL);
+	return (NULL);
 }
