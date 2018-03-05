@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 16:35:51 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/04 14:14:07 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/05 12:34:49 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	get_line_from_file(t_input *input, size_t *state)
 		*state = INIT;
 		return (0);
 	}
-	exit(EXIT_SUCCESS);
+	return (END_OF_FILE);
 }
 
 int			getline(t_input *input, const int interactive, const int mode,
@@ -70,7 +70,7 @@ int			getline(t_input *input, const int interactive, const int mode,
 	}
 	else
 	{
-		if (get_line_from_file(input, state) == MALLOC_FAIL)
+		if ((ret = get_line_from_file(input, state)) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
 	}
 	(ret == RETURN) ? ret = 0 : 0;
