@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 18:12:03 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/05 22:38:23 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/06 14:37:07 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ static char		*get_heredoc_line(t_bool is_dlessdash)
 		{
 			if (is_dlessdash)
 				remove_leading_tabs(bsh->input.buffer);
-			bsh->input.buffer[ft_strlen(bsh->input.buffer) - 1] = '\0';
 			return (bsh->input.buffer);
 		}
 		return (getline_ret == CATCH_SIGINT ? NULL : "");
@@ -92,7 +91,7 @@ int				fill_heredoc(int const doc_fd, char const *const here_end,
 					|| *line == 0)
 				break ;
 			else
-				(void)ft_dprintf(doc_fd, "%s\n", line);
+				(void)ft_dprintf(doc_fd, "%s", line);
 		}
 		else
 			return (42);
