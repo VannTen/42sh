@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 15:12:09 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/06 15:22:46 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/06 17:51:53 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ static int	export_option_n(t_env *env, char **argv)
 		if ((var = ft_getenv(env->env_list, argv[0])))
 			var->exportable = 0;
 		env->has_changed = TRUE;
-		if (argv[1])
+		if (!var)
 		{
-			ret = append_variable_to_env(env, argv[0], argv[1], LOCAL);
+			ret = append_variable_to_env(env, argv[0], argv[1] ? argv[1] : "",
+					LOCAL);
 			if (!ret && !ft_strcmp("PATH", argv[0]))
 				clear_hashtable();
 		}
@@ -78,7 +79,7 @@ int			builtin_export(char **av, t_env *env)
 	{
 		if (!av[i][1])
 		{
-			ft_putendl_fd("42sh: history: `-': not a valid identifier", 2);
+			ft_putendl_fd("42sh: export: `-': not a valid identifier", 2);
 			return (1);
 		}
 		if ((wrong_opt = check_arg_opt(av[i] + 1, export_options, options)))
