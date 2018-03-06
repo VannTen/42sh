@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 15:17:41 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/04 16:04:50 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/06 15:19:21 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		get_prompt(t_term *term)
 	if (!(pwd = getcwd(NULL, MAX_PROMPT_SIZE)))
 	{
 		ft_strcpy(term->prompt, "Where am I ??");
-		term->prompt_len = 12;
+		term->prompt_len = 13;
 	}
 	else
 	{
