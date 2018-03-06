@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:40:46 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 16:20:55 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/06 17:41:45 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,24 @@ static int	get_target_fd(struct s_sh_io_redirect const *const io_redir)
 	t_bsh *const	bsh = get_shell_data();
 	char			*filename;
 	int				target_fd;
+	int				flags;
 
 	if (bsh && io_redir->target)
 		filename = expanded_str(&bsh->exp, io_redir->target, NOT_HERE_END_EXP);
 	else
 		filename = NULL;
-	target_fd = filename ? open(filename, io_redir->flags, io_redir->mode) : -1;
-	ft_strdel(&filename);
-	return (target_fd);
+	if (filename)
+	{
+		flags = io_redir->flags;
+		if (io_redir->type == e_sh_io_type_file && io_redir->variant
+				&& ft_getenv(bsh->env.env_list, "noclobber"))
+			flags |= O_EXCL;
+		target_fd = open(filename, flags, io_redir->mode);
+		ft_strdel(&filename);
+		return (target_fd);
+	}
+	else
+		return (-1);
 }
 
 int			io_redir_file(struct s_sh_io_redirect const *const io_redir,
