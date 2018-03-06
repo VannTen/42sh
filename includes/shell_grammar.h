@@ -27,12 +27,8 @@ static char const	g_shell_grammar[] =
 ":LIST"
 ";"
 "LIST"
-":LIST SEPARATOR_OP OPTIONAL_AND_OR"
+":LIST SEPARATOR_OP AND_OR"
 "|AND_OR"
-";"
-"OPTIONAL_AND_OR"
-":AND_OR"
-"|"
 ";"
 "AND_OR"
 ":PIPELINE"
@@ -109,11 +105,7 @@ static t_exec const	g_exec_rules[] = {
 		.create=&create_sh_list,
 		.give=&give_sh_list,
 		.destroy=&destroy_container
-	}, { .name="OPTIONAL_AND_OR",
-		.create=&create_optional_and_or,
-		.give=&give_optional_and_or,
-		.destroy=&destroy_container
-	}, { .name="AND_OR",
+	},{ .name="AND_OR",
 		.create=&create_and_or,
 		.give=&give_and_or,
 		.destroy=&destroy_container
