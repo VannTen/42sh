@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 11:41:51 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/04 15:22:07 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/06 12:47:02 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ static int	apply_key(t_input *input)
 static int	get_key(t_input *input)
 {
 	int	i;
+	int	ret;
 
 	i = -1;
 	if (input->read_buffer[0] == '\t' && input->state != SELECTION)
@@ -76,14 +77,14 @@ static int	get_key(t_input *input)
 	else if (input->state != SELECTION)
 		input->state = STANDARD;
 	if (input->state == COMPLETION && input->comp.prefix == NULL)
-		if (init_completion_data(&input->comp, input->buffer,
-								input->cursor_pos))
-		{
-			reset_completion_data(&input->comp);
-			return (MALLOC_FAIL);
-		}
+		if (init_comp_data(&input->comp, input->buffer, input->cursor_pos))
+			return (reset_completion_data(&input->comp));
 	if (input->state == COMPLETION)
-		return (completion(input));
+	{
+		if ((ret = completion(input)) == MALLOC_FAIL)
+			return (reset_completion_data(&input->comp));
+		return (ret);
+	}
 	reset_completion_data(&input->comp);
 	if (!ft_isprint(input->read_buffer[0]))
 		return (apply_key(input));
