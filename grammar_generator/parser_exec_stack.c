@@ -56,7 +56,7 @@ static t_bool			consume_stack(t_lst **exec_stack)
 			break;
 		if (!parent->functions->give(parent->real, child->real))
 		{
-			clean_exec_struct((void**)&child);
+			destroy_construct_in_stack(&child);
 			break ;
 		}
 		destroy_construct(&child);
