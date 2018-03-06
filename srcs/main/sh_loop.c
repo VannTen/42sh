@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:49:09 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/06 14:26:15 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/06 16:11:25 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ int				sh_loop(t_bsh *bsh)
 						&bsh->history, bsh->interactive)) == EVENT_NOT_FOUND
 						|| ret == MALLOC_FAIL || ret == INPUT_TOO_LONG || ret)
 		{
+			if (ret == END_OF_FILE)
+				break ;
 			error_messages(&bsh->input, ret);
 			continue ;
 		}
-		if (ret == END_OF_FILE)
-			break ;
 		if (lexer(&bsh->lexer, bsh->input.buffer) == MALLOC_FAIL)
 			continue ;
 		if (bsh->interactive)
