@@ -134,9 +134,11 @@ SRCS = \
 	   $(SRCS_DIR)/line_editing/completion/completion_display.c \
 	   $(SRCS_DIR)/line_editing/completion/completion_search_in_env.c \
 	   $(SRCS_DIR)/line_editing/completion/completion_search_path.c \
+	   $(SRCS_DIR)/line_editing/completion/clear_matches.c \
 	   $(SRCS_DIR)/line_editing/completion/ft_basename.c \
 	   $(SRCS_DIR)/line_editing/completion/ft_dirname.c \
 	   $(SRCS_DIR)/line_editing/completion/init_completion_data.c \
+	   $(SRCS_DIR)/line_editing/completion/not_dot_or_dotdot.c \
 	   $(SRCS_DIR)/line_editing/completion/reset_completion_data.c \
 	   $(SRCS_DIR)/line_editing/completion/search_directories.c \
 	   $(SRCS_DIR)/line_editing/completion/sort_matches.c \
