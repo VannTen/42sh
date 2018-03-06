@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 08:29:53 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/04 14:14:02 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/06 11:47:22 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "s_fd_backup.h"
 #include "redirection.h"
 
-static struct s_fd_backup	*create_fd_backup(int const fd)
+static struct s_fd_backup	*create_fd_backup(int fd)
 {
 	struct s_fd_backup	*new_backup;
 	int					save;
@@ -38,20 +38,42 @@ static struct s_fd_backup	*create_fd_backup(int const fd)
 	return (new_backup);
 }
 
-int							backup_filedescriptor(int const fd,
+static struct s_fd_backup	*get_fd_backup(int fd, t_lst *fd_backup_lst)
+{
+	struct s_fd_backup	*backup;
+
+	while (fd_backup_lst)
+	{
+		backup = (void*)get_lst_elem(fd_backup_lst, 0);
+		if (backup && backup->origin == fd)
+			return (backup);
+		fd_backup_lst = advance_list(fd_backup_lst, 1);
+	}
+	return (NULL);
+}
+
+int							backup_filedescriptor(int fd,
 		t_lst **const fd_backups)
 {
 	struct s_fd_backup	*backup;
 
-	backup = create_fd_backup(fd);
-	if (backup != NULL)
+	if (fd_backups)
 	{
-		if (f_lstpush(backup, fd_backups))
-			return (0);
-		else
+		if (fd < 0 || filedescriptor_is_a_backup(fd, *fd_backups))
+			fd = -1;
+		if (fd != -1 && !get_fd_backup(fd, *fd_backups))
 		{
-			free(backup);
-			ft_putstr_fd("42sh: allocation attempt failed.\n", 2);
+			backup = create_fd_backup(fd);
+			if (backup != NULL)
+			{
+				if (f_lstpush(backup, fd_backups))
+					return (0);
+				else
+				{
+					free(backup);
+					ft_putstr_fd("42sh: allocation attempt failed.\n", 2);
+				}
+			}
 		}
 	}
 	return (1);

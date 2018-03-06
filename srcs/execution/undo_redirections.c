@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 10:40:44 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/24 08:06:46 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/06 11:58:13 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	restore_filedescriptor(struct s_fd_backup const *const fd_backup)
 		else if (dup2(fd_backup->save, fd_backup->origin) == -1)
 			ft_dprintf(2, "42sh: failed to restore filedescriptor %i.\n",
 					fd_backup->origin);
+		close(fd_backup->save);
 	}
 }
 
