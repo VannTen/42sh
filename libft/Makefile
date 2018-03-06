@@ -16,5 +16,5 @@
 # Alternatively, make can be aliased to 'make
 # makefiles_dir=/absolute/path/of/makefiles/dir'
 
-makefiles_dir := make-build-system
+makefiles_dir := ../make-build-system
 include $(makefiles_dir)/Makefile

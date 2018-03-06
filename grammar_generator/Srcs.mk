@@ -118,7 +118,7 @@ OBJ_DIR := object
 INC_DIR := includes
 DEP_DIR := .dep
 COMPONENTS :=
-LIBRARIES := libft
+LIBRARIES := ../libft
 
 # Testing
 
