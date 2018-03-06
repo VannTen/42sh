@@ -6,33 +6,42 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 15:27:33 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/30 16:53:48 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/06 13:02:12 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-t_list	*completion_search_in_env(t_comp *comp)
+static void	*init_variables(t_env_list **env, char **str, t_comp *comp,
+							int *ret)
+{
+	*env = get_shell_data()->env.env_list;
+	*str = comp->basename;
+	*ret = -1;
+	return (NULL);
+}
+
+t_list		*completion_search_in_env(t_comp *comp)
 {
 	t_env_list	*env;
 	t_list		*match[2];
 	char		*str;
 	int			ret;
 
-	env = get_shell_data()->env.env_list;
-	str = comp->basename;
-	match[0] = NULL;
-	ret = -1;
+	match[0] = init_variables(&env, &str, comp, &ret);
 	while (env)
 	{
 		if (!(ret = ft_strncmp(str, env->name, ft_strlen(str))) && !match[0])
 		{
-			match[0] = ft_lstnew(env->name, ft_strlen(env->name) + 1);
+			if (!(match[0] = ft_lstnew(env->name, ft_strlen(env->name) + 1)))
+				return (clear_matches_and_dir(comp, match[0], NULL));
 			match[1] = match[0];
 		}
 		else if (!ret)
 		{
-			match[1]->next = ft_lstnew(env->name, ft_strlen(env->name) + 1);
+			if (!(match[1]->next = ft_lstnew(env->name,
+							ft_strlen(env->name) + 1)))
+				return (clear_matches_and_dir(comp, match[0], NULL));
 			match[1] = match[1]->next;
 		}
 		env = env->next;

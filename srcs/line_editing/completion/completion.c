@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:24:25 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/05 16:03:07 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/06 13:43:12 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ static int	add_builtin(t_comp *comp)
 	{
 		if (!ft_strncmp(g_builtins_name[i], comp->basename, comp->basename_len))
 		{
-			elem = ft_lstnew(g_builtins_name[i],
-							ft_strlen(g_builtins_name[i]) + 1);
+			if (!(elem = ft_lstnew(g_builtins_name[i],
+							ft_strlen(g_builtins_name[i]) + 1)))
+				return (MALLOC_FAIL);
 			elem->next = comp->matches;
 			comp->matches = elem;
 			comp->nb_matches++;
@@ -79,10 +80,15 @@ int			completion(t_input *input)
 		else if (ret)
 			input->comp.matches = completion_search_in_env(&input->comp);
 		else if (input->comp.search_location == PATH)
-			completion_search_path(&input->comp);
+		{
+			if ((ret = completion_search_path(&input->comp)))
+				return (ret);
+		}
 		else if (input->comp.search_location == DIRECTORY)
-			input->comp.matches = open_and_read_directory(&input->comp,
-									input->comp.dirname);
+			if (!(input->comp.matches = open_and_read_directory(&input->comp,
+									input->comp.dirname))
+					&& input->comp.nb_matches < 0)
+				return (MALLOC_FAIL);
 		(input->comp.search_location == PATH) ? add_builtin(&input->comp) : 0;
 	}
 	input->comp.matches = merge_sort_matches(input->comp.matches);

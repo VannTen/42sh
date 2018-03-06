@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 14:03:11 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/04 14:15:15 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/06 11:16:15 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int		get_tokens_up_to_cursor(t_lexer *lexer, char *buffer,
 	return (0);
 }
 
-int				init_completion_data(t_comp *comp, char *buffer,
+int				init_comp_data(t_comp *comp, char *buffer,
 									const int cursor_pos)
 {
 	t_lexer	lexer;
@@ -98,7 +98,7 @@ int				init_completion_data(t_comp *comp, char *buffer,
 		return (MALLOC_FAIL);
 	comp->basename_len = ft_strlen(comp->basename);
 	comp->search_location = get_search_location(lexer, *comp);
-	comp->count = 0;
+	comp->nb_matches = 0;
 	comp->comp_str = NULL;
 	comp->matches = NULL;
 	comp->current = NULL;
