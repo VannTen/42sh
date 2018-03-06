@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 12:51:20 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/25 20:41:24 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/06 16:48:49 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static int	cd_bad_opt(char c)
 {
-	ft_putstr_fd("21sh: cd: - ", 2);
+	ft_putstr_fd("42sh: cd: - ", 2);
 	ft_putchar_fd(c, 2);
 	ft_putstr_fd(": invalid option\n", 2);
 	return (1);

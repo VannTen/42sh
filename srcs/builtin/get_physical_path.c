@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 12:52:33 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/25 22:22:17 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/06 16:48:33 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	const	*get_home_dir(t_env *env)
 	home_dir = shell_getenv(env, "HOME");
 	if (home_dir == NULL)
 	{
-		ft_putstr_fd("21sh: cd: HOME not set.\n", 2);
+		ft_putstr_fd("42sh: cd: HOME not set.\n", 2);
 		return (NULL);
 	}
 	return (home_dir);
@@ -69,7 +69,7 @@ static char			*parse_cdpath(char const *directory, t_env *env)
 				&& combine(directory, cdpath, tmp - cdpath, &path))
 			return (path);
 		else
-			ft_putstr_fd("21sh: cd: a component of CDPATH is larger than "
+			ft_putstr_fd("42sh: cd: a component of CDPATH is larger than "
 					"PATH_MAX and could not be checked.\n", 2);
 		cdpath = tmp;
 		while (cdpath[0] == ':')
@@ -88,7 +88,7 @@ int					get_physical_path(char const *directory,
 	else if (!ft_strcmp(directory, "-")
 			&& (directory = shell_getenv(env, "OLDPWD")) == NULL)
 	{
-		ft_putstr_fd("21sh: cd: OLDPWD not set\n", 2);
+		ft_putstr_fd("42sh: cd: OLDPWD not set\n", 2);
 		return (1);
 	}
 	if (directory[0] == '/'
