@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 13:37:22 by mgautier          #+#    #+#             */
-/*   Updated: 2018/03/06 11:26:15 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/06 14:45:04 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_bool			consume_stack(t_lst **exec_stack)
 		child = f_lstpop(exec_stack);
 		parent = (void*)get_lst_elem(*exec_stack, 0);
 		if (*exec_stack == NULL)
-			break;
+			break ;
 		if (!parent->functions->give(parent->real, child->real))
 		{
 			destroy_construct_in_stack(&child);

@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 10:47:24 by mgautier          #+#    #+#             */
-/*   Updated: 2018/03/06 11:28:06 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/06 14:41:45 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_exec_construct	*create_construct(t_exec const *exec_functions)
 ** parent, except the meta construct, which does not belong to the exec_stack.
 */
 
-void			destroy_construct_in_stack(t_exec_construct **to_destroy)
+void				destroy_construct_in_stack(t_exec_construct **to_destroy)
 {
 	t_exec_construct	*construct;
 

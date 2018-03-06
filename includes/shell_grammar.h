@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 12:12:51 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/27 18:32:45 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/06 14:44:20 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ static t_exec const	g_exec_rules[] = {
 		.create=&create_sh_list,
 		.give=&give_sh_list,
 		.destroy=&destroy_container
-	},{ .name="AND_OR",
+	}, { .name="AND_OR",
 		.create=&create_and_or,
 		.give=&give_and_or,
 		.destroy=&destroy_container
