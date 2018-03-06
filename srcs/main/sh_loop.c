@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:49:09 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/06 11:39:43 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/06 14:26:15 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,6 @@
 #include "parser_defs.h"
 #include "heredoc_creation.h"
 #include <errno.h>
-
-void			display_tokens(t_token *tokens)
-{
-	while (tokens)
-	{
-		ft_printf("[%s] ==> type = %zu\n", tokens->value, tokens->type);
-		tokens = tokens->next;
-	}
-}
 
 static int		update_history(t_history *history, t_input *input)
 {
@@ -45,11 +36,13 @@ static int		update_history(t_history *history, t_input *input)
 
 static int		error_messages(t_input *input, const int ret)
 {
-	(ret == EVENT_NOT_FOUND) ?
-			ft_dprintf(STDERR_FILENO, "42sh: Event not found\n") : 0;
+	if (ret == EVENT_NOT_FOUND)
+	{
+		ft_dprintf(STDERR_FILENO, "42sh: Event not found\n");
+		return (0);
+	}
 	if (ret == MALLOC_FAIL)
 	{
-		init_buffers(input);
 		ft_dprintf(STDERR_FILENO, "42sh: Memory allocation failed."
 				" Aborting process routine\n");
 	}
@@ -57,13 +50,13 @@ static int		error_messages(t_input *input, const int ret)
 	{
 		ft_dprintf(STDERR_FILENO, "42sh: Input is too long."
 							" Aborting process routine!\n");
-		init_buffers(input);
 		input->cursor_pos = 0;
 	}
+	init_buffers(input);
 	return (0);
 }
 
-static void	parse_and_execute(t_token *list_tokens, t_parser const *parser)
+static void		parse_and_execute(t_token *list_tokens, t_parser const *parser)
 {
 	void					*result;
 	struct s_parse_input	input;
@@ -93,7 +86,7 @@ int				sh_loop(t_bsh *bsh)
 		reset_lexer(&bsh->lexer);
 		if ((ret = readline_process(&bsh->input, &bsh->lexer,
 						&bsh->history, bsh->interactive)) == EVENT_NOT_FOUND
-						|| ret == MALLOC_FAIL || ret == INPUT_TOO_LONG)
+						|| ret == MALLOC_FAIL || ret == INPUT_TOO_LONG || ret)
 		{
 			error_messages(&bsh->input, ret);
 			continue ;
