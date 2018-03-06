@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 17:57:42 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/05 12:21:44 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/06 13:48:07 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "termios.h"
 # include "history.h"
 # include "fcntl.h"
+# include <dirent.h>
 
 # define MAX_KEY_LENGTH 6
 # define MAX_PROMPT_SIZE 256
@@ -78,7 +79,7 @@ typedef struct	s_comp
 	size_t		basename_len;
 	t_list		*matches;
 	t_list		*current;
-	size_t		nb_matches;
+	int			nb_matches;
 	size_t		search_location;
 	int			init_c_pos;
 }				t_comp;
@@ -161,7 +162,7 @@ void			go_to_beg_line(t_input *input);
 */
 
 int				completion(t_input *input);
-int				init_completion_data(t_comp *comp, char *buffer,
+int				init_comp_data(t_comp *comp, char *buffer,
 				const int cursor_pos);
 t_list			*open_and_read_directory(t_comp *comp,
 				const char *directory);
@@ -172,4 +173,8 @@ int				reset_completion_data(t_comp *comp);
 char			*ft_basename(const char *path);
 char			*ft_dirname(const char *path);
 t_list			*merge_sort_matches(t_list *matches);
+void			*clear_matches_and_dir(t_comp *comp, t_list *matches,
+									DIR *dirp);
+void			del_matches(void *matches, size_t size);
+int				not_dot_or_dotdot(const char *filename);
 #endif
