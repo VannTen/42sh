@@ -1,4 +1,4 @@
-SRCS = $(SRCS_DIR)/execution/create_all_heredocs.c $(SRCS_DIR)/execution/unlink_all_heredocs.c\
+SRCS = \
 	   $(SRCS_DIR)/hashtable/builtin_hash.c \
 	   $(SRCS_DIR)/hashtable/hashtable.c \
 	   $(SRCS_DIR)/hashtable/new_hash_data.c \
