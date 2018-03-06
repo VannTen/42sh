@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:54:54 by mgautier          #+#    #+#             */
-/*   Updated: 2018/03/02 17:29:44 by heynard          ###   ########.fr       */
+/*   Updated: 2018/03/06 11:29:02 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct s_exec_construct	t_exec_construct;
 */
 
 void							clean_exec_struct(void **exec_struct);
+void							destroy_construct_in_stack(
+		t_exec_construct **to_destroy);
 
 /*
 ** exec stack operation
