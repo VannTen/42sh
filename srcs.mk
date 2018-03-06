@@ -23,7 +23,6 @@ SRCS = \
 	   $(SRCS_DIR)/ast_generation/lessand.c \
 	   $(SRCS_DIR)/ast_generation/lessgreat.c \
 	   $(SRCS_DIR)/ast_generation/list.c \
-	   $(SRCS_DIR)/ast_generation/optional_and_or.c \
 	   $(SRCS_DIR)/ast_generation/or_if.c \
 	   $(SRCS_DIR)/ast_generation/pipe_sequence.c \
 	   $(SRCS_DIR)/ast_generation/pipeline.c \

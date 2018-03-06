@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 16:08:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/28 14:34:36 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/06 12:57:31 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ t_bool			give_sh_list(void *construct, void *sub_construct)
 		sub = sub_construct;
 		if (sub->label == e_ast_container_label_and_or)
 			ret = extend_sh_list(list, sub);
-		if (sub->label == e_ast_container_label_optional_and_or)
-			ret = sub->content ? extend_sh_list(list, sub->content) : TRUE;
 		if (ret == TRUE)
 			destroy_container((void**)&sub);
 	}
