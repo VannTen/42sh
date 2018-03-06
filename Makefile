@@ -22,13 +22,17 @@ LIBS = grammar_generator/libgrammar_generator.a libft/libft.a
 
 LFLAGS = $(patsubst %,-L%,$(dir $(LIBS))) $(patsubst lib%.a,-l%,$(notdir $(LIBS)))
 
-all: $(NAME)
+.NOT_PARRALEL:
+
+all: lib_deps $(NAME)
+
+lib_deps:
+	$(foreach lib,$(LIBS),$(MAKE) -C $(dir $(lib)) $(notdir $(lib));)
+
+.PHONY: lib_deps
 
 $(NAME): $(OBJ) $(LIBS)
 	$(CC) $(LFLAGS) -o $(NAME) $(OBJ) -ltermcap
-
-%.a:
-	make -C $(dir $@) $(notdir $@)
 
 $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c $(INCLUDES)
 	-@mkdir -p $(dir $@)
