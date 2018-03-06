@@ -6,7 +6,7 @@
 /*   By: heynard <heynard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 17:52:16 by heynard           #+#    #+#             */
-/*   Updated: 2018/03/02 12:24:11 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/06 17:08:30 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,5 @@ int					hash_42sh(const char *bin_name)
 	i = 0;
 	while (bin_name[i])
 		hash += (int)bin_name[i++];
-	return (hash % MAX_BIN);
+	return ((hash % MAX_UNIQUE) * COLLISION_TOLERANCE);
 }
