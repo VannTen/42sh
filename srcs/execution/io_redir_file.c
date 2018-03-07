@@ -6,12 +6,14 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:40:46 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/06 17:41:45 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/07 11:30:04 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <unistd.h>
+#include "sh_error.h"
+#include "shell_macros.h"
 #include "redirection.h"
 #include "shell.h"
 
@@ -33,6 +35,9 @@ static int	get_target_fd(struct s_sh_io_redirect const *const io_redir)
 				&& ft_getenv(bsh->env.env_list, "noclobber"))
 			flags |= O_EXCL;
 		target_fd = open(filename, flags, io_redir->mode);
+		if (target_fd == -1)
+			ft_dprintf(STDERR_FILENO, "%s: %s: %s\n", SH_NAME, filename,
+					sh_errstr(errno));
 		ft_strdel(&filename);
 		return (target_fd);
 	}
@@ -63,9 +68,6 @@ int			io_redir_file(struct s_sh_io_redirect const *const io_redir,
 						io_redir->target);
 			close(target_fd);
 		}
-		else
-			ft_dprintf(STDERR_FILENO, "42sh: %s: failed to open file.\n",
-					io_redir->target);
 	}
 	return (ret == -1);
 }
