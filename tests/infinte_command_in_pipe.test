@@ -1,0 +1,1 @@
+cat /dev/urandom | base64 | head -c 10
