@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:39:16 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/28 18:21:52 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/07 08:57:58 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	io_redir_here(struct s_sh_io_redirect const *io_redir,
 	if (io_redir != NULL && io_redir->target != NULL)
 	{
 		ret = io_redir_file(io_redir, fd_backups_loc);
-		(void)unlink(io_redir->target);
 		return (ret);
 	}
 	else
