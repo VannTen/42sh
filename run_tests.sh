@@ -17,6 +17,7 @@ then
 	for	testfile in "$1"/*.test
 	do
 		echo 'testfile:' $testfile
+		cat $testfile
 		echo 'vvvvvvvvvv Result vvvvvvvvvv'
 		./42sh < $testfile
 		echo ============================
