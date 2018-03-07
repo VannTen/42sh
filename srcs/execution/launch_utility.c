@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 11:39:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/07 10:49:37 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/07 11:03:27 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,13 @@ int					launch_utility(char **argv, t_bool is_child)
 	t_builtin		builtin;
 	char			*external;
 
-	if (bsh && argv != NULL && argv[0] != NULL)
+	if (bsh && argv != NULL)
 	{
-		if (ft_strchr(argv[0], '/'))
+		if (!argv[0])
+			bsh->exit_status = 0;
+		else if (ft_strchr(argv[0], '/'))
 			return (launch_external(argv[0], argv, &bsh->env, is_child));
-		if ((builtin = find_builtin(argv[0])))
+		else if ((builtin = find_builtin(argv[0])))
 			bsh->exit_status = builtin(argv, &bsh->env);
 		else if ((external = find_external(argv[0], bsh)))
 		{
