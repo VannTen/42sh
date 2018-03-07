@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 11:21:13 by bjanik            #+#    #+#             */
-/*   Updated: 2017/04/30 18:43:02 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/07 12:58:55 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int		check_fd(const int fd, t_fd *p_fd, char **line)
 		if (ret > 0)
 			(p_fd->tmp)[0] = c;
 	}
+	else
+		return (-1);
 	return (1);
 }
 
