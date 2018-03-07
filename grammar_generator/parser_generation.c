@@ -14,7 +14,7 @@
 #include "grammar_interface.h"
 #include <assert.h>
 
-static t_bool	create_symbols_have_destructor(t_exec const *sym_rules)
+t_bool			create_symbols_have_destructor(t_exec const *sym_rules)
 {
 	size_t	index;
 
