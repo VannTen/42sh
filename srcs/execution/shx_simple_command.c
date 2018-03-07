@@ -6,12 +6,13 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 12:09:31 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 16:51:49 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/07 10:24:00 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 #include "shell.h"
+#include "shell_macros.h"
 
 static char	*resolved_arg(char *arg)
 {
@@ -78,7 +79,11 @@ int			shx_simple_command(struct s_sh_simple_command *const simple_command)
 		if (apply_redirections(simple_command->redirs, &fd_backups) == 0)
 			ret = launch_utility(argv, simple_command->child);
 		else
+		{
+			ft_dprintf(STDERR_FILENO, "%s: %s: Failed to apply redirections.\n",
+					SH_NAME, argv[0]);
 			ret = 42;
+		}
 		undo_redirections(&fd_backups);
 		delete_argv(argv);
 		return (ret);
