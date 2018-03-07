@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 11:39:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/05 14:37:16 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/07 10:13:42 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int					launch_utility(char **argv, t_bool is_child)
 			return (ret);
 		}
 		ft_dprintf(2, "42sh: %s: command not found\n", argv[0]);
+		bsh->exit_status = -1;
 	}
 	return (-1);
 }
