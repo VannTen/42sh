@@ -2,7 +2,7 @@ NAME = 42sh
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -DNDEBUG
 
 INCLUDES_DIR = includes libft grammar_generator/includes
 
