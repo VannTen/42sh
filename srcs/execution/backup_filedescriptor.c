@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 08:29:53 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/06 11:47:22 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/07 10:03:43 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int							backup_filedescriptor(int fd,
 				}
 			}
 		}
+		else
+			return (0);
 	}
 	return (1);
 }
