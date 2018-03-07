@@ -1,0 +1,26 @@
+void				glob_handle_bs_next(char *str, size_t *i, t_bracket *b)
+{
+	int				bslash;
+	int				bracket;
+
+	b->result[b->current][b->pos++] = str[(*i)++];
+	bracket = 0;
+	bslash = 0;
+	while (1)
+	{
+		if ((str[*i] == '}' && bracket == 0 && bslash == 0) || str[*i] == '\0')
+			break ;
+		if (str[*i] == '\\' && bslash == 0)
+		{
+			bslash = 1;
+			b->result[b->current][b->pos++] = str[(*i)++];
+			continue ;
+		}
+		if (str[*i] == '{' && bslash == 0)
+			bracket++;
+		if (str[*i] == '{' && bslash == 0 && bracket > 0)
+			bracket--;
+		b->result[b->current][b->pos++] = str[(*i)++];
+		bslash = 0;
+	}
+}
