@@ -94,8 +94,8 @@ int					append_variable_to_env(t_env *env, const char *name,
 				var = var->next;
 			var->next = new_var;
 		}
+		env->env_len++;
 	}
-	env->env_len++;
 	env->has_changed = TRUE;
 	return (0);
 }

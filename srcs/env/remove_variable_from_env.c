@@ -45,6 +45,7 @@ int			remove_variable_from_env(t_env *env, const char *const name,
 			tmp->next = remove_var->next;
 		}
 		free_env_var(remove_var);
+		env->env_len--;
 		env->has_changed = TRUE;
 	}
 	return (0);

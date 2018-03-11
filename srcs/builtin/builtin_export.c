@@ -31,9 +31,12 @@ static int	export_option_n(t_env *env, char **argv)
 	if (argv[0])
 	{
 		if ((var = ft_getenv(env->env_list, argv[0])))
+		{
 			var->exportable = 0;
+			env->env_len--;
+		}
 		env->has_changed = TRUE;
-		if (!var)
+		if (!var || argv[1])
 		{
 			ret = append_variable_to_env(env, argv[0], argv[1] ? argv[1] : "",
 					LOCAL);
@@ -56,6 +59,7 @@ static int	set_to_global(t_env *env, char *av1, char *av2)
 			ret = append_variable_to_env(env, av1, av2, GLOBAL);
 		else
 			var->exportable = 1;
+		env->env_len++;
 	}
 	else
 		ret = append_variable_to_env(env, av1, av2 ? av2 : "", GLOBAL);
