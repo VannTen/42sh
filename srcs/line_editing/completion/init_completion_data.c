@@ -19,7 +19,8 @@ static size_t	get_search_location(t_lexer lexer, t_comp comp)
 		if ((!lexer.tokens[1]->prev || (lexer.tokens[1]->prev->type == SEMI
 					|| lexer.tokens[1]->prev->type == AND_IF
 					|| lexer.tokens[1]->prev->type == OR_IF
-					|| lexer.tokens[1]->prev->type == PIPE))
+					|| lexer.tokens[1]->prev->type == PIPE)
+					|| lexer.tokens[1]->prev->type == BANG)
 					&& !ft_strcmp(comp.dirname, "."))
 			return (PATH);
 		else
@@ -29,7 +30,8 @@ static size_t	get_search_location(t_lexer lexer, t_comp comp)
 				&& (lexer.tokens[1]->type == SEMI
 				|| lexer.tokens[1]->type == PIPE
 				|| lexer.tokens[1]->type == AND_IF
-				|| lexer.tokens[1]->type == OR_IF)))
+				|| lexer.tokens[1]->type == OR_IF
+				|| lexer.tokens[1]->type == BANG)))
 		return (PATH);
 	else
 		return (DIRECTORY);
