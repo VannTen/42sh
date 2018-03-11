@@ -12,34 +12,38 @@
 
 #include "shell.h"
 
-static void	remove(t_input *input)
-{
-	if (!ft_strcmp(input->buf_tmp, "\\\n"))
-		ft_memset(input->buf_tmp, '\0', 2);
-}
-
-static int	remove_backslash_nl(t_input *input, t_lexer *lexer)
+static void	fill_buffer(t_lexer *lexer, t_input *input)
 {
 	int	i;
 
 	i = 0;
-	clear_tokens(&lexer->tokens[0]);
-	input->buf_tmp = input->buffer;
-	remove(input);
-	if (!(input->buffer = ft_strnew(input->buffer_size)))
-		return (MALLOC_FAIL);
-	lexer->input = input->buf_tmp;
 	while (*(lexer->input))
 	{
 		get_event(lexer);
 		lexer->state = g_lexer[lexer->state][lexer->event].new_state;
-		if (*(lexer->input) == '\\' && *(lexer->input + 1) == '\n'
-				&& lexer->state != QUOTE && lexer->state != COMMENT
-				&& *(lexer->input + 2) != '\0')
-			lexer->input += 2;
+		if (*(lexer->input) == '\\' && lexer->state != QUOTE)
+		{
+			if (*(lexer->input + 1) == '\n')
+				lexer->input += 2;
+			else
+			{
+				input->buffer[i++] = *(lexer->input++);
+				input->buffer[i++] = *(lexer->input++);
+			}
+		}
 		else
 			input->buffer[i++] = *(lexer->input++);
 	}
+}
+
+static int	remove_backslash_nl(t_input *input, t_lexer *lexer)
+{
+	clear_tokens(&lexer->tokens[0]);
+	input->buf_tmp = input->buffer;
+	if (!(input->buffer = ft_strnew(input->buffer_size)))
+		return (MALLOC_FAIL);
+	lexer->input = input->buf_tmp;
+	fill_buffer(lexer, input);
 	ft_strdel(&input->buf_tmp);
 	reset_lexer(lexer);
 	return (0);
