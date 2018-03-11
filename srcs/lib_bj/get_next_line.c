@@ -21,7 +21,8 @@ char	*ft_realloc(t_fd *p_fd, size_t *mem_size, int ret)
 	{
 		s = p_fd->tmp;
 		*mem_size *= 2;
-		p_fd->tmp = ft_memalloc(*mem_size);
+		if ((p_fd->tmp = ft_strnew(*mem_size)) == NULL)
+			return (NULL);
 		ft_strcpy(p_fd->tmp, s);
 		free(s);
 	}
@@ -41,17 +42,15 @@ int		check_fd(const int fd, t_fd *p_fd, char **line)
 	{
 		if (p_fd->tmp == NULL)
 		{
-			if ((p_fd->tmp = ft_memalloc(TEMP_SIZE + 1)) == NULL)
+			if ((p_fd->tmp = ft_strnew(TEMP_SIZE)) == NULL)
 				return (-1);
-			p_fd->mem_size = TEMP_SIZE + 1;
+			p_fd->mem_size = TEMP_SIZE;
 			p_fd->nl = NULL;
 		}
 		if (ret > 0)
 			(p_fd->tmp)[0] = c;
 	}
-	else
-		return (-1);
-	return (1);
+	return (ret);
 }
 
 int		gnl_return_value(t_fd *p_fd, int ret, char **line)
