@@ -30,13 +30,9 @@ static int	get_line_from_file(t_input *input, size_t *state)
 	char	*line;
 
 	if ((ret = get_next_line(input->fd, &line)) > 0)
-	{
-		if (save_line_to_input_buffer(input, &line) == MALLOC_FAIL)
-			return (MALLOC_FAIL);
-		return (0);
-	}
+		return (save_line_to_input_buffer(input, &line))
 	else if (ret < 0)
-		sh_exit_message("42sh: get_next_line failed\n");
+		sh_exit_message("42sh: get_next_line failed");
 	else if ((*state == DQUOTE || *state == QUOTE))
 	{
 		ft_dprintf(STDERR_FILENO, "42sh: unexpected EOF while looking for"
