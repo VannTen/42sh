@@ -14,6 +14,8 @@
 
 int	handle_home(t_input *input)
 {
+	while (input->cursor_pos >= input->term->first_line_len)
+		handle_ctrl_up(input);
 	while (input->cursor_pos > 0)
 		handle_arrow_left(input);
 	if (input->state == SELECTION)
