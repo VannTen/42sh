@@ -30,7 +30,7 @@ static int	get_line_from_file(t_input *input, size_t *state)
 	char	*line;
 
 	if ((ret = get_next_line(input->fd, &line)) > 0)
-		return (save_line_to_input_buffer(input, &line))
+		return (save_line_to_input_buffer(input, &line));
 	else if (ret < 0)
 		sh_exit_message("42sh: get_next_line failed");
 	else if ((*state == DQUOTE || *state == QUOTE))
