@@ -44,16 +44,17 @@
 # define CTRL_F "\x6"
 # define CTRL_K "\xB"
 # define CTRL_R "\x12"
+# define CTRL_T "\x14"
 # define CTRL_U "\x15"
 # define CTRL_X "\x18"
+# define CTRL_Y "\x19"
 # define CLEAR_SCREEN "\xC"
-# define ALT_GREAT "\x1B>"
-# define ALT_LESS "\x1B<"
+# define PAGE_UP "\x1B[5~"
+# define PAGE_DOWN "\x1B[6~"
 # define DELETE "\x1B[3~"
 # define BACKSPACE "\x7F"
 # define HOME "\x1B[H"
 # define END "\x1B[F"
-# define RETURN_C "\n"
 
 # define REGULAR_INPUT 0
 # define HEREDOC_INPUT 1
@@ -121,14 +122,15 @@ int				handle_ctrl_left(t_input *input);
 int				handle_ctrl_right(t_input *input);
 int				handle_ctrl_up(t_input *input);
 int				handle_ctrl_down(t_input *input);
+int				swap_previous_characters(t_input *input);
 int				handle_backspace(t_input *input);
 int				handle_delete(t_input *input);
 int				handle_home(t_input *input);
 int				handle_end(t_input *input);
 int				handle_return(t_input *input);
 int				handle_reg_char(t_input *input, char c);
-int				handle_alt_less(t_input *input);
-int				handle_alt_great(t_input *input);
+int				handle_page_up(t_input *input);
+int				handle_page_down(t_input *input);
 int				handle_clear_screen(t_input *input);
 int				handle_clear_line_bf_cursor(t_input *input);
 int				handle_clear_line_af_cursor(t_input *input);
