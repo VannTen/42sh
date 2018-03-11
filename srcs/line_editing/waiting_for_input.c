@@ -31,11 +31,12 @@ t_keys		g_handle_keys[] = {
 	{CTRL_F, {skip_key, copy_selection}},
 	{CTRL_K, {handle_clear_line_af_cursor, skip_key}},
 	{CTRL_R, {handle_history_search, skip_key}},
+	{CTRL_T, {swap_previous_characters, skip_key}},
 	{CTRL_U, {handle_clear_line_bf_cursor, skip_key}},
 	{CTRL_X, {skip_key, cut_selection}},
-	{ALT_GREAT, {handle_alt_great, skip_key}},
-	{ALT_LESS, {handle_alt_less, skip_key}},
-	{RETURN_C, {handle_return, skip_key}},
+	{PAGE_UP, {handle_page_up, skip_key}},
+	{PAGE_DOWN, {handle_page_down, skip_key}},
+	{"\n", {handle_return, skip_key}},
 	{CLEAR_SCREEN, {handle_clear_screen, skip_key}},
 	{NULL, {NULL, NULL}},
 };
@@ -133,6 +134,6 @@ int			wait_for_input(t_input *input, int input_type)
 			break ;
 	}
 	if (input->type != HISTORY_SEARCH)
-		write(STDIN_FILENO, RETURN_C, 1);
+		write(STDIN_FILENO, "\n", 1);
 	return (ret);
 }
