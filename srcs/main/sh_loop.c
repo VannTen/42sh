@@ -85,8 +85,7 @@ int				sh_loop(t_bsh *bsh)
 	{
 		reset_lexer(&bsh->lexer);
 		if ((ret = readline_process(&bsh->input, &bsh->lexer,
-						&bsh->history, bsh->interactive)) == EVENT_NOT_FOUND
-						|| ret == MALLOC_FAIL || ret == INPUT_TOO_LONG || ret)
+						&bsh->history, bsh->interactive)))
 		{
 			if (ret == END_OF_FILE)
 				break ;
