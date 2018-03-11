@@ -17,8 +17,9 @@ int		handle_ctrl_down(t_input *input)
 	if (input->cursor_pos + input->term->width < input->buffer_len)
 	{
 		tputs(tgetstr("do", NULL), 1, putchar_termcaps);
-		tputs(tgoto(tgetstr("RI", NULL), 0, input->term->cursor_col - 1),
-		1, putchar_termcaps);
+		if (input->term->cursor_col != 1)
+			tputs(tgoto(tgetstr("RI", NULL), 0, input->term->cursor_col - 1),
+			1, putchar_termcaps);
 		input->cursor_pos += input->term->width;
 	}
 	else
@@ -91,6 +92,8 @@ int		handle_clear_screen(t_input *input)
 		print_prompt(input, BOLD_CYAN);
 	else if (input->type == HISTORY_SEARCH)
 		ft_putstr_fd("History search> ", STDERR_FILENO);
+	else if (input->type == HEREDOC_INPUT)
+		ft_putstr_fd("heredoc> ", STDERR_FILENO);
 	else
 		display_basic_prompt(input);
 	input->cursor_pos = 0;
