@@ -1,3 +1,5 @@
 echo text > file
 cat -e < file ; rm file
-echo text > file_A > file_B > file_C ; cat -e > file_A > file_B > file_C
+echo text > file_A > file_B > file_C
+cat -e < file_A < file_B < file_C
+rm file_A file_B file_C

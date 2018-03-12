@@ -1,0 +1,8 @@
+./42sh 0>/dev/null
+./42sh 0<&-
+./42sh 1</dev/null <<- EOF
+exit
+EOF
+./42sh 2</dev/null <<- EOF
+exit
+EOF
