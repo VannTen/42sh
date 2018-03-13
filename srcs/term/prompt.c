@@ -45,6 +45,7 @@ void		display_basic_prompt(t_input *input)
 	input->cursor_pos = 0;
 	input->buffer_len = 0;
 	input->term->cursor_col = 3;
+	input->term->first_line_len = input->term->width - 2;
 }
 
 void		print_prompt(t_input *input, char *color)

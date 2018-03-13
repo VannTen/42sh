@@ -19,5 +19,6 @@ void	resize_term(int sigid)
 	(void)sigid;
 	input = &get_shell_data()->input;
 	get_term_size(input->term);
+	input->term->first_line_len = input->term->width - input->term->prompt_len;
 	handle_clear_screen(input);
 }
