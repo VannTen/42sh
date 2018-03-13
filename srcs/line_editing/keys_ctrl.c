@@ -95,8 +95,9 @@ int		handle_clear_screen(t_input *input)
 	else if (input->type == HEREDOC_INPUT)
 		ft_putstr_fd("heredoc> ", STDERR_FILENO);
 	else
-		display_basic_prompt(input);
+		ft_putstr_fd("> ", STDERR_FILENO);
 	input->cursor_pos = 0;
+	input->term->cursor_col = input->term->prompt_len + 1;
 	display_buffer(input, 0);
 	i = input->buffer_len;
 	while (i-- > cursor_pos)
