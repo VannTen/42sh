@@ -1,0 +1,83 @@
+echo 'toto'
+echo "toto"
+echo '
+toto
+tata
+tutu
+'
+echo "
+'toto'
+'tata'
+'tutu'
+"
+echo '\z'
+echo "\z"
+echo \\
+echo \\\
+\\
+echo "'toto'"
+echo "\"\"\"\"\"\"\""
+echo '\'\'\'\'\'\'\'\'\'
+echo '"toto"'
+echo "\m\k\m\k"
+echo \t\o\t\o
+echo \\m\\k\\m\\k
+echo ------------------
+ls \
+&& ls -l\
+d
+echo ------------------
+echo '\
+\momo\
+mama\
+mumu\'
+echo $HOME
+echo '$HOME'
+echo "$HOME"
+echo '"$HOME"'
+echo "''''$HOME''''"
+echo \$HOME
+echo $\HOME
+echo \'$HOME\'
+echo $$$HOMEabc
+echo $HOME$$$0$?
+echo "$\
+HOME"
+echo $\
+P\
+A\
+T\
+H
+echo "$\
+P\
+A\
+T\
+H"
+echo '$\
+P\
+A\
+T\
+H'
+echo "$\
+P\\
+A\\
+T\\
+H"
+
+
+
+echo "\
+\\
+\\
+\\
+"
+
+echo "\
+\"
+"
+echo "\
+\\\
+\\\
+\\\
+z"
+ls -d > $LESS && cat -- $LESS

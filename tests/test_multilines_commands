@@ -1,0 +1,19 @@
+ls \
+&& ls -ld |\
+cat -e|\
+cat -e
+
+! ls "
+sd
+fsd
+fsddf
+sdf
+sdfsd
+fsdf" &&\
+ls |\
+cat -e
+
+! ls
+\! ls
+'!' ls
+"!" ls

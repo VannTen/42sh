@@ -1,0 +1,18 @@
+echo A && echo B && echo C
+echo -----------------
+echo A && echo B || echo C
+echo -----------------
+echo A || echo B || echo C
+echo -----------------
+! echo A && ! echo B && ! echo C
+echo -----------------
+! echo A && ! echo B || ! echo C
+echo -----------------
+! echo A || ! echo B || ! echo C
+
+echo -----------------
+echo -----------------
+ls -d || ls -a
+ls -ld && ls -l
+ls -R && ls -o && ls -k
+! ls -z &&  ls -l / && cat toto
