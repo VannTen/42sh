@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 16:09:34 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/04 19:01:27 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/13 15:05:01 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,19 @@ t_bsh			*get_shell_data(void)
 	return (bsh);
 }
 
-t_bsh			*shell_init(char **environ, int argc, char **argv)
+t_bsh			*shell_init(char **envir, int argc, char **argv)
 {
 	t_bsh		*bsh;
 	struct stat	info;
 
-	if (!(bsh = get_shell_data()))
-		return (NULL);
-	if (init_env(&bsh->env, environ) == MALLOC_FAIL)
+	if (!(bsh = get_shell_data()) || init_env(&bsh->env, envir) == MALLOC_FAIL)
 		return (NULL);
 	update_shlvl(&bsh->env);
+	if (!ft_getenv(bsh->env.env_list, "PATH"))
+		if (append_variable_to_env(&bsh->env, "PATH", "/bin:/usr/bin", LOCAL))
+			return (NULL);
 	if (!ft_getenv(bsh->env.env_list, "TERM"))
-		if (append_variable_to_env(&bsh->env, "TERM", "xterm", GLOBAL))
+		if (append_variable_to_env(&bsh->env, "TERM", "xterm", LOCAL))
 			return (NULL);
 	if (init_expander(&bsh->exp, &bsh->env) == MALLOC_FAIL)
 		return (NULL);
