@@ -26,12 +26,15 @@ void	readline_sigint(int sigid)
 		go_to_beg_line(&bsh->input);
 		tputs(tgetstr("up", NULL), 1, putchar_termcaps);
 	}
-	reset_buffer(&bsh->input);
 	tputs(tgetstr("me", NULL), 1, putchar_termcaps);
 	if (bsh->input.buf_tmp)
 		ft_memset(bsh->input.buf_tmp, 0, ft_strlen(bsh->input.buf_tmp));
 	if (bsh->input.type != HISTORY_SEARCH)
+	{
+		handle_end(&bsh->input);
 		write(STDERR_FILENO, "\n", 1);
+	}
+	reset_buffer(&bsh->input);
 	bsh->input.pivot = -1;
 	bsh->input.state = STANDARD;
 	reset_completion_data(&bsh->input.comp);
