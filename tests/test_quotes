@@ -10,6 +10,7 @@ echo "
 'tata'
 'tutu'
 "
+echo "toto"'tata'\t\u\t\u"''titi''"
 echo '\z'
 echo "\z"
 echo \\
@@ -36,11 +37,13 @@ echo '$HOME'
 echo "$HOME"
 echo '"$HOME"'
 echo "''''$HOME''''"
+echo '\"\"\"\$\H\O\M\E\"\"\"\'
+echo '"""$HOME"""'
 echo \$HOME
 echo $\HOME
 echo \'$HOME\'
 echo $$$HOMEabc
-echo $HOME$$$0$?
+echo $HOME$0$?
 echo "$\
 HOME"
 echo $\

@@ -1,0 +1,35 @@
+||
+&&
+<&
+>&
+|
+;
+<
+>
+<<
+>>
+<<-
+<>
+|
+ls | |
+ls && ls &&
+ls || ls | cat -e ||\
+; ls < >
+ls || && !
+ls |cat -e | ! cat -e ;
+ls "sdfsdfsdfdsf" > <
+!! | ! ls
+|| && ;
+ls > >  > > > > >
+ls  < < < <
+ls << >>
+ls | <<
+ls | >>
+ls < |
+ls > |
+ls >> | !
+ls ! || ! ls | ! ls
+;;;;;
+
+echo \LAST \LINE\!
+#leaks $$
