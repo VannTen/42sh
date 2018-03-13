@@ -42,6 +42,8 @@ int			handle_history_search(t_input *input)
 {
 	int	i;
 
+	if (input->type >= HEREDOC_INPUT && input->type <= HISTORY_SEARCH)
+		return (0);
 	if (init_search(input) == CATCH_SIGINT)
 		return (CATCH_SIGINT);
 	if (input->buffer_len > 0)
