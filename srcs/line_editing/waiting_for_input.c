@@ -97,8 +97,9 @@ static int	buf_read_one(char *buffer, int offset)
 	int	ret;
 
 	ret = 0;
-	while (!ret)
+	while (ret == 0 || (ret == -1 && errno == EINTR))
 	{
+		errno = 0;
 		ret = read(STDIN_FILENO, buffer + offset, 1);
 		if (g_sigint_detected)
 			break ;
