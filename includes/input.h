@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 17:57:42 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/06 13:48:07 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/14 11:14:58 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct	s_keys
 }				t_keys;
 
 int				putchar_termcaps(int c);
+void			apply_termcaps(char *str);
 int				wait_for_input(t_input *input, int type);
 int				init_input(t_input *input, t_term *term, t_history *history);
 int				init_buffers(t_input *input);

@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 15:12:58 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/31 16:42:01 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/14 11:22:35 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ int	handle_arrow_left(t_input *input)
 	{
 		if (input->term->cursor_col == 1)
 		{
-			tputs(tgetstr("up", NULL), 1, putchar_termcaps);
+			apply_termcaps("up");
 			tputs(tgoto(tgetstr("RI", NULL), 0, input->term->width), 1,
 					putchar_termcaps);
 			input->term->cursor_col = input->term->width;
 		}
 		else
 		{
-			tputs(tgetstr("le", NULL), 1, putchar_termcaps);
+			apply_termcaps("le");
 			input->term->cursor_col--;
 		}
 		input->cursor_pos--;
@@ -39,12 +39,12 @@ int	handle_arrow_right(t_input *input)
 	{
 		if (input->term->cursor_col == input->term->width)
 		{
-			tputs(tgetstr("do", NULL), 1, putchar_termcaps);
+			apply_termcaps("do");
 			input->term->cursor_col = 1;
 		}
 		else
 		{
-			tputs(tgetstr("nd", NULL), 1, putchar_termcaps);
+			apply_termcaps("nd");
 			input->term->cursor_col++;
 		}
 		input->cursor_pos++;
@@ -73,10 +73,10 @@ int	handle_arrow_down(t_input *input)
 		else
 		{
 			handle_home(input);
-			tputs(tgetstr("sc", NULL), 1, putchar_termcaps);
-			tputs(tgetstr("nw", NULL), 1, putchar_termcaps);
-			tputs(tgetstr("cd", NULL), 1, putchar_termcaps);
-			tputs(tgetstr("rc", NULL), 1, putchar_termcaps);
+			apply_termcaps("sc");
+			apply_termcaps("nw");
+			apply_termcaps("cd");
+			apply_termcaps("rc");
 			ft_bzero(input->buffer, input->buffer_size);
 			input->buffer_len = 0;
 			input->cursor_pos = 0;

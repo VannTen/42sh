@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:52:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/03 13:58:01 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/14 11:27:24 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	readline_sigint(int sigid)
 	if (bsh->input.type == HISTORY_SEARCH)
 	{
 		go_to_beg_line(&bsh->input);
-		tputs(tgetstr("up", NULL), 1, putchar_termcaps);
+		apply_termcaps("up");
 	}
-	tputs(tgetstr("me", NULL), 1, putchar_termcaps);
+	apply_termcaps("me");
 	if (bsh->input.buf_tmp)
 		ft_memset(bsh->input.buf_tmp, 0, ft_strlen(bsh->input.buf_tmp));
 	if (bsh->input.type != HISTORY_SEARCH)

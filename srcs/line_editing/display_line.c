@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 11:59:28 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/01 15:41:07 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/14 10:59:24 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ static void	enable_video_display(t_input *input, int cursor)
 	if (cursor > input->pivot)
 	{
 		if (input->cursor_pos == input->pivot)
-			tputs(tgetstr("mr", NULL), 1, putchar_termcaps);
+			apply_termcaps("mr");
 		if (input->cursor_pos == cursor)
-			tputs(tgetstr("me", NULL), 1, putchar_termcaps);
+			apply_termcaps("me");
 	}
 	else if (cursor < input->pivot)
 	{
 		if (input->cursor_pos == cursor)
-			tputs(tgetstr("mr", NULL), 1, putchar_termcaps);
+			apply_termcaps("mr");
 		if (input->cursor_pos == input->pivot)
-			tputs(tgetstr("me", NULL), 1, putchar_termcaps);
+			apply_termcaps("me");
 	}
 	else
-		tputs(tgetstr("me", NULL), 1, putchar_termcaps);
+		apply_termcaps("me");
 }
 
 void		display_buffer(t_input *input, int cursor)
@@ -44,7 +44,7 @@ void		display_buffer(t_input *input, int cursor)
 		write(STDIN_FILENO, &input->buffer[i], 1);
 		if (input->term->cursor_col == input->term->width)
 		{
-			tputs(tgetstr("do", NULL), 1, putchar_termcaps);
+			apply_termcaps("do");
 			input->term->cursor_col = 0;
 		}
 		input->cursor_pos++;
@@ -56,11 +56,11 @@ void		display_line(t_input *input, int cursor)
 {
 	int	i;
 
-	tputs(tgetstr("vi", NULL), 1, putchar_termcaps);
+	apply_termcaps("vi");
 	handle_home(input);
 	display_buffer(input, cursor);
 	i = input->buffer_len;
 	while (i-- > cursor)
 		handle_arrow_left(input);
-	tputs(tgetstr("ve", NULL), 1, putchar_termcaps);
+	apply_termcaps("ve");
 }

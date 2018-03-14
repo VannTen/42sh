@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:38:49 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/01 16:58:29 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/14 11:16:01 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ int			main(int argc, char **argv, char **environ)
 	}
 	(bsh->interactive) ? init_termcaps(bsh) : 0;
 	sh_loop(bsh);
+	restore_initial_attr(&bsh->term);
 	return (0);
 }

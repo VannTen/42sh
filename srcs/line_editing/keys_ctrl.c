@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 16:33:58 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/31 16:41:46 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/14 11:24:25 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		handle_ctrl_down(t_input *input)
 {
 	if (input->cursor_pos + input->term->width < input->buffer_len)
 	{
-		tputs(tgetstr("do", NULL), 1, putchar_termcaps);
+		apply_termcaps("do");
 		if (input->term->cursor_col != 1)
 			tputs(tgoto(tgetstr("RI", NULL), 0, input->term->cursor_col - 1),
 			1, putchar_termcaps);
@@ -34,7 +34,7 @@ int		handle_ctrl_up(t_input *input)
 	nb = input->term->prompt_len - input->term->cursor_col + 1;
 	if (input->cursor_pos >= input->term->first_line_len)
 	{
-		tputs(tgetstr("up", NULL), 1, putchar_termcaps);
+		apply_termcaps("up");
 		if (input->term->cursor_col <= input->term->prompt_len &&
 			input->cursor_pos < input->term->first_line_len +
 			input->term->width)
@@ -87,7 +87,7 @@ int		handle_clear_screen(t_input *input)
 	int	cursor_pos;
 
 	cursor_pos = input->cursor_pos;
-	tputs(tgetstr("cl", NULL), 1, putchar_termcaps);
+	apply_termcaps("cl");
 	if (input->type == REGULAR_INPUT)
 		print_prompt(input, BOLD_CYAN);
 	else if (input->type == HISTORY_SEARCH)

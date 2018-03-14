@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 15:16:44 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/09 15:38:48 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/14 11:22:20 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	handle_home(t_input *input)
 		handle_arrow_left(input);
 	if (input->state == SELECTION)
 	{
-		tputs(tgetstr("sc", NULL), 1, putchar_termcaps);
+		apply_termcaps("sc");
 		display_buffer(input, 0);
-		tputs(tgetstr("rc", NULL), 1, putchar_termcaps);
+		apply_termcaps("rc");
 		input->cursor_pos = 0;
 		input->term->cursor_col = input->term->prompt_len + 1;
 	}

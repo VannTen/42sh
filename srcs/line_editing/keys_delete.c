@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 20:38:51 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/01 15:42:29 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/14 10:52:19 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,21 @@ static void	delete_char(t_input *input)
 	ft_strcpy(input->buffer + input->cursor_pos,
 				input->buffer + input->cursor_pos + 1);
 	cursor_pos = input->cursor_pos;
-	tputs(tgetstr("vi", NULL), 1, putchar_termcaps);
+	apply_termcaps("vi");
 	handle_home(input);
-	tputs(tgetstr("sc", NULL), 1, putchar_termcaps);
-	tputs(tgetstr("ce", NULL), 1, putchar_termcaps);
+	apply_termcaps("sc");
+	apply_termcaps("ce");
 	if (input->buffer_len > input->term->first_line_len)
 	{
-		tputs(tgetstr("do", NULL), 1, putchar_termcaps);
-		tputs(tgetstr("cd", NULL), 1, putchar_termcaps);
+		apply_termcaps("do");
+		apply_termcaps("cd");
 	}
-	tputs(tgetstr("rc", NULL), 1, putchar_termcaps);
+	apply_termcaps("rc");
 	display_buffer(input, 0);
 	i = --input->buffer_len;
 	while (i-- > cursor_pos)
 		handle_arrow_left(input);
-	tputs(tgetstr("ve", NULL), 1, putchar_termcaps);
+	apply_termcaps("ve");
 }
 
 int			handle_backspace(t_input *input)

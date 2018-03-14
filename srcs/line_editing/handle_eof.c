@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 14:46:47 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/04 18:54:20 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/14 10:56:42 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		handle_clear_line_bf_cursor(t_input *input)
 			return (MALLOC_FAIL);
 		cursor_pos = input->cursor_pos;
 		handle_home(input);
-		tputs(tgetstr("cd", NULL), 1, putchar_termcaps);
+		apply_termcaps("cd");
 		ft_bzero(input->buffer, input->buffer_size);
 		ft_strcpy(input->buffer, buf);
 		free(buf);
@@ -42,7 +42,7 @@ int		handle_clear_line_af_cursor(t_input *input)
 				input->buffer_len - input->cursor_pos + 1);
 		handle_home(input);
 		clear_lines(input, "");
-		tputs(tgetstr("ce", NULL), 1, putchar_termcaps);
+		apply_termcaps("ce");
 		display_line(input, input->buffer_len);
 		input->buffer_len = input->cursor_pos;
 	}

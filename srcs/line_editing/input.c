@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 14:55:18 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/01 15:04:02 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/14 10:55:52 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void		cp_history_to_buffer(t_input *input)
 	ft_strcpy(input->buffer, str);
 	input->buffer_len = ft_strlen(input->buffer);
 	display_buffer(input, 0);
-	tputs(tgetstr("sc", NULL), 1, putchar_termcaps);
-	tputs(tgetstr("nw", NULL), 1, putchar_termcaps);
-	tputs(tgetstr("cd", NULL), 1, putchar_termcaps);
-	tputs(tgetstr("rc", NULL), 1, putchar_termcaps);
+	apply_termcaps("sc");
+	apply_termcaps("nw");
+	apply_termcaps("cd");
+	apply_termcaps("rc");
 }

@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:32:04 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/03 16:30:08 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/14 10:49:59 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ int		cut_selection(t_input *input)
 	cut_from_buffer(input, input->cursor_pos, input->pivot,
 							ft_strlen(input->buf_copy));
 	switch_input_state(input);
-	tputs(tgetstr("me", NULL), 1, putchar_termcaps);
+	apply_termcaps("me");
 	handle_home(input);
 	clear_lines(input, input->buf_copy);
-	tputs(tgetstr("ce", NULL), 1, putchar_termcaps);
+	apply_termcaps("ce");
 	display_buffer(input, 0);
 	i = input->buffer_len;
 	while (i-- > cursor)

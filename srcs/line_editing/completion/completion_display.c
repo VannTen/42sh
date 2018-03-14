@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 12:37:48 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/13 12:19:40 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/14 11:25:44 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	display_next_match(t_comp *comp, t_input *input, char *copy)
 	cursor = comp->init_c_pos + ft_strlen(copy);
 	paste_str_in_buffer(copy, input);
 	handle_home(input);
-	tputs(tgetstr("ce", NULL), 1, putchar_termcaps);
+	apply_termcaps("ce");
 	display_buffer(input, 0);
 	i = input->buffer_len;
 	while (i-- > cursor)
