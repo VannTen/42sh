@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 12:31:57 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/05 12:41:33 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/14 13:24:09 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # include <sys/types.h>
 # include <sys/ioctl.h>
 # include <unistd.h>
+# include <errno.h>
 
 # define EVENT_NOT_FOUND 1
 # define MALLOC_FAIL -1
