@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:43:17 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/01 18:23:00 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/14 16:34:13 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ static int	get_shell_name(t_expander *exp)
 
 static int	get_env_variable(t_expander *exp, char *s)
 {
-	t_env_list	*env_var;
-	int			len;
+	t_env_list		*env_var;
+	int				len;
+	t_bsh *const	bsh = get_shell_data();
 
 	len = 0;
 	while (ft_isalnum(*(s + len)) || *(s + len) == '_')
@@ -73,7 +74,7 @@ static int	get_env_variable(t_expander *exp, char *s)
 		return (append(exp));
 	if (!(s = ft_strndup(exp->tmp + 1, len)))
 		return (MALLOC_FAIL);
-	if ((env_var = ft_getenv(exp->env, s)))
+	if ((env_var = ft_getenv(bsh->env.env_list, s)))
 	{
 		exp->buffer_len += ft_strlen(env_var->value);
 		while (exp->buffer_len >= exp->buffer_size)

@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:59:26 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/04 11:28:13 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/14 16:37:52 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define EXPANDER_H
 # define INITIAL_SIZE 256
 # include "libft.h"
-# include "env.h"
 
 # define NOT_HERE_END_EXP 0
 # define HERE_END_EXP 1
@@ -44,7 +43,6 @@ typedef struct	s_expander
 {
 	int			state;
 	int			event;
-	t_env_list	*env;
 	char		*buffer;
 	int			buffer_len;
 	int			buffer_size;
@@ -66,7 +64,7 @@ int				handle_bckslsh_dquote(t_expander *exp);
 int				get_event_exp(char c);
 int				realloc_exp_buffer(t_expander *exp);
 char			*expanded_str(t_expander *exp, char *str, const size_t type);
-int				init_expander(t_expander *exp, t_env *env);
+int				init_expander(t_expander *exp);
 
 const t_transit		g_exp[MAX_STATE_EXP][MAX_EVENT_EXP];
 #endif
