@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 14:58:40 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/28 15:37:23 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/14 11:51:38 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct	s_history
 int				init_history(t_history *history, int size);
 int				import_history_from_file(t_history *history);
 int				save_history_to_histfile(t_history *history);
-int				display_history(t_history *history);
+int				display_history(t_history *history, char *arg);
 int				add_cmd_to_history(t_history *history, char *const command);
 int				remove_cmd_from_history(t_history *history, const int offset);
 int				clear_all_history(t_history *history);

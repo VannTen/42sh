@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 12:53:10 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/01 19:41:48 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/14 12:18:58 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	history_usage(const char opt, const int usage_reason)
 static int	num_is_eligible_to_be_an_entry(char *num)
 {
 	(num[0] == '+') ? num++ : 0;
-	if (ft_str_isdigit(num))
+	if (ft_str_isdigit(num) && ft_atoi(num))
 	{
 		if (ft_strlen(num) > 10
 				|| (ft_strlen(num) == 10 && ft_strcmp(num, INT_MAX_STR)))
@@ -84,6 +84,5 @@ int			builtin_history(char **args, t_env *env)
 		clear_all_history(history);
 	else if (ft_strchr(options, 'd'))
 		history_del_one_entry(history, args[i]);
-	(i == 1) ? display_history(history) : 0;
-	return (0);
+	return (i == 1) ? display_history(history, args[i]) : 0;
 }
