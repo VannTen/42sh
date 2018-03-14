@@ -6,7 +6,7 @@
 /*   By: heynard <heynard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 13:52:12 by heynard           #+#    #+#             */
-/*   Updated: 2018/03/07 15:48:25 by heynard          ###   ########.fr       */
+/*   Updated: 2018/03/07 16:32:37 by heynard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static t_dir_content	*init_list_of_candidats(unsigned int i, char **extended)
 	if (extended[i][0] == '/')
 	{
 		j = 1;
-		while (extended[i][j] == '/')
+		while (extended[i][j] == '/' || extended[i][j] == '.')
 			j++;
-		list = get_dir_content("/", j - 1, extended[i][j] == '.' ? 1 : 0);
+		list = get_dir_first_content("/", j - 1, extended[i][j] == '.' ? 1 : 0);
 	}
 	else
 		list = get_dir_content(".", 0, extended[i][0] == '.' ? 1 : 0);

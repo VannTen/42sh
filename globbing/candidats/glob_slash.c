@@ -25,7 +25,7 @@ static t_dir_content	*loop_extend_candidat_slash(t_dir_content *list,
 {
 	t_dir_content		*tmp;
 	t_dir_content		*tmp2;
-	unsigned int		current;
+	int					current;
 
 	tmp = list;
 	current = 0;
@@ -34,8 +34,8 @@ static t_dir_content	*loop_extend_candidat_slash(t_dir_content *list,
 		tmp = tmp->next;
 		current++;
 	}
-	tmp2 = list->next;
-	while (current)
+	tmp2 = list;
+	while (current > -1)
 	{
 		if (tmp->next)
 			tmp = tmp->next;
@@ -51,7 +51,7 @@ static t_dir_content	*loop_extend_candidat_slash(t_dir_content *list,
 static t_dir_content	*extend_directories_slash(t_dir_content *list,
 												char *pattern)
 {
-	struct stat			stat;
+	struct stat			stat_buf;
 	t_dir_content		*breakpoint;
 	t_dir_content		*tmp;
 
@@ -63,7 +63,7 @@ static t_dir_content	*extend_directories_slash(t_dir_content *list,
 		breakpoint = breakpoint->next;
 	while (tmp != breakpoint)
 	{
-		if (lstat(tmp->name, &stat) >= 0 && S_ISDIR(stat.st_mode))
+		if (stat(tmp->name, &stat_buf) >= 0 && S_ISDIR(stat_buf.st_mode))
 		{
 			if (tmp->name[0] != '.' || *pattern == '.')
 				list = add_dir_content("/", list, tmp->name);
@@ -72,7 +72,7 @@ static t_dir_content	*extend_directories_slash(t_dir_content *list,
 	}
 	if (tmp != NULL)
 	{
-		if (lstat(tmp->name, &stat) >= 0 && S_ISDIR(stat.st_mode))
+		if (stat(tmp->name, &stat_buf) >= 0 && S_ISDIR(stat_buf.st_mode))
 		{
 			if (tmp->name[0] != '.' || *pattern == '.')
 				list = add_dir_content("/", list, tmp->name);
