@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 10:08:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/14 15:59:59 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/14 16:37:10 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ static int		spawn_pipe(t_lst *sequence, int pipe_in)
 int				shx_pipe_sequence(
 		struct s_sh_pipe_sequence *const pipe_sequence)
 {
-	t_lst	*sequence;
-	t_bsh	*const bsh = get_shell_data();
-	int		ret;
+	t_lst			*sequence;
+	t_bsh *const	bsh = get_shell_data();
+	int				ret;
 
 	if (bsh && pipe_sequence && (sequence = pipe_sequence->simple_commands))
 	{
