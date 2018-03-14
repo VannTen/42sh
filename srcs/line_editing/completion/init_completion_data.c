@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 14:03:11 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/06 11:16:15 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/14 17:40:11 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ static int		get_tokens_up_to_cursor(t_lexer *lexer, char *buffer,
 	lexer->input = buffer;
 	while (lexer->input < buffer + cursor_pos)
 	{
-		if (g_lexer[lexer->state][lexer->event].p_transit(lexer) == MALLOC_FAIL)
-			return (MALLOC_FAIL);
+		if (g_lexer[lexer->state][lexer->event].p_transit != NULL)
+			if (g_lexer[lexer->state][lexer->event].p_transit(lexer)
+				== MALLOC_FAIL)
+				return (MALLOC_FAIL);
 		if (lexer->state != INIT)
 			lexer->input++;
 		lexer->state = g_lexer[lexer->state][lexer->event].new_state;
