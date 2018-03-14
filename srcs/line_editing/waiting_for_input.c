@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 11:41:51 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/14 11:00:59 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/14 13:24:23 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,13 @@ int			wait_for_input(t_input *input, int input_type)
 	while (42)
 	{
 		if ((r_ret = buf_read_one(input->read_buffer, input->read_buf_ind)) < 1)
-			sh_exit_message("42sh: Read failed\n");
+		{
+			if (errno != EAGAIN)
+			{
+				restore_initial_attr(input->term);
+				sh_exit_message("42sh: Read failed");
+			}
+		}
 		else if (r_ret == CATCH_SIGINT)
 			return (CATCH_SIGINT);
 		if ((ret = get_key(input)) == MALLOC_FAIL)
@@ -133,7 +139,6 @@ int			wait_for_input(t_input *input, int input_type)
 		else if (ret)
 			break ;
 	}
-	if (input->type != HISTORY_SEARCH)
-		write(STDIN_FILENO, "\n", 1);
+	(input->type != HISTORY_SEARCH) ? write(STDIN_FILENO, "\n", 1) : 0;
 	return (ret);
 }
