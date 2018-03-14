@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:55:16 by bjanik            #+#    #+#             */
-/*   Updated: 2018/01/22 15:18:11 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/14 12:34:55 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	remove_cmd_from_history(t_history *history, const int offset)
 				(char**)history->history + offset, (history->len - offset) *
 				sizeof(char*));
 	history->len--;
+	history->current = history->len;
 	history->history[history->len] = NULL;
 	return (0);
 }
