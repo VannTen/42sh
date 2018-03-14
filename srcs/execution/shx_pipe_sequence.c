@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 10:08:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/07 12:45:46 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/14 15:59:59 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,21 @@ int				shx_pipe_sequence(
 		struct s_sh_pipe_sequence *const pipe_sequence)
 {
 	t_lst	*sequence;
+	t_bsh	*const bsh = get_shell_data();
+	int		ret;
 
-	if (pipe_sequence && (sequence = pipe_sequence->simple_commands))
+	if (bsh && pipe_sequence && (sequence = pipe_sequence->simple_commands))
 	{
 		if (1 < f_lst_len(sequence))
-			spawn_pipe(sequence, STDIN_FILENO);
+		{
+			if (spawn_pipe(sequence, STDIN_FILENO))
+				bsh->exit_status = 42;
+		}
 		else
-			shx_simple_command((void*)get_lst_elem(sequence, 0));
+		{
+			ret = shx_simple_command((void*)get_lst_elem(sequence, 0));
+			bsh->exit_status = ret;
+		}
 	}
 	return (0);
 }

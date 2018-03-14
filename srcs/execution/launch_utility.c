@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 11:39:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/07 11:03:27 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/14 15:59:46 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,22 +58,19 @@ int					launch_utility(char **argv, t_bool is_child)
 	if (bsh && argv != NULL)
 	{
 		if (!argv[0])
-			bsh->exit_status = 0;
+			return (0);
 		else if (ft_strchr(argv[0], '/'))
 			return (launch_external(argv[0], argv, &bsh->env, is_child));
 		else if ((builtin = find_builtin(argv[0])))
-			bsh->exit_status = builtin(argv, &bsh->env);
+			return (builtin(argv, &bsh->env));
 		else if ((external = find_external(argv[0], bsh)))
 		{
 			(void)launch_external(external, argv, &bsh->env, is_child);
 			free(external);
+			return (bsh->exit_status);
 		}
 		else
-		{
-			bsh->exit_status = -1;
 			ft_dprintf(2, "42sh: %s: command not found\n", argv[0]);
-		}
-		return (bsh->exit_status);
 	}
 	return (-1);
 }
