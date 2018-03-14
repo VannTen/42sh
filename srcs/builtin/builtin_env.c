@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 08:30:37 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/05 23:01:14 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/14 09:08:08 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static int	init_env_cpy(t_env *env_cpy, t_env *env, t_bool ignore_env)
 	return (0);
 }
 
-static char	**modif_env(char **argv, t_env *env_cpy)
+static char	**modif_env(char **argv, t_env *env_cpy,
+		char const **effective_path_loc)
 {
 	char	*tmp;
 
@@ -45,6 +46,8 @@ static char	**modif_env(char **argv, t_env *env_cpy)
 		if (!is_valid_variable_name(*argv)
 				|| append_variable_to_env(env_cpy, *argv, tmp + 1, GLOBAL) != 0)
 			return (NULL);
+		if (!ft_strcmp(*argv, "PATH"))
+			*effective_path_loc = *argv + 5;
 		*tmp = '=';
 		argv += 1;
 	}
@@ -81,27 +84,26 @@ int			builtin_env(char **argv, t_env *env)
 {
 	t_env		env_cpy;
 	t_bool		ignore_env;
+	char const	*effective_path;
 	int			ret;
-	char const	*path;
 
 	if (!argv || !argv[0] || !env)
 	{
 		ft_dprintf(STDERR_FILENO, "env: invalid parameters.\n");
 		return (42);
 	}
-	ignore_env = (argv[1] && ft_strcmp(argv[1], "-i") == 0);
+	ignore_env = (argv[1] && !ft_strcmp(argv[1], "-i"));
 	if (init_env_cpy(&env_cpy, env, ignore_env))
 		return (42);
-	argv = modif_env(argv + (ignore_env ? 2 : 1), &env_cpy);
+	effective_path = NULL;
+	argv = modif_env(argv + (ignore_env ? 2 : 1), &env_cpy, &effective_path);
 	if (argv)
 	{
-		if (!(path = shell_getenv(&env_cpy, "PATH")))
-			path = shell_getenv(env, "PATH");
-		ret = builtin_env_utility(argv, &env_cpy, path);
+		if (!effective_path)
+			effective_path = shell_getvar(env, "PATH");
+		ret = builtin_env_utility(argv, &env_cpy, effective_path);
 	}
-	else
-		ret = 42;
 	clear_env_list(&env_cpy.env_list);
 	ft_free_string_array(&(env_cpy.env_array));
-	return (ret);
+	return (argv ? ret : 42);
 }

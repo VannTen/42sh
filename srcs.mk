@@ -78,6 +78,7 @@ SRCS = \
 	   $(SRCS_DIR)/execution/execve_error.c \
 	   $(SRCS_DIR)/execution/sh_path_error.c \
 	   $(SRCS_DIR)/execution/shell_getenv.c \
+	   $(SRCS_DIR)/execution/shell_getvar.c \
 	   $(SRCS_DIR)/execution/shx_and_or.c \
 	   $(SRCS_DIR)/execution/shx_complete_command.c \
 	   $(SRCS_DIR)/execution/shx_io_redirect.c \

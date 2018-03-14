@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:50:58 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/05 15:38:15 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/14 08:40:53 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int						init_env(t_env *env, char **environ);
 t_env_list				*ft_getenv(t_env_list *env_list,
 						const char *const name);
 char					*shell_getenv(t_env *env, char const *const name);
+char					*shell_getvar(t_env *env, char const *const name);
 
 char					**convert_env_to_array(t_env_list *env_list,
 						const size_t len);

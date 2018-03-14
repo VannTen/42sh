@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 14:32:04 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 16:30:06 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/14 08:40:04 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char		*sh_path_search(t_env *env, char *name)
 {
 	char	*path_val;
 
-	path_val = shell_getenv(env, "PATH");
+	path_val = shell_getvar(env, "PATH");
 	if (path_val != NULL)
 		return (path_search(name, path_val));
 	return (NULL);
