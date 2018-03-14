@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:26:05 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/14 12:32:06 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/14 14:56:04 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	display_history(t_history *history, char *arg)
 	i = 0;
 	if (arg)
 	{
-		if (!ft_str_isdigit(arg))
+		if (!ft_str_isdigit(arg) || !arg[0])
 		{
 			ft_dprintf(STDERR_FILENO, "42sh: history: %s: numeric "
 						"argument required\n", arg);
