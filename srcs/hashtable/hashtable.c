@@ -6,7 +6,7 @@
 /*   By: heynard <heynard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 17:52:16 by heynard           #+#    #+#             */
-/*   Updated: 2018/03/06 17:08:30 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/15 10:52:03 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ char				*get_path_table(t_hash_table *htable,
 
 int					hash_42sh(const char *bin_name)
 {
-	int				hash;
-	int				i;
+	unsigned int	hash;
+	unsigned int	i;
 
 	hash = 0;
 	i = 0;
