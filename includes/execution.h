@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 19:17:47 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/01 09:49:25 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/15 14:30:58 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		recreate_env_array(t_env *env);
 
 void	wait_for_instance(pid_t father, t_bool const save_return);
 
-char	*path_search(char *name, char const *path);
+char	*path_search(char const *name, char const *path);
 char	*sh_path_search(t_env *env, char *name);
 
 int		launch_utility(char **argv, t_bool is_child);

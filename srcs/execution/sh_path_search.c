@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 14:32:04 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/14 08:40:04 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/15 15:23:40 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,21 @@
 #include "env.h"
 #include <unistd.h>
 
-static char	*test_one(char const *start, char const *end, char const *name,
+static char	*test_one(char const *prefix, size_t prefix_len, char const *name,
 		size_t const name_len)
 {
-	char	*str;
+	char			*str;
+	t_bool const	add_slash = 0 < prefix_len && prefix[prefix_len - 1] != '/';
 
-	if ((str = ft_strnew((end - start) + name_len + (end[-1] != '/'))) == NULL)
+	if ((str = ft_strnew(prefix_len + name_len + (add_slash ? 2 : 1))) == NULL)
 		shell_errmsg(e_shell_errmsg_alloc, __FUNCTION__);
 	else
 	{
-		ft_strncpy(str, start, end - start);
-		if (end[-1] != '/')
-			str[end - start] = '/';
-		ft_strcat(str, name);
+		ft_strncpy(str, prefix, prefix_len);
+		if (add_slash)
+			str[prefix_len] = '/';
+		ft_strncpy(str + prefix_len + (add_slash ? 1 : 0), name, name_len);
+		str[prefix_len + (add_slash ? 1 : 0) + name_len] = 0;
 		if (!access(str, F_OK))
 			return (str);
 		ft_strdel(&str);
@@ -50,9 +52,11 @@ char		*path_search(char const *const name, char const *path)
 	{
 		if ((end = ft_strchr(path, ':')) == NULL)
 			end = path + ft_strlen(path);
-		if ((str = test_one(path, end, name, name_len)) != NULL)
+		if ((str = test_one(path, end - path, name, name_len)) != NULL)
 			return (str);
 		path = end + (*end != 0);
+		while (*path == ':')
+			path += 1;
 	}
 	return (NULL);
 }

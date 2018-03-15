@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 12:52:33 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/15 14:23:03 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/15 16:04:43 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "shell_errmsg.h"
 #include <unistd.h>
 #include <limits.h>
+#include <sys/stat.h>
 
 static char	const	*get_home_dir(t_env *env)
 {
@@ -28,59 +29,63 @@ static char	const	*get_home_dir(t_env *env)
 	return (home_dir);
 }
 
-/*
-** The function returns true upon allocation failure to put an end to parsing.
-** The allocation error message is expected to be displayed by builtin_cd.
-*/
-
-static char			*combine(char const *directory, char const *prepath,
-		size_t prepath_len)
+static t_bool		eligible_target(char const *str)
 {
-	size_t const	directory_len = ft_strlen(directory);
-	char			*path;
+	struct stat	stat_buf;
 
-	path = (char*)malloc((prepath_len + directory_len + 2) * sizeof(char));
-	if (path == NULL)
-		return (NULL);
-	ft_strncpy(path, prepath, prepath_len);
-	path[prepath_len] = '/';
-	ft_strncpy(path + prepath_len + 1, directory, directory_len);
-	path[prepath_len + directory_len + 1] = 0;
-	if (access(path, F_OK))
+	if (!stat(str, &stat_buf))
 	{
-		ft_strdel(&path);
-		return (NULL);
+		if (S_ISDIR(stat_buf.st_mode) && access(str, X_OK))
+			return (TRUE);
 	}
-	return (path);
+	return (FALSE);
 }
 
-static char			*parse_cdpath(char const *directory, t_env *env)
+static char			*test_one(char const *prefix, size_t prefix_len,
+		char const *name, size_t const name_len)
+{
+	char			*str;
+	t_bool const	add_slash = 0 < prefix_len && prefix[prefix_len - 1] != '/';
+
+	if ((str = ft_strnew(prefix_len + name_len + (add_slash ? 2 : 1))) == NULL)
+		shell_errmsg(e_shell_errmsg_alloc, __FUNCTION__);
+	else
+	{
+		ft_strncpy(str, prefix, prefix_len);
+		if (add_slash)
+			str[prefix_len] = '/';
+		ft_strncpy(str + prefix_len + (add_slash ? 1 : 0), name, name_len);
+		str[prefix_len + (add_slash ? 1 : 0) + name_len] = 0;
+		if (eligible_target(str))
+			return (str);
+		ft_strdel(&str);
+	}
+	return (NULL);
+}
+
+static char			*cdpath_search(char const *const name, t_env *env)
 {
 	char const	*cdpath;
-	char const	*tmp;
-	char		*path;
+	char const	*end;
+	char		*str;
+	size_t		name_len;
 
-	if ((cdpath = shell_getenv(env, "CDPATH")) == NULL)
-		return (ft_strdup(directory));
-	while (cdpath[0] == ':')
+	if (!name || !env || !(cdpath = shell_getenv(env, "CDPATH")))
+		return (NULL);
+	name_len = ft_strlen(name);
+	while (*cdpath == ':')
 		cdpath += 1;
-	while ((tmp = ft_strchr(cdpath, ':')) != NULL)
+	while (*cdpath != 0)
 	{
-		if (tmp - cdpath < PATH_MAX)
-		{
-			if ((path = combine(directory, cdpath, tmp - cdpath)))
-				return (path);
-		}
-		else
-			ft_putstr_fd("42sh: cd: a component of CDPATH is larger than "
-					"PATH_MAX and could not be checked.\n", 2);
-		cdpath = tmp;
-		while (cdpath[0] == ':')
+		if ((end = ft_strchr(cdpath, ':')) == NULL)
+			end = cdpath + ft_strlen(cdpath);
+		if ((str = test_one(cdpath, end - cdpath, name, name_len)) != NULL)
+			return (str);
+		cdpath = end + (*end != 0);
+		while (*cdpath == ':')
 			cdpath += 1;
 	}
-	if (!(path = combine(directory, cdpath, ft_strlen(cdpath))))
-		path = ft_strdup(directory);
-	return (path);
+	return (NULL);
 }
 
 int					get_physical_path(char const *directory,
@@ -97,10 +102,9 @@ int					get_physical_path(char const *directory,
 	if (directory[0] == '/'
 			|| (directory[0] == '.' && ft_strchr("/", directory[1]))
 			|| (!ft_strncmp(directory, "..", 2)
-				&& ft_strchr("/", directory[1])))
+				&& ft_strchr("/", directory[1]))
+			|| !(*curpath_loc = cdpath_search(directory, env)))
 		*curpath_loc = ft_strdup(directory);
-	else
-		*curpath_loc = parse_cdpath(directory, env);
 	if (*curpath_loc == NULL)
 	{
 		shell_errmsg(e_shell_errmsg_alloc, "cd");
