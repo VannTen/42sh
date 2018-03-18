@@ -5,7 +5,6 @@ INCLUDES = \
 		   includes/builtin_echo.h \
 		   includes/builtins.h \
 		   includes/colors.h \
-		   includes/completion.h \
 		   includes/env.h \
 		   includes/execution.h \
 		   includes/expander.h \
