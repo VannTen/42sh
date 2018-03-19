@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 12:52:33 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/15 16:04:43 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/19 13:14:10 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,11 @@ static t_bool		eligible_target(char const *str)
 {
 	struct stat	stat_buf;
 
-	if (!stat(str, &stat_buf))
-	{
-		if (S_ISDIR(stat_buf.st_mode) && access(str, X_OK))
-			return (TRUE);
-	}
-	return (FALSE);
+	if (!stat(str, &stat_buf) && S_ISDIR(stat_buf.st_mode)
+			&& !access(str, X_OK))
+		return (TRUE);
+	else
+		return (FALSE);
 }
 
 static char			*test_one(char const *prefix, size_t prefix_len,
@@ -78,7 +77,7 @@ static char			*cdpath_search(char const *const name, t_env *env)
 	while (*cdpath != 0)
 	{
 		if ((end = ft_strchr(cdpath, ':')) == NULL)
-			end = cdpath + ft_strlen(cdpath);
+			end = ft_strchr(cdpath, 0);
 		if ((str = test_one(cdpath, end - cdpath, name, name_len)) != NULL)
 			return (str);
 		cdpath = end + (*end != 0);
