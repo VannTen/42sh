@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 13:28:26 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/02 10:52:06 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/20 11:49:24 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static t_env_list	*add_to_env_list(const char *name, const char *value,
 ** Function changes the variable value if it is different from VALUE parameter
 */
 
-static int			update_env_variable(t_env_list *const var,
+static int			update_env_variable(t_env *env, t_env_list *const var,
 										const char *const value,
 										const int exportable)
 {
@@ -53,6 +53,8 @@ static int			update_env_variable(t_env_list *const var,
 	{
 		if (ft_strcmp(var->value, value))
 		{
+			if (var->exportable == LOCAL && exportable == GLOBAL)
+				env->env_len++;
 			ft_strdel(&var->value);
 			if (!(var->value = ft_strdup(value)))
 				return (MALLOC_FAIL);
@@ -78,7 +80,7 @@ int					append_variable_to_env(t_env *env, const char *name,
 
 	if ((var = ft_getenv(env->env_list, name)))
 	{
-		if (update_env_variable(var, value, exportable))
+		if (update_env_variable(env, var, value, exportable))
 			return (MALLOC_FAIL);
 	}
 	else
@@ -94,7 +96,7 @@ int					append_variable_to_env(t_env *env, const char *name,
 				var = var->next;
 			var->next = new_var;
 		}
-		env->env_len++;
+		(exportable == GLOBAL) ? env->env_len++ : 0;
 	}
 	env->has_changed = TRUE;
 	return (0);
