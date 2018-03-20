@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 16:48:42 by bjanik            #+#    #+#             */
-/*   Updated: 2018/02/28 12:30:43 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/20 18:30:02 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@ static void	init_completion(t_comp *comp)
 	comp->basename_len = 0;
 	comp->matches = NULL;
 	comp->current = NULL;
+	comp->comp_str = NULL;
+	comp->count = 0;
 	comp->nb_matches = 0;
 	comp->search_location = 0;
+	comp->init_c_pos = -1;
 }
 
 int			init_input(t_input *input, t_term *term, t_history *history)
