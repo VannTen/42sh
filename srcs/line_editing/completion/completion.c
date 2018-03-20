@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:24:25 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/06 13:43:12 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/20 19:33:49 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ static int	eligible_to_env_completion(t_comp *comp)
 	len = ft_strlen(comp->prefix);
 	len_bis = len;
 	if (len)
-		while ((ft_isalnum(comp->prefix[--len])
-				|| comp->prefix[len] == '_') && len > -1)
+		while (--len > -1 && (ft_isalnum(comp->prefix[len])
+				|| comp->prefix[len] == '_'))
 			;
-	if (comp->prefix[len] == '$')
+	if (len > -1 && comp->prefix[len] == '$')
 	{
 		ft_strdel(&comp->basename);
 		if (!(comp->basename = ft_strdup(comp->prefix + len + 1)))
