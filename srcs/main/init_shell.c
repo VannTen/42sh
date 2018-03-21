@@ -6,11 +6,13 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 16:09:34 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/14 16:38:33 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/21 17:59:02 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+
+int				g_argc;
 
 static t_bsh	*init_data(void)
 {
@@ -20,11 +22,17 @@ static t_bsh	*init_data(void)
 		return (NULL);
 	init_hash_table(&bsh->hashtable);
 	if (init_lexer(&bsh->lexer) == MALLOC_FAIL
-			|| init_history(&bsh->history, DEFAULT_HISTSIZE) == MALLOC_FAIL
 			|| init_term(&bsh->term) == MALLOC_FAIL
 			|| init_input(&bsh->input, &bsh->term,
 				&bsh->history) == MALLOC_FAIL)
 		return (NULL);
+	if (g_argc == 1 && isatty(STDIN_FILENO))
+	{
+		if (init_history(&bsh->history, DEFAULT_HISTSIZE) == MALLOC_FAIL)
+			return (NULL);
+	}
+	else
+		set_history_to_null(&bsh->history);
 	if (!(bsh->parser = generate_parser(g_shell_grammar, g_tokens_name,
 					g_exec_rules, get_tok_id)))
 		return (NULL);
@@ -82,6 +90,7 @@ t_bsh			*shell_init(char **envir, int argc, char **argv)
 	t_bsh		*bsh;
 	struct stat	info;
 
+	g_argc = argc;
 	if (!(bsh = get_shell_data()) || init_env(&bsh->env, envir) == MALLOC_FAIL)
 		return (NULL);
 	update_shlvl(&bsh->env);
@@ -101,7 +110,6 @@ t_bsh			*shell_init(char **envir, int argc, char **argv)
 		if (S_ISDIR(info.st_mode))
 			sh_exit_message("42sh: stdin: Is a directory");
 	}
-	if (argc > 1)
-		is_file_valid(&bsh->input, argv[1]);
+	(argc > 1) ? is_file_valid(&bsh->input, argv[1]) : 0;
 	return (bsh);
 }
