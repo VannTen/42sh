@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:26:05 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/14 14:56:04 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/21 17:59:05 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	display_history(t_history *history, char *arg)
 		else if ((num = ft_atoi(arg)) < history->len)
 			i = history->len - num;
 	}
-	while (history->history[i])
+	while (history->history && history->history[i])
 	{
 		ft_printf("%5d  %s\n", i + 1, history->history[i]);
 		i++;
