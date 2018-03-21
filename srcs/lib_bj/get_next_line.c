@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 11:21:13 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/07 12:58:55 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/21 15:19:50 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,6 @@ int		get_next_line(const int fd, char **line)
 		ft_strcat((p_fd + fd)->tmp, buff);
 		if ((nb = get_line(p, line)) == 1)
 			break ;
-		else
-			return (nb);
 	}
 	return (gnl_return_value(p, ret, line));
 }
