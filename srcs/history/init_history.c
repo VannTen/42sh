@@ -6,11 +6,20 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 12:39:42 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/02 13:21:34 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/21 17:54:12 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+
+void		set_history_to_null(t_history *history)
+{
+	history->history = NULL;
+	history->file = NULL;
+	history->current = 0;
+	history->len = 0;
+	history->size = 0;
+}
 
 int			init_history(t_history *history, int size)
 {
