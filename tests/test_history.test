@@ -1,0 +1,33 @@
+echo "IN FILE MODE, HISTORY IS ALWAYS EMPTY"
+echo --------------------------------------
+history # Should be empty
+history -d -1
+history -c
+history -d 0
+history -d 1
+history -d 2
+history -d 3
+history -d 4
+history -d 5
+history -d 6
+history -d 7
+echo ---------------
+history
+echo ---------------
+history 0
+echo ---------------
+history 5
+echo ---------------
+history 50
+echo ---------------
+history 500
+echo ---------------
+history 5000
+echo ---------------
+history 50000
+echo ---------------
+history 500000
+history -d
+echo ---------------
+#leaks $$
+
