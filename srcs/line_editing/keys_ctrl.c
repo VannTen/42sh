@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 16:33:58 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/14 11:24:25 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/21 13:23:02 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ int		handle_ctrl_left(t_input *input)
 		!input->buffer[input->cursor_pos])
 		{
 			handle_arrow_left(input);
-			if ((input->buffer[input->cursor_pos] != ' ' &&
-			input->buffer[input->cursor_pos - 1] == ' ') ||
-			!input->cursor_pos)
+			if (!input->cursor_pos
+					|| (input->buffer[input->cursor_pos] != ' '
+					&& input->buffer[input->cursor_pos - 1] == ' '))
 				break ;
 		}
 	}
