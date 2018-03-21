@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 12:53:10 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/16 18:06:44 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/21 18:04:04 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	history_del_one_entry(t_history *history, char *num)
 	}
 	else
 		ft_dprintf(STDERR_FILENO, "42sh: history: -d: option requires an "
-					"argument");
+					"argument\n");
 	return (0);
 }
 
