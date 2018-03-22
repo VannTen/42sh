@@ -11,6 +11,8 @@ echo -----------------
 ! echo A || ! echo B || ! echo C
 
 echo -----------------
+/bin/ls doesnotexist && ls -l
+! /bin/ls -z && ls -la
 echo -----------------
 ls -d || ls -a
 ls -ld && ls -l

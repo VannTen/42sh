@@ -1,4 +1,9 @@
 echo "IN FILE MODE, HISTORY IS ALWAYS EMPTY"
+!!
+!456
+!-85
+!to
+!ls
 echo --------------------------------------
 history # Should be empty
 history -d -1
@@ -30,4 +35,5 @@ history 500000
 history -d
 echo ---------------
 #leaks $$
-
+echo exiting now!!!!
+exit
