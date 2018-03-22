@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 16:33:58 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/21 13:23:02 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/22 15:32:10 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		handle_clear_screen(t_input *input)
 	cursor_pos = input->cursor_pos;
 	apply_termcaps("cl");
 	if (input->type == REGULAR_INPUT)
-		print_prompt(input, BOLD_CYAN);
+		print_prompt(input);
 	else if (input->type == HISTORY_SEARCH)
 		ft_putstr_fd("History search> ", STDERR_FILENO);
 	else if (input->type == HEREDOC_INPUT)

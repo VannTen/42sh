@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 12:31:00 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/05 13:11:01 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/22 15:32:40 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int			readline_process(t_input *input, t_lexer *lexer, t_history *history,
 	int			ret;
 	t_string	exp_input;
 
-	(interact) ? print_prompt(input, BOLD_CYAN) : 0;
+	(interact) ? print_prompt(input) : 0;
 	if ((ret = get_complete_line_to_buffer(lexer, input,
 					interact)) == MALLOC_FAIL || ret == END_OF_FILE)
 		return (ret);

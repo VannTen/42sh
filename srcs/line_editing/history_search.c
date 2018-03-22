@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 14:19:38 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/03 13:51:32 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/22 15:31:41 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	exit_history_search_mode(t_input *input)
 {
 	go_to_beg_line(input);
-	print_prompt(input, BOLD_CYAN);
+	print_prompt(input);
 }
 
 static int	init_search(t_input *input)
