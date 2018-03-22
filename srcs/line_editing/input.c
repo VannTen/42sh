@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 14:55:18 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/14 10:55:52 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/22 10:50:32 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void		cp_history_to_buffer(t_input *input)
 	int		len;
 
 	str = input->history->history[input->history->current];
-	ft_bzero(input->buffer, input->buffer_size);
 	if (!str)
 		return ;
+	ft_bzero(input->buffer, input->buffer_size);
 	handle_home(input);
 	len = ft_strlen(str);
 	while (len > input->buffer_size)
