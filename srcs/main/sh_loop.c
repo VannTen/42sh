@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:49:09 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/06 16:11:25 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/22 15:27:04 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,12 @@ static void		parse_and_execute(t_token *list_tokens, t_parser const *parser)
 	errno = 0;
 	result = execute_construct(parser, "PROGRAM", &input, &bad_token);
 	if (result == NULL && errno == 0)
+	{
 		ft_dprintf(STDERR_FILENO,
 				"42sh: syntax error near unexpected token %s\n",
 				g_tokens_name[get_tok_id(bad_token)]);
+		get_shell_data()->exit_status = 1;
+	}
 	shx_program(result);
 	destroy_program(&result);
 }
