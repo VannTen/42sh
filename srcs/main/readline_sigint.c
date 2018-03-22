@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:52:25 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/14 11:27:24 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/22 13:40:34 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@ int		g_sigint_detected = 0;
 
 void	readline_sigint(int sigid)
 {
-	t_bsh	*bsh;
+	t_bsh *const	bsh = get_shell_data();
 
 	(void)sigid;
 	g_sigint_detected = 1;
-	bsh = get_shell_data();
 	if (bsh->input.type == HISTORY_SEARCH)
 	{
 		go_to_beg_line(&bsh->input);
@@ -41,4 +40,5 @@ void	readline_sigint(int sigid)
 	(bsh->input.type != HEREDOC_INPUT) ? reset_lexer(&bsh->lexer) : 0;
 	bsh->input.type = REGULAR_INPUT;
 	bsh->history.current = bsh->history.len;
+	bsh->exit_status= 1;
 }
