@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 19:02:54 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/04 12:51:01 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/22 15:50:40 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static t_bool	exit_string_is_digit(const char *string)
 		index++;
 	return (string[index] == '\0');
 }
-
 
 int				builtin_exit(char **args, t_env *env)
 {
