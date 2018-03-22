@@ -15,14 +15,14 @@
 #include "shell_errmsg.h"
 #include "shell.h"
 
-static void	exit_badarg(char *arg)
+static void		exit_badarg(char *arg)
 {
 	ft_putstr_fd("42sh: exit: ", 2);
 	ft_putstr_fd(arg, 2);
 	ft_putstr_fd(": numeric argument required\n", 2);
 }
 
-static int	exit_arg_check(char **args)
+static int		exit_arg_check(char **args)
 {
 	if (args == NULL || args[0] == NULL)
 	{
@@ -37,7 +37,7 @@ static int	exit_arg_check(char **args)
 	return (0);
 }
 
-static int	get_shell_exit_status(void)
+static int		get_shell_exit_status(void)
 {
 	t_bsh	*bsh;
 
@@ -45,7 +45,18 @@ static int	get_shell_exit_status(void)
 	return (bsh ? bsh->exit_status : 42);
 }
 
-int			builtin_exit(char **args, t_env *env)
+static t_bool	exit_string_is_digit(const char *string)
+{
+	size_t	index;
+
+	index = (string[0] == '-') ? 1 : 0;
+	while (ft_isdigit(string[index]))
+		index++;
+	return (string[index] == '\0');
+}
+
+
+int				builtin_exit(char **args, t_env *env)
 {
 	t_bsh *const	bsh = get_shell_data();
 	unsigned char	exit_value;
@@ -57,7 +68,7 @@ int			builtin_exit(char **args, t_env *env)
 		return (-1);
 	if (args[1] == NULL)
 		exit_value = (unsigned char)get_shell_exit_status();
-	else if (string_is_digit(args[1]))
+	else if (exit_string_is_digit(args[1]))
 		exit_value = (unsigned char)ft_atoi(args[1]);
 	else
 	{
