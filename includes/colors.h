@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:15:35 by mgautier          #+#    #+#             */
-/*   Updated: 2018/03/04 11:26:14 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/22 15:30:37 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define BACK_YEL "\x1B[43m"
 # define BACK_CYN "\x1B[46m"
 # define BOLD_CYAN "\x1B[1m\033[36m"
+# define BOLD_RED "\x1B[1m\033[31m"
 # define BOLD_GRN "\x1B[1m\033[32m"
 # define RESET "\x1B[0m"
 
