@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 17:57:42 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/14 11:14:58 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/22 15:29:25 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ int				cut_selection(t_input *input);
 int				paste_selection_buffer(t_input *input);
 int				paste_str_in_buffer(const char *copy, t_input *input);
 void			get_prompt(t_term *term);
-void			print_prompt(t_input *input, char *color);
+void			print_prompt(t_input *input);
 void			display_basic_prompt(t_input *input);
 void			go_to_beg_line(t_input *input);
 /*
