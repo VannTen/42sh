@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 10:08:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/14 16:37:10 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/22 15:11:15 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "execution.h"
 #include "shell.h"
 #include "redirection.h"
+#include "shx_pipe_sequence.h"
 
 static t_bool	stdfd(int pipe_buf[2])
 {
@@ -50,6 +51,20 @@ static pid_t	create_child(int pipe_in, int pipe_buf[2],
 	}
 }
 
+static int		continue_sequence(t_lst *next, int pipe_in, int child_pid)
+{
+	int	ret;
+			
+	if (next != NULL)
+	{
+		ret = spawn_pipe(next, pipe_in);
+		wait_for_instance(child_pid);
+	}
+	else
+		ret = wait_for_instance(child_pid);
+	return (ret);
+}
+
 static int		spawn_pipe(t_lst *sequence, int pipe_in)
 {
 	int		pipe_buf[2];
@@ -62,12 +77,7 @@ static int		spawn_pipe(t_lst *sequence, int pipe_in)
 		father = create_child(pipe_in, pipe_buf,
 				(void*)get_lst_elem(sequence, 0), next == NULL);
 		if (0 < father)
-		{
-			if (next != NULL)
-				spawn_pipe(next, pipe_buf[0]);
-			wait_for_instance(father, (next == NULL));
-			return (0);
-		}
+			return (continue_sequence(next, pipe_buf[0], father));
 		else
 		{
 			close(pipe_buf[0]);
@@ -83,21 +93,15 @@ int				shx_pipe_sequence(
 		struct s_sh_pipe_sequence *const pipe_sequence)
 {
 	t_lst			*sequence;
-	t_bsh *const	bsh = get_shell_data();
 	int				ret;
 
-	if (bsh && pipe_sequence && (sequence = pipe_sequence->simple_commands))
+	if (pipe_sequence && (sequence = pipe_sequence->simple_commands))
 	{
 		if (1 < f_lst_len(sequence))
-		{
-			if (spawn_pipe(sequence, STDIN_FILENO))
-				bsh->exit_status = 42;
-		}
+			ret = spawn_pipe(sequence, STDIN_FILENO);
 		else
-		{
 			ret = shx_simple_command((void*)get_lst_elem(sequence, 0));
-			bsh->exit_status = ret;
-		}
+		return (ret);
 	}
 	return (0);
 }
