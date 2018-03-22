@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 10:08:12 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/22 15:11:15 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/22 15:36:37 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static pid_t	create_child(int pipe_in, int pipe_buf[2],
 static int		continue_sequence(t_lst *next, int pipe_in, int child_pid)
 {
 	int	ret;
-			
+
 	if (next != NULL)
 	{
 		ret = spawn_pipe(next, pipe_in);
