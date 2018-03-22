@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/25 19:59:38 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/05 12:30:46 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/22 13:00:37 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 int			launch_external(char *const bin_path, char **argv, t_env *env,
 		t_bool is_child)
 {
-	pid_t	father;
+	pid_t			father;
+	t_bsh *const	bsh = get_shell_data();
 
 	if (bin_path && argv && env && !recreate_env_array(env))
 	{
@@ -34,7 +35,10 @@ int			launch_external(char *const bin_path, char **argv, t_env *env,
 		else if (0 < father)
 			wait_for_instance(father, TRUE);
 		else
+		{
 			ft_dprintf(2, "42sh: %s: failed to fork\n", argv[0]);
+			bsh->exit_status = 1;
+		}
 	}
-	return (0);
+	return (bsh->exit_status);
 }
