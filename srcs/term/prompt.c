@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 15:17:41 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/06 15:19:21 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/22 15:34:47 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,17 @@ void		display_basic_prompt(t_input *input)
 	input->term->first_line_len = input->term->width - 2;
 }
 
-void		print_prompt(t_input *input, char *color)
+void		print_prompt(t_input *input)
 {
+	t_bsh *const	bsh = get_shell_data();
+
 	get_prompt(input->term);
 	if (input->type != HISTORY_SEARCH)
 		ft_putchar_fd('\n', STDERR_FILENO);
-	ft_putstr_fd(color, STDERR_FILENO);
+	if (bsh->exit_status)
+		ft_putstr_fd(BOLD_RED, STDERR_FILENO);
+	else
+		ft_putstr_fd(BOLD_GRN, STDERR_FILENO);
 	ft_putstr_fd(input->term->prompt, STDERR_FILENO);
 	ft_putstr_fd(RESET, STDERR_FILENO);
 	ft_putchar_fd(' ', STDERR_FILENO);
