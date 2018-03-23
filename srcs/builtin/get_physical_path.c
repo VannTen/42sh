@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 12:52:33 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/19 13:14:10 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/23 11:42:14 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	const	*get_home_dir(t_env *env)
 {
 	char const	*home_dir;
 
-	home_dir = shell_getenv(env, "HOME");
+	home_dir = shell_getvar(env, "HOME");
 	if (home_dir == NULL)
 	{
 		ft_putstr_fd("42sh: cd: HOME not set.\n", 2);
@@ -69,7 +69,7 @@ static char			*cdpath_search(char const *const name, t_env *env)
 	char		*str;
 	size_t		name_len;
 
-	if (!name || !env || !(cdpath = shell_getenv(env, "CDPATH")))
+	if (!name || !env || !(cdpath = shell_getvar(env, "CDPATH")))
 		return (NULL);
 	name_len = ft_strlen(name);
 	while (*cdpath == ':')
@@ -93,7 +93,7 @@ int					get_physical_path(char const *directory,
 	if (directory == NULL && (directory = get_home_dir(env)) == NULL)
 		return (1);
 	else if (!ft_strcmp(directory, "-")
-			&& (directory = shell_getenv(env, "OLDPWD")) == NULL)
+			&& (directory = shell_getvar(env, "OLDPWD")) == NULL)
 	{
 		ft_putstr_fd("42sh: cd: OLDPWD not set\n", 2);
 		return (1);

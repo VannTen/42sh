@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 11:47:26 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/05 11:15:20 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/23 11:43:10 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	change_pwd_value(char *new_value, int const options, t_env *env)
 	int			ret;
 
 	ret = 0;
-	cur_value = shell_getenv(env, "PWD");
+	cur_value = shell_getvar(env, "PWD");
 	if (cur_value != NULL
 			&& append_variable_to_env(env, "OLDPWD", cur_value, GLOBAL))
 	{
