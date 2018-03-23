@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 11:41:51 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/23 15:43:32 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/23 15:45:41 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ int				wait_for_input(t_input *input, int input_type)
 	int		ret;
 	int		r_ret;
 
-	init_keys();
+	init_keys(input);
 	input->type = input_type;
 	while (42)
 	{
