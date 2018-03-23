@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 12:53:57 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/02/25 20:42:19 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/23 13:56:41 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ static int		component_is_dir(char *curpath, size_t index)
 		index += 1;
 	tmp = curpath[index];
 	curpath[index] = 0;
-	if (lstat(curpath, &component_stat))
+	if (stat(curpath, &component_stat))
 	{
-		ft_putstr_fd("42sh: cd -L: call to lstat() failed.\n", 2);
+		ft_putstr_fd("42sh: cd -L: call to stat() failed.\n", 2);
 		ret = 0;
 	}
 	else if (!(component_stat.st_mode & S_IFDIR))
