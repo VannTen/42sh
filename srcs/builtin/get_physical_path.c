@@ -6,7 +6,7 @@
 /*   By: ble-berr <ble-berr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 12:52:33 by ble-berr          #+#    #+#             */
-/*   Updated: 2018/03/23 11:42:14 by ble-berr         ###   ########.fr       */
+/*   Updated: 2018/03/23 13:45:39 by ble-berr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int					get_physical_path(char const *directory,
 	if (directory[0] == '/'
 			|| (directory[0] == '.' && ft_strchr("/", directory[1]))
 			|| (!ft_strncmp(directory, "..", 2)
-				&& ft_strchr("/", directory[1]))
+				&& ft_strchr("/", directory[2]))
 			|| !(*curpath_loc = cdpath_search(directory, env)))
 		*curpath_loc = ft_strdup(directory);
 	if (*curpath_loc == NULL)
