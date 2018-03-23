@@ -6,11 +6,29 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 15:17:41 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/22 15:34:47 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/23 15:59:47 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+
+static void	prompt_to_buf(t_term *term, char *prompt)
+{
+	int		truncated;
+	size_t	prompt_len;
+
+	prompt_len = ft_strlen(prompt);
+	if ((size_t)((term->width / 2) + 3) < prompt_len)
+	{
+		truncated = 1;
+		prompt_len = (term->width / 2) + 3;
+	}
+	else
+		truncated = 0;
+	ft_strncpy(term->prompt, prompt, prompt_len);
+	if (truncated)
+		ft_strncpy(term->prompt + prompt_len - 3, "...", 4);
+}
 
 void		get_prompt(t_term *term)
 {
@@ -28,7 +46,7 @@ void		get_prompt(t_term *term)
 		if (pwd[0] == '/' && !pwd[1])
 			term->prompt[0] = *pwd;
 		else
-			ft_strcpy(term->prompt, ft_strrchr(pwd, '/') + 1);
+			prompt_to_buf(term, ft_strrchr(pwd, '/') + 1);
 		ft_strdel(&pwd);
 		term->prompt_len = ft_strlen(term->prompt) + 1;
 	}
