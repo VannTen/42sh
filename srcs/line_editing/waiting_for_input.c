@@ -6,25 +6,25 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 11:41:51 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/21 17:14:01 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/23 15:43:32 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-t_keys		g_handle_keys[] = {
-	{ARROW_UP, {handle_arrow_up, skip_key}},
-	{ARROW_DOWN, {handle_arrow_down, skip_key}},
-	{ARROW_LEFT, {handle_arrow_left, select_left}},
-	{ARROW_RIGHT, {handle_arrow_right, select_right}},
+static t_keys		g_handle_keys[] = {
+	{ARROW_UP_ANSI, {handle_arrow_up, skip_key}},
+	{ARROW_DOWN_ANSI, {handle_arrow_down, skip_key}},
+	{ARROW_LEFT_ANSI, {handle_arrow_left, select_left}},
+	{ARROW_RIGHT_ANSI, {handle_arrow_right, select_right}},
 	{CTRL_UP, {handle_ctrl_up, skip_key}},
 	{CTRL_DOWN, {handle_ctrl_down, skip_key}},
 	{CTRL_LEFT, {handle_ctrl_left, skip_key}},
 	{CTRL_RIGHT, {handle_ctrl_right, skip_key}},
 	{BACKSPACE, {handle_backspace, skip_key}},
 	{DELETE, {handle_delete, skip_key}},
-	{END, {handle_end, handle_end}},
-	{HOME, {handle_home, handle_home}},
+	{END_ANSI, {handle_end, handle_end}},
+	{HOME_ANSI, {handle_home, handle_home}},
 	{CTRL_A, {switch_input_state, switch_input_state}},
 	{CTRL_D, {handle_eof, handle_eof}},
 	{CTRL_E, {paste_selection_buffer, skip_key}},
@@ -41,7 +41,25 @@ t_keys		g_handle_keys[] = {
 	{NULL, {NULL, NULL}},
 };
 
-static int	apply_key(t_input *input)
+static void		init_keys(t_input *input)
+{
+	if (!(g_handle_keys[0].key = tgetstr("ku", NULL)))
+		g_handle_keys[0].key = ARROW_UP_ANSI;
+	if (!(g_handle_keys[1].key = tgetstr("kd", NULL)))
+		g_handle_keys[1].key = ARROW_DOWN_ANSI;
+	if (!(g_handle_keys[2].key = tgetstr("kl", NULL)))
+		g_handle_keys[2].key = ARROW_LEFT_ANSI;
+	if (!(g_handle_keys[3].key = tgetstr("kr", NULL)))
+		g_handle_keys[3].key = ARROW_RIGHT_ANSI;
+	if (!(g_handle_keys[10].key = tgetstr("kH", NULL)))
+		g_handle_keys[10].key = END_ANSI;
+	if (!(g_handle_keys[11].key = tgetstr("kh", NULL)))
+		g_handle_keys[11].key = HOME_ANSI;
+	input->read_buf_ind = 0;
+	ft_bzero(input->read_buffer, MAX_KEY_LENGTH + 1);
+}
+
+static int		apply_key(t_input *input)
 {
 	int		ret;
 	int		i;
@@ -67,7 +85,7 @@ static int	apply_key(t_input *input)
 	return (0);
 }
 
-static int	get_key(t_input *input)
+static int		get_key(t_input *input)
 {
 	int	i;
 	int	ret;
@@ -92,7 +110,7 @@ static int	get_key(t_input *input)
 	return (handle_reg_char(input, input->read_buffer[0]));
 }
 
-static int	buf_read_one(char *buffer, int offset)
+static int		buf_read_one(char *buffer, int offset)
 {
 	int	ret;
 
@@ -115,14 +133,13 @@ static int	buf_read_one(char *buffer, int offset)
 	return (ret);
 }
 
-int			wait_for_input(t_input *input, int input_type)
+int				wait_for_input(t_input *input, int input_type)
 {
 	int		ret;
 	int		r_ret;
 
+	init_keys();
 	input->type = input_type;
-	input->read_buf_ind = 0;
-	ft_bzero(input->read_buffer, MAX_KEY_LENGTH + 1);
 	while (42)
 	{
 		if ((r_ret = buf_read_one(input->read_buffer, input->read_buf_ind)) < 1)

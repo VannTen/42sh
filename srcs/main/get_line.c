@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 16:35:51 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/05 12:34:49 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/23 14:23:02 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,12 @@ int			getline(t_input *input, const int interactive, const int mode,
 	ret = 0;
 	if (interactive == 1)
 	{
+		apply_termcaps("ks");
 		set_shell_sigmode(e_shell_sigmode_line_editing);
 		restore_custom_attr(term);
 		if ((ret = wait_for_input(input, mode)) == MALLOC_FAIL)
 			return (ret);
+		apply_termcaps("ke");
 		set_shell_sigmode(e_shell_sigmode_shell);
 		restore_initial_attr(term);
 	}

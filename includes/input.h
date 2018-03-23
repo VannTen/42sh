@@ -6,7 +6,7 @@
 /*   By: bjanik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 17:57:42 by bjanik            #+#    #+#             */
-/*   Updated: 2018/03/22 15:29:25 by bjanik           ###   ########.fr       */
+/*   Updated: 2018/03/23 14:44:32 by bjanik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@
 # define SELECTION 1
 # define COMPLETION 2
 
-# define ARROW_RIGHT "\x1B[C"
-# define ARROW_LEFT "\x1B[D"
-# define ARROW_UP "\x1B[A"
-# define ARROW_DOWN "\x1B[B"
+# define ARROW_RIGHT_ANSI "\x1BOC"
+# define ARROW_LEFT_ANSI "\x1BOD"
+# define ARROW_UP_ANSI "\x1BOA"
+# define ARROW_DOWN_ANSI "\x1BOB"
 # define CTRL_RIGHT "\x1B[1;2C"
 # define CTRL_LEFT "\x1B[1;2D"
 # define CTRL_UP "\x1B[1;2A"
@@ -53,8 +53,8 @@
 # define PAGE_DOWN "\x1B[6~"
 # define DELETE "\x1B[3~"
 # define BACKSPACE "\x7F"
-# define HOME "\x1B[H"
-# define END "\x1B[F"
+# define HOME_ANSI "\x1BOH"
+# define END_ANSI "\x1BOF"
 
 # define REGULAR_INPUT 0
 # define HEREDOC_INPUT 1
